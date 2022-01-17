@@ -1,24 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, Navigate } from "react-router-dom";
+import Login from "./Pages/Login"
+import history from "./history"
+import {useRecoilState} from "recoil";
+import {TOKEN_KEY, tokenAtom} from "./Store/userObject";
+import Tab from "./Pages/Tab"
+
+import AlertFactory from "./AlertFactory"
+import ContextMenuFactory from "./ContextMenuFactory"
+import ApiRecoilBounder from "./ApiRecoilBounder"
+import {useWatch} from "./Utils/hooks/useWatch";
+
+let initialRoute = history.location.pathname !== "/login" ? history.location.pathname : "/"
 
 function App() {
+  const [token, setToken] = useRecoilState(tokenAtom)
+
+  useWatch(token, (token, prevToken) => {
+    if (token === null && prevToken) {
+      localStorage.setItem(TOKEN_KEY, "")
+    } else if (token && prevToken === null) {
+      localStorage.setItem(TOKEN_KEY, token)
+      initialRoute = undefined
+    }
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <AlertFactory />
+      <ContextMenuFactory />
+      <ApiRecoilBounder />
+      {token === null
+        ? (
+          <Routes>
+            <Route
+              path="/login"
+              element={<Login initialRoute={initialRoute} onSubmit={setToken}/>}
+            />
+            <Route
+              path="*"
+              element={<Navigate to="/login"/>}
+            />
+          </Routes>
+        )
+        : (
+          <Routes>
+            <Route
+              path="/tab/*"
+              element={<Tab />}
+            />
+            {/*<Route*/}
+            {/*  path="/login"*/}
+            {/*  element={<Login onSubmit={setToken}/>}*/}
+            {/*/>*/}
+            <Route
+              path="*"
+              element={<Navigate to="/tab"/>}
+            />
+          </Routes>
+        )}
+    </>
   );
 }
 

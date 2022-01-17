@@ -1,0 +1,37 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import WithOpenModalWindow from './index'
+
+# Добавление декоратора селектора recoil state
+<Meta
+    title="Core/RecoilStateSelectors/WithOpenModalWindow"
+    component={WithOpenModalWindow()}
+/>
+
+#### Примеры подключения
+
+```
+import React, { Component } from "react"
+
+import WithOpenModalWindow from "@/Core/Decorators/WithOpenModalWindow"
+class Page extends Component {
+    ...
+
+    const method = () => {
+        const { openModalWindow } = this.state
+
+        openModalWindow()
+    }
+
+    ...
+}
+
+export default WithOpenModalWindow(Page)
+
+```
+
+
+Позволяет получить доступ к состоянию **recoil** за пределами ***функциональных компонентов***
+
+#### Используется
+
+* На страницах где необходимы модальные окна(создание новой сделки)

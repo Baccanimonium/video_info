@@ -1,0 +1,282 @@
+// TODO: move this file and remove importants
+.b-r-0 {
+  border-radius: 0px !important;
+}
+.b-r-1 {
+  border-radius: 1px !important;
+}
+.b-r-2 {
+  border-radius: 2px;
+}
+.b-r-4 {
+  border-radius: 4px;
+}
+.b-r-5 {
+  border-radius: 5px;
+}
+.b-r-50percent {
+  border-radius: 50%;
+}
+
+.display-none {
+  display: none;
+}
+
+.separator-top {
+  border-top: var(--separator-width) solid var(--separator-color);
+}
+.separator-bot {
+  border-bottom: var(--separator-width) solid var(--separator-color);
+}
+.separator-right {
+  border-right: var(--separator-width) solid var(--separator-color) !important;
+}
+.separator-left {
+  border-left: var(--separator-width) solid var(--separator-color) !important;
+}
+.separator-bot-greyLight {
+  border-bottom: 1px solid var(--color-grey-Light-4);
+}
+
+.cursor-grab {
+  cursor: grab;
+}
+.overflow-auto {
+  overflow-y: auto;
+}
+
+.p-absolute {
+  position: absolute;
+}
+.pos-absolute {
+  position: absolute!important;
+}
+.pos-relative {
+  position: relative;
+}
+.pos-static {
+  position: static;
+}
+.pos-fixed {
+  position: fixed!important;
+}
+
+.ta-center {
+  text-align: center;
+}
+.ta-left {
+  text-align: left;
+}
+
+.no-white-space {
+  white-space: nowrap;
+}
+
+.max-width-30 {
+  max-width: 30px;
+}
+.max-width-24 {
+  max-width: 24px;
+}
+
+.min-width-30 {
+  min-width: 30px;
+}
+.min-width-24 {
+  min-width: 24px;
+}
+.min-width-12 {
+  min-width: 12px;
+}
+
+.w-18 {
+  width: 18px;
+}
+.h-18 {
+  height: 18px;
+}
+
+
+.w-24 {
+  width: 24px;
+}
+
+.h-30 {
+  height: 30px;
+}
+.h-34 {
+  height: 34px;
+}
+.h-40 {
+  height: 40px;
+}
+.h-24 {
+  height: 24px;
+}
+.h-25 {
+  height: 25px;
+}
+.w-30 {
+  width: 30px;
+}
+.h-30 {
+  height: 30px;
+}
+.h-34 {
+  height: 34px;
+}
+.h-40 {
+  height: 40px;
+}
+.h-60 {
+  height: 60px;
+}
+.w-40 {
+  width: 40px;
+}
+
+.max-h-250 {
+  max-height: 250px;
+}
+.max-h-270 {
+  max-height: 270px;
+}
+.min-h-50 {
+  min-height: 50px;
+}
+.min-h-60 {
+  min-height: 60px;
+}
+
+.w-50 {
+  width: 50px;
+}
+.max-w-58 {
+  max-width: 58px;
+}
+.w-90 {
+  width: 90px;
+}
+// TODO удалить зачем нужен глобальный стиль алена добавила не подумав
+
+.w-320 {
+  width: 320px;
+}
+.w-350 {
+  width: 350px!important;
+}
+.max-w-400 {
+  max-width: 400px;
+}
+.w-494 {
+  width: 494px;
+}
+.min-w-494 {
+  min-width: 494px;
+}
+.w-400 {
+  width: 400px;
+}
+.min-w-400 {
+  min-width: 400px;
+}
+
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+
+
+
+.h-max {
+  height: var(--max-height);
+}
+.h-auto {
+  height: auto !important;
+}
+.h-min-content {
+  height: min-content;
+}
+
+.h-max-100 {
+  max-height: 100%;
+}
+.m-h-100 {
+  max-height: 100%;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.max-width-100 {
+  max-width: 100%;
+}
+.min-width-100 {
+  min-width: 100%;
+}
+
+.flex-full-with {
+  flex: 1 1 auto;
+}
+.flex-min-with {
+  flex: 0 0 auto!important;
+}
+.full-grid-row {
+  grid-column: 1 / -1;
+}
+
+.w-min-content {
+  width: min-content;
+}
+
+.no-user-select {
+  user-select: none;
+}
+.no-pointer-events {
+  pointer-events: none;
+}
+.word-break-all {
+  word-break: break-all;
+}
+
+.left-0 {
+  left: 0;
+}
+.right-0 {
+  right: 0;
+}
+.top-0 {
+  top: 0;
+}
+.bottom-0 {
+  bottom: 0;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+.layout-border {
+  border: 1px solid var(--color-grey-darken-0);
+}
+.border-top-lightGold {
+  border-top: 1px solid var(--color-light-gold-1);
+}
+.border-top-greyDarken {
+  border-top: 1px solid var(--color-grey-darken-1);
+}
+.border-bottom-greyDarken {
+  border-bottom: 1px solid var(--color-grey-darken-1);
+}
+.border-color-transparent {
+  border-color: transparent!important;
+}
+.box-shadow-container {
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+}
+.pointer-events-all {
+  pointer-events: all;
+}
+

@@ -1,0 +1,13 @@
+::placeholder {
+  font-size: 12px;
+  color: var(--color-grey-darken-1);
+  letter-spacing: 0.5px;
+}
+
+// убираем фон в авторизации на хроме
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+  -webkit-box-shadow: 0 0 0 30px #F3F3F3 inset !important;
+}

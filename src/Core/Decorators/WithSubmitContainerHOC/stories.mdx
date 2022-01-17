@@ -1,0 +1,34 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import WithSubmitContainerHOC from './index'
+
+# Добавление декоратора добавляющего контейнер с кнопкой сохранения значения поля ввода
+<Meta
+    title="Core/Decorators/WithSubmitContainerHOC"
+    component={WithSubmitContainerHOC()}
+/>
+
+#### Примеры подключения
+
+```
+export const fieldConfig = [
+    {
+        id: "COMENT",
+        component: WithSubmitContainerHOC(BsInput, SubmitButton)
+    }
+]
+export default WithSubmitContainerHOC(Page)
+
+```
+
+Отличие от WithSubmitButtonHOC только в отображении
+#### Пропсы
+
+| Название | обязательна | Описание |
+|---|---|---|
+| `value` | - | значение поля ввода |
+
+
+#### Используется
+
+* В формах, где редактирование значения происходит в контекстном меню по клику на кнопку
+

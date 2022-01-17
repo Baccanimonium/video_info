@@ -1,0 +1,79 @@
+import { Meta  } from '@storybook/addon-docs/blocks'
+import DocumentStatusesController from './index'
+
+# Добавление бизнес процесса к документу
+<Meta title="Core/DocumentStatusesController" component={DocumentStatusesController} />
+
+#### Примеры подключения
+
+```
+import DocumentStatusesController from "@/Core/DocumentStatusesController"
+
+class Document {
+    ...
+    render () {
+        return (
+            <div>
+                ...
+                <DocumentStatusesController
+                    document={currentPractice}
+                    onInput={this.updateCurrentPractice}
+                    changeStatusInterceptor={this.saveEntireDocument}
+                />
+            </div>
+        )
+    }
+}
+```
+
+[Подключение кнопок бизнес процесса](?path=/story/core-documentstatusescontroller--page#подключение-кнопок)
+#### Функционал
+
+* Отслеживает статусы документа
+* Осуществляет загрузку кнопок для документа(при изменении документа или статуса документа)
+* Производит автоматическую смену статусов при наличии их в аттрибуте **mp_update**
+* Создает контекст(***DocumentBusinessProcessButtons***) кнопок и функций для дальнейшего использования их внутри документа
+
+#### Пропсы
+
+| Название | обязательна | Описание |
+|---|---|---|
+| `onInput` | + | Функция обработчик изменения документа из контроллера |
+| `document` | + | Документ содержащий контекст бизнес процесса |
+| `children`  | - | React children |
+| `changeStatusInterceptor` | - | Хук изменения статуса вызывается до применения изменений статуса |
+
+#### Создаваемый контекст
+
+* buttons - Объект содержащий доступные кнопки, кнопки разложены по локациям
+* onChangeStatus - Функция изменения движения документа по бизнес процессу
+* idButtonInWork - ид нажатой кнопки, является индикатором запроса
+
+#### Методы
+
+| Название | Описание |
+|---|---|
+| `changeStatusHandler` | Функция обработчик изменения статуса, в зависимости от наличия **POPUP** в аргументах вызывает различные функции - **changeStatus** или **openModalBeforeChangeStatus**|
+| `openModalBeforeChangeStatus` | Открывает модальное окно по конфигурации переданной с сервера по завершению вызывает функцию **changeStatus** |
+| `changeStatus`  | Осуществляет запрос по смене статуса документа |
+| `Эффект загрузки контекста бизнес процесса` | Загружает кнопки доступные по текущему статусу бизнес процесса |
+| `Эффект автоматической смены статусов` | Срабатывает при наличии аттрибута **mp_update** внутри загруженных кнопок |
+
+#### Подключение кнопок
+
+```
+import DocumentBusinessButtons from "@/Core/DocumentStatusesController/DocumentBusinessButtons"
+
+const ButtonContainer = () => (
+    <DocumentBusinessButtons
+        buttonGroupName="mp_practice_tab"
+        renderButtonLimit="1"
+    />
+)
+```
+
+| Название | обязательна | Описание |
+|---|---|---|
+| `buttonGroupName` | + | Локация кнопок, по умолчанию контекст кнопок - это все кнопки разложенные на локации |
+| `customHandler` | + | Костыль добавленный для обработки кнопок без смены статуса |
+| `renderButtonLimit`  | - | кол-во кнопок выводимых в ряд |

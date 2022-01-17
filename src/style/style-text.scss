@@ -1,0 +1,57 @@
+a, button, input, textarea {
+  outline: none;
+}
+
+a {
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.2s ease 0s !important;
+  color: inherit;
+}
+
+p([class]) {
+  margin-bottom: 10px;
+}
+
+p {
+  line-height: 1.3;
+  word-wrap: anywhere;
+  margin-bottom: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 17px;
+}
+
+h2 {
+  font-size: 18px;
+  padding-top: 35px;
+  padding-bottom: 30px;
+  font-weight: 700;
+}
+
+h3 {
+  text-transform: uppercase;
+  padding-bottom: 15px;
+  font-size: 14px;
+}
+
+h5 {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 13px;
+}
+
+.text-overflow-ellipsis {
+  text-overflow: ellipsis;
+}
+
+.normal-case {
+  text-transform: none;
+}
