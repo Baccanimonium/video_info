@@ -8,3 +8,15 @@ export const DataSetContainer = styled.div`
     --layout-right-padding: 5%;
   }
 `
+export const DataListContainer = styled.div`
+  height: 85%;
+  width: 30%;
+  border: 2px black solid;
+  margin-left: 5%;
+  margin-top: 5%;
+`
+
+export const SelectTools = styled.div`
+  border-bottom: 2px black solid;
+  padding: 10px;
+`

@@ -1,57 +1,29 @@
 import React, {useCallback, useState} from 'react';
 import PropTypes from 'prop-types';
 import Tree, { TreeNode } from 'rc-tree';
-import {DataSetContainer} from "@/Pages/Tab/Pages/DataSet/styles";
+import { DataSetContainer, DataListContainer, SelectTools } from "@/Pages/Tab/Pages/DataSet/styles";
 import BsButton from "@/Components/BsButton";
+import { treeData, channelsList, citiesList } from "./mok";
 
-const treeData = [
-  {
-    key: '0-0',
-    title: 'ТВ + Интернет (Ноль плюс) с 1-авг-2019',
-    children: [
-      {
-        key: '0-0-0',
-        title: 'Национальное ТВ + Интернет (Ноль Плюс)',
-      },
-      {
-        key: '0-0-1',
-        title: 'Национальное ТВ + Неэфирное ТВ + Интернет (Ноль Плюс)',
-      },
-      {
-        key: '0-0-2',
-        title: 'Национальное ТВ + BigTVRating + Интернет (Ноль Плюс)',
-      },
-    ],
-  },
-  {
-    key: '0-1',
-    title: 'Города',
-    children: [
-      {
-        key: '0-1-0',
-        title: 'Города 2015',
-      },
-      {
-        key: '0-1-1',
-        title: 'Города 2016',
-      },
-      {
-        key: '0-1-2',
-        title: 'Города 2017',
-      },
-      {
-        key: '0-1-3',
-        title: 'Города 2018',
-      },
-    ],
-  },
-];
 
 const DataSet = props => {
   const [selectedKey, setSelectedKey] = useState("")
   const [checked, setCheckedKey] = useState("")
+  const [selectedList, setSelectedList] = useState([])
   const onSelect =  useCallback((selectedKeys, info) => {
+    const { node: { title } } = info
     console.log('selected', selectedKeys, info);
+        switch (title) {
+            case "ТВ + Интернет (Ноль плюс) с 1-авг-2019":
+                setSelectedList(channelsList);
+                break;
+                case "Города":
+                setSelectedList(citiesList);
+                break;
+
+            default: setSelectedList([])
+    }
+    // setSelectedList(node)
     this.selKey = info.node.props.eventKey;
   }, []);
   const onExpand = useCallback(expandedKeys => {
@@ -63,31 +35,61 @@ const DataSet = props => {
   }, []);
 
   return (
-    <DataSetContainer className="flex-container pos-relative overflow-hidden">
-      <div className="flex-container l-p-layout r-p-layout">
-        <h2 className=" min-width-100">
-          Дата сет от 27.11.2021
-        </h2>
-        <Tree
-          showLine
-          selectable={false}
-          defaultExpandAll
-          onExpand={onExpand}
-          defaultSelectedKeys={selectedKey}
-          defaultCheckedKeys={checked}
-          onSelect={onSelect}
-          onCheck={onCheck}
-          treeData={treeData}
-        />
-      </div>
-      <div className="display-flex jc-fe l-p-layout r-p-layout p-t-5 p-b-5 separator-top h-40">
-        <BsButton
-          type="button"
-          className="golden btn width-max color-greyDarken"
-        >
-          Далее
-        </BsButton>
-      </div>
+    <DataSetContainer className="flex-container pos-relative overflow-hidden j-c-space-between">
+        <div className="display-flex h-100">
+            <DataListContainer
+                className="display-flex j-c-center"
+            >
+                <div
+                    className="w-100"
+                >
+                    <SelectTools>
+                        <BsButton
+                            type="button"
+                            className="golden btn width-midi color-greyDarken"
+                        >
+                            +ADD
+                        </BsButton>
+                    </SelectTools>
+                    <div
+                        className="p-10"
+                    >
+                        { selectedList.map(({id, name}) => (
+                            <div
+                                key={id}
+                            >
+                                {name}
+                            </div>
+                        )) }
+                    </div>
+                </div>
+            </DataListContainer>
+            <div className="flex-container l-p-layout r-p-layout">
+              <h2 className=" min-width-100">
+                Дата сет от 27.11.2021
+              </h2>
+              <Tree
+                showLine
+                // selectable={false}
+                draggable
+                defaultExpandAll
+                onExpand={onExpand}
+                defaultSelectedKeys={selectedKey}
+                defaultCheckedKeys={checked}
+                onSelect={onSelect}
+                onCheck={onCheck}
+                treeData={treeData}
+              />
+            </div>
+        </div>
+        <div className="display-flex jc-fe l-p-layout r-p-layout p-t-5 p-b-5 separator-top h-40">
+          <BsButton
+            type="button"
+            className="golden btn width-max color-greyDarken"
+          >
+            Далее
+          </BsButton>
+        </div>
     </DataSetContainer>
   );
 };
