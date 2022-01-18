@@ -44,93 +44,93 @@ export const treeData = [
 export const channelsList = [
     {
         id: 1,
-        name: "2X2"
+        title: "2X2"
     },
     {
         id: 2,
-        name: "AD CHANNELS"
+        title: "AD CHANNELS"
     },
     {
         id: 3,
-        name: "CHE"
+        title: "CHE"
     },
     {
         id: 4,
-        name: "DISCOVERY CHANNEL"
+        title: "DISCOVERY CHANNEL"
     },
     {
         id: 5,
-        name: "DOM KINO"
+        title: "DOM KINO"
     },
     {
         id: 6,
-        name: "DOMASHNIY"
+        title: "DOMASHNIY"
     },
     {
         id: 7,
-        name: "EURONEWS"
+        title: "EURONEWS"
     },
     {
         id: 8,
-        name: "EURONOVOSTI"
+        title: "EURONOVOSTI"
     },
     {
         id: 9,
-        name: "FRIDAY"
+        title: "FRIDAY"
     },
     {
         id: 10,
-        name: "KANAL DISNEY"
+        title: "KANAL DISNEY"
     },
     {
         id: 11,
-        name: "KARUSEL"
+        title: "KARUSEL"
     },
 ]
 
 export const citiesList = [
     {
         id: 1,
-        name: "ГОРОД 1"
+        title: "ГОРОД 1"
     },
     {
         id: 2,
-        name: "ГОРОД 2"
+        title: "ГОРОД 2"
     },
     {
         id: 3,
-        name: "ГОРОД 3"
+        title: "ГОРОД 3"
     },
     {
         id: 4,
-        name: "ГОРОД 4"
+        title: "ГОРОД 4"
     },
     {
         id: 5,
-        name: "ГОРОД 5"
+        title: "ГОРОД 5"
     },
     {
         id: 6,
-        name: "ГОРОД 6"
+        title: "ГОРОД 6"
     },
     {
         id: 7,
-        name: "ГОРОД 7"
+        title: "ГОРОД 7"
     },
     {
         id: 8,
-        name: "ГОРОД 8"
+        title: "ГОРОД 8"
     },
     {
         id: 9,
-        name: "ГОРОД 9"
+        title: "ГОРОД 9"
     },
     {
         id: 10,
-        name: "ГОРОД 10"
+        title: "ГОРОД 10"
     },
     {
         id: 11,
-        name: "ГОРОД 11"
+        title: "ГОРОД 11"
     },
 ]

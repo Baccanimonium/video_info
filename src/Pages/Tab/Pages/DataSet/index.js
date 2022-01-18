@@ -4,15 +4,19 @@ import Tree, { TreeNode } from 'rc-tree';
 import { DataSetContainer, DataListContainer, SelectTools } from "@/Pages/Tab/Pages/DataSet/styles";
 import BsButton from "@/Components/BsButton";
 import { treeData, channelsList, citiesList } from "./mok";
+import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
+import PureDeleteItems from "../../../../Utils/Arrays/PureDeleteItems";
 
 
 const DataSet = props => {
   const [selectedKey, setSelectedKey] = useState("")
   const [checked, setCheckedKey] = useState("")
   const [selectedList, setSelectedList] = useState([])
+  const [checkedObject, setCheckedObject] = useState([])
+  const [pageData, setPageData] = useState(treeData)
   const onSelect =  useCallback((selectedKeys, info) => {
+      setSelectedKey(info)
     const { node: { title } } = info
-    console.log('selected', selectedKeys, info);
         switch (title) {
             case "ТВ + Интернет (Ноль плюс) с 1-авг-2019":
                 setSelectedList(channelsList);
@@ -23,6 +27,7 @@ const DataSet = props => {
 
             default: setSelectedList([])
     }
+    setCheckedObject([])
     // setSelectedList(node)
     this.selKey = info.node.props.eventKey;
   }, []);
@@ -33,6 +38,22 @@ const DataSet = props => {
   const onCheck = useCallback((checkedKeys, info) => {
     console.log('onCheck', checkedKeys, info);
   }, []);
+
+  const checkObject = (value) => {
+      if (checkedObject.some(a => a === value[0])){
+          const newData = PureDeleteItems(checkedObject, checkedObject.indexOf(value[0]), 1)
+          setCheckedObject(newData)
+      } else
+      setCheckedObject(Array.from(new Set(checkedObject.concat(value))))
+      console.log()
+  }
+
+  const setNewTree = () => {
+      const { node, node: { key } } = selectedKey
+      const newChildren = pageData[key].children.concat(checkedObject)
+      const newTreeData = { ...pageData[key], children: { ...pageData[key].children, checkedObject }}
+      console.log(newTreeData, newChildren, node)
+  }
 
   return (
     <DataSetContainer className="flex-container pos-relative overflow-hidden j-c-space-between">
@@ -47,6 +68,7 @@ const DataSet = props => {
                         <BsButton
                             type="button"
                             className="golden btn width-midi color-greyDarken"
+                            onClick={() => setNewTree()}
                         >
                             +ADD
                         </BsButton>
@@ -54,13 +76,14 @@ const DataSet = props => {
                     <div
                         className="p-10"
                     >
-                        { selectedList.map(({id, name}) => (
-                            <div
-                                key={id}
-                            >
-                                {name}
-                            </div>
-                        )) }
+                        <CheckboxGroup
+                            options={selectedList}
+                            valueKey="id"
+                            labelKey="title"
+                            // value={checkedObject}
+                            returnObjects
+                            onInput={(value) => checkObject(value)}
+                        />
                     </div>
                 </div>
             </DataListContainer>
@@ -78,7 +101,7 @@ const DataSet = props => {
                 defaultCheckedKeys={checked}
                 onSelect={onSelect}
                 onCheck={onCheck}
-                treeData={treeData}
+                treeData={pageData}
               />
             </div>
         </div>
