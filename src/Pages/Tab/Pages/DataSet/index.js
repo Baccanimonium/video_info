@@ -6,6 +6,7 @@ import BsButton from "@/Components/BsButton";
 import { treeData, channelsList, citiesList } from "./mok";
 import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
 import PureDeleteItems from "../../../../Utils/Arrays/PureDeleteItems";
+import {pureUpdateArrayByComparator} from "../../../../Utils/Arrays/PureUpdateArrayItems";
 
 
 const DataSet = props => {
@@ -45,14 +46,16 @@ const DataSet = props => {
           setCheckedObject(newData)
       } else
       setCheckedObject(Array.from(new Set(checkedObject.concat(value))))
-      console.log()
   }
 
   const setNewTree = () => {
-      const { node, node: { key } } = selectedKey
-      const newChildren = pageData[key].children.concat(checkedObject)
-      const newTreeData = { ...pageData[key], children: { ...pageData[key].children, checkedObject }}
-      console.log(newTreeData, newChildren, node)
+      const { node: { key } } = selectedKey
+      const newChildren = pageData[key].children.concat(checkedObject.map((a, index) => {
+          return  { ...a, key:`${key}-${pageData[key].children.length + index}`}
+      }))
+      let data = [...pageData]
+      data[key] = {...data[key], children: newChildren}
+      setPageData(data)
   }
 
   return (
