@@ -1,10 +1,11 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import PropTypes from 'prop-types';
 import Tree, { TreeNode } from 'rc-tree';
 import { DataSetContainer, DataListContainer, SelectTools } from "@/Pages/Tab/Pages/DataSet/styles";
 import BsButton from "@/Components/BsButton";
 import { treeData, channelsList, citiesList } from "./mok";
 import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
+import style from "./style.less"
 import PureDeleteItems from "../../../../Utils/Arrays/PureDeleteItems";
 import {pureUpdateArrayByComparator} from "../../../../Utils/Arrays/PureUpdateArrayItems";
 
@@ -15,9 +16,10 @@ const DataSet = props => {
   const [selectedList, setSelectedList] = useState([])
   const [checkedObject, setCheckedObject] = useState([])
   const [pageData, setPageData] = useState(treeData)
-  const onSelect =  useCallback((selectedKeys, info) => {
+  const onSelect = useCallback((selectedKeys, info) => {
+      const { node: { title, children } } = info
       setSelectedKey(info)
-    const { node: { title } } = info
+      setCheckedObject(children)
         switch (title) {
             case "ТВ + Интернет (Ноль плюс) с 1-авг-2019":
                 setSelectedList(channelsList);
@@ -28,9 +30,6 @@ const DataSet = props => {
 
             default: setSelectedList([])
     }
-    setCheckedObject([])
-    // setSelectedList(node)
-    this.selKey = info.node.props.eventKey;
   }, []);
   const onExpand = useCallback(expandedKeys => {
     console.log('onExpand', expandedKeys);
@@ -41,21 +40,21 @@ const DataSet = props => {
   }, []);
 
   const checkObject = (value) => {
-      if (checkedObject.some(a => a === value[0])){
-          const newData = PureDeleteItems(checkedObject, checkedObject.indexOf(value[0]), 1)
-          setCheckedObject(newData)
+      if (checkedObject.some(a => !value.some(i => i.id === a.id))){
+          setCheckedObject(value)
       } else
       setCheckedObject(Array.from(new Set(checkedObject.concat(value))))
   }
 
   const setNewTree = () => {
       const { node: { key } } = selectedKey
-      const newChildren = pageData[key].children.concat(checkedObject.map((a, index) => {
-          return  { ...a, key:`${key}-${pageData[key].children.length + index}`}
-      }))
-      let data = [...pageData]
-      data[key] = {...data[key], children: newChildren}
-      setPageData(data)
+      setPageData((pageData) => {
+          const newPageData = [...pageData]
+              newPageData[key].children = checkedObject.map((item, index) => (
+                  {...item, key: `${key}-${index}`}
+              ))
+          return newPageData
+      })
   }
 
   return (
@@ -71,10 +70,13 @@ const DataSet = props => {
                         <BsButton
                             type="button"
                             className="golden btn width-midi color-greyDarken"
-                            onClick={() => setNewTree()}
+                            onClick={setNewTree}
                         >
-                            +ADD
+                            применить
                         </BsButton>
+                        <div
+                            className="parent-icon"
+                        />
                     </SelectTools>
                     <div
                         className="p-10"
@@ -84,6 +86,7 @@ const DataSet = props => {
                             valueKey="id"
                             labelKey="title"
                             // value={checkedObject}
+                            value={checkedObject}
                             returnObjects
                             onInput={(value) => checkObject(value)}
                         />
