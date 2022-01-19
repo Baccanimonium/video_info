@@ -13,6 +13,7 @@ import DataSet from "@/Pages/Tab/Pages/DataSet";
 import Reports from "@/Pages/Tab/Pages/Reports";
 import Criteria from "@/Pages/Tab/Pages/Criteria";
 import Result from "@/Pages/Tab/Pages/Result";
+import TabHeader from "../../Components/TabHeader";
 
 const PlusIcon = Icon(plusIcon)
 
@@ -87,6 +88,7 @@ const Tab = () => {
           </WithOpenContextMenu>
 
         </TabBar>
+        <TabHeader/>
 
         <Routes>
           <Route
