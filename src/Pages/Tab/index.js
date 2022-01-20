@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react'
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
 import NavigationDrawer from "@/Components/NavigationDrawer"
 import TabBar from "@/Components/TabBar"
 import {tabNavigationMenu, FooterTabs} from "./constants"
@@ -16,6 +16,14 @@ import Result from "@/Pages/Tab/Pages/Result";
 import TabHeader from "../../Components/TabHeader";
 
 const PlusIcon = Icon(plusIcon)
+
+const urls = {
+  "/tab/data_set": "/tab/report",
+  "/tab/report": "/tab/selection_criteria",
+  "/tab/selection_criteria": "/tab/buying_audiences",
+  "/tab/buying_audiences": "/tab/result",
+  "/tab/result": "/tab/result"
+}
 
 const Tab = () => {
   const [tabs, editTabs] = useState([{tabName: "Закладка 1", id: 0}])
@@ -58,6 +66,9 @@ const Tab = () => {
       },
     ])
   }, [])
+
+  const location = useLocation()
+
   return (
     <div className="display-flex h-100">
       <NavigationDrawer routes={tabNavigationMenu}/>
@@ -88,7 +99,9 @@ const Tab = () => {
           </WithOpenContextMenu>
 
         </TabBar>
-        <TabHeader/>
+        <TabHeader
+          path={urls[location.pathname]}
+        />
 
         <Routes>
           <Route

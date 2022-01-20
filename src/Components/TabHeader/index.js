@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
 import {HeaderContainer, ContainerDatePicker} from "./style"
 import DatePicker from "../Fields/DatePicker";
-import {Route, Routes, Redirect, NavLink} from "react-router-dom";
-import history from "@/history"
-import {FooterTabs} from "../../Pages/Tab/constants"
+import {NavLink} from "react-router-dom";
 
-const TabHeader = () => {
+const TabHeader = ({path}) => {
   const [valueDate, setValueDate] = useState([])
   const formPayload = { dateRange: [] }
 
@@ -26,13 +24,13 @@ const TabHeader = () => {
           value={valueDate}
         />
       </ContainerDatePicker>
-      <div>
-       <NavLink
-         to="/tab/selection_criteria"
-       >
-         Далее
-       </NavLink>
-      </div>
+      <NavLink
+        name="NavLink"
+        to={path}
+        className="btn golden width-max"
+      >
+        Далее
+      </NavLink>
     </HeaderContainer>
   );
 };

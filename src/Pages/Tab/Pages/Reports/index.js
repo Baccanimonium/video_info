@@ -1,7 +1,7 @@
 import React, {useCallback, useMemo, useState} from 'react';
 import PropTypes from 'prop-types';
 import {DataSetContainer} from "@/Pages/Tab/Pages/DataSet/styles";
-import {ReportContainer, ReportsGrid, WrapperInput} from "./styles"
+import {LeftContainer, ReportContainer, ReportsGrid, WrapperInput} from "./styles"
 import Tree from "rc-tree";
 import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
 import {ButtonsContainer, Button} from "../../../../Components/ButtonsTabBar/style";
@@ -10,6 +10,7 @@ import RadioButton from "../../../../Components/Fields/RadioButton";
 import BsInput from "../../../../Components/Fields/BsInput";
 import DatePicker from "../../../../Components/Fields/DatePicker";
 import {ContainerDatePicker} from "../../../../Components/TabHeader/style";
+import ScrollBar from "react-perfect-scrollbar";
 
 const statistics = [
   { key: 2274, title: "GRP" },
@@ -136,13 +137,13 @@ const Reports = () => {
   return (
     <DataSetContainer className="flex-container pos-relative overflow-hidden">
       <div className="flex-container p-l-20 p-r-20">
-        <ReportContainer>
-          <div>
+        <ReportContainer className="overflow-hidden">
+          <LeftContainer className="overflow-hidden pos-relative">
             <h3>
               Доступные отчеты
             </h3>
             <ReportsGrid>
-              <div className="m-b-25">
+              <div className="m-b-20">
                 <BsCheckBox
                   id="videoProtocol"
                   label='Отчет "Протокол роликов"'
@@ -184,151 +185,168 @@ const Reports = () => {
                     </Button>
                   ))}
                 </ButtonsContainer>
-                <div className="m-t-15">
-                  {activeOption === "Опции расчета" && (
-                    <div>
-                      <div className="display-flex p-b-20 j-c-space-around">
-                        <RadioButton
-                          id="byAmount"
-                          label="по сумме"
-                          value={byAmount}
-                          onInput={setByAmount}
-                        />
-                        <RadioButton
-                          id="average"
-                          label="по среднему"
-                          value={average}
-                          onInput={setAverage}
-                          className=""
+                <div className="m-t-15 overflow-hidden pos-relative flex-container">
+                  <ScrollBar>
+                    {activeOption === "Опции расчета" && (
+                      <div>
+                        <div className="display-flex p-b-15 separator-bot-greyLight">
+                          <RadioButton
+                            id="byAmount"
+                            label="по сумме"
+                            value={byAmount}
+                            onInput={setByAmount}
+                            className="m-r-30"
+                          />
+                          <RadioButton
+                            id="average"
+                            label="по среднему"
+                            value={average}
+                            onInput={setAverage}
+                            className=""
+                          />
+                        </div>
+                        <div className="p-t-15 separator-bot-greyLight">
+                          <BsCheckBox
+                            id="totalLine"
+                            label="Итоговая строка"
+                            value={totalLine}
+                            onInput={setTotalLine}
+                            className="m-b-15"
+                          />
+                          <BsCheckBox
+                            id="interval"
+                            label="Промежуточный итог"
+                            value={interval}
+                            onInput={setInterval}
+                            className="m-b-15"
+                          />
+                          <BsCheckBox
+                            id="growing"
+                            label="Нарастающий итог"
+                            value={growing}
+                            onInput={setGrowing}
+                            className="m-b-15"
+                          />
+                        </div>
+                        <div className="p-t-15 separator-bot-greyLight">
+                          <WrapperInput>
+                            <div className="p-r-15">Первый день недели:</div>
+                            <div>
+                              <BsInput
+                                id="week"
+                                value={week}
+                                onInput={setWeek}
+                              />
+                            </div>
+                          </WrapperInput>
+                          <WrapperInput>
+                            <div className="p-r-15">Время выхода событий:</div>
+                            <div className="display-flex a-i-center">
+                              <BsInput
+                                id="time"
+                                value={time}
+                                onInput={setTime}
+                              />
+                              <div className="p-l-5">мин</div>
+                            </div>
+                          </WrapperInput>
+                          <WrapperInput>
+                            <div className="p-r-15">Базовая длительность:</div>
+                            <div className="display-flex a-i-center">
+                              <BsInput
+                                id="duration"
+                                value={duration}
+                                onInput={setDuration}
+                              />
+                              <div className="p-l-5">сек</div>
+                            </div>
+                          </WrapperInput>
+                        </div>
+                        <div className="p-t-15">
+                          <BsCheckBox
+                            id="groupEvents"
+                            label="Группировать события"
+                            value={groupEvents}
+                            onInput={setGroupEvents}
+                            className="m-b-15"
+                          />
+                        </div>
+                      </div>
+                    )}
+                    {activeOption === "Опции охвата" && (
+                      <div>
+                        <div className="separator-bot-greyLight">
+                          <WrapperInput className="display-flex a-i-center">
+                            <div className="p-r-15">NBD канал:</div>
+                            <BsInput
+                              id="NBD"
+                              value={NBD}
+                              placeholder="Впишите NBD канал"
+                              onInput={setNBD}
+                            />
+                          </WrapperInput>
+                        </div>
+                        <ContainerDatePicker className="separator-top-greyLight p-t-15 ml-auto mr-auto p-b-15">
+                          <div className="p-b-10">
+                            Базовый день
+                          </div>
+                          <DatePicker
+                            id="dateRange"
+                            formPayload={formPayload}
+                            onInput={setValueDate}
+                            range
+                            allWaysOpen
+                            value={valueDate}
+                          />
+                        </ContainerDatePicker>
+                        <div className="separator-top-greyLight p-t-15">
+                          <WrapperInput className="display-flex a-i-center j-c-space-between">
+                            <div className="p-r-15">Qual.Reach viewer:</div>
+                            <BsInput
+                              styleInputBox={{maxWidth: "200px"}}
+                              id="Qual"
+                              value={Qual}
+                              placeholder="Qual.Reach viewer"
+                              onInput={setQual}
+                            />
+                          </WrapperInput>
+                          <WrapperInput className="display-flex a-i-center j-c-space-between">
+                            <div className="p-r-15">Average Weekly/<br/>Monthly Reach:</div>
+                            <BsInput
+                              styleInputBox={{maxWidth: "200px"}}
+                              id="average"
+                              value={aver}
+                              placeholder="Средний день"
+                              onInput={setAve}
+                            />
+                          </WrapperInput>
+                        </div>
+                      </div>
+                    )}
+                    {activeOption === "Доп опции" && (
+                      <div>
+                        <WrapperInput className="display-flex a-i-center">
+                          <div className="p-r-15">Текущий список <br/> предметов рекламы:</div>
+                          <BsInput
+                            id="listAdvertising"
+                            value={listAdvertising}
+                            onInput={setListAdvertising}
+                          />
+                        </WrapperInput>
+                        <BsCheckBox
+                          id="originalOutputs"
+                          label="Количество оригинальных выходов"
+                          value={originalOutputs}
+                          onInput={setOriginalOutputs}
+                          className="m-b-15"
                         />
                       </div>
-                      <BsCheckBox
-                        id="totalLine"
-                        label="Итоговая строка"
-                        value={totalLine}
-                        onInput={setTotalLine}
-                        className="m-b-15"
-                      />
-                      <BsCheckBox
-                        id="interval"
-                        label="Промежуточный итог"
-                        value={interval}
-                        onInput={setInterval}
-                        className="m-b-15"
-                      />
-                      <BsCheckBox
-                        id="growing"
-                        label="Нарастающий итог"
-                        value={growing}
-                        onInput={setGrowing}
-                        className="m-b-15"
-                      />
-                      <WrapperInput className="display-flex a-i-center">
-                        <div className="p-r-15">Первый день недели:</div>
-                        <BsInput
-                          id="week"
-                          value={week}
-                          placeholder="Впишите день недели"
-                          onInput={setWeek}
-                        />
-                      </WrapperInput>
-                      <WrapperInput className="display-flex a-i-center">
-                        <div className="p-r-15">Время выхода событий:</div>
-                        <BsInput
-                          id="time"
-                          value={time}
-                          placeholder="Впишите время выхода событий"
-                          onInput={setTime}
-                        />
-                        <div className="p-l-5">мин</div>
-                      </WrapperInput>
-                      <WrapperInput className="display-flex a-i-center">
-                        <div className="p-r-15">Базовая длительность:</div>
-                        <BsInput
-                          id="duration"
-                          value={duration}
-                          placeholder="Впишите базовую длительность"
-                          onInput={setDuration}
-                        />
-                        <div className="p-l-5">сек</div>
-                      </WrapperInput>
-                      <BsCheckBox
-                        id="groupEvents"
-                        label="Группировать события"
-                        value={groupEvents}
-                        onInput={setGroupEvents}
-                        className="m-b-15"
-                      />
-                    </div>
-                  )}
-                  {activeOption === "Опции охвата" && (
-                    <div>
-                      <WrapperInput className="display-flex a-i-center">
-                        <div className="p-r-15">NBD канал:</div>
-                        <BsInput
-                          id="NBD"
-                          value={NBD}
-                          placeholder="Впишите NBD канал"
-                          onInput={setNBD}
-                        />
-                      </WrapperInput>
-                      <ContainerDatePicker>
-                        <div className="p-b-10">
-                          Базовый день
-                        </div>
-                        <DatePicker
-                          id="dateRange"
-                          formPayload={formPayload}
-                          onInput={setValueDate}
-                          range
-                          allWaysOpen
-                          value={valueDate}
-                        />
-                      </ContainerDatePicker>
-                      <WrapperInput className="display-flex a-i-center">
-                        <div className="p-r-15">Qual.Reach viewer:</div>
-                        <BsInput
-                          id="Qual"
-                          value={Qual}
-                          placeholder="Qual.Reach viewer"
-                          onInput={setQual}
-                        />
-                      </WrapperInput>
-                      <WrapperInput className="display-flex a-i-center">
-                        <div className="p-r-15">Average Weekly/Monthly Reach:</div>
-                        <BsInput
-                          id="average"
-                          value={aver}
-                          placeholder="Средний день"
-                          onInput={setAve}
-                        />
-                      </WrapperInput>
-                    </div>
-                  )}
-                  {activeOption === "Доп опции" && (
-                    <div>
-                      <WrapperInput className="display-flex a-i-center">
-                        <div className="p-r-15">Текущий список предметов рекламы:</div>
-                        <BsInput
-                          id="listAdvertising"
-                          value={listAdvertising}
-                          placeholder="Текущий список предметов рекламы"
-                          onInput={setListAdvertising}
-                        />
-                      </WrapperInput>
-                      <BsCheckBox
-                        id="originalOutputs"
-                        label="Количество оригинальных выходов"
-                        value={originalOutputs}
-                        onInput={setOriginalOutputs}
-                        className="m-b-15"
-                      />
-                    </div>
-                  )}
+                    )}
+                  </ScrollBar>
                 </div>
               </div>
             </ReportsGrid>
-          </div>
+          </LeftContainer>
           <div className="display-flex flex-column a-i-center">
             <h3>
               Выбранные атрибуты

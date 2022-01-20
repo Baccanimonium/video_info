@@ -34,8 +34,15 @@
 .separator-left {
   border-left: var(--separator-width) solid var(--separator-color) !important;
 }
+
 .separator-bot-greyLight {
   border-bottom: 1px solid var(--color-grey-Light-4);
+}
+.separator-top-greyLight {
+  border-top: 1px solid var(--color-grey-Light-4);
+}
+.separator-right-greyLight {
+  border-right: 1px solid var(--color-grey-Light-4);
 }
 
 .cursor-grab {
