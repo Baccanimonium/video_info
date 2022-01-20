@@ -5,6 +5,7 @@ import { DataSetContainer, DataListContainer, SelectTools } from "@/Pages/Tab/Pa
 import BsButton from "@/Components/BsButton";
 import { treeData, channelsList, citiesList } from "./mok";
 import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
+import BsInput from "../../../../Components/Fields/BsInput";
 import style from "./style.less"
 import PureDeleteItems from "../../../../Utils/Arrays/PureDeleteItems";
 import {pureUpdateArrayByComparator} from "../../../../Utils/Arrays/PureUpdateArrayItems";
@@ -13,8 +14,9 @@ import {pureUpdateArrayByComparator} from "../../../../Utils/Arrays/PureUpdateAr
 const DataSet = props => {
   const [selectedKey, setSelectedKey] = useState("")
   const [checked, setCheckedKey] = useState("")
-  const [selectedList, setSelectedList] = useState([])
+  const [selectedList, setSelectedList] = useState(citiesList)
   const [checkedObject, setCheckedObject] = useState([])
+  const [newParentName, setNewParentName] = useState("")
   const [pageData, setPageData] = useState(treeData)
   const onSelect = useCallback((selectedKeys, info) => {
       const { node: { title, children } } = info
@@ -28,7 +30,7 @@ const DataSet = props => {
                 setSelectedList(citiesList);
                 break;
 
-            default: setSelectedList([])
+            default: setSelectedList(citiesList)
     }
   }, []);
   const onExpand = useCallback(expandedKeys => {
@@ -57,6 +59,23 @@ const DataSet = props => {
       })
   }
 
+  const onDragStart = (info) => {
+      console.log("onDragStart", info)
+  }
+  const onDragEnter = (arg) => {
+      console.log("onDragEnter", arg)
+  }
+  const onDrop = (info) => {
+      console.log("onDrop", info)
+
+  }
+  const setNewNode = () => {
+      let newPageData = [...pageData]
+      newPageData.push({ key: newPageData.length, title: `${newParentName}`, children: []})
+          setPageData(newPageData)
+      setNewParentName("")
+  }
+
   return (
     <DataSetContainer className="flex-container pos-relative overflow-hidden j-c-space-between">
         <div className="display-flex h-100">
@@ -66,21 +85,25 @@ const DataSet = props => {
                 <div
                     className="w-100"
                 >
-                    <SelectTools>
-                        <BsButton
-                            type="button"
-                            className="golden btn width-midi color-greyDarken"
-                            onClick={setNewTree}
-                        >
-                            применить
-                        </BsButton>
-                        <div
-                            className="parent-icon"
-                        />
-                    </SelectTools>
                     <div
                         className="p-10"
                     >
+                        <div className="display-flex a-i-center m-b-10">
+                            <BsInput
+                                id="NewParentName"
+                                value={newParentName}
+                                onInput={(value) => setNewParentName(value)}
+                                maxHeight="20px"
+                                className=""
+                            />
+                            <BsButton
+                                type="button"
+                                className="golden btn width-midi color-greyDarken m-t-10 w-18 m-l-8"
+                                onClick={setNewNode}
+                            >
+                                добавить
+                            </BsButton>
+                        </div>
                         <CheckboxGroup
                             options={selectedList}
                             valueKey="id"
@@ -90,6 +113,15 @@ const DataSet = props => {
                             returnObjects
                             onInput={(value) => checkObject(value)}
                         />
+                        <SelectTools>
+                            <BsButton
+                                type="button"
+                                className="golden btn width-midi color-greyDarken w-18"
+                                onClick={setNewTree}
+                            >
+                                применить
+                            </BsButton>
+                        </SelectTools>
                     </div>
                 </div>
             </DataListContainer>
@@ -98,6 +130,9 @@ const DataSet = props => {
                 Дата сет от 27.11.2021
               </h2>
               <Tree
+                onDragStart={onDragStart}
+                onDragEnter={onDragEnter}
+                onDrop={onDrop}
                 showLine
                 // selectable={false}
                 draggable
