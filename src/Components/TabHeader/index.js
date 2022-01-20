@@ -8,9 +8,7 @@ import {FooterTabs} from "../../Pages/Tab/constants"
 const TabHeader = () => {
   const [valueDate, setValueDate] = useState([])
   const formPayload = { dateRange: [] }
-  const editDate = (value) => {
-    setValueDate(value)
-  }
+
   return (
     <HeaderContainer
       className="p-l-15 p-r-15 p-b-10 p-t-10 display-flex j-c-space-between bg-color-greyLight-4 a-i-center"
@@ -22,7 +20,7 @@ const TabHeader = () => {
         <DatePicker
           id="dateRange"
           formPayload={formPayload}
-          onInput={editDate}
+          onInput={setValueDate}
           range
           placeholder="Непрерывный диапазон дат"
           value={valueDate}

@@ -1,12 +1,15 @@
 import React, {useCallback, useMemo, useState} from 'react';
 import PropTypes from 'prop-types';
 import {DataSetContainer} from "@/Pages/Tab/Pages/DataSet/styles";
-import {ReportContainer, ReportsGrid} from "./styles"
+import {ReportContainer, ReportsGrid, WrapperInput} from "./styles"
 import Tree from "rc-tree";
 import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
 import {ButtonsContainer, Button} from "../../../../Components/ButtonsTabBar/style";
 import BsCheckBox from "../../../../Components/Fields/BsCheckBox";
 import RadioButton from "../../../../Components/Fields/RadioButton";
+import BsInput from "../../../../Components/Fields/BsInput";
+import DatePicker from "../../../../Components/Fields/DatePicker";
+import {ContainerDatePicker} from "../../../../Components/TabHeader/style";
 
 const statistics = [
   { key: 2274, title: "GRP" },
@@ -33,6 +36,10 @@ const attributesButtons = [
   {
     id: 2,
     label: "Атрибуты"
+  },
+  {
+    id: 3,
+    label: "Демография"
   }
 ]
 
@@ -72,6 +79,22 @@ const Reports = () => {
   const [totalLine, setTotalLine] = useState()
   const [interval, setInterval] = useState()
   const [growing, setGrowing] = useState()
+
+  const [week, setWeek] = useState("")
+  const [time, setTime] = useState("")
+  const [duration, setDuration] = useState("")
+  const [groupEvents , setGroupEvents] = useState()
+
+  const [NBD , setNBD] = useState()
+  const [valueDate, setValueDate] = useState([])
+  const [Qual, setQual] = useState("")
+  const [aver, setAve] = useState("")
+
+  const [listAdvertising , setListAdvertising] = useState("")
+  const [originalOutputs , setOriginalOutputs] = useState("")
+
+
+  const formPayload = { dateRange: [] }
 
   const TreeData = useMemo(() => [
     {
@@ -200,23 +223,113 @@ const Reports = () => {
                         onInput={setGrowing}
                         className="m-b-15"
                       />
+                      <WrapperInput className="display-flex a-i-center">
+                        <div className="p-r-15">Первый день недели:</div>
+                        <BsInput
+                          id="week"
+                          value={week}
+                          placeholder="Впишите день недели"
+                          onInput={setWeek}
+                        />
+                      </WrapperInput>
+                      <WrapperInput className="display-flex a-i-center">
+                        <div className="p-r-15">Время выхода событий:</div>
+                        <BsInput
+                          id="time"
+                          value={time}
+                          placeholder="Впишите время выхода событий"
+                          onInput={setTime}
+                        />
+                        <div className="p-l-5">мин</div>
+                      </WrapperInput>
+                      <WrapperInput className="display-flex a-i-center">
+                        <div className="p-r-15">Базовая длительность:</div>
+                        <BsInput
+                          id="duration"
+                          value={duration}
+                          placeholder="Впишите базовую длительность"
+                          onInput={setDuration}
+                        />
+                        <div className="p-l-5">сек</div>
+                      </WrapperInput>
+                      <BsCheckBox
+                        id="groupEvents"
+                        label="Группировать события"
+                        value={groupEvents}
+                        onInput={setGroupEvents}
+                        className="m-b-15"
+                      />
                     </div>
                   )}
                   {activeOption === "Опции охвата" && (
                     <div>
-                      Опции охвата
+                      <WrapperInput className="display-flex a-i-center">
+                        <div className="p-r-15">NBD канал:</div>
+                        <BsInput
+                          id="NBD"
+                          value={NBD}
+                          placeholder="Впишите NBD канал"
+                          onInput={setNBD}
+                        />
+                      </WrapperInput>
+                      <ContainerDatePicker>
+                        <div className="p-b-10">
+                          Базовый день
+                        </div>
+                        <DatePicker
+                          id="dateRange"
+                          formPayload={formPayload}
+                          onInput={setValueDate}
+                          range
+                          allWaysOpen
+                          value={valueDate}
+                        />
+                      </ContainerDatePicker>
+                      <WrapperInput className="display-flex a-i-center">
+                        <div className="p-r-15">Qual.Reach viewer:</div>
+                        <BsInput
+                          id="Qual"
+                          value={Qual}
+                          placeholder="Qual.Reach viewer"
+                          onInput={setQual}
+                        />
+                      </WrapperInput>
+                      <WrapperInput className="display-flex a-i-center">
+                        <div className="p-r-15">Average Weekly/Monthly Reach:</div>
+                        <BsInput
+                          id="average"
+                          value={aver}
+                          placeholder="Средний день"
+                          onInput={setAve}
+                        />
+                      </WrapperInput>
                     </div>
                   )}
                   {activeOption === "Доп опции" && (
                     <div>
-                      Доп опции
+                      <WrapperInput className="display-flex a-i-center">
+                        <div className="p-r-15">Текущий список предметов рекламы:</div>
+                        <BsInput
+                          id="listAdvertising"
+                          value={listAdvertising}
+                          placeholder="Текущий список предметов рекламы"
+                          onInput={setListAdvertising}
+                        />
+                      </WrapperInput>
+                      <BsCheckBox
+                        id="originalOutputs"
+                        label="Количество оригинальных выходов"
+                        value={originalOutputs}
+                        onInput={setOriginalOutputs}
+                        className="m-b-15"
+                      />
                     </div>
                   )}
                 </div>
               </div>
             </ReportsGrid>
           </div>
-          <div>
+          <div className="display-flex flex-column a-i-center">
             <h3>
               Выбранные атрибуты
             </h3>
@@ -265,6 +378,11 @@ const Reports = () => {
                 onInput={setFreeStateTwo}
                 returnObjects
               />
+            )}
+            {activeButton === "Демография" && (
+              <div>
+                Демография
+              </div>
             )}
           </div>
         </ReportContainer>
