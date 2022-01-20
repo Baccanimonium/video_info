@@ -10,7 +10,7 @@ export const treeData = [
     {
         key: '0',
         title: 'ТВ + Интернет (Ноль плюс) с 1-авг-2019',
-        icon: Icon,
+        // icon: Icon,
         children: [
             {
                 id: 1,
