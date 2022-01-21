@@ -13,6 +13,7 @@ import DataSet from "@/Pages/Tab/Pages/DataSet";
 import Reports from "@/Pages/Tab/Pages/Reports";
 import Criteria from "@/Pages/Tab/Pages/Criteria";
 import Result from "@/Pages/Tab/Pages/Result";
+import SelectionCriteria from "@/Pages/Tab/Pages/SelectionCriteria"
 import TabHeader from "../../Components/TabHeader";
 
 const PlusIcon = Icon(plusIcon)
@@ -93,6 +94,14 @@ const Tab = () => {
         <Routes>
           <Route
             path="/"
+            element={<Home/>}
+          />
+          <Route
+            path="/selection_criteria"
+            element={<SelectionCriteria/>}
+          />
+          <Route
+            path="/selection criteria"
             element={<Home/>}
           />
           <Route
