@@ -2,7 +2,7 @@ import React, {useCallback, useMemo, useState} from 'react';
 import PropTypes from 'prop-types';
 import {DataSetContainer} from "@/Pages/Tab/Pages/DataSet/styles";
 import {LeftContainer, ReportContainer, ReportsGrid, WrapperInput} from "./styles"
-import Tree from "rc-tree";
+import Tree, { TreeNode } from 'rc-tree';
 import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
 import {ButtonsContainer, Button} from "../../../../Components/ButtonsTabBar/style";
 import BsCheckBox from "../../../../Components/Fields/BsCheckBox";
@@ -48,7 +48,6 @@ const optionsButtons = [
   {
     id: 1,
     label: "Опции расчета",
-
   },
   {
     id: 2,
@@ -88,6 +87,9 @@ const Reports = () => {
 
   const [NBD , setNBD] = useState()
   const [valueDate, setValueDate] = useState([])
+  const [monitoringDates, setMonitoringDates] = useState()
+  const [automaticDetection , setAutomaticDetection] = useState()
+  const [userDetection , setUserDetection] = useState()
   const [Qual, setQual] = useState("")
   const [aver, setAve] = useState("")
 
@@ -136,13 +138,13 @@ const Reports = () => {
 
   return (
     <DataSetContainer className="flex-container pos-relative overflow-hidden">
-      <div className="flex-container p-l-20 p-r-20">
-        <ReportContainer className="overflow-hidden">
-          <LeftContainer className="overflow-hidden pos-relative">
-            <h3>
-              Доступные отчеты
-            </h3>
-            <ReportsGrid>
+      <div className="flex-container p-l-15 p-r-15">
+        <ReportContainer className="overflow-hidden h-100">
+          <LeftContainer className="overflow-hidden pos-relative flex-container">
+            <ScrollBar>
+              <h3>
+                Доступные отчеты
+              </h3>
               <div className="m-b-20">
                 <BsCheckBox
                   id="videoProtocol"
@@ -173,7 +175,7 @@ const Reports = () => {
                   className="m-b-15"
                 />
               </div>
-              <div>
+              <div className="flex-container p-r-15 overflow-hidden">
                 <ButtonsContainer>
                   {optionsButtons.map(({id, label}) => (
                     <Button
@@ -185,10 +187,9 @@ const Reports = () => {
                     </Button>
                   ))}
                 </ButtonsContainer>
-                <div className="m-t-15 overflow-hidden pos-relative flex-container">
-                  <ScrollBar>
+                <div className="m-t-15 flex-container overflow-hidden">
                     {activeOption === "Опции расчета" && (
-                      <div>
+                      <div className="flex-container">
                         <div className="display-flex p-b-15 separator-bot-greyLight">
                           <RadioButton
                             id="byAmount"
@@ -262,43 +263,62 @@ const Reports = () => {
                             </div>
                           </WrapperInput>
                         </div>
-                        <div className="p-t-15">
-                          <BsCheckBox
-                            id="groupEvents"
-                            label="Группировать события"
-                            value={groupEvents}
-                            onInput={setGroupEvents}
-                            className="m-b-15"
-                          />
-                        </div>
+                        <BsCheckBox
+                          id="groupEvents"
+                          label="Группировать события"
+                          value={groupEvents}
+                          onInput={setGroupEvents}
+                          className="m-b-15 p-t-15"
+                        />
                       </div>
                     )}
                     {activeOption === "Опции охвата" && (
-                      <div>
-                        <div className="separator-bot-greyLight">
-                          <WrapperInput className="display-flex a-i-center">
-                            <div className="p-r-15">NBD канал:</div>
-                            <BsInput
-                              id="NBD"
-                              value={NBD}
-                              placeholder="Впишите NBD канал"
-                              onInput={setNBD}
-                            />
-                          </WrapperInput>
-                        </div>
-                        <ContainerDatePicker className="separator-top-greyLight p-t-15 ml-auto mr-auto p-b-15">
-                          <div className="p-b-10">
-                            Базовый день
-                          </div>
-                          <DatePicker
-                            id="dateRange"
-                            formPayload={formPayload}
-                            onInput={setValueDate}
-                            range
-                            allWaysOpen
-                            value={valueDate}
+                      <>
+                        <WrapperInput className="display-flex a-i-center separator-bot-greyLight p-b-15">
+                          <div className="p-r-15">NBD канал:</div>
+                          <BsInput
+                            id="NBD"
+                            value={NBD}
+                            placeholder="Впишите NBD канал"
+                            onInput={setNBD}
                           />
-                        </ContainerDatePicker>
+                        </WrapperInput>
+                        <div className=" p-b-15">
+                          <div className="p-b-15">
+                            Базовый день:
+                          </div>
+                          <BsCheckBox
+                            id="monitoringDates"
+                            label="По датам мониторинга компании"
+                            value={monitoringDates}
+                            onInput={setMonitoringDates}
+                            className="m-b-15"
+                          />
+                          <RadioButton
+                            id="automaticDetection"
+                            label="Автоматическое определение"
+                            value={automaticDetection}
+                            onInput={setAutomaticDetection}
+                            className="m-b-15"
+                          />
+                          <RadioButton
+                            id="userDetection"
+                            label="Определение пользователем"
+                            value={userDetection}
+                            onInput={setUserDetection}
+                            className="p-b-15"
+                          />
+                          <ContainerDatePicker className="ml-auto mr-auto">
+                            <DatePicker
+                              id="dateRange"
+                              formPayload={formPayload}
+                              onInput={setValueDate}
+                              allWaysOpen
+                              value={valueDate}
+                              placeholder="Выберите дату"
+                            />
+                          </ContainerDatePicker>
+                        </div>
                         <div className="separator-top-greyLight p-t-15">
                           <WrapperInput className="display-flex a-i-center j-c-space-between">
                             <div className="p-r-15">Qual.Reach viewer:</div>
@@ -321,7 +341,7 @@ const Reports = () => {
                             />
                           </WrapperInput>
                         </div>
-                      </div>
+                      </>
                     )}
                     {activeOption === "Доп опции" && (
                       <div>
@@ -342,10 +362,9 @@ const Reports = () => {
                         />
                       </div>
                     )}
-                  </ScrollBar>
                 </div>
               </div>
-            </ReportsGrid>
+            </ScrollBar>
           </LeftContainer>
           <div className="display-flex flex-column a-i-center">
             <h3>
@@ -399,7 +418,11 @@ const Reports = () => {
             )}
             {activeButton === "Демография" && (
               <div>
-                Демография
+                <Tree defaultExpandAll>
+                  <TreeNode title="Parent">
+                    <TreeNode title="Child" />
+                  </TreeNode>
+                </Tree>
               </div>
             )}
           </div>
