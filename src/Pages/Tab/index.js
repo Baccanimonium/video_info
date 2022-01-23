@@ -11,8 +11,8 @@ import Home from "./Pages/Home";
 import TabFooter from "@/Pages/Tab/TabFooter";
 import DataSet from "@/Pages/Tab/Pages/DataSet";
 import Reports from "@/Pages/Tab/Pages/Reports";
-import Criteria from "@/Pages/Tab/Pages/Criteria";
 import Result from "@/Pages/Tab/Pages/Result";
+import SelectionCriteria from "@/Pages/Tab/Pages/SelectionCriteria"
 import TabHeader from "../../Components/TabHeader";
 
 const PlusIcon = Icon(plusIcon)
@@ -115,7 +115,7 @@ const Tab = () => {
                />
                <Route
                  path="/selection_criteria"
-                 element={<Criteria/>}
+                 element={<SelectionCriteria/>}
                />
                <Route
                  path="/result"
