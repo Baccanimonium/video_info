@@ -26,6 +26,7 @@ class OverlayMenu extends PureComponent {
     const { event: { target }, refTargetParent = target, refContainer } = this.props
     this.observer.observe(refTargetParent, {})
     refContainer.addEventListener("scroll", this.resolveDimensions)
+    this.resolveDimensions()
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -53,6 +54,7 @@ class OverlayMenu extends PureComponent {
       rightPosition = rightPosition > 0 ? rightPosition : 0
       const leftPosition = clientWidth - (left - zoneLeft) > contextMenuWidth ? left : zoneLeft
       const maxTipLeftPosition = leftPosition + contextMenuWidth - 8
+
       this.setState({
         positionStyles: (
           (outOfYAxis < 0 ? top < zoneBot : top > zoneTop)
