@@ -13,13 +13,16 @@ import DataSet from "@/Pages/Tab/Pages/DataSet";
 import Reports from "@/Pages/Tab/Pages/Reports";
 import Criteria from "@/Pages/Tab/Pages/Criteria";
 import Result from "@/Pages/Tab/Pages/Result";
+import TabHeader from "../../Components/TabHeader";
 
 const PlusIcon = Icon(plusIcon)
 
 const urls = {
   "/tab/data_set": "/tab/report",
   "/tab/report": "/tab/selection_criteria",
-  "/tab/selection_criteria": "/tab/result",
+  "/tab/selection_criteria": "/tab/buying_audiences",
+  "/tab/buying_audiences": "/tab/result",
+  "/tab/result": "/tab/result"
 }
 
 const Tab = () => {
@@ -98,6 +101,9 @@ const Tab = () => {
         {tabs.length > 0
           ?
            <>
+             <TabHeader
+               path={urls[location.pathname]}
+             />
              <Routes>
                <Route
                  path="/data_set"

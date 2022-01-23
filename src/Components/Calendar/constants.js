@@ -1,10 +1,10 @@
 export const MonthNames = [
-  "January", "February", "March", "April", "May", "June", "July", "August",
-  "September", "October", "November", "December"
+  "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август",
+  "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
 ]
 
-export const WeekHeaders = ["M", "T", "W", "T", "F", "S", "S"]
+export const WeekHeaders = ["П", "В", "С", "Ч", "П", "С", "В"]
 
-export const CALENDAR_MONTH_VIEW = "month"
-export const CALENDAR_YEAR_VIEW = "year"
-export const CALENDAR_DECADE_VIEW = "decade"
+export const CALENDAR_MONTH_VIEW = "месяц"
+export const CALENDAR_YEAR_VIEW = "год"
+export const CALENDAR_DECADE_VIEW = "декада"
