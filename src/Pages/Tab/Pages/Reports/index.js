@@ -1,79 +1,112 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import PropTypes from 'prop-types';
-import { WithValidationHocRenderPropAdapter } from "@/Core/Decorators/withValidation"
-import StateLessForm from "@/Components/Forms/StateLessForm"
+import {DataSetContainer} from "@/Pages/Tab/Pages/DataSet/styles";
+import {ReportContainer} from "./styles"
+import Tree from "rc-tree";
+import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
 
-import {
-  DealConditionWrapper, IndentionConditionForm, Separator, ConditionFormWrapper
-} from "@/Pages/Tab/Pages/styles";
+const statistics = [
+  { key: 2274, title: "GRP" },
+  { key: 2272, title: "WRP" },
+  { key: 2270, title: "Mins" },
+  { key: 2268, title: "Share" },
+]
 
-import { reportsFields, attribsFields, mainFields } from './constants'
-
-const fieldRules = {}
+const attributes = [
+  { key: 2274, title: "Year" },
+  { key: 2272, title: "Month" },
+  { key: 2270, title: "Month excl year" },
+  { key: 2268, title: "Month digt" },
+  { key: 2271, title: "TvCompany" },
+  { key: 2265, title: "TvNet" },
+]
 
 const Reports = () => {
-  const [value, setValue] = useState({})
-  const onSubmit = useCallback(() => console.log("submit"), [])
+  const [selectedKey, setSelectedKey] = useState("")
+  const [checked, setCheckedKey] = useState("")
+  const [freeState, setFreeState] = useState([])
+  const [freeStateTwo, setFreeStateTwo] = useState([])
+
+  const TreeData = useMemo(() => [
+    {
+      key: '0',
+      title: 'Статистика',
+      children: freeState.map((item, i)=> ({
+        ...item, key: `0-${i}`
+      }) ),
+    },
+    {
+      key: '1',
+      title: 'Атрибуты',
+      children: freeStateTwo.map((item, i)=> ({
+        ...item, key: `1-${i}`
+      }) ),
+    },
+  ], [freeStateTwo, freeState])
+
+  const onSelect =  useCallback((selectedKeys, info) => {
+    console.log('selected', selectedKeys, info);
+    this.selKey = info.node.props.eventKey;
+  }, []);
+  const onExpand = useCallback(expandedKeys => {
+    console.log('onExpand', expandedKeys);
+  }, []);
+
+  const onCheck = useCallback((checkedKeys, info) => {
+    console.log('onCheck', checkedKeys, info);
+  }, []);
+
   return (
-    <DealConditionWrapper className="flex-container">
-      <IndentionConditionForm>
-        <Separator>
-          <h2 className="p-b-10">
-            Глобальные аттрибуты
-          </h2>
-          <ConditionFormWrapper>
-            <StateLessForm
-              value={value}
-              fields={mainFields}
-              onInput={setValue}
-              className="display-contents"
-              classNameInputWrapper="styleFormWrapper"
+    <DataSetContainer className="flex-container pos-relative overflow-hidden">
+      <div className="flex-container p-l-20 p-r-20">
+        <ReportContainer>
+          <div>
+            <h3>
+              Отчеты
+            </h3>
+          </div>
+          <div>
+            <h3>
+              Выбранные атрибуты
+            </h3>
+            <Tree
+              showLine
+              selectable={false}
+              defaultExpandAll
+              onExpand={onExpand}
+              defaultSelectedKeys={selectedKey}
+              defaultCheckedKeys={checked}
+              onSelect={onSelect}
+              onCheck={onCheck}
+              treeData={TreeData}
             />
-          </ConditionFormWrapper>
-        </Separator>
-
-        <Separator>
-          <h2 className="p-b-10">
-            Отчеты
-          </h2>
-          <ConditionFormWrapper>
-            <WithValidationHocRenderPropAdapter
-              onInput={setValue}
-              value={value}
-              rules={fieldRules}
-              onSubmit={onSubmit}
-            >
-              {(props) => (
-                <StateLessForm
-                  {...props}
-                  fields={reportsFields}
-                  className="display-contents"
-                  classNameInputWrapper="styleFormWrapper"
-                />
-              )}
-            </WithValidationHocRenderPropAdapter>
-
-
-          </ConditionFormWrapper>
-        </Separator>
-
-        <Separator>
-          <h2 className="p-b-10">
-            Выбранные атрибуты
-          </h2>
-          <ConditionFormWrapper>
-            <StateLessForm
-              onSubmit={onSubmit}
-              fields={attribsFields}
-              className="display-contents"
-              classNameInputWrapper="styleFormWrapper"
-              value={value}
-              onInput={setValue}
+          </div>
+          <div>
+            <h3>
+              Атрибуты
+            </h3>
+            <CheckboxGroup
+              value={freeState}
+              blockTitle="Статистика"
+              labelKey="title"
+              valueKey="key"
+              options={statistics}
+              onInput={setFreeState}
+              returnObjects
             />
-          </ConditionFormWrapper>
-        </Separator>
-      </IndentionConditionForm>
-    </DealConditionWrapper>
+            <CheckboxGroup
+              value={freeStateTwo}
+              blockTitle="Атрибуты"
+              labelKey="title"
+              valueKey="key"
+              options={attributes}
+              onInput={setFreeStateTwo}
+              returnObjects
+            />
+          </div>
+        </ReportContainer>
+      </div>
+    </DataSetContainer>
   );
 };
 

@@ -125,15 +125,17 @@ class CheckboxGroup extends Component {
     const checkboxes = this.sortedOptions(tempQuery, options).map(item => {
       const { [labelKey]: label } = item
       return (
-        <BsCheckBox
-          {...this.props}
-          className="m-b-15"
-          checkBoxValue={item}
-          label={label}
-          disabled={disabled || loading}
-          key={label}
-          style={style}
-        />
+        <div className="p-r-14 p-l-14">
+          <BsCheckBox
+            {...this.props}
+            className="m-b-15"
+            checkBoxValue={item}
+            label={label}
+            disabled={disabled || loading}
+            key={label}
+            style={style}
+          />
+        </div>
       )
     })
     if (!filterable) {
