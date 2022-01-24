@@ -29,7 +29,7 @@ Row.propTypes = {
 };
 
 Row.defaultProps = {
-  rowComponent: "span"
+  rowComponent: ({children, className, style }) => <div className={className} style={style}>{children}</div>
 };
 
 export default Row;
