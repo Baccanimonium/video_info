@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import PropTypes from 'prop-types';
-import Tree from '@/Components/TTTree';
+import Tree from '@/Components/Tree';
 import {DataSetContainer} from "@/Pages/Tab/Pages/DataSet/styles";
 
 const DataSet = props => {
@@ -73,22 +73,27 @@ const DataSet = props => {
   }, []);
 
   return (
-    <DataSetContainer className="flex-container pos-relative overflow-hidden l-p-layout r-p-layout p-t-35">
-      <Tree
-        checkAble
-        defaultExpandAll
-        onExpand={onExpand}
-        draggable
-        onDragStart={onDragStart}
-        onDragEnter={onDragEnter}
-        defaultSelectedKeys={selectedKey}
-        defaultCheckedKeys={checked}
-        onSelect={onSelect}
-        onCheck={onCheck}
-        options={treeData}
-        value={checkedKeys}
-        onInput={setCheckedKeys}
-      />
+    <DataSetContainer className="flex-container pos-relative overflow-hidden">
+      <div className="flex-container l-p-layout r-p-layout">
+        <h2 className=" min-width-100">
+          Дата сет от 27.11.2021
+        </h2>
+        <Tree
+          checkAble
+          defaultExpandAll
+          onExpand={onExpand}
+          draggable
+          onDragStart={onDragStart}
+          onDragEnter={onDragEnter}
+          defaultSelectedKeys={selectedKey}
+          defaultCheckedKeys={checked}
+          onSelect={onSelect}
+          onCheck={onCheck}
+          options={treeData}
+          value={checkedKeys}
+          onInput={setCheckedKeys}
+        />
+      </div>
     </DataSetContainer>
   );
 };

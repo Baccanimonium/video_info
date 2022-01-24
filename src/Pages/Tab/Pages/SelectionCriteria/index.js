@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import PropTypes from 'prop-types';
-import Tree from '@/Components/TTTree';
+import Tree from '@/Components/Tree';
 import {GridContainer, SelectTools} from "./styles"
 import BsButton from "@/Components/BsButton";
 import {treeData, channelsList, citiesList} from "./mok";
@@ -16,6 +16,7 @@ const DataSet = props => {
   const [newParentName, setNewParentName] = useState("")
   const [pageData, setPageData] = useState(treeData)
   const onSelect = useCallback(({node: {title, children}, sequence}) => {
+    console.log(title)
     switch (title) {
       case "ТВ + Интернет (Ноль плюс) с 1-авг-2019":
         setSelectedList(channelsList);

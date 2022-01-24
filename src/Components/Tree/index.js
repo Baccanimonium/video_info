@@ -1,7 +1,7 @@
 import React, {useCallback, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import {memoize} from "lodash/function";
-import Leaf from "@/Components/TTTree/Leaf";
+import Leaf from "@/Components/Tree/Leaf";
 import MemoResolver from "@/Utils/MemoResolver";
 
 const resolver = MemoResolver()
@@ -11,7 +11,7 @@ const Tree = (props) => {
   refProps.current = props
   const {
     value, onInput, onDrag, childrenKey, valueKey, labelKey, checkAble, options, draggable, dropRule,
-    defaultExpandAll
+    defaultExpandAll, rowComponent, onUpdateOptions
   } = props
   const [selectedNode, setSelectedNode] = useState("")
   const [dropState, setDropState] = useState(null)
@@ -36,16 +36,30 @@ const Tree = (props) => {
 
   }, resolver), [childrenKey])
 
-  const handleSelectNode = useCallback((node) => {
+  const handleSelectNode = useCallback((selectedState) => {
     const { selectRule, onSelect, valueKey } = refProps.current
-    if (selectRule(node, refProps.current)) {
-      onSelect(node)
-      setSelectedNode(node[valueKey])
+    if (selectRule(selectedState.node, refProps.current)) {
+      onSelect(selectedState)
+      setSelectedNode(selectedState.node[valueKey])
     }
 
   }, [])
 
   const getSequence = useCallback((sequence) => sequence, [])
+
+  const handleUpdateOptions = useCallback((nextLeafValue, childrenIndex) => {
+    const { options, onUpdateOptions } =  refProps.current = props
+    const nextOptions = [...options]
+    nextOptions[childrenIndex] = nextLeafValue
+    onUpdateOptions(nextOptions)
+  }, [])
+
+  const deleteLeaf = useCallback((childrenIndex) => {
+    const { options, onUpdateOptions, index } =  refProps.current = props
+    const nextOptions = [...options]
+    nextOptions.splice(childrenIndex, 1)
+    onUpdateOptions(nextOptions, index)
+  }, [])
 
   return (
     <div>
@@ -68,6 +82,9 @@ const Tree = (props) => {
         setDropState={setDropState}
         dropState={dropState}
         defaultExpandAll={defaultExpandAll}
+        rowComponent={rowComponent}
+        onUpdateOptions={handleUpdateOptions}
+        onDeleteLeafOption={deleteLeaf}
       />
       )}
     </div>
@@ -79,13 +96,15 @@ Tree.propTypes = {
 };
 
 Tree.defaultProps = {
+  options: [],
   childrenKey: "children",
   valueKey: "id",
   labelKey: "title",
   value: {},
   onSelect: () => null,
+  onUpdateOptions: () => null,
   selectRule: (node, { childrenKey }) => !!node[childrenKey],
-  dropRule: ({valueKey, parent: { [valueKey]: originParentKey}}, { parent: { [valueKey]: targetParentKey } = {} }) => {
+  dropRule: ({valueKey, parent: { [valueKey]: originParentKey } = {}}, { parent: { [valueKey]: targetParentKey } = {} }) => {
     return originParentKey === targetParentKey
   }
 };

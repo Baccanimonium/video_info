@@ -8,21 +8,26 @@ export const LeafContainer = styled.div`
   padding: 3px 0;
 `
 
-export const LeafHeader = styled.button`
+export const LeafHeader = styled.div`
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  width: 100%;
+  ${props => props.borderState ? `
+    border-${props.borderState}: 2px solid var(--color-light-gold-3);
+  `
+          : ""
+  }
+  padding: 4px 4px;
+`
+
+export const LeafTitle = styled.span`
   ${props => props.selected ? `
     background-color: var(--color-light-gold-1);
     box-shadow: 0 0 0 1px var(--color-light-gold-1);
     color: white;
     `
-  :
-    ""
+          :
+          ""
   }
-  border-top: 2px solid transparent;
-  border-bottom: 2px solid transparent;
-  ${props => props.borderState ? `
-    border-${props.borderState}: 2px solid var(--color-light-gold-3);
-  `
-  : ""
-  }
-  padding: 4px 4px;
 `

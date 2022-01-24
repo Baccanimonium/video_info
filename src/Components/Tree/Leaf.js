@@ -1,12 +1,12 @@
 import React, {useCallback, useRef, useState} from 'react'
 import PropTypes from 'prop-types';
-import {LeafContainer} from "@/Components/TTTree/styles"
+import {LeafContainer} from "@/Components/Tree/styles"
 import Icon from "@/Components/Icon"
 import BsCheckbox from "@/Components/Fields/BsCheckBox"
 import { CircleMinus } from "./Icons/CircleMinus"
 import { CirclePlus } from "./Icons/CirclePlus"
 import { Dot } from "./Icons/Dot"
-import Row from "@/Components/TTTree/Row"
+import Row from "@/Components/Tree/Row"
 
 const PlusIcon = Icon(CirclePlus)
 const MinusIcon = Icon(CircleMinus)
@@ -16,7 +16,8 @@ const Leaf = (props) => {
   const {
     childrenKey, valueKey, options, options: { title, [childrenKey]: children, [valueKey]: leafVal }, level,
     onInput, index, value, defaultExpandAll, getLeafSelectedStatus, onSelect, selectedNode, draggable,
-    checkAble, getSequence, dropRule, setDropState, dropState
+    checkAble, getSequence, dropRule, setDropState, dropState, rowComponent, parent, onUpdateOptions,
+    onDeleteLeafOption
   } = props
 
   const refProps = useRef(props)
@@ -63,13 +64,6 @@ const Leaf = (props) => {
     }
   }, [children, handleInput, childrenKey, options, valueKey, leafVal])
 
-  const selectNode = useCallback(() => onSelect(options), [options])
-
-  const onDragStart = useCallback(() => {
-    const { getSequence, setDropState } = refProps.current
-    setDropState({ node: refProps.current, sequence: getSequence() })
-  }, [])
-
   const onDragEnd = useCallback(() => {
     setBorderState("")
     setDropState(null)
@@ -102,6 +96,36 @@ const Leaf = (props) => {
     return getSequence(sequence)
   }, [getSequence, index])
 
+  const onUpdateLeafOption = useCallback((nextLeafValue) => {
+    onUpdateOptions(nextLeafValue, index)
+  }, [index, onUpdateOptions])
+
+  const handleDeleteLeafOption = useCallback(() => {
+    onDeleteLeafOption(index)
+  }, [index, onDeleteLeafOption])
+
+
+  const handleUpdateOptions = useCallback((nextLeafValue, childrenIndex) => {
+    const { options, onUpdateOptions, index, childrenKey } =  refProps.current
+    const nextOptions = {...options, [childrenKey]: [...options[childrenKey]]}
+    nextOptions[childrenKey][childrenIndex] = nextLeafValue
+    onUpdateOptions(nextOptions, index)
+  }, [])
+
+  const deleteLeaf = useCallback((childrenIndex) => {
+    const { options, onUpdateOptions, index, childrenKey } =  refProps.current
+    const nextOptions = {...options, [childrenKey]: [...options[childrenKey]]}
+    nextOptions[childrenKey].splice(childrenIndex, 1)
+    onUpdateOptions(nextOptions, index)
+  }, [])
+
+  const selectNode = useCallback(() => onSelect({node:options, sequence: handleGetSequence()}), [options, handleGetSequence])
+
+  const onDragStart = useCallback(() => {
+    const { setDropState } = refProps.current
+    setDropState({ node: refProps.current, sequence: handleGetSequence() })
+  }, [handleGetSequence])
+
   return (
     <LeafContainer level={level} >
       <div
@@ -124,6 +148,11 @@ const Leaf = (props) => {
           draggable={draggable}
           onDragStart={onDragStart}
           onDragEnd={onDragEnd}
+          node={options}
+          parent={parent}
+          rowComponent={rowComponent}
+          onInput={onUpdateLeafOption}
+          onDelete={handleDeleteLeafOption}
         />
       </div>
       <div>
@@ -142,8 +171,12 @@ const Leaf = (props) => {
           onSelect={onSelect}
           selectedNode={selectedNode}
           parent={options}
+          defaultExpandAll={defaultExpandAll}
           setDropState={setDropState}
           dropState={dropState}
+          rowComponent={rowComponent}
+          onUpdateOptions={handleUpdateOptions}
+          onDeleteLeafOption={deleteLeaf}
         />)}
       </div>
     </LeafContainer>
