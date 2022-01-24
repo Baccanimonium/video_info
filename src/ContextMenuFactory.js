@@ -11,17 +11,25 @@ const ContextMenu = styled(OverlayMenu)`
   background: var(--color-white);
   max-width: 350px;
   z-index: 20000;
+  padding-top: 5px;
+  padding-bottom: 5px;
+`
+
+const StyleContextMenuButton = styled.button`
+  &:hover {
+    color: var(--color-gold);
+  }
 `
 
 export const defaultContextMenuButton = ({ title, onSubmit, className }) => (
-  <button
+  <StyleContextMenuButton
     type="button"
     key={title}
     className={className}
     onMouseDown={onSubmit}
   >
     {title}
-  </button>
+  </StyleContextMenuButton>
 )
 
 const ContextMenuFactory = () => {

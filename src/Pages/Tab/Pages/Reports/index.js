@@ -366,7 +366,7 @@ const Reports = () => {
               </div>
             </ScrollBar>
           </LeftContainer>
-          <div className="display-flex flex-column a-i-center">
+          <div className="display-flex flex-column ml-auto mr-auto">
             <h3>
               Выбранные атрибуты
             </h3>
