@@ -63,29 +63,30 @@ const Tree = (props) => {
 
   return (
     <div>
-      {options.map((item, index) => <Leaf
-        draggable={draggable}
-        key={item[valueKey]}
-        value={value[index]}
-        options={item}
-        checkAble={checkAble}
-        index={index}
-        childrenKey={childrenKey}
-        valueKey={valueKey}
-        level={0}
-        onInput={handleInput}
-        onSelect={handleSelectNode}
-        selectedNode={selectedNode}
-        getSequence={getSequence}
-        getLeafSelectedStatus={getLeafSelectedStatus}
-        dropRule={dropRule}
-        setDropState={setDropState}
-        dropState={dropState}
-        defaultExpandAll={defaultExpandAll}
-        rowComponent={rowComponent}
-        onUpdateOptions={handleUpdateOptions}
-        onDeleteLeafOption={deleteLeaf}
-      />
+      {options.map((item, index) =>
+        <Leaf
+          draggable={draggable}
+          key={item[valueKey]}
+          value={value[index]}
+          options={item}
+          checkAble={checkAble}
+          index={index}
+          childrenKey={childrenKey}
+          valueKey={valueKey}
+          level={0}
+          onInput={handleInput}
+          onSelect={handleSelectNode}
+          selectedNode={selectedNode}
+          getSequence={getSequence}
+          getLeafSelectedStatus={getLeafSelectedStatus}
+          dropRule={dropRule}
+          setDropState={setDropState}
+          dropState={dropState}
+          defaultExpandAll={defaultExpandAll}
+          rowComponent={rowComponent}
+          onUpdateOptions={handleUpdateOptions}
+          onDeleteLeafOption={deleteLeaf}
+        />
       )}
     </div>
   );

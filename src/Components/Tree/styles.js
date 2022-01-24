@@ -23,9 +23,7 @@ export const LeafHeader = styled.div`
 
 export const LeafTitle = styled.span`
   ${props => props.selected ? `
-    background-color: var(--color-light-gold-1);
     box-shadow: 0 0 0 1px var(--color-light-gold-1);
-    color: white;
     `
           :
           ""

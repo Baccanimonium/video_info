@@ -90,7 +90,7 @@ SideBarFilters.defaultProps = {
   filtersChanged: true,
   autoClose: true,
   title: "filter",
-  buttonTitle: "apply",
+  buttonTitle: "Применить",
   filterLocation: ""
 }
 

@@ -14,7 +14,7 @@ const WithSubmitContainerHoc = (Component) => {
           className={`btn m-l-a width-min m-t-10 btn-apply ${valueChanged ? "golden" : "light-grey"}`}
           disabled={!valueChanged}
         >
-          apply
+          Применить
         </button>
       </div>
     )
