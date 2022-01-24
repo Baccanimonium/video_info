@@ -15,8 +15,8 @@ const Home = () => (
         <h2 className="fs-34 a-i-center max-width-555">
           Добро пожаловать в VideoInfo!
         </h2>
-        <div className="fs-18 d-flex fw700 color-lightGold">
-          Начните с выбора данных в нижнем меню.
+        <div className="fs-18 d-flex fw700 color-lightGold text-align-center">
+          Откройте новую вкладку нажав на кнопку в правом верхнем углу.
         </div>
       </NotFoundMessageContainer>
     </div>

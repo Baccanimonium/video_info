@@ -11,8 +11,8 @@ import Home from "./Pages/Home";
 import TabFooter from "@/Pages/Tab/TabFooter";
 import DataSet from "@/Pages/Tab/Pages/DataSet";
 import Reports from "@/Pages/Tab/Pages/Reports";
-import Criteria from "@/Pages/Tab/Pages/Criteria";
 import Result from "@/Pages/Tab/Pages/Result";
+import SelectionCriteria from "@/Pages/Tab/Pages/SelectionCriteria"
 import TabHeader from "../../Components/TabHeader";
 
 const PlusIcon = Icon(plusIcon)
@@ -26,8 +26,9 @@ const urls = {
 }
 
 const Tab = () => {
-  const [tabs, editTabs] = useState([{tabName: "Закладка 1", id: 0}])
+  const [tabs, editTabs] = useState([])
   const [currentTabIndex, setTabIndex] = useState(0)
+  const location = useLocation()
 
   const closeTab = useCallback((index) => {
     editTabs((tabs) => PureDeleteItems(tabs, index))
@@ -67,8 +68,6 @@ const Tab = () => {
     ])
   }, [])
 
-  const location = useLocation()
-
   return (
     <div className="display-flex h-100">
       <NavigationDrawer routes={tabNavigationMenu}/>
@@ -99,33 +98,36 @@ const Tab = () => {
           </WithOpenContextMenu>
 
         </TabBar>
-        <TabHeader
-          path={urls[location.pathname]}
-        />
+        {tabs.length > 0
+          ?
+           <>
+             <TabHeader
+               path={urls[location.pathname]}
+             />
+             <Routes>
+               <Route
+                 path="/data_set"
+                 element={<DataSet/>}
+               />
+               <Route
+                 path="/report"
+                 element={<Reports/>}
+               />
+               <Route
+                 path="/selection_criteria"
+                 element={<SelectionCriteria/>}
+               />
+               <Route
+                 path="/result"
+                 element={<Result/>}
+               />
+             </Routes>
+             <TabFooter buttons={FooterTabs} parentUrl="/tab"/>
+           </>
+          :
+          <Home/>
+        }
 
-        <Routes>
-          <Route
-            path="/"
-            element={<Home/>}
-          />
-          <Route
-            path="/data_set"
-            element={<DataSet/>}
-          />
-          <Route
-            path="/report"
-            element={<Reports/>}
-          />
-          <Route
-            path="/selection_criteria"
-            element={<Criteria/>}
-          />
-          <Route
-            path="/result"
-            element={<Result/>}
-          />
-        </Routes>
-        <TabFooter buttons={FooterTabs} parentUrl="/tab"/>
       </div>
     </div>
   )
