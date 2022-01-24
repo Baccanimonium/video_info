@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import PropTypes from 'prop-types';
-import Tree from '@/Components/Tree';
+import Tree from '@/Components/TTTree';
 import {DataSetContainer} from "@/Pages/Tab/Pages/DataSet/styles";
 
 const DataSet = props => {

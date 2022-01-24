@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import PropTypes from 'prop-types';
-import Tree from '@/Components/Tree';
-import {DataSetContainer, DataListContainer, SelectTools} from "@/Pages/Tab/Pages/DataSet/styles";
+import Tree from '@/Components/TTTree';
+import {GridContainer, SelectTools} from "./styles"
 import BsButton from "@/Components/BsButton";
 import {treeData, channelsList, citiesList} from "./mok";
 import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
@@ -78,13 +78,9 @@ const DataSet = props => {
   const selectRule = ({type}) => type === "condition"
 
   return (
-    <DataSetContainer className="flex-container pos-relative overflow-hidden j-c-space-between">
-      <div className="display-flex h-100">
-        <div className="flex-container l-p-layout r-p-layout">
-          <h2 className=" min-width-100">
-            Дата сет от 27.11.2021
-          </h2>
-          <ScrollBar>
+    <div className="flex-container pos-relative overflow-hidden j-c-space-between p-l-15 p-r-15">
+      <GridContainer className="l-p-layout r-p-layout">
+        <ScrollBar>
           <Tree
             onDragStart={onDragStart}
             onDragEnter={onDragEnter}
@@ -103,40 +99,32 @@ const DataSet = props => {
             onUpdateOptions={onUpdateOptions}
             rowComponent={RowComponent}
           />
-          </ScrollBar>
-        </div>
-        <DataListContainer
-          className="display-flex j-c-center"
+        </ScrollBar>
+        <div
+          className=" "
         >
-          <div
-            className="w-100"
-          >
-            <div
-              className="p-10"
+          <CheckboxGroup
+            options={selectedList}
+            valueKey="id"
+            labelKey="title"
+            value={checkedObject}
+            returnObjects
+            onInput={(value) => checkObject(value)}
+          />
+          {selectedList.length > 0 && <SelectTools>
+            <BsButton
+              type="button"
+              className="golden btn width-midi color-greyDarken w-18"
+              onClick={setNewTree}
             >
-              <CheckboxGroup
-                options={selectedList}
-                valueKey="id"
-                labelKey="title"
-                // value={checkedObject}
-                value={checkedObject}
-                returnObjects
-                onInput={(value) => checkObject(value)}
-              />
-              {selectedList.length > 0 && <SelectTools>
-                <BsButton
-                  type="button"
-                  className="golden btn width-midi color-greyDarken w-18"
-                  onClick={setNewTree}
-                >
-                  применить
-                </BsButton>
-              </SelectTools>}
-            </div>
-          </div>
-        </DataListContainer>
-      </div>
-    </DataSetContainer>
+              применить
+            </BsButton>
+          </SelectTools>}
+
+        </div>
+      </GridContainer>
+
+    </div>
   );
 };
 
