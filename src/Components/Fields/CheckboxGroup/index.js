@@ -160,7 +160,7 @@ class CheckboxGroup extends Component {
               inputStyles={inputStyles}
               ref={this.searchInputRef}
               type="text"
-              placeholder="Please enter query"
+              placeholder="Пожалуйста, введите текст"
               value={tempQuery}
               onInput={this.searchInput}
               onKeyup={this.handleEscape}

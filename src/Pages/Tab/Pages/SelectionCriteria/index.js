@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import PropTypes from 'prop-types';
 import Tree from '@/Components/Tree';
-import {GridContainer, SelectTools} from "./styles"
+import {GridContainer} from "./styles"
 import BsButton from "@/Components/BsButton";
 import {treeData, channelsList, citiesList} from "./mok";
 import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
@@ -16,7 +16,6 @@ const DataSet = props => {
   const [newParentName, setNewParentName] = useState("")
   const [pageData, setPageData] = useState(treeData)
   const onSelect = useCallback(({node: {title, children}, sequence}) => {
-    console.log(title)
     switch (title) {
       case "ТВ + Интернет (Ноль плюс) с 1-авг-2019":
         setSelectedList(channelsList);
@@ -79,53 +78,48 @@ const DataSet = props => {
   const selectRule = ({type}) => type === "condition"
 
   return (
-    <div className="flex-container pos-relative overflow-hidden j-c-space-between p-l-15 p-r-15">
-      <GridContainer className="l-p-layout r-p-layout">
-        <ScrollBar>
-          <Tree
-            onDragStart={onDragStart}
-            onDragEnter={onDragEnter}
-            onDrop={onDrop}
-            showLine
-            // selectable={false}
-            draggable
-            defaultExpandAll
-            onExpand={onExpand}
-            defaultSelectedKeys={selectedKey}
-            defaultCheckedKeys={checked}
-            onSelect={onSelect}
-            onCheck={onCheck}
-            options={pageData}
-            selectRule={selectRule}
-            onUpdateOptions={onUpdateOptions}
-            rowComponent={RowComponent}
-          />
-        </ScrollBar>
-        <div
-          className=" "
-        >
-          <CheckboxGroup
-            options={selectedList}
-            valueKey="id"
-            labelKey="title"
-            value={checkedObject}
-            returnObjects
-            onInput={(value) => checkObject(value)}
-          />
-          {selectedList.length > 0 && <SelectTools>
-            <BsButton
-              type="button"
-              className="golden btn width-midi color-greyDarken w-18"
-              onClick={setNewTree}
-            >
-              применить
-            </BsButton>
-          </SelectTools>}
+    <GridContainer className="p-r-15 p-l-15 pos-relative overflow-hidden h-100">
+      <ScrollBar>
+        <Tree
+          onDragStart={onDragStart}
+          onDragEnter={onDragEnter}
+          onDrop={onDrop}
+          showLine
+          // selectable={false}
+          draggable
+          defaultExpandAll
+          onExpand={onExpand}
+          defaultSelectedKeys={selectedKey}
+          defaultCheckedKeys={checked}
+          onSelect={onSelect}
+          onCheck={onCheck}
+          options={pageData}
+          selectRule={selectRule}
+          onUpdateOptions={onUpdateOptions}
+          rowComponent={RowComponent}
+        />
+      </ScrollBar>
+      <div className="separator-left p-l-15 m-b-15">
+        <CheckboxGroup
+          options={selectedList}
+          valueKey="id"
+          labelKey="title"
+          value={checkedObject}
+          returnObjects
+          onInput={(value) => checkObject(value)}
+        />
+        {selectedList.length > 0 &&
+          <BsButton
+            type="button"
+            className="golden btn width-midi color-greyDarken w-18"
+            onClick={setNewTree}
+          >
+            применить
+          </BsButton>
+        }
 
-        </div>
-      </GridContainer>
-
-    </div>
+      </div>
+    </GridContainer>
   );
 };
 

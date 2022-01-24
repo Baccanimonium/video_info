@@ -47,7 +47,7 @@ Default.args = {
       },
       componentProps: {
         initPayload: { TEST: "TEST" },
-        btnText: "Apply",
+        btnText: "Применить",
         fields: [
           {
             id: "TEST",

@@ -29,7 +29,7 @@ const Leaf = (props) => {
   const ComponentIcon = children ? expanded ? MinusIcon : PlusIcon : DotICon
 
   const toggleOpen = useCallback(() => setExpanded(v => !v), [])
-  
+
   const handleInput = useCallback((value, sequence = []) => {
     sequence.unshift(index)
     onInput(value, sequence)
@@ -156,35 +156,36 @@ const Leaf = (props) => {
         />
       </div>
       <div>
-        {expanded && children && children.map((item, index) => <Leaf
-          getSequence={handleGetSequence}
-          dropRule={dropRule}
-          draggable={draggable}
-          key={item[valueKey]}
-          options={item}
-          checkAble={checkAble}
-          index={index}
-          level={level + 1}
-          onInput={handleInput}
-          value={value ? value[index] : null}
-          getLeafSelectedStatus={getLeafSelectedStatus}
-          onSelect={onSelect}
-          selectedNode={selectedNode}
-          parent={options}
-          defaultExpandAll={defaultExpandAll}
-          setDropState={setDropState}
-          dropState={dropState}
-          rowComponent={rowComponent}
-          onUpdateOptions={handleUpdateOptions}
-          onDeleteLeafOption={deleteLeaf}
-        />)}
+        {expanded && children && children.map((item, index) =>
+          <Leaf
+            getSequence={handleGetSequence}
+            dropRule={dropRule}
+            draggable={draggable}
+            key={item[valueKey]}
+            options={item}
+            checkAble={checkAble}
+            index={index}
+            level={level + 1}
+            onInput={handleInput}
+            value={value ? value[index] : null}
+            getLeafSelectedStatus={getLeafSelectedStatus}
+            onSelect={onSelect}
+            selectedNode={selectedNode}
+            parent={options}
+            defaultExpandAll={defaultExpandAll}
+            setDropState={setDropState}
+            dropState={dropState}
+            rowComponent={rowComponent}
+            onUpdateOptions={handleUpdateOptions}
+            onDeleteLeafOption={deleteLeaf}
+          />)}
       </div>
     </LeafContainer>
   );
 };
 
 Leaf.propTypes = {
-  
+
 };
 
 Leaf.defaultProps = {
