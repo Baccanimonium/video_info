@@ -2,7 +2,7 @@ import React, {useCallback, useMemo, useState} from 'react';
 import PropTypes from 'prop-types';
 import {DataSetContainer} from "@/Pages/Tab/Pages/DataSet/styles";
 import {LeftContainer, ReportContainer, ReportsGrid, WrapperInput} from "./styles"
-import Tree, { TreeNode } from 'rc-tree';
+import Tree from '@/Components/Tree';
 import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
 import {ButtonsContainer, Button} from "../../../../Components/ButtonsTabBar/style";
 import BsCheckBox from "../../../../Components/Fields/BsCheckBox";
@@ -11,6 +11,8 @@ import BsInput from "../../../../Components/Fields/BsInput";
 import DatePicker from "../../../../Components/Fields/DatePicker";
 import {ContainerDatePicker} from "../../../../Components/TabHeader/style";
 import ScrollBar from "react-perfect-scrollbar";
+
+import DemographicRow from "./Components/DemographicRow";
 
 const statistics = [
   { key: 2274, title: "GRP" },
@@ -59,11 +61,108 @@ const optionsButtons = [
   }
 ]
 
+const demographic = [
+  {
+    id: "fdgdsf0gdfg",
+    title: "11-34",
+    folder: "",
+    type: "Public",
+    owner:  "Taschfd",
+    lastUpdateDate: "02.12.2018",
+    lastUpdater: "Ycvb",
+    children: [
+      {
+        id: "fdgdsf0gdfg1",
+        title: "11-34",
+      },
+      {
+        id: "fdgdsf0gdfg2",
+        title: "11-33",
+      },
+      {
+        id: "fdgdsf0gdfg3",
+        title: "11-32",
+      },
+      {
+        id: "fdgdsf0gdfg4",
+        title: "11-31",
+      },
+      {
+        id: "fdgdsf0gdfg5",
+        title: "11-30",
+      },
+    ]
+  },
+  {
+    id: "fdgdsf0gdfg1",
+    title: "15-20",
+    folder: "",
+    type: "Public",
+    owner:  "Oklfd",
+    lastUpdateDate: "17.12.2018",
+    lastUpdater: "Krocv",
+    children: [
+      {
+        id: "fdgdsf0gdfg01",
+        title: "11-34",
+      },
+      {
+        id: "fdgdsf0gdfg02",
+        title: "11-33",
+      },
+      {
+        id: "fdgdsf0gdfg03",
+        title: "11-32",
+      },
+      {
+        id: "fdgdsf0gdfg04",
+        title: "11-31",
+      },
+      {
+        id: "fdgdsf0gdfg05",
+        title: "11-30",
+      },
+    ]
+  },
+  {
+    id: "fdgdsf0gdfg2",
+    title: "15-24",
+    folder: "",
+    type: "Private",
+    owner:  "Tmndfui",
+    lastUpdateDate: "02.12.2018",
+    lastUpdater: "Lkjdfh",
+    children: [
+      {
+        id: "fdgdsf0gdfg012",
+        title: "11-34",
+      },
+      {
+        id: "fdgdsf0gdfg022",
+        title: "11-33",
+      },
+      {
+        id: "fdgdsf0gdfg032",
+        title: "11-32",
+      },
+      {
+        id: "fdgdsf0gdfg042",
+        title: "11-31",
+      },
+      {
+        id: "fdgdsf0gdfg052",
+        title: "11-30",
+      },
+    ]
+  },
+]
+
 const Reports = () => {
   const [selectedKey, setSelectedKey] = useState("")
   const [checked, setCheckedKey] = useState("")
   const [freeState, setFreeState] = useState([])
   const [freeStateTwo, setFreeStateTwo] = useState([])
+  const [demographicState, setDemographicState] = useState([])
 
   const [activeButton, setActiveButton] = useState("Статистика")
   const [activeOption, setActiveOption] = useState("Опции расчета")
@@ -98,23 +197,35 @@ const Reports = () => {
 
 
   const formPayload = { dateRange: [] }
-
   const TreeData = useMemo(() => [
     {
-      key: '0',
+      id: '0',
       title: 'Статистика',
       children: freeState.map((item, i)=> ({
-        ...item, key: `0-${i}`
+        ...item, id: `0-${i}`
       }) ),
     },
     {
-      key: '1',
+      id: '1',
       title: 'Атрибуты',
       children: freeStateTwo.map((item, i)=> ({
-        ...item, key: `1-${i}`
+        ...item, id: `1-${i}`
       }) ),
     },
-  ], [freeStateTwo, freeState])
+    {
+      id: '2',
+      title: 'Демография',
+      children: Object.entries(demographicState).map(([index, children]) => {
+        const originObj = demographic[index]
+        return {
+          title: originObj.title,
+          id: originObj.id,
+          children: Object.values(children).map((elemID) => originObj.children.find((originElem) => originElem.id === elemID))
+        }
+      }),
+    },
+
+  ], [freeStateTwo, freeState, demographicState])
 
   const onSelect =  useCallback((selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
@@ -135,6 +246,7 @@ const Reports = () => {
   const openOptions = useCallback((e) => {
     setActiveOption(e.target.innerText)
   },[setActiveOption])
+
 
   return (
     <DataSetContainer className="flex-container pos-relative overflow-hidden">
@@ -372,14 +484,13 @@ const Reports = () => {
             </h3>
             <Tree
               showLine
-              selectable={false}
               defaultExpandAll
               onExpand={onExpand}
               defaultSelectedKeys={selectedKey}
               defaultCheckedKeys={checked}
               onSelect={onSelect}
-              onCheck={onCheck}
-              treeData={TreeData}
+              draggable
+              options={TreeData}
             />
           </div>
           <div>
@@ -418,11 +529,26 @@ const Reports = () => {
             )}
             {activeButton === "Демография" && (
               <div>
-                <Tree defaultExpandAll>
-                  <TreeNode title="Parent">
-                    <TreeNode title="Child" />
-                  </TreeNode>
-                </Tree>
+                <DemographicRow node={{
+                  folder: "Папка",
+                  type: "Тип",
+                  owner:  "Владелец",
+                  lastUpdateDate: "Обновленна",
+                  lastUpdater: "Изменивший",
+                }}
+
+                  className="separator-bot p-b-5"
+                >
+                  <span>Name</span>
+                </DemographicRow>
+                <Tree
+                  defaultExpandAll
+                  options={demographic}
+                  rowComponent={DemographicRow}
+                  checkAble
+                  onInput={setDemographicState}
+                  value={demographicState}
+                />
               </div>
             )}
           </div>
