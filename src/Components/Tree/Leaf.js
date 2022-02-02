@@ -127,7 +127,7 @@ const Leaf = (props) => {
   }, [handleGetSequence])
 
   return (
-    <LeafContainer level={level} >
+    <LeafContainer level={level} selected={leafVal === selectedNode}>
       <div
         className="display-flex a-i-center"
         onDrop={onDrop}
