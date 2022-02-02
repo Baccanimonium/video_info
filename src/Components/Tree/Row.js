@@ -16,7 +16,9 @@ const Row = ({
       onDragEnd={onDragEnd}
     >
       <Component node={node} parent={parent} onInput={onInput} onDelete={onDelete}>
-        <LeafTitle selected={selected}>
+        <LeafTitle
+            selected={selected}
+        >
           {title}
         </LeafTitle>
       </Component>
