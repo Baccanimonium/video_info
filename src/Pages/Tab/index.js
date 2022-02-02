@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react'
-import {Route, Routes, useLocation} from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import NavigationDrawer from "@/Components/NavigationDrawer"
 import TabBar from "@/Components/TabBar"
 import {tabNavigationMenu, FooterTabs} from "./constants"
@@ -25,7 +25,8 @@ const urls = {
   "/tab/result": "/tab/result"
 }
 
-const Tab = () => {
+const Tab = (a) => {
+  const n = useNavigate()
   const [tabs, editTabs] = useState([])
   const [currentTabIndex, setTabIndex] = useState(0)
   const location = useLocation()
@@ -36,6 +37,7 @@ const Tab = () => {
 
   const onOpenNewTab = useCallback(() => {
     editTabs((tabs) => {
+      n("/tab/data_set")
       setTabIndex(tabs.length)
       return [...tabs, {tabName: `Закладка ${tabs.length + 1}`, id: tabs.length}]
     })
