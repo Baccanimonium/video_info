@@ -15,7 +15,7 @@ export const TrashIcon = Icon(basketTrash)
 export const PlusIcon = Icon(CirclePlus)
 
 
-const RowComponent = ({ node: { type }, node, children, onInput, onDelete }) => {
+const RowComponent = ({ node: { type, condition }, node, children, onInput, onDelete }) => {
 
   const openAddForm = useCallback(({e, applyContextMenu }) => {
     e.stopPropagation()
@@ -98,6 +98,53 @@ const RowComponent = ({ node: { type }, node, children, onInput, onDelete }) => 
     ])
   }, [node, onInput])
 
+  const openConditionForm = useCallback(({e, applyContextMenu }) => {
+    applyContextMenu([
+      {
+        component: ContextMenuForm,
+        onSubmit: ({nodes}) => {
+          onInput({
+            ...node,
+            condition: nodes.condition
+          })
+        },
+        componentProps: {
+          initPayload: {},
+          fields: [
+            {
+              label: "Доступные узлы",
+              id: "nodes",
+              component: WithSubmitContainerHoc(Select),
+              valueKey: "condition",
+              labelKey: "condition",
+              returnOption: true,
+              allWaysOpen: true,
+              options: type ? [
+                  {
+                    condition: "AND",
+                  },
+                  {
+                    condition: "OR",
+                  },
+                  {
+                    condition: "NOT",
+                  }
+                ] : [
+                  {
+                    condition: "AND",
+                  },
+                  {
+                    condition: "OR",
+                  }
+                ]
+            }
+          ]
+
+        }
+      }
+    ])
+  }, [node, onInput])
+
   const handleInitDelete = useCallback(({applyContextMenu}) => applyContextMenu([{
     component: ({onClose, title, onSubmit}) => {
       return <div className="display-flex a-i-center flex-column p-15">
@@ -117,6 +164,19 @@ const RowComponent = ({ node: { type }, node, children, onInput, onDelete }) => 
 
   return (
     <div className="display-flex a-i-center">
+      <WithOpenContextMenu
+          settings={{maxSize: "200", minSize: "200"}}
+          onOpenContextMenu={openConditionForm}
+      >
+      {(onOpenContextMenu) => (
+        <BsButton
+            className="p-r-8"
+            onClick={onOpenContextMenu}
+        >
+          {condition}
+        </BsButton>
+      )}
+      </WithOpenContextMenu>
       {children}
       {(type === "block" || type === "head") &&
         <WithOpenContextMenu
@@ -138,7 +198,6 @@ const RowComponent = ({ node: { type }, node, children, onInput, onDelete }) => 
           <StyleTrashIcon className="m-l-5" onClick={onOpenContextMenu}/>
         )}
       </WithOpenContextMenu>
-
        }
     </div>
   );

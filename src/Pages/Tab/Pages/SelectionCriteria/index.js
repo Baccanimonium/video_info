@@ -70,7 +70,9 @@ const DataSet = props => {
   }
   const onDrop = (info) => {
     console.log("onDrop", info)
-
+  }
+  const setRowCondition = () => {
+    console.log("setRowCondition")
   }
 
   const onUpdateOptions = (nextOptions) => {
@@ -88,6 +90,7 @@ const DataSet = props => {
           onDrop={onDrop}
           showLine
           // selectable={false}
+          setRowCondition={setRowCondition}
           draggable
           defaultExpandAll
           onExpand={onExpand}

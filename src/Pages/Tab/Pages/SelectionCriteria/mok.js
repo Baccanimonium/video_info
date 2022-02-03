@@ -14,28 +14,33 @@ export const treeData = [
         children: [
             {
                 id: "123123",
-                title: "AND",
+                title: "",
+                condition: "AND",
                 type: "block",
                 children: [
                     {
                         id: '15251',
                         title: 'ТВ + Интернет (Ноль плюс) с 1-авг-2019',
                         type: "condition",
+                        condition: "AND",
                         // icon: Icon,
                         children: [
                             {
                                 id: 1,
                                 key: '0-0',
+                                condition: "OR",
                                 title: 'Национальное ТВ + Интернет (Ноль Плюс)',
                             },
                             {
                                 id: 2,
                                 key: '0-1',
+                                condition: "OR",
                                 title: 'Национальное ТВ + Неэфирное ТВ + Интернет (Ноль Плюс)',
                             },
                             {
                                 id: 3,
                                 key: '0-2',
+                                condition: "OR",
                                 title: 'Национальное ТВ + BigTVRating + Интернет (Ноль Плюс)',
                             },
                         ],
@@ -43,26 +48,31 @@ export const treeData = [
                     {
                         id: '666',
                         title: 'Города',
+                        condition: "AND",
                         type: "condition",
                         children: [
                             {
                                 id: 1,
                                 key: '1-0',
+                                condition: "OR",
                                 title: 'Города 2015',
                             },
                             {
                                 id: 2,
                                 key: '1-1',
+                                condition: "OR",
                                 title: 'Города 2016',
                             },
                             {
                                 id: 3,
                                 key: '1-2',
+                                condition: "OR",
                                 title: 'Города 2017',
                             },
                             {
                                 id: 15,
                                 key: '1-3',
+                                condition: "OR",
                                 title: 'Города 2018',
                             },
                         ],
@@ -71,28 +81,32 @@ export const treeData = [
             },
             {
                 id: "444",
-                title: "OR",
+                condition: "AND",
                 type: "block",
                 children: [
                     {
                         id: '0',
                         title: 'ТВ + Интернет (Ноль плюс) с 1-авг-2019',
                         type: "condition",
+                        condition: "AND",
                         // icon: Icon,
                         children: [
                             {
                                 id: 1,
                                 key: '0-0',
+                                condition: "OR",
                                 title: 'Национальное ТВ + Интернет (Ноль Плюс)',
                             },
                             {
                                 id: 2,
                                 key: '0-1',
+                                condition: "OR",
                                 title: 'Национальное ТВ + Неэфирное ТВ + Интернет (Ноль Плюс)',
                             },
                             {
                                 id: 3,
                                 key: '0-2',
+                                condition: "OR",
                                 title: 'Национальное ТВ + BigTVRating + Интернет (Ноль Плюс)',
                             },
                         ],
@@ -100,26 +114,31 @@ export const treeData = [
                     {
                         id: '1',
                         title: 'Города',
+                        condition: "AND",
                         type: "condition",
                         children: [
                             {
                                 id: 1,
                                 key: '1-0',
+                                condition: "OR",
                                 title: 'Города 2015',
                             },
                             {
                                 id: 2,
                                 key: '1-1',
+                                condition: "OR",
                                 title: 'Города 2016',
                             },
                             {
                                 id: 3,
                                 key: '1-2',
+                                condition: "OR",
                                 title: 'Города 2017',
                             },
                             {
                                 id: 15,
                                 key: '1-3',
+                                condition: "OR",
                                 title: 'Города 2018',
                             },
                         ],
