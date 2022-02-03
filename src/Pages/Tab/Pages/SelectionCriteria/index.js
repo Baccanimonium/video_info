@@ -3,7 +3,20 @@ import PropTypes from 'prop-types';
 import Tree from '@/Components/Tree';
 import {GridContainer} from "./styles"
 import BsButton from "@/Components/BsButton";
-import {treeData, channelsList, citiesList} from "./mok";
+import {
+  treeData,
+  nationalTV,
+  TVcompanies,
+  TypeOfAdvertisement,
+  AdvertisersList,
+  marking,
+  SubbrandsList,
+  Models,
+  AdvertisingItemsLevel1,
+  AdvertisingItemsLevel2,
+  AdvertisingItemsLevel3,
+  AdvertisingItemsLevel4
+} from "./mok";
 import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
 import RowComponent from "./Components/RowComponent";
 import ScrollBar from "react-perfect-scrollbar";
@@ -16,13 +29,54 @@ const DataSet = props => {
   const [checkedObject, setCheckedObject] = useState([])
   const [newParentName, setNewParentName] = useState("")
   const [pageData, setPageData] = useState(treeData)
+  const [title, setTitle] = useState("")
+
+  // создать useState чтобы при onSelect складывать туда title
   const onSelect = useCallback(({node: {title, children}, sequence}) => {
     switch (title) {
-      case "ТВ + Интернет (Ноль плюс) с 1-авг-2019":
-        setSelectedList(channelsList);
+      case "Нац.телекомпании":
+        setSelectedList(nationalTV);
+        setTitle("Нац.телекомпании");
         break;
-      case "Города":
-        setSelectedList(citiesList);
+      case "Телекомпании":
+        setSelectedList(TVcompanies);
+        setTitle("Телекомпании");
+        break;
+      case "Тип рекламы":
+        setSelectedList(TypeOfAdvertisement);
+        setTitle("Тип рекламы");
+        break;
+      case "Рекламодатели":
+        setSelectedList(AdvertisersList);
+        setTitle("Рекламодатели");
+        break;
+      case "Марки":
+        setSelectedList(marking);
+        setTitle("Марки");
+        break;
+      case "Суббренды":
+        setSelectedList(SubbrandsList);
+        setTitle("Суббренды");
+        break;
+      case "Модели":
+        setSelectedList(Models);
+        setTitle("Модели");
+        break;
+      case "Предметы рекламы уровень 1":
+        setSelectedList(AdvertisingItemsLevel1);
+        setTitle("Предметы рекламы уровень 1");
+        break;
+      case "Предметы рекламы уровень 2":
+        setSelectedList(AdvertisingItemsLevel2);
+        setTitle("Предметы рекламы уровень 2");
+        break;
+      case "Предметы рекламы уровень 3":
+        setSelectedList(AdvertisingItemsLevel3);
+        setTitle("Предметы рекламы уровень 3");
+        break;
+      case "Предметы рекламы уровень 4":
+        setSelectedList(AdvertisingItemsLevel4);
+        setTitle("Предметы рекламы уровень 4");
         break;
       default:
         setSelectedList(citiesList)
@@ -108,6 +162,7 @@ const DataSet = props => {
         <CheckboxGroup
           options={selectedList}
           valueKey="id"
+          blockTitle={title}
           labelKey="title"
           value={checkedObject}
           returnObjects
