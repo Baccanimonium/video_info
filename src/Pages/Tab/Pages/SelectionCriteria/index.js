@@ -5,8 +5,6 @@ import {GridContainer} from "./styles"
 import BsButton from "@/Components/BsButton";
 import {
   treeData,
-  channelsList,
-  citiesList,
   nationalTV,
   TVcompanies,
   TypeOfAdvertisement,
@@ -27,20 +25,14 @@ const StyleTree = {width: "600px"}
 const DataSet = props => {
   const [selectedKey, setSelectedKey] = useState([])
   const [checked, setCheckedKey] = useState("")
-  const [selectedList, setSelectedList] = useState(citiesList)
+  const [selectedList, setSelectedList] = useState([])
   const [checkedObject, setCheckedObject] = useState([])
   const [newParentName, setNewParentName] = useState("")
   const [pageData, setPageData] = useState(treeData)
   const onSelect = useCallback(({node: {title, children}, sequence}) => {
     switch (title) {
-      case "ТВ + Интернет (Ноль плюс) с 1-авг-2019":
-        setSelectedList(channelsList);
-        break;
       case "Нац.телекомпании":
         setSelectedList(nationalTV);
-        break;
-      case "Города":
-        setSelectedList(citiesList);
         break;
       case "Телекомпании":
         setSelectedList(TVcompanies);
@@ -73,7 +65,6 @@ const DataSet = props => {
         setSelectedList(AdvertisingItemsLevel4);
         break;
       default:
-        setSelectedList(citiesList)
         break
     }
     setSelectedKey(sequence)
