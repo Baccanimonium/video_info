@@ -93,6 +93,7 @@ const Tree = (props) => {
 };
 
 Tree.propTypes = {
+  style: PropTypes.object,
 
 };
 
@@ -108,7 +109,7 @@ Tree.defaultProps = {
   dropRule: ({valueKey, parent: { [valueKey]: originParentKey } = {}}, { parent: { [valueKey]: targetParentKey } = {} }) => {
     return originParentKey === targetParentKey
   },
-  style: PropTypes.object,
+  style: {},
 };
 
 export default Tree;

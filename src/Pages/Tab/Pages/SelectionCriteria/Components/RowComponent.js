@@ -102,22 +102,23 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
     applyContextMenu([
       {
         component: ContextMenuForm,
-        onSubmit: ({nodes}) => {
+        onSubmit: ({condition}) => {
           onInput({
             ...node,
-            condition: nodes.condition
+            condition
           })
         },
         componentProps: {
-          initPayload: {},
+          initPayload: {
+            condition: node.condition
+          },
           fields: [
             {
               label: "Доступные узлы",
-              id: "nodes",
+              id: "condition",
               component: WithSubmitContainerHoc(Select),
               valueKey: "condition",
               labelKey: "condition",
-              returnOption: true,
               allWaysOpen: true,
               options: type ? [
                   {
@@ -168,14 +169,14 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
           settings={{maxSize: "200", minSize: "200"}}
           onOpenContextMenu={openConditionForm}
       >
-      {(onOpenContextMenu) => (
+      {(onOpenContextMenu) => condition ? (
         <BsButton
             className="p-r-8"
             onClick={onOpenContextMenu}
         >
           {condition}
         </BsButton>
-      )}
+      ): null}
       </WithOpenContextMenu>
       {children}
       {(type === "block" || type === "head") &&
