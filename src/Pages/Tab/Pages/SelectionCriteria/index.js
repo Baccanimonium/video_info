@@ -7,7 +7,7 @@ import {
   treeData,
   channelsList,
   citiesList,
-  // nationalTV,
+  nationalTV,
   TVcompanies,
   TypeOfAdvertisement,
   AdvertisersList,
@@ -37,7 +37,7 @@ const DataSet = props => {
         setSelectedList(channelsList);
         break;
       case "Нац.телекомпании":
-        // setSelectedList(nationalTV);
+        setSelectedList(nationalTV);
         break;
       case "Города":
         setSelectedList(citiesList);
@@ -152,7 +152,7 @@ const DataSet = props => {
           rowComponent={RowComponent}
         />
       </ScrollBar>
-      <div className="separator-left p-l-15 m-b-15">
+      <div className="scrollbar-container ps separator-left p-l-15 m-b-15">
         <CheckboxGroup
           options={selectedList}
           valueKey="id"

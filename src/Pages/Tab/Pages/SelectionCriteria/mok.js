@@ -279,7 +279,7 @@ export const citiesList = [
     },
 ]
 
-export const ModelsList = [
+export const nationalTV = [
     {
         id: 1,
         title: "CHE"
