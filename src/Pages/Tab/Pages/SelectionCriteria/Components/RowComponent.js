@@ -31,7 +31,9 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
               ...nodes,
               id: uniqueId(),
               children: [],
-              type: node.type === "block" ? "condition" : "block"
+              type: node.type === "block" ? "condition" : "block",
+              title: node.type === "head" ? "" : nodes.title,
+              condition: node.type === "head" ? "OR" : "AND"
             }
           ]
         }),
@@ -200,8 +202,8 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
           onOpenContextMenu={openAddForm}
         >
           {(onOpenContextMenu) => (
-            <BsButton className="" onClick={onOpenContextMenu} >
-              <IconPlus title="Добавить узел">
+            <BsButton  onClick={onOpenContextMenu} >
+              <IconPlus className="m-r-15 m-l-15" title="Добавить узел">
                 <svg className="svg-inline--fa fa-code-branch fa-w-12 text-grey" aria-hidden="true" data-prefix="fa"
                      data-icon="code-branch" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
                      data-fa-i2svg="">
