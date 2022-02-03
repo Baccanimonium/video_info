@@ -5,14 +5,15 @@ export const LeafContainer = styled.div`
   flex-direction: column;
   margin-left: ${props => `${props.level * 10}px`};
   //border-bottom: ${props => props.level === 0 ? "1px solid" : ""};
-  padding: 3px 0;
+  padding: 5px 5px;
+  border-radius: 4px;
   ${props => props.selected ?
           `background: var(--color-grey-Light-9);`
           : ``
   }
   ${props => props.level === 2 ?
           `
-          padding-left: 10px;
+          padding-left: 5px;
           margin-left: 10px;
           `
           :
@@ -30,7 +31,7 @@ export const LeafHeader = styled.div`
   `
           : ""
   }
-  padding: 4px 4px;
+  //padding: 4px 4px;
 `
 
 export const LeafTitle = styled.span`
