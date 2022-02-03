@@ -71,7 +71,16 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
                   title: "Модели",
                 },
                 {
-                  title: "Предметы рекламы",
+                  title: "Предметы рекламы уровень 1",
+                },
+                {
+                  title: "Предметы рекламы уровень 2",
+                },
+                {
+                  title: "Предметы рекламы уровень 3",
+                },
+                {
+                  title: "Предметы рекламы уровень 4",
                 },
                 {
                   title: "TV списки",

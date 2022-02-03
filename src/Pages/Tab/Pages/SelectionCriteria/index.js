@@ -3,7 +3,22 @@ import PropTypes from 'prop-types';
 import Tree from '@/Components/Tree';
 import {GridContainer} from "./styles"
 import BsButton from "@/Components/BsButton";
-import {treeData, channelsList, citiesList} from "./mok";
+import {
+  treeData,
+  channelsList,
+  citiesList,
+  // nationalTV,
+  TVcompanies,
+  TypeOfAdvertisement,
+  AdvertisersList,
+  marking,
+  SubbrandsList,
+  Models,
+  AdvertisingItemsLevel1,
+  AdvertisingItemsLevel2,
+  AdvertisingItemsLevel3,
+  AdvertisingItemsLevel4
+} from "./mok";
 import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
 import RowComponent from "./Components/RowComponent";
 import ScrollBar from "react-perfect-scrollbar";
@@ -21,8 +36,41 @@ const DataSet = props => {
       case "ТВ + Интернет (Ноль плюс) с 1-авг-2019":
         setSelectedList(channelsList);
         break;
+      case "Нац.телекомпании":
+        // setSelectedList(nationalTV);
+        break;
       case "Города":
         setSelectedList(citiesList);
+        break;
+      case "Телекомпании":
+        setSelectedList(TVcompanies);
+        break;
+      case "Тип рекламы":
+        setSelectedList(TypeOfAdvertisement);
+        break;
+      case "Рекламодатели":
+        setSelectedList(AdvertisersList);
+        break;
+      case "Марки":
+        setSelectedList(marking);
+        break;
+      case "Суббренды":
+        setSelectedList(SubbrandsList);
+        break;
+      case "Модели":
+        setSelectedList(Models);
+        break;
+      case "Предметы рекламы уровень 1":
+        setSelectedList(AdvertisingItemsLevel1);
+        break;
+      case "Предметы рекламы уровень 2":
+        setSelectedList(AdvertisingItemsLevel2);
+        break;
+      case "Предметы рекламы уровень 3":
+        setSelectedList(AdvertisingItemsLevel3);
+        break;
+      case "Предметы рекламы уровень 4":
+        setSelectedList(AdvertisingItemsLevel4);
         break;
       default:
         setSelectedList(citiesList)
