@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import PropTypes from 'prop-types';
 import Tree from '@/Components/Tree';
-import {GridContainer} from "./styles"
+import {CheckboxGroupContainer, GridContainer} from "./styles"
 import BsButton from "@/Components/BsButton";
 import {
   treeData,
@@ -25,7 +25,7 @@ const StyleTree = {width: "600px"}
 const DataSet = props => {
   const [selectedKey, setSelectedKey] = useState([])
   const [checked, setCheckedKey] = useState("")
-  const [selectedList, setSelectedList] = useState(citiesList)
+  const [selectedList, setSelectedList] = useState([])
   const [checkedObject, setCheckedObject] = useState([])
   const [newParentName, setNewParentName] = useState("")
   const [pageData, setPageData] = useState(treeData)
@@ -79,7 +79,7 @@ const DataSet = props => {
         setTitle("Предметы рекламы уровень 4");
         break;
       default:
-        setSelectedList(citiesList)
+        setSelectedList([])
         break
     }
     setSelectedKey(sequence)
@@ -159,26 +159,27 @@ const DataSet = props => {
         />
       </ScrollBar>
       <div className="separator-left p-l-15 m-b-15">
-        <CheckboxGroup
-          options={selectedList}
-          valueKey="id"
-          blockTitle={title}
-          labelKey="title"
-          value={checkedObject}
-          returnObjects
-          onInput={(value) => checkObject(value)}
-        />
-        {selectedList.length > 0 &&
-          <BsButton
-            type="button"
-            className="golden btn width-midi color-greyDarken w-18"
-            onClick={setNewTree}
-          >
-            применить
-          </BsButton>
-        }
-
-      </div>
+        <CheckboxGroupContainer>
+          <CheckboxGroup
+            options={selectedList}
+            valueKey="id"
+            blockTitle={title}
+            labelKey="title"
+            value={checkedObject}
+            returnObjects
+            onInput={(value) => checkObject(value)}
+          />
+          {selectedList.length > 0 &&
+            <BsButton
+              type="button"
+              className="golden btn width-midi color-greyDarken w-18"
+              onClick={setNewTree}
+            >
+              применить
+            </BsButton>
+          }
+        </CheckboxGroupContainer>
+        </div>
     </GridContainer>
   );
 };

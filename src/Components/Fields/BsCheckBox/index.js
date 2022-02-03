@@ -72,7 +72,7 @@ const BsCheckBox = ({
       </BoxContainer>
       {label && (
         <div
-          className="p-l-15 fw-400"
+          className="p-l-15 fw-400 ta-left l-h-16"
         >
           { checkBoxLabel || label }
         </div>
