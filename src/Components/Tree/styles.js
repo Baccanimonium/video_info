@@ -3,9 +3,21 @@ import styled from "styled-components";
 export const LeafContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: ${props => `${props.level * 20}px`};
-  // border-bottom: ${props => props.level === 0 ? "1px solid" : ""};
+  margin-left: ${props => `${props.level * 10}px`};
+  //border-bottom: ${props => props.level === 0 ? "1px solid" : ""};
   padding: 3px 0;
+  ${props => props.selected ?
+          `background: var(--color-grey-Light-9);`
+          : ``
+  }
+  ${props => props.level === 2 ?
+          `
+          padding-left: 10px;
+          margin-left: 10px;
+          `
+          :
+          ``
+}
 `
 
 export const LeafHeader = styled.div`
@@ -23,7 +35,7 @@ export const LeafHeader = styled.div`
 
 export const LeafTitle = styled.span`
   ${props => props.selected ? `
-    box-shadow: 0 0 0 1px var(--color-light-gold-1);
+    font-weight: 700;
     `
           :
           ""

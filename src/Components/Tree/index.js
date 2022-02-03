@@ -11,7 +11,7 @@ const Tree = (props) => {
   refProps.current = props
   const {
     value, onInput, onDrag, childrenKey, valueKey, labelKey, checkAble, options, draggable, dropRule,
-    defaultExpandAll, rowComponent, onUpdateOptions
+    defaultExpandAll, rowComponent, onUpdateOptions, style
   } = props
   const [selectedNode, setSelectedNode] = useState("")
   const [dropState, setDropState] = useState(null)
@@ -62,7 +62,7 @@ const Tree = (props) => {
   }, [])
 
   return (
-    <div>
+    <div style={style}>
       {options.map((item, index) =>
         <Leaf
           draggable={draggable}
@@ -107,7 +107,8 @@ Tree.defaultProps = {
   selectRule: (node, { childrenKey }) => !!node[childrenKey],
   dropRule: ({valueKey, parent: { [valueKey]: originParentKey } = {}}, { parent: { [valueKey]: targetParentKey } = {} }) => {
     return originParentKey === targetParentKey
-  }
+  },
+  style: PropTypes.object,
 };
 
 export default Tree;

@@ -8,6 +8,7 @@ import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
 import RowComponent from "./Components/RowComponent";
 import ScrollBar from "react-perfect-scrollbar";
 
+const StyleTree = {width: "600px"}
 const DataSet = props => {
   const [selectedKey, setSelectedKey] = useState([])
   const [checked, setCheckedKey] = useState("")
@@ -83,6 +84,7 @@ const DataSet = props => {
     <GridContainer className="p-r-15 p-l-15 pos-relative overflow-hidden h-100">
       <ScrollBar>
         <Tree
+          style={StyleTree}
           onDragStart={onDragStart}
           onDragEnter={onDragEnter}
           onDrop={onDrop}
