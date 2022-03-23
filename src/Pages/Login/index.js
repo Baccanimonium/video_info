@@ -30,29 +30,34 @@ class Login extends Component {
 
   submitForm = async ({ storeCredentials, login, password }) => {
     const { onSubmit, initialRoute, openModalWindow } = this.props
-    try {
-      this.setState({ loading: true })
-      localStorage.setItem(LOCAL_STORAGE_REMEBER_ME, String(Boolean(storeCredentials)))
-      // const token = await AuthRequest({ login, password })
-      const token = "token"
-
-      if (storeCredentials && window.PasswordCredential) {
-        await navigator.credentials.store(await new window.PasswordCredential({ id: login, password }))
-      }
-      onSubmit(token)
-      if (initialRoute) {
-        history.push(initialRoute)
-      } else {
-        history.push("/tab")
-      }
-    } catch (e) {
-      openModalWindow({
-        message: "Couldn't connect to login server. Please contact your administrator"
-      })
-      console.log("login error", e)
-    } finally {
-      this.setState({ loading: false })
-    }
+    if (login.length > 3 && password) {
+      history.push("/tab")
+    } else openModalWindow({
+          message: "Couldn't connect to login server. Please contact your administrator"
+        })
+    // try {
+    //   this.setState({ loading: true })
+    //   localStorage.setItem(LOCAL_STORAGE_REMEBER_ME, String(Boolean(storeCredentials)))
+    //   // const token = await AuthRequest({ login, password })
+    //   const token = "token"
+    //
+    //   if (storeCredentials && window.PasswordCredential) {
+    //     await navigator.credentials.store(await new window.PasswordCredential({ id: login, password }))
+    //   }
+    //   onSubmit(token)
+    //   if (initialRoute) {
+    //     history.push(initialRoute)
+    //   } else {
+    //     history.push("/tab")
+    //   }
+    // } catch (e) {
+    //   openModalWindow({
+    //     message: "Couldn't connect to login server. Please contact your administrator"
+    //   })
+    //   console.log("login error", e)
+    // } finally {
+    //   this.setState({ loading: false })
+    // }
   }
 
   onInput = (payload) => {
@@ -65,12 +70,6 @@ class Login extends Component {
       <PageContainer>
         <ImgLogo src="./assets/bg/img-login.jpg" alt="" />
         <ContentContainer>
-          <img
-            className="p-b-10"
-            src="./assets/icons/logo.svg"
-            alt=""
-          />
-
           <FormContainer className="display-flex fd-column">
             <FormTittle className="fw700">
               Welcome

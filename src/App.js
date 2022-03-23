@@ -29,21 +29,29 @@ function App() {
       <AlertFactory />
       <ContextMenuFactory />
       <ApiRecoilBounder />
-      {token === null
-        ? (
+      {/*{token === null*/}
+      {/*  ? (*/}
+      {/*    <Routes>*/}
+      {/*      <Route*/}
+      {/*        path="/login"*/}
+      {/*        element={<Login initialRoute={initialRoute} onSubmit={setToken}/>}*/}
+      {/*      />*/}
+      {/*      <Route*/}
+      {/*        path="*"*/}
+      {/*        element={<Navigate to="/login"/>}*/}
+      {/*      />*/}
+      {/*    </Routes>*/}
+        {/*)*/}
+        {/*: (*/}
           <Routes>
             <Route
-              path="/login"
-              element={<Login initialRoute={initialRoute} onSubmit={setToken}/>}
+                path="/login"
+                element={<Login initialRoute={initialRoute} onSubmit={setToken}/>}
             />
-            <Route
-              path="*"
-              element={<Navigate to="/login"/>}
-            />
-          </Routes>
-        )
-        : (
-          <Routes>
+            {/*<Route*/}
+            {/*    path="*"*/}
+            {/*    element={<Navigate to="/login"/>}*/}
+            {/*/>*/}
             <Route
               path="/tab/*"
               element={<Tab />}
@@ -57,7 +65,7 @@ function App() {
               element={<Navigate to="/tab"/>}
             />
           </Routes>
-        )}
+        {/*)}*/}
     </>
   );
 }
