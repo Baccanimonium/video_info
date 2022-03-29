@@ -30,7 +30,7 @@ class Login extends Component {
 
   submitForm = async ({ storeCredentials, login, password }) => {
     const { onSubmit, initialRoute, openModalWindow } = this.props
-    if (login.length > 3 && password) {
+    if (login === "user" && password === "11111") {
       history.push("/tab")
     } else openModalWindow({
           message: "Couldn't connect to login server. Please contact your administrator"
