@@ -24,13 +24,13 @@ const TabHeader = ({path}) => {
           value={valueDate}
         />
       </ContainerDatePicker>
-      <NavLink
-        name="NavLink"
-        to={path}
-        className="btn golden width-max"
-      >
-        Далее
-      </NavLink>
+      {/*<NavLink*/}
+      {/*  name="NavLink"*/}
+      {/*  to={path}*/}
+      {/*  className="btn golden width-max"*/}
+      {/*>*/}
+      {/*  Далее*/}
+      {/*</NavLink>*/}
     </HeaderContainer>
   );
 };

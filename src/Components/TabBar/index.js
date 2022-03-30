@@ -1,7 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { TabBarContainer, TabButton, StyleRemoveIcon } from "./styles"
+import { TabBarContainer, TabButton, StyleRemoveIcon, AlertAndUserInfoContainer } from "./styles"
 import Carousel from "@/Components/Carousel"
+import UserInfo from "../UserInfo";
 
 const TabBar = ({ tabs, currentTabIndex, onCloseTab, onChangeActiveTab, className, children }) => {
   const closeTabById = (index) => (e) => {
@@ -30,6 +31,9 @@ const TabBar = ({ tabs, currentTabIndex, onCloseTab, onChangeActiveTab, classNam
           </TabButton>
         )))}
       </Carousel>
+      <AlertAndUserInfoContainer>
+        <UserInfo />
+      </AlertAndUserInfoContainer>
       {children}
     </TabBarContainer>
   )

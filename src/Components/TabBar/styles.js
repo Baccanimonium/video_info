@@ -3,9 +3,6 @@ import { RemoveIcon } from "@/Components/Icon/CommonIcons"
 
 export const TabBarContainer = styled.div`
   height: 40px;
-  background-image: url(/assets/bg/TabBarBg.png);
-  background-repeat: no-repeat;
-  background-position: right;
   box-shadow: 0 4px 11px rgba(0, 0, 0, 0.1);
 `
 export const TabButton = styled.button`
@@ -38,4 +35,11 @@ position: relative;
     bottom: -4px;
     right: -4px;
   }
+`
+
+export const AlertAndUserInfoContainer = styled.div`
+  min-width: 366px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 `

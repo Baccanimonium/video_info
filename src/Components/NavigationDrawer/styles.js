@@ -16,6 +16,10 @@ export const LeftMenuLogo = styled.div`
   padding-bottom: 10px;
   padding-left: 25px;
 `
+export const TextLogo = styled.div`
+  color: var(--color-white);
+  font-size: 20px;
+`
 export const LeftMenuItem = styled.div`
   color: var(--color-grey);
   border-bottom: 2px solid transparent;
@@ -30,6 +34,30 @@ export const LeftMenuItem = styled.div`
     border-bottom: 2px solid var(--color-light-gold-1);
   }
 `
+
+export const MenuLink = styled.div`
+  padding: 0 15px 0 10px;
+  display: flex;
+  align-items: center;
+  color: var(--color-grey);
+  border-bottom: 2px solid transparent;
+  transition: all 0.5s ease 0s;
+  height: 26px;
+  ${props => !props.current} {
+    background: linear-gradient(89.43deg, #000000 0.12%, rgba(0, 0, 0, 0) 99.82%);
+    color: var(--color-white);
+    border-bottom: 2px solid var(--color-light-gold-1);
+  };
+  &:hover {
+    border-bottom: 2px solid var(--color-light-gold-1);
+  }
+`
+
+export const WrapperMenuLink = styled.div`
+  position: absolute;
+  bottom: 200px;
+`
+
 export const OpenMenuItem = styled.div`
    opacity: 0;
       transition: all .3s ease 0s;
@@ -47,10 +75,11 @@ export const ListTile = styled.div`
   ${props => props.hideToolbar} {
     width: 100%;
     display: grid;
-    grid-template-columns: 38px 1fr;
+    grid-template-columns: 20px 1fr;
     grid-column-gap: 5px;
   }
 `
+
 export const Copyright = styled.div`
   position: absolute;
   bottom: 15px;

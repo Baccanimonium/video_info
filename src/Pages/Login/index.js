@@ -19,7 +19,7 @@ const Login = ({onSubmit, initialRoute, openModalWindow}) => {
   })
   const [loading, setLoading] = useState(false)
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleInput = (payload) => {
     setValue({ ...value, ...payload } )
