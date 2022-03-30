@@ -52,4 +52,8 @@ export const FooterTabs = [
     path: "/result",
     text: "Результат"
   },
+  {
+    path: "/constructor",
+    text: "ReportConstructor"
+  },
 ]

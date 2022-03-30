@@ -13,6 +13,8 @@ import DataSet from "@/Pages/Tab/Pages/DataSet";
 import Reports from "@/Pages/Tab/Pages/Reports";
 import Result from "@/Pages/Tab/Pages/Result";
 import SelectionCriteria from "@/Pages/Tab/Pages/SelectionCriteria"
+// import ReportConstructor from "@/Pages/Tab/Pages/ReportConstructor"
+import ReportConstructor from "../Tab/Pages/ReportConstructor"
 import TabHeader from "../../Components/TabHeader";
 
 const PlusIcon = Icon(plusIcon)
@@ -22,7 +24,8 @@ const urls = {
   "/tab/report": "/tab/selection_criteria",
   "/tab/selection_criteria": "/tab/buying_audiences",
   "/tab/buying_audiences": "/tab/result",
-  "/tab/result": "/tab/result"
+  "/tab/result": "/tab/result",
+  "/tab/constructor": "/tab/constructor"
 }
 
 const Tab = (a) => {
@@ -122,6 +125,10 @@ const Tab = (a) => {
                <Route
                  path="/result"
                  element={<Result/>}
+               />
+               <Route
+                 path="/constructor"
+                 element={<ReportConstructor/>}
                />
              </Routes>
              <TabFooter buttons={FooterTabs} parentUrl="/tab"/>
