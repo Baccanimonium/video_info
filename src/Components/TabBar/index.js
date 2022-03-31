@@ -24,7 +24,7 @@ const TabBar = ({ tabs, currentTabIndex, onCloseTab, onChangeActiveTab, classNam
             <span className="overflow-hidden text-overflow-ellipsis no-white-space">{tabName}</span>
             {tabs.length > 1 && (
               <StyleRemoveIcon
-                size="12"
+                size="10"
                 onClick={closeTabById(id)}
               />
             )}

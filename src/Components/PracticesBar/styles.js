@@ -5,13 +5,13 @@ export const PracticesButtonsContainer = styled.div`
   border-top: 1px solid var(--color-grey-darken-1);
   background: var(--color-grey-Light-4);
   align-items: center;
-  border-bottom: 2px solid var(--color-light-gold-1);
+  border-bottom: 2px solid var(--color-grey-darken-4);
   border-top: 2px solid var(--color-white);
 `
 
 export const PracticeButton = styled.div`
-  font-size: 16px;
-  height: 30px;
+  font-size: 14px;
+  height: 32px;
   min-width: 150px;
   background: var(--color-grey-darken-1);
   display: flex;
@@ -19,7 +19,7 @@ export const PracticeButton = styled.div`
   justify-content: center;
   font-weight: 700;
   color: var(--color-white);
-  padding: 4px 16px;
+  padding: 4px 10px;
   margin-right: 2px;
   cursor: pointer;
   will-change: width;

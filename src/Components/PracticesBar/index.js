@@ -12,7 +12,7 @@ const PracticesBar = () => {
           Критерии отбора
         </PracticeButton>
         <PracticeButton>
-          Результаты
+          Результат
         </PracticeButton>
       </div>
     </PracticesButtonsContainer>

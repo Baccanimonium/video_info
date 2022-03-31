@@ -39,29 +39,6 @@ const Tab = (a) => {
     setTabIndex(newIndex)
   }, [])
 
-  const OpenEditForm = useCallback(async ({applyContextMenu}) => {
-    await applyContextMenu([
-      {
-        componentProps: {
-          title: "Наборы данных",
-        },
-        onSubmit: onOpenNewTab,
-      },
-      {
-        componentProps: {
-          title: "Новый набор",
-        },
-        onSubmit: onOpenNewTab,
-      },
-      {
-        componentProps: {
-          title: "Открыть папку",
-        },
-        onSubmit: onOpenNewTab
-      },
-    ])
-  }, [])
-
   return (
     <RouteContext.Provider value={useMemo(() => ({ path, onOpenNewTab }), [onOpenNewTab, path])}>
       <div className="display-flex h-100">
@@ -77,23 +54,6 @@ const Tab = (a) => {
             onCloseTab={closeTab}
             onChangeActiveTab={onChangeActiveTab}
           >
-            <WithOpenContextMenu
-              settings={{maxSize: "200", minSize: "200"}}
-              onOpenContextMenu={OpenEditForm}
-            >
-            {(onOpenContextMenu) => (
-              <button
-                type="button"
-                className="min-gold-button btn bg-color-lightGold"
-                onClick={onOpenContextMenu}
-              >
-                <PlusIcon
-                  className="color-white"
-                  size="22"
-                />
-              </button>
-            )}
-          </WithOpenContextMenu>
 
         </TabBar>
         {tabs.length > 0
@@ -110,22 +70,6 @@ const Tab = (a) => {
                <Route
                  path="/download_task"
                  element={<DownloadTask/>}
-               />
-               <Route
-                 path="/data_set"
-                 element={<DataSet/>}
-               />
-               <Route
-                 path="/report"
-                 element={<Reports/>}
-               />
-               <Route
-                 path="/selection_criteria"
-                 element={<SelectionCriteria/>}
-               />
-               <Route
-                 path="/result"
-                 element={<Result/>}
                />
              </Routes>
            </>

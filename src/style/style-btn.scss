@@ -1,5 +1,5 @@
 .btn {
-  border-radius: 4px;
+  border-radius: 2px;
   text-transform: uppercase;
   padding: 8px 14px;
   font-weight: 700;
@@ -19,13 +19,13 @@
     min-width: var(--button-width-min);
   }
   &.width-midi {
-    min-width: 130px;
+    min-width: 200px;
   }
   &.width-medium {
     min-width: var(--button-width-medium);
   }
   &.width-max {
-    width: 180px;
+    min-width: 240px;
   }
   &.grey-bg {
     background: var(--color-grey-darken-0);
@@ -45,6 +45,7 @@
       background: var(--color-light-gold-1);
       color: var(--color-white);
     }
+
   }
   &.golden {
     background: var(--color-light-gold-1);
@@ -64,6 +65,24 @@
     }
     &:not(:disabled):hover {
       box-shadow: var(--shadow-black);
+    }
+  }
+  &.border-black {
+    background: var(--color-white);
+    border: 2px solid var(--color-black-darken-2);
+    color: var(--color-black-darken-2);
+    &:hover {
+      background: var(--color-black-darken-2);
+      color:  var(--color-white);
+    }
+  }
+  &.border-gold {
+    background: var(--color-white);
+    border: 2px solid var(--color-gold);
+    color: var(--color-gold);
+    &:hover {
+      background: var(--color-gold);
+      color:  var(--color-white);
     }
   }
   &.min-button {

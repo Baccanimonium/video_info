@@ -6,7 +6,7 @@ export const TabBarContainer = styled.div`
   box-shadow: 0 4px 11px rgba(0, 0, 0, 0.1);
 `
 export const TabButton = styled.button`
-  width: 178px;
+  width: 160px;
   min-width: 100px;
   padding-left: 15px;
   padding-right: 13px;
@@ -15,7 +15,7 @@ export const TabButton = styled.button`
   transition-property: color, background-color;
   transition-timing-function: ease-in-out;
   transition-duration: 250ms;
-  margin-right: ${props => props.notLast ? "5px" : "0px"};
+  margin-right: ${props => props.notLast ? "2px" : "0px"};
 
   &:hover:not(.active) {
     color: var(--color-black-darken-1);

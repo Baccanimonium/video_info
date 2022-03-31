@@ -12,7 +12,7 @@ const DownloadTask = () => {
       <div className="l-p-layout r-p-layout">
         <BsButton
           type="button"
-          className="golden btn width-medium color-greyDarken w-18"
+          className="border-gold btn width-medium color-greyDarken w-18 m-t-20"
           onClick={download}
         >
           Загрузить задачу
@@ -21,18 +21,24 @@ const DownloadTask = () => {
 
         <div className="flex-container pos-relative">
           <div className="display-flex l-p-layout r-p-layout j-c-space-between p-t-10 p-b-10 a-i-center">
-            <div className="fw700">Россия Ноль +</div>
-            <div>date</div>
+            <div>
+              <span className="color-grey">Источник данных: </span>
+              <span className="fw700">Россия Ноль +</span>
+            </div>
+            <div>
+              <span className="color-grey">Непрерывный диапазон дат: </span>
+              31.03.2022
+            </div>
             <BsButton
               type="button"
-              className="golden btn width-medium color-greyDarken w-18"
+              className="border-black btn width-max color-greyDarken w-18"
               onClick={download}
             >
               Интервальный диапазон дат
             </BsButton>
             <BsButton
               type="button"
-              className="golden btn width-medium color-greyDarken w-18"
+              className="border-black btn width-midi color-greyDarken w-18"
               onClick={download}
             >
               Временные интервалы
@@ -51,14 +57,14 @@ const DownloadTask = () => {
             <div className="display-flex j-c-flex-end m-b-20">
               <BsButton
                 type="button"
-                className="golden btn width-medium color-greyDarken w-18 m-r-10"
+                className="border-gold btn width-medium color-greyDarken w-18 m-r-10"
                 onClick={download}
               >
                 Сохранить
               </BsButton>
               <BsButton
                 type="button"
-                className="golden btn width-medium color-greyDarken w-18"
+                className="border-gold btn width-medium color-greyDarken w-18"
                 onClick={download}
               >
                 Продолжить
