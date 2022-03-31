@@ -10,12 +10,11 @@ import DataSet from "@/Pages/Tab/Pages/DataSet";
 import Reports from "@/Pages/Tab/Pages/Reports";
 import Result from "@/Pages/Tab/Pages/Result";
 import SelectionCriteria from "@/Pages/Tab/Pages/SelectionCriteria"
-// import ReportConstructor from "@/Pages/Tab/Pages/ReportConstructor"
 import ReportConstructor from "../Tab/Pages/ReportConstructor"
 import TabHeader from "../../Components/TabHeader";
-
-const PlusIcon = Icon(plusIcon)
-
+import NewTask from "../NewTask";
+import DownloadTask from "../DownloadTask";
+import {RouteContext} from "../../constants"
 const urls = {
   "/tab/data_set": "/tab/report",
   "/tab/report": "/tab/selection_criteria",
@@ -24,9 +23,6 @@ const urls = {
   "/tab/result": "/tab/result",
   "/tab/constructor": "/tab/constructor"
 }
-import NewTask from "../NewTask";
-import DownloadTask from "../DownloadTask";
-import {RouteContext} from "../../constants"
 
 const Tab = (a) => {
   const path = "/tab"
@@ -72,16 +68,13 @@ const Tab = (a) => {
                <Routes>
                  <Route
                    path="/new_task"
-                   element={<NewTask/>}
+                   element={<ReportConstructor/>}
+                   // element={<NewTask/>}
                  />
                  <Route
                    path="/download_task"
                    element={<DownloadTask/>}
                  />
-               <Route
-                 path="/constructor"
-                 element={<ReportConstructor/>}
-               />
              </Routes>
              </>
             :
