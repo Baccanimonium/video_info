@@ -15,12 +15,17 @@ const ReportConstructor = ({openModalWindow}) => {
     const [openSourceMenu, setOpenSourceMenu] = useState(false)
     const [continuousDateRange, setContinuousDateRange] = useState([])
 
-    const selectSource = useCallback(() => {
-        setSelectedSource((currentVal) => {
-            setDataSource(currentVal)
-            return {}
-        })
-    }, [selectedSource, dataSource])
+    // const selectSource = useCallback(() => {
+    //     setSelectedSource((currentVal) => {
+    //         setDataSource(currentVal)
+    //         return {}
+    //     })
+    // }, [selectedSource, dataSource])
+    const saveSource = () => {
+        console.log("eqweqwe")
+        // selectSource()
+        // setOpenSourceMenu(false)
+    }
     const closeMenu = useCallback(() => { setOpenSourceMenu(false) }, [])
     const openMenu = useCallback(() => { setOpenSourceMenu(true) }, [])
     const saveTask = () => {
@@ -66,12 +71,11 @@ const ReportConstructor = ({openModalWindow}) => {
                                                 >
                                                     <DataSourceModal
                                                         setSelectedSource={setSelectedSource}
-                                                        setDataSource={setDataSource}
                                                     />
                                                     <button
                                                         className="golden btn min text-uppercase"
                                                         type="button"
-                                                        onClick={selectSource}
+                                                        onClick={saveSource}
                                                     >
                                                         ok
                                                     </button>

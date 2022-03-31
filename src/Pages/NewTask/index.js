@@ -17,6 +17,7 @@ const NewTask = () => {
   const [openSourceMenu, setOpenSourceMenu] = useState(false)
   const [continuousDateRange, setContinuousDateRange] = useState([])
   const selectSource = useCallback(() => {
+    setOpenSourceMenu(false)
     setSelectedSource((currentVal) => {
       setDataSource(currentVal)
       return {}
