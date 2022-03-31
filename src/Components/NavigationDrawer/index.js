@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import PropTypes from "prop-types"
 import { NavLink } from "react-router-dom"
-import { LeftMenuContainer, LeftMenuLogo, LeftMenuItem, ToggleToolbar, ListTile, Copyright, OpenMenuItem } from "./styles"
+import { LeftMenuContainer, LeftMenuLogo, LeftMenuItem, ToggleToolbar, ListTile,
+  Copyright, OpenMenuItem, TextLogo, MenuLink, WrapperMenuLink } from "./styles"
+import NavigationButton from "../NavigationButton";
+import {RouteContext} from "../../constants"
 
 const NavigationDrawer = ({ routes }) => {
+  const { onOpenNewTab } = useContext(RouteContext)
   const [leftWidth, setLeftWidth] = useState(60)
   const [toggleArrow, setToggleArrow] = useState()
   const [iconArrowStyle, setIconArrowStyle] = useState()
@@ -14,14 +18,14 @@ const NavigationDrawer = ({ routes }) => {
       setToggleArrow("default")
       setIconArrowStyle("default")
     } else {
-      setLeftWidth(150)
+      setLeftWidth(190)
       setToggleArrow("default-open")
       setIconArrowStyle("default-open")
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   useEffect(() => {
-    setLeftWidth(getHidden === "close" ? 60 : 150)
+    setLeftWidth(getHidden === "close" ? 60 : 190)
   }, [getHidden])
   const hideToolbar = leftWidth === 60
   const toggleToolbar = () => {
@@ -35,7 +39,7 @@ const NavigationDrawer = ({ routes }) => {
       <LeftMenuLogo>
         <img src="/assets/toolbar-left/three-points.svg" alt="" />
         <OpenMenuItem hideToolbar={hideToolbar} className="display-flex a-i-center">
-          <img src="/assets/toolbar-left/logo.svg" alt="" />
+          <TextLogo>VideoInfo</TextLogo>
         </OpenMenuItem>
       </LeftMenuLogo>
       {routes.map(({ name, style, route, picture: Picture }) => (
@@ -44,7 +48,7 @@ const NavigationDrawer = ({ routes }) => {
           style={style}
           // current={currentIdObject === ID_OBJ_OBJ}
         >
-          <NavLink to={route} name={name} className="w-100 h-100">
+          <NavigationButton to={route} name={name} className="w-100 h-100" onClick={onOpenNewTab}>
             <ListTile hideToolbar={hideToolbar}>
               <div className="icon-container transition-icon cursor a-i-center j-c-center display-flex">
                 <Picture />
@@ -55,12 +59,28 @@ const NavigationDrawer = ({ routes }) => {
                 </OpenMenuItem>
               )}
             </ListTile>
-          </NavLink>
+          </NavigationButton>
         </LeftMenuItem>
       ))}
-      <Copyright hideToolbar={hideToolbar} className={`fs-9 color-greyDarken-2 ${hideToolbar ? "" : "show"}`}>
-        ⓒ Publicis Media 2019
-      </Copyright>
+      {!hideToolbar && (
+        <WrapperMenuLink>
+          <MenuLink>
+            <NavLink to="/options" name="Опции">
+              Дополнительныe опции
+            </NavLink>
+          </MenuLink>
+          <MenuLink>
+            <NavLink to="/options" name="Опции">
+              Справочник
+            </NavLink>
+          </MenuLink>
+          <MenuLink>
+            <NavLink to="/options" name="Опции">
+              Помощь
+            </NavLink>
+          </MenuLink>
+        </WrapperMenuLink>
+      )}
       <ToggleToolbar
         className={`display-flex a-i-center j-c-center bg-color-black ${toggleArrow}`}
         onClick={toggleToolbar}
