@@ -27,9 +27,9 @@ const NewTask = ({openModalWindow}) => {
   const closeMenu = useCallback(() => { setOpenSourceMenu(false) }, [])
   const openMenu = useCallback(() => { setOpenSourceMenu(true) }, [])
   const saveTask = () => {
-    if (dataSource && continuousDateRange.length) {
+    if (dataSource || continuousDateRange.length) {
       openModalWindow({
-        message: "Task template saved."
+        message: "Task template saved"
       })
     }
   }
