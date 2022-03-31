@@ -5,24 +5,10 @@ import TabBar from "@/Components/TabBar"
 import {tabNavigationMenu} from "./constants"
 import PureDeleteItems from "@/Utils/Arrays/PureDeleteItems"
 import Home from "./Pages/Home";
-import TabFooter from "@/Pages/Tab/TabFooter";
-import DataSet from "@/Pages/Tab/Pages/DataSet";
-import Reports from "@/Pages/Tab/Pages/Reports";
-import Result from "@/Pages/Tab/Pages/Result";
-import SelectionCriteria from "@/Pages/Tab/Pages/SelectionCriteria"
-import ReportConstructor from "../Tab/Pages/ReportConstructor"
-import TabHeader from "../../Components/TabHeader";
 import NewTask from "../NewTask";
 import DownloadTask from "../DownloadTask";
 import {RouteContext} from "../../constants"
-const urls = {
-  "/tab/data_set": "/tab/report",
-  "/tab/report": "/tab/selection_criteria",
-  "/tab/selection_criteria": "/tab/buying_audiences",
-  "/tab/buying_audiences": "/tab/result",
-  "/tab/result": "/tab/result",
-  "/tab/constructor": "/tab/constructor"
-}
+import ReportConstructor from "../Tab/Pages/ReportConstructor"
 
 const Tab = (a) => {
   const path = "/tab"
@@ -68,8 +54,7 @@ const Tab = (a) => {
                <Routes>
                  <Route
                    path="/new_task"
-                   element={<ReportConstructor/>}
-                   // element={<NewTask/>}
+                   element={<NewTask/>}
                  />
                  <Route
                    path="/download_task"

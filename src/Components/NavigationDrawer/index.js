@@ -82,7 +82,7 @@ const NavigationDrawer = ({ routes }) => {
         </WrapperMenuLink>
       )}
       <ToggleToolbar
-        className={`display-flex a-i-center j-c-center bg-color-black ${toggleArrow}`}
+        className={`display-flex a-i-center j-c-center bg-color-blackDarken-1 ${toggleArrow}`}
         onClick={toggleToolbar}
       >
         <img className={`icon-arrow ${iconArrowStyle}`} src="/assets/icon-arrow/arrow-right-white.svg" alt="" />

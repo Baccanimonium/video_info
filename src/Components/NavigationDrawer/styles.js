@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const LeftMenuContainer = styled.div`
   position: relative;
-  background: var(--color-black-darken-2);
+  background: var(--color-black);
   height: 100%;
   flex: 0 0 auto;
   transition: .3s;
@@ -49,7 +49,7 @@ export const MenuLink = styled.div`
     border-bottom: 2px solid var(--color-light-gold-1);
   };
   &:hover {
-    border-bottom: 2px solid var(--color-light-gold-1);
+    border-bottom: 2px solid var(--color-grey);
   }
 `
 
