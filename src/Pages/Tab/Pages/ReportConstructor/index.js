@@ -14,22 +14,11 @@ const ReportConstructor = (props) => {
     const [openSourceMenu, setOpenSourceMenu] = useState(false)
     const [continuousDateRange, setContinuousDateRange] = useState([])
     const selectSource = useCallback(() => {
-        console.log("qweqwewq")
         setSelectedSource((currentVal) => {
             setDataSource(currentVal)
             return {}
         })
     }, [selectedSource, dataSource])
-    const selectDataSource = () => {
-    const { openModalWindow } = props
-        openModalWindow({
-            component: () => (<DataSourceModal
-                setSelectedSource={setSelectedSource}
-                setDataSource={setDataSource}
-            />),
-            onSubmit: selectSource
-        })
-     }
     const closeMenu = useCallback(() => { setOpenSourceMenu(false) }, [])
     const openMenu = useCallback(() => { setOpenSourceMenu(true) }, [])
      const formPayload = { dateRange: []}
