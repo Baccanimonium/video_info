@@ -7,8 +7,9 @@ import DatePicker from "../../Components/Fields/DatePicker";
 import RenderOverlayMenu from "@/Components/OverlayMenu/RenderOverlayMenu"
 import WithCloseWindow from "@/Core/RenderProps/withCloseWindow"
 import OverlayMenu from "@/Components/OverlayMenu"
+import WithOpenModalWindow from "@/Core/Decorators/WithOpenModalWindow"
 
-const NewTask = () => {
+const NewTask = ({openModalWindow}) => {
   const download = () => {
 
   }
@@ -25,6 +26,13 @@ const NewTask = () => {
   }, [selectedSource, dataSource])
   const closeMenu = useCallback(() => { setOpenSourceMenu(false) }, [])
   const openMenu = useCallback(() => { setOpenSourceMenu(true) }, [])
+  const saveTask = () => {
+    if (dataSource && continuousDateRange.length) {
+      openModalWindow({
+        message: "Task template saved."
+      })
+    }
+  }
   const formPayload = { dateRange: []}
   return (
     <div className="flex-container pos-relative overflow-hidden">
@@ -63,7 +71,6 @@ const NewTask = () => {
                         >
                           <DataSourceModal
                             setSelectedSource={setSelectedSource}
-                            setDataSource={setDataSource}
                           />
                           <button
                             className="border-gold btn min text-uppercase"
@@ -119,7 +126,7 @@ const NewTask = () => {
             <BsButton
               type="button"
               className="border-gold btn width-medium color-greyDarken w-18 m-r-10"
-              onClick={download}
+              onClick={saveTask}
             >
               Сохранить
             </BsButton>
@@ -137,4 +144,4 @@ const NewTask = () => {
   );
 };
 
-export default NewTask;
+export default WithOpenModalWindow(NewTask);
