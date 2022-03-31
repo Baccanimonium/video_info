@@ -4,18 +4,11 @@ import NavigationDrawer from "@/Components/NavigationDrawer"
 import TabBar from "@/Components/TabBar"
 import {tabNavigationMenu} from "./constants"
 import PureDeleteItems from "@/Utils/Arrays/PureDeleteItems"
-import Icon from "@/Components/Icon"
-import {plusIcon} from "./icons/plusIcon"
-import WithOpenContextMenu from "@/Core/RenderProps/WithOpenContextMenu"
 import Home from "./Pages/Home";
 import NewTask from "../NewTask";
 import DownloadTask from "../DownloadTask";
 import {RouteContext} from "../../constants"
-import DataSet from "@/Pages/Tab/Pages/DataSet";
-import Reports from "@/Pages/Tab/Pages/Reports";
-import Result from "@/Pages/Tab/Pages/Result";
-import SelectionCriteria from "@/Pages/Tab/Pages/SelectionCriteria"
-const PlusIcon = Icon(plusIcon)
+import ReportConstructor from "../Tab/Pages/ReportConstructor"
 
 const Tab = (a) => {
   const path = "/tab"
@@ -54,31 +47,27 @@ const Tab = (a) => {
             onCloseTab={closeTab}
             onChangeActiveTab={onChangeActiveTab}
           >
-
-        </TabBar>
-        {tabs.length > 0
-          ?
-           <>
-             {/*<TabHeader*/}
-             {/*  path={urls[location.pathname]}*/}
-             {/*/>*/}
-             <Routes>
-               <Route
-                 path="/new_task"
-                 element={<NewTask/>}
-               />
-               <Route
-                 path="/download_task"
-                 element={<DownloadTask/>}
-               />
+          </TabBar>
+          {tabs.length > 0
+            ?
+             <>
+               <Routes>
+                 <Route
+                   path="/new_task"
+                   element={<ReportConstructor/>}
+                   // element={<NewTask/>}
+                 />
+                 <Route
+                   path="/download_task"
+                   element={<DownloadTask/>}
+                 />
              </Routes>
-           </>
-          :
-          <Home/>
-        }
-
+             </>
+            :
+            <Home/>
+          }
+        </div>
       </div>
-    </div>
     </RouteContext.Provider>
   )
 }
