@@ -8,11 +8,13 @@ import WithCloseWindow from "@/Core/RenderProps/withCloseWindow"
 import OverlayMenu from "@/Components/OverlayMenu"
 
 
-const ReportConstructor = (props) => {
+
+const ReportConstructor = ({openModalWindow}) => {
     const [selectedSource, setSelectedSource] = useState({})
     const [dataSource, setDataSource] = useState({})
     const [openSourceMenu, setOpenSourceMenu] = useState(false)
     const [continuousDateRange, setContinuousDateRange] = useState([])
+
     const selectSource = useCallback(() => {
         setSelectedSource((currentVal) => {
             setDataSource(currentVal)
@@ -21,7 +23,13 @@ const ReportConstructor = (props) => {
     }, [selectedSource, dataSource])
     const closeMenu = useCallback(() => { setOpenSourceMenu(false) }, [])
     const openMenu = useCallback(() => { setOpenSourceMenu(true) }, [])
-     const formPayload = { dateRange: []}
+    const saveTask = () => {
+        if (dataSource && continuousDateRange.length) {
+            openModalWindow({
+                message: "Task template saved."
+            })
+        }
+    }
     return (
         <div className="h-100">
             <div
@@ -54,6 +62,7 @@ const ReportConstructor = (props) => {
                                             {openSourceMenu && (
                                                 <OverlayMenu
                                                     className="display-flex flex-column j-c-center p-10 h-100"
+                                                    style={{height: "80%"}}
                                                 >
                                                     <DataSourceModal
                                                         setSelectedSource={setSelectedSource}
@@ -79,7 +88,7 @@ const ReportConstructor = (props) => {
                             <DatePicker
                                 id="continuousDateRange"
                                 range
-                                formPayload={formPayload}
+                                formPayload={{dateRange: []}}
                                 value={continuousDateRange}
                                 onInput={setContinuousDateRange}
                                 placeholder="Непрерывный диапазон дат"
@@ -88,9 +97,12 @@ const ReportConstructor = (props) => {
                     }
                     </div>
                 </div>
-                <div>
+                <button
+                    type="button"
+                    onClick={saveTask}
+                >
                     Сохранить задачу
-                </div>
+                </button>
             </div>
         </div>
     );
