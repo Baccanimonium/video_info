@@ -42,7 +42,7 @@ const NavigationDrawer = ({ routes }) => {
           <TextLogo>VideoInfo</TextLogo>
         </OpenMenuItem>
       </LeftMenuLogo>
-      {routes.map(({ name, style, route, picture: Picture }) => (
+      {routes.map(({ name, style, route, picture: Picture, size }) => (
         <LeftMenuItem
           key={name}
           style={style}
@@ -51,7 +51,7 @@ const NavigationDrawer = ({ routes }) => {
           <NavigationButton to={route} name={name} className="w-100 h-100" onClick={onOpenNewTab}>
             <ListTile hideToolbar={hideToolbar}>
               <div className="icon-container transition-icon cursor a-i-center j-c-center display-flex">
-                <Picture />
+                <Picture size={size}/>
               </div>
               {!hideToolbar && (
                 <OpenMenuItem hideToolbar={hideToolbar} className="display-flex a-i-center">

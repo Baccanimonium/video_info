@@ -3,21 +3,21 @@ import { book } from "./icons/book"
 import { wiki } from "./icons/wiki"
 import { settings } from "./icons/settings"
 import { archive } from "./icons/archive"
-
-export const CACHED_TAB_STATE = "CACHED_TAB_STATE"
-export const LAST_ACTIVE_INDEX = "LAST_ACTIVE_INDEX"
+import {mediaplanIcon} from "./icons/mediaplanIcon"
+import {documentDownloadFile} from "./icons/documentDownloadFile"
 
 
 export const tabNavigationMenu = [
   {
     name: "Новая задача",
     route: "/new_task",
-    picture: Icon(archive),
+    picture: Icon(mediaplanIcon),
   },
   {
     name: "Загрузить задачу",
     route: "/download_task",
-    picture: Icon(archive),
+    picture: Icon(documentDownloadFile),
+    size: 20
   },
   // {
   //   name: "Базы данных",
