@@ -8,20 +8,33 @@ import WithCloseWindow from "@/Core/RenderProps/withCloseWindow"
 import OverlayMenu from "@/Components/OverlayMenu"
 
 
-const ReportConstructor = (props) => {
+
+const ReportConstructor = ({openModalWindow}) => {
     const [selectedSource, setSelectedSource] = useState({})
     const [dataSource, setDataSource] = useState({})
     const [openSourceMenu, setOpenSourceMenu] = useState(false)
     const [continuousDateRange, setContinuousDateRange] = useState([])
-    const selectSource = useCallback(() => {
-        setSelectedSource((currentVal) => {
-            setDataSource(currentVal)
-            return {}
-        })
-    }, [selectedSource, dataSource])
+
+    // const selectSource = useCallback(() => {
+    //     setSelectedSource((currentVal) => {
+    //         setDataSource(currentVal)
+    //         return {}
+    //     })
+    // }, [selectedSource, dataSource])
+    const saveSource = () => {
+        console.log("eqweqwe")
+        // selectSource()
+        // setOpenSourceMenu(false)
+    }
     const closeMenu = useCallback(() => { setOpenSourceMenu(false) }, [])
     const openMenu = useCallback(() => { setOpenSourceMenu(true) }, [])
-     const formPayload = { dateRange: []}
+    const saveTask = () => {
+        if (dataSource && continuousDateRange.length) {
+            openModalWindow({
+                message: "Task template saved."
+            })
+        }
+    }
     return (
         <div className="h-100">
             <div
@@ -35,43 +48,43 @@ const ReportConstructor = (props) => {
                         menuComponent={OverlayMenu}
                     >
                         {(overlayBoundRef, onOpenOverlayMenu, OverlayMenu) => (
-                            <WithCloseWindow
-                                closeWindow={closeMenu}
-                                byKey={openSourceMenu}
-                            >
-                                {(onMouseDown) => (
-                                    <button
-                                        ref={overlayBoundRef}
-                                        type="button"
-                                        onMouseDown={onMouseDown}
-                                    >
-                                        <div
-                                            className="cursor"
-                                            onClick={onOpenOverlayMenu}
+                                <WithCloseWindow
+                                    closeWindow={closeMenu}
+                                    byKey={openSourceMenu}
+                                >
+                                    {(onMouseDown) => (
+                                        <button
+                                            ref={overlayBoundRef}
+                                            type="button"
+                                            onMouseDown={onMouseDown}
                                         >
-                                            {dataSource.title ? dataSource.title : "Источник данных"}
-                                        </div>
-                                        {openSourceMenu && (
-                                            <OverlayMenu
-                                                className="display-flex flex-column j-c-center p-10 h-100"
+                                            <div
+                                                className="cursor"
+                                                onClick={onOpenOverlayMenu}
                                             >
-                                                <DataSourceModal
-                                                    setSelectedSource={setSelectedSource}
-                                                    setDataSource={setDataSource}
-                                                />
-                                                <button
-                                                    className="golden btn min text-uppercase"
-                                                    type="button"
-                                                    onClick={selectSource}
+                                                {dataSource.title ? dataSource.title : "Источник данных"}
+                                            </div>
+                                            {openSourceMenu && (
+                                                <OverlayMenu
+                                                    className="display-flex flex-column j-c-center p-10 h-100"
+                                                    style={{height: "80%"}}
                                                 >
-                                                    ok
-                                                </button>
-                                            </OverlayMenu>
-                                        )}
-                                    </button>
+                                                    <DataSourceModal
+                                                        setSelectedSource={setSelectedSource}
+                                                    />
+                                                    <button
+                                                        className="golden btn min text-uppercase"
+                                                        type="button"
+                                                        onClick={saveSource}
+                                                    >
+                                                        ok
+                                                    </button>
+                                                </OverlayMenu>
+                                            )}
+                                        </button>
+                                    )}
+                                </WithCloseWindow>
                                 )}
-                            </WithCloseWindow>
-                            )}
                     </RenderOverlayMenu>
                     <div className="p-l-15 w-320">
                     {
@@ -79,7 +92,7 @@ const ReportConstructor = (props) => {
                             <DatePicker
                                 id="continuousDateRange"
                                 range
-                                formPayload={formPayload}
+                                formPayload={{dateRange: []}}
                                 value={continuousDateRange}
                                 onInput={setContinuousDateRange}
                                 placeholder="Непрерывный диапазон дат"
@@ -88,9 +101,12 @@ const ReportConstructor = (props) => {
                     }
                     </div>
                 </div>
-                <div>
+                <button
+                    type="button"
+                    onClick={saveTask}
+                >
                     Сохранить задачу
-                </div>
+                </button>
             </div>
         </div>
     );
