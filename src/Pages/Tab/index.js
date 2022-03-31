@@ -54,8 +54,7 @@ const Tab = (a) => {
                <Routes>
                  <Route
                    path="/new_task"
-                   element={<ReportConstructor/>}
-                   // element={<NewTask/>}
+                   element={<NewTask/>}
                  />
                  <Route
                    path="/download_task"

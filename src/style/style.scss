@@ -64,7 +64,7 @@ body {
 
   --max-height: 100%;
   --font-size-switch: 12px;
-  --height-input: 34px;
+  --height-input: 30px;
   --border-color-input: var(--color-grey-darken-0);
   --plachodler-font-size: 10px;
   --background-input: inherit;
@@ -184,6 +184,14 @@ body {
   --button-width-medium: 160px;
   --button-width-min: 120px;
 
+}
+
+
+.link {
+  position: relative;
+  &:hover {
+    color: var(--color-gold);
+  }
 }
 
 

@@ -12,7 +12,7 @@ const TabBar = ({ tabs, currentTabIndex, onCloseTab, onChangeActiveTab, classNam
   }
 
   return (
-    <TabBarContainer className={`display-flex flex-min-with p-l-5 p-r-30 w-100 ${className}`}>
+    <TabBarContainer className={`display-flex flex-min-with p-l-5 p-r-10 w-100 ${className}`}>
       <Carousel value={currentTabIndex} onInput={onChangeActiveTab}>
         {tabs.map((({ tabName, id }, i) => (
           <TabButton

@@ -35,43 +35,43 @@ const ReportConstructor = (props) => {
                         menuComponent={OverlayMenu}
                     >
                         {(overlayBoundRef, onOpenOverlayMenu, OverlayMenu) => (
-                                <WithCloseWindow
-                                    closeWindow={closeMenu}
-                                    byKey={openSourceMenu}
-                                >
-                                    {(onMouseDown) => (
-                                        <button
-                                            ref={overlayBoundRef}
-                                            type="button"
-                                            onMouseDown={onMouseDown}
+                            <WithCloseWindow
+                                closeWindow={closeMenu}
+                                byKey={openSourceMenu}
+                            >
+                                {(onMouseDown) => (
+                                    <button
+                                        ref={overlayBoundRef}
+                                        type="button"
+                                        onMouseDown={onMouseDown}
+                                    >
+                                        <div
+                                            className="cursor"
+                                            onClick={onOpenOverlayMenu}
                                         >
-                                            <div
-                                                className="cursor"
-                                                onClick={onOpenOverlayMenu}
+                                            {dataSource.title ? dataSource.title : "Источник данных"}
+                                        </div>
+                                        {openSourceMenu && (
+                                            <OverlayMenu
+                                                className="display-flex flex-column j-c-center p-10 h-100"
                                             >
-                                                {dataSource.title ? dataSource.title : "Источник данных"}
-                                            </div>
-                                            {openSourceMenu && (
-                                                <OverlayMenu
-                                                    className="display-flex flex-column j-c-center p-10 h-100"
+                                                <DataSourceModal
+                                                    setSelectedSource={setSelectedSource}
+                                                    setDataSource={setDataSource}
+                                                />
+                                                <button
+                                                    className="golden btn min text-uppercase"
+                                                    type="button"
+                                                    onClick={selectSource}
                                                 >
-                                                    <DataSourceModal
-                                                        setSelectedSource={setSelectedSource}
-                                                        setDataSource={setDataSource}
-                                                    />
-                                                    <button
-                                                        className="golden btn min text-uppercase"
-                                                        type="button"
-                                                        onClick={selectSource}
-                                                    >
-                                                        ok
-                                                    </button>
-                                                </OverlayMenu>
-                                            )}
-                                        </button>
-                                    )}
-                                </WithCloseWindow>
+                                                    ok
+                                                </button>
+                                            </OverlayMenu>
+                                        )}
+                                    </button>
                                 )}
+                            </WithCloseWindow>
+                            )}
                     </RenderOverlayMenu>
                     <div className="p-l-15 w-320">
                     {
