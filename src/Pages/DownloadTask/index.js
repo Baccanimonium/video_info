@@ -9,7 +9,7 @@ import OverlayMenu from "@/Components/OverlayMenu"
 import WithOpenModalWindow from "@/Core/Decorators/WithOpenModalWindow"
 import DatePicker from "../../Components/Fields/DatePicker";
 
-const DownloadTask = () => {
+const DownloadTask = ({openModalWindow}) => {
   const download = () => {
 
   }
@@ -36,10 +36,19 @@ const DownloadTask = () => {
     if (files[0].type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || files[0].type === "text/plain") {
       setShowTask(true)
     } else {
-
+      openModalWindow({
+        message: "Файл не корректного формата"
+      })
     }
-
   }, [])
+
+  const saveTask = () => {
+    if (dataSource || continuousDateRange.length) {
+      openModalWindow({
+        message: "Задача сохранена"
+      })
+    }
+  }
 
   return (
     <div className="flex-container pos-relative overflow-hidden">
@@ -153,7 +162,7 @@ const DownloadTask = () => {
                 <BsButton
                   type="button"
                   className="border-gold btn width-medium color-greyDarken w-18 m-r-10"
-                  onClick={download}
+                  onClick={saveTask}
                 >
                   Сохранить
                 </BsButton>
@@ -173,4 +182,4 @@ const DownloadTask = () => {
   );
 };
 
-export default DownloadTask;
+export default WithOpenModalWindow(DownloadTask);

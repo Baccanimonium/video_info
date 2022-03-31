@@ -29,7 +29,7 @@ const NewTask = ({openModalWindow}) => {
   const saveTask = () => {
     if (dataSource || continuousDateRange.length) {
       openModalWindow({
-        message: "Task template saved"
+        message: "Задача сохранена"
       })
     }
   }
