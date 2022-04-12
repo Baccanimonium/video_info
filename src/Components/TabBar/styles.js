@@ -2,11 +2,11 @@ import styled from "styled-components"
 import { RemoveIcon } from "@/Components/Icon/CommonIcons"
 
 export const TabBarContainer = styled.div`
-  height: 40px;
+  height: 38px;
   box-shadow: 0 4px 11px rgba(0, 0, 0, 0.1);
 `
 export const TabButton = styled.button`
-  width: 160px;
+  width: 120px;
   min-width: 100px;
   padding-left: 15px;
   padding-right: 13px;

@@ -1,20 +1,20 @@
 import React from 'react';
-import { PracticesButtonsContainer, PracticeButton, OpenVersionButton } from "./styles"
+import { PracticesButtonsContainer, PracticeButton, OpenVersionButton, WrapperButton } from "./styles"
 
 const PracticesBar = () => {
   return (
     <PracticesButtonsContainer>
-      <div className="display-flex">
-        <PracticeButton>
-          Отчеты
-        </PracticeButton>
+      <WrapperButton className="display-flex bg-color-greyLight-4">
         <PracticeButton>
           Критерии отбора
+        </PracticeButton>
+        <PracticeButton className="current-practice">
+          Отчеты
         </PracticeButton>
         <PracticeButton>
           Результат
         </PracticeButton>
-      </div>
+      </WrapperButton>
     </PracticesButtonsContainer>
   );
 };
