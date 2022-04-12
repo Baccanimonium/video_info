@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useContext, useCallback, useRef } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import PropTypes from "prop-types"
 import { NavLink } from "react-router-dom"
 import { LeftMenuContainer, LeftMenuLogo, LeftMenuItem, ToggleToolbar, ListTile,
   Copyright, OpenMenuItem, TextLogo, MenuLink, WrapperMenuLink } from "./styles"
 import NavigationButton from "../NavigationButton";
 import {RouteContext} from "../../constants"
-import TipsOverlayComponent from "../TipsHelp/TipsOverlayComponent";
 
 const NavigationDrawer = ({ routes }) => {
   const { onOpenNewTab } = useContext(RouteContext)
@@ -13,8 +12,6 @@ const NavigationDrawer = ({ routes }) => {
   const [toggleArrow, setToggleArrow] = useState()
   const [iconArrowStyle, setIconArrowStyle] = useState()
   const [getHidden, setGetHidden] = useState(localStorage.getItem("APP_NAVBAR"))
-  const [event, setEvent] = useState()
-  const timerRef = useRef()
   useEffect(() => {
     if (getHidden === "close") {
       setLeftWidth(60)
@@ -37,17 +34,6 @@ const NavigationDrawer = ({ routes }) => {
     setIconArrowStyle(getHidden === "close" ? "open" : "close")
     setGetHidden(localStorage.getItem("APP_NAVBAR"))
   }
-
-  const showTips = useCallback((e) => {
-    clearTimeout(timerRef.current)
-    timerRef.current = setTimeout(() => { setEvent(e) }, 500)
-  }, [])
-
-  const closeTips = useCallback(() => {
-    clearTimeout(timerRef.current)
-    setEvent(undefined)
-  }, [setEvent])
-  // TipsOverlayComponent выводится неправильное название
   return (
     <LeftMenuContainer style={{ width: leftWidth }}>
       <LeftMenuLogo>
@@ -65,21 +51,11 @@ const NavigationDrawer = ({ routes }) => {
           <NavigationButton to={route} name={name} className="w-100 h-100" onClick={onOpenNewTab}>
             <ListTile hideToolbar={hideToolbar}>
               <div className="icon-container transition-icon cursor a-i-center j-c-center display-flex">
-                <Picture
-                  onMouseEnter={showTips}
-                  onMouseLeave={closeTips}
-                  size={size}
-                />
+                <Picture size={size}/>
               </div>
-              {hideToolbar && (
-                <TipsOverlayComponent
-                  tipsText={name}
-                  event={event}
-                />
-              )}
               {!hideToolbar && (
                 <OpenMenuItem hideToolbar={hideToolbar} className="display-flex a-i-center">
-                  <div className="text-menu font-weight-bold">{name}</div>
+                  <div className="text-menu font-weight-bold capitalize">{name}</div>
                 </OpenMenuItem>
               )}
             </ListTile>
