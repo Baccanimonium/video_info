@@ -44,12 +44,12 @@ const Login = ({onSubmit, initialRoute, openModalWindow}) => {
         }
       } else {
         openModalWindow({
-          message: "Couldn't connect to login server. Please contact your administrator"
+          message: "Couldn't connect to login server. <br> Please contact your administrator"
         })
       }
     } catch (e) {
       openModalWindow({
-        message: "Couldn't connect to login server. Please contact your administrator"
+        message: "Couldn't connect to login server. \n Please contact your administrator"
       })
       console.log("login error", e)
     } finally {
@@ -74,7 +74,7 @@ const Login = ({onSubmit, initialRoute, openModalWindow}) => {
               onSubmit={submitForm}
             >
               <BsButton
-                className="golden btn width-max m-l-a m-r-a m-t-20"
+                className="golden sign-up-btn btn width-max m-l-a m-r-a m-t-20"
                 loading={loading}
                 disabled={loading}
                 name="Login"

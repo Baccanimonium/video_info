@@ -34,7 +34,7 @@ export const ImgLogo = styled.img`
   @media (min-width: 1210px) {
     transform: translate(-6%, 0%);
   }
-  @media (min-width: 1349px) {
+  @media (min-width: 1169px) {
     width: 100%;
     transform: scaleY(1.2);
   }
