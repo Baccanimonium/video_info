@@ -65,7 +65,7 @@ const NewTask = ({openModalWindow}) => {
                       onMouseDown={onMouseDown}
                     >
                       <div
-                        className="cursor btn sign-up-btn light-grey m-l-14 link"
+                        className="cursor btn light-grey m-l-14 link"
                         style={{"color": "black"}}
                         onClick={onOpenOverlayMenu}
                       >{
