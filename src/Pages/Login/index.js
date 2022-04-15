@@ -74,7 +74,7 @@ const Login = ({onSubmit, initialRoute, openModalWindow}) => {
               onSubmit={submitForm}
             >
               <BsButton
-                className="golden sign-up-btn btn width-max m-l-a m-r-a m-t-20"
+                className="golden sign-up-btn btn m-l-a m-r-a m-t-20"
                 loading={loading}
                 disabled={loading}
                 name="Login"
