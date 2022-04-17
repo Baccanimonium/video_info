@@ -5,6 +5,7 @@ import { settings } from "./icons/settings"
 import { archive } from "./icons/archive"
 import {mediaplanIcon} from "./icons/mediaplanIcon"
 import {documentDownloadFile} from "./icons/documentDownloadFile"
+import {templates} from "./icons/templates"
 
 
 export const tabNavigationMenu = [
@@ -16,7 +17,7 @@ export const tabNavigationMenu = [
   {
     name: "Загрузить задачу",
     route: "/download_task",
-    picture: Icon(documentDownloadFile),
+    picture: Icon(templates),
     size: 20
   },
   // {

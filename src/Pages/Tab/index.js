@@ -8,7 +8,6 @@ import Home from "./Pages/Home";
 import NewTask from "../NewTask";
 import DownloadTask from "../DownloadTask";
 import {RouteContext} from "../../constants"
-import ReportConstructor from "../Tab/Pages/ReportConstructor"
 
 const Tab = (a) => {
   const path = "/tab"
@@ -61,6 +60,7 @@ const Tab = (a) => {
                    element={<DownloadTask/>}
                  />
              </Routes>
+               {/*<TabFooter buttons={FooterTabs} parentUrl="/tab"/>*/}
              </>
             :
             <Home/>

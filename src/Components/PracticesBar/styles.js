@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { NavLink } from "react-router-dom"
 
 export const PracticesButtonsContainer = styled.div`
   display: flex;
@@ -6,6 +7,7 @@ export const PracticesButtonsContainer = styled.div`
   align-items: center;
   border-bottom: 1px solid var(--color-grey-darken-3);
   border-top: 2px solid var(--color-white);
+  margin-left: 10px;
 `
 
 export const PracticeButton = styled.div`
