@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import BsButton from "../../Components/BsButton";
 import PracticesBar from "../../Components/PracticesBar";
 import {WrapperButtons} from "../DownloadTask/style";
@@ -30,6 +30,14 @@ const NewTask = ({openModalWindow}) => {
   const openChangeSourceMenu = useCallback(() => { setChangeSourceMenu(true) }, [])
   const deleteDataSource = useCallback(() => { setDataSource({}) }, [])
   const changeDataSource = useCallback(() => { setChangeSourceMenu(true) }, [])
+  const closeDataSourceMenu = useCallback(() => { setChangeSourceMenu(false) }, [])
+  const closeSourceMenu = () => {
+    closeMenu();
+    closeDataSourceMenu()
+  }
+  useEffect(() => {
+    closeDataSourceMenu()
+  }, [dataSource])
   const saveTask = () => {
     if (dataSource || continuousDateRange.length) {
       openModalWindow({
@@ -57,7 +65,7 @@ const NewTask = ({openModalWindow}) => {
             >
               {(overlayBoundRef, onOpenOverlayMenu, OverlayMenu) => (
                 <WithCloseWindow
-                  closeWindow={closeMenu}
+                  closeWindow={closeSourceMenu}
                   byKey={openSourceMenu}
                 >
                   {(onMouseDown) => (
@@ -71,7 +79,7 @@ const NewTask = ({openModalWindow}) => {
                         style={{"color": "black"}}
                         onClick={onOpenOverlayMenu}
                       >{
-                        Object.keys(dataSource).length > 0 ? openSourceMenu ? sourceBtnTitle(dataSource.title) : "..." :
+                        Object.keys(dataSource).length > 0 ? sourceBtnTitle(dataSource.title) :
                             <span>
                               <span
                                   className="fs-14"
