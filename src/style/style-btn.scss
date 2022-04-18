@@ -124,6 +124,11 @@
   &.sign-up-btn {
     min-width: 140px;
   }
+  &.width-hover-grey-darken-0 {
+    &:hover {
+      background-color: var(--color-grey-darken-0);
+    }
+  }
 }
 
 .save-btn {

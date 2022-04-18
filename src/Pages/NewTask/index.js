@@ -42,6 +42,7 @@ const NewTask = ({openModalWindow}) => {
   const openMenu = useCallback(() => { setOpenSourceMenu(true) }, [])
   const openChangeSourceMenu = useCallback(() => { setChangeSourceMenu(true) }, [])
   const deleteDataSource = useCallback(() => { setDataSource({}) }, [])
+  const changeDataSource = useCallback(() => { setChangeSourceMenu(true) }, [])
   const saveTask = () => {
     if (dataSource || continuousDateRange.length) {
       openModalWindow({
@@ -49,6 +50,7 @@ const NewTask = ({openModalWindow}) => {
       })
     }
   }
+  const sourceBtnTitle = (sourceName) => sourceName.length > 15 ? `${sourceName.substring(0, 15)}...` : sourceName
   const formPayload = { dateRange: []}
   const openOptions = useCallback((e) => {
     setActiveOption(e.target.innerText)
@@ -81,11 +83,11 @@ const NewTask = ({openModalWindow}) => {
                       onMouseDown={onMouseDown}
                     >
                       <div
-                        className="cursor btn light-grey m-l-14 link"
+                        className="cursor btn light-grey width-hover-grey-darken-0 m-l-14 link"
                         style={{"color": "black"}}
                         onClick={onOpenOverlayMenu}
                       >{
-                        Object.keys(dataSource).length > 0 ? "..." :
+                        Object.keys(dataSource).length > 0 ? openSourceMenu ? sourceBtnTitle(dataSource.title) : "..." :
                             <span>
                               <span
                                   className="fs-14"
@@ -100,12 +102,12 @@ const NewTask = ({openModalWindow}) => {
                           className="display-flex flex-column j-c-center p-10 h-100"
                         >
                           {
-                            Object.keys(dataSource).length > 0 ? (
+                            Object.keys(dataSource).length > 0 && !changeSourceMenu ? (
                                 <div
                                     className="display-flex fd-column p-8"
                                 >
                                   <span
-                                      onClick={deleteDataSource}
+                                      onClick={changeDataSource}
                                       className="p-b-10"
                                   >Заменить источник
                                   </span>
