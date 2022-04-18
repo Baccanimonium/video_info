@@ -27,6 +27,7 @@ const NewTask = ({openModalWindow}) => {
   const [selectedSource, setSelectedSource] = useState({})
   const [dataSource, setDataSource] = useState({})
   const [openSourceMenu, setOpenSourceMenu] = useState(false)
+  const [changeSourceMenu, setChangeSourceMenu] = useState(false)
   const [continuousDateRange, setContinuousDateRange] = useState([])
   const [activeOption, setActiveOption] = useState("Критерии отбора")
 
@@ -39,6 +40,8 @@ const NewTask = ({openModalWindow}) => {
   }, [selectedSource, dataSource])
   const closeMenu = useCallback(() => { setOpenSourceMenu(false) }, [])
   const openMenu = useCallback(() => { setOpenSourceMenu(true) }, [])
+  const openChangeSourceMenu = useCallback(() => { setChangeSourceMenu(true) }, [])
+  const deleteDataSource = useCallback(() => { setDataSource({}) }, [])
   const saveTask = () => {
     if (dataSource || continuousDateRange.length) {
       openModalWindow({
@@ -54,10 +57,12 @@ const NewTask = ({openModalWindow}) => {
     <div className="flex-container pos-relative overflow-hidden">
       <div className="flex-container pos-relative">
         <WrapperButtons className="l-p-layout r-p-layout p-t-10 p-b-10 a-i-flex-start">
-          <div>
-            <div className="color-grey p-b-5">Источник данных:</div>
+          <div
+              className="display-flex a-i-center p-t-10 p-b-10"
+          >
+            <div className="color-grey">Источник данных: </div>
             <div className="text-align-left p-b-5">
-              {dataSource.title}
+              {/*{dataSource.title}*/}
             </div>
             <RenderOverlayMenu
               onOpenOverlayMenu={openMenu}
@@ -76,25 +81,47 @@ const NewTask = ({openModalWindow}) => {
                       onMouseDown={onMouseDown}
                     >
                       <div
-                        className="cursor color-lightGold link"
+                        className="cursor btn light-grey m-l-14 link"
+                        style={{"color": "black"}}
                         onClick={onOpenOverlayMenu}
-                      >
-                        Добавить источник данных
-                      </div>
+                      >{
+                        Object.keys(dataSource).length > 0 ? "..." :
+                            <span>
+                              <span
+                                  className="fs-14"
+                              >
+                                + 
+                              </span>
+                              Добавить
+                            </span>
+                      }</div>
                       {openSourceMenu && (
                         <OverlayMenu
                           className="display-flex flex-column j-c-center p-10 h-100"
                         >
-                          <DataSourceModal
-                            setSelectedSource={setSelectedSource}
-                          />
-                          <button
-                            className="border-gold btn min text-uppercase"
-                            type="button"
-                            onClick={selectSource}
-                          >
-                            ok
-                          </button>
+                          {
+                            Object.keys(dataSource).length > 0 ? (
+                                <div
+                                    className="display-flex fd-column p-8"
+                                >
+                                  <span
+                                      onClick={deleteDataSource}
+                                      className="p-b-10"
+                                  >Заменить источник
+                                  </span>
+                                  <span
+                                      onClick={deleteDataSource}
+                                  >
+                                    Удалить источник
+                                  </span>
+                                </div>
+                            ) : (
+                                <DataSourceModal
+                                selectSource={selectSource}
+                                setSelectedSource={setSelectedSource}
+                                />
+                            )
+                          }
                         </OverlayMenu>
                       )}
                     </button>
