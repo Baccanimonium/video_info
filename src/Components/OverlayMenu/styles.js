@@ -5,7 +5,7 @@ export const SlotContainer = styled.div`
   height: 100%;
   width: 100%;
   background: var(--color-white);
-  max-height: 350px;
+  //max-height: 350px;
 `
 
 export const FixedContainer = styled.div`

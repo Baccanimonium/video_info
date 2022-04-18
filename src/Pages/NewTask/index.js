@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useState, useRef} from 'react';
 import BsButton from "../../Components/BsButton";
 import PracticesBar from "../../Components/PracticesBar";
 import {WrapperButtons} from "../DownloadTask/style";
@@ -13,12 +13,45 @@ import Result from "./Content/result";
 import SelectionCriteria from "./Content/selectionCriteria";
 import Reports from "./Content/reports";
 import {Tabs} from "./constants"
-import {calendar} from "./icons/calendar"
-import Icon from "@/Components/Icon"
 import {PracticeButton, PracticesButtonsContainer, WrapperButton} from "../../Components/PracticesBar/styles";
-import {InformationCard} from "./styles"
+import {InformationCard, InformationCardMin} from "./styles"
+import TipsOverlayComponent from "../../Components/TipsHelp/TipsOverlayComponent";
+import DefaultPreview from "@/Components/Fields/InputContstuctor/PreviewFields/DefaultPreview"
+import WithSubmitButtonHOC from "@/Core/Decorators/WithSubmitButtonHOC"
+import ContextMenuValueEditor from "@/Components/Fields/InputContstuctor/InputControllers/ContextMenuValueEditor"
+import memoizeOne from "memoize-one";
+import dayjs from "dayjs";
+import { PRESENT_DATE_FORMAT } from "@/constants"
+import { BsCalendar, BsCalendar3, BsCalendar4, BsCalendar3Range } from 'react-icons/bs';
+import {VscChecklist} from 'react-icons/vsc';
 
-const Calendar = Icon(calendar)
+
+const editConfig = {
+  component: WithSubmitButtonHOC(DatePicker),
+  label: "Выбор даты или периода",
+  placeholder: "Выбор даты или периода",
+  allWaysOpen: true,
+  preview: DefaultPreview.constructor,
+  range: true
+}
+
+const editConfigIntervalRange = {
+  component: WithSubmitButtonHOC(DatePicker),
+  label: "Выбор интервального диапазона",
+  placeholder: "Выбор интервального диапазона",
+  allWaysOpen: true,
+  preview: DefaultPreview.constructor,
+  range: true
+}
+
+const editConfigTimeRange = {
+  component: WithSubmitButtonHOC(DatePicker),
+  label: "Выбор временных интервалов",
+  placeholder: "Выбор временных интервалов",
+  allWaysOpen: true,
+  preview: DefaultPreview.constructor,
+  range: true
+}
 
 const NewTask = ({openModalWindow}) => {
   const download = () => {
@@ -29,7 +62,12 @@ const NewTask = ({openModalWindow}) => {
   const [openSourceMenu, setOpenSourceMenu] = useState(false)
   const [changeSourceMenu, setChangeSourceMenu] = useState(false)
   const [continuousDateRange, setContinuousDateRange] = useState([])
+  const [continuousIntervalRange, setContinuousIntervalRange] = useState([])
   const [activeOption, setActiveOption] = useState("Критерии отбора")
+  const [event, setEvent] = useState()
+  const [eventIntervalRange, setEventIntervalRange] = useState()
+  const [eventTimeRange, setEventTimeRange] = useState()
+  const timerRef = useRef()
 
   const selectSource = useCallback(() => {
     setOpenSourceMenu(false)
@@ -55,6 +93,47 @@ const NewTask = ({openModalWindow}) => {
   const openOptions = useCallback((e) => {
     setActiveOption(e.target.innerText)
   },[setActiveOption])
+
+  const showTips = useCallback((e) => {
+    clearTimeout(timerRef.current)
+    timerRef.current = setTimeout(() => { setEvent(e) }, 500)
+  }, [])
+
+  const closeTips = useCallback(() => {
+    clearTimeout(timerRef.current)
+    setEvent(undefined)
+  }, [setEvent])
+
+
+  const showTipsIntervalRange = useCallback((e) => {
+    clearTimeout(timerRef.current)
+    timerRef.current = setTimeout(() => { setEventIntervalRange(e) }, 500)
+  }, [])
+
+  const closeTipsIntervalRange = useCallback(() => {
+    clearTimeout(timerRef.current)
+    setEventIntervalRange(undefined)
+  }, [setEventIntervalRange])
+
+
+  const showTipsTimeRange = useCallback((e) => {
+    clearTimeout(timerRef.current)
+    timerRef.current = setTimeout(() => { setEventTimeRange(e) }, 500)
+  }, [])
+
+  const closeTipsTimeRange = useCallback(() => {
+    clearTimeout(timerRef.current)
+    setEventTimeRange(undefined)
+  }, [setEventTimeRange])
+
+  // Приводим любые даты к числам
+  const getInputValue = memoizeOne((value) => Array.isArray(value)
+    // eslint-disable-next-line max-len
+    ? `${value[0] ? dayjs(value[0], PRESENT_DATE_FORMAT).format(PRESENT_DATE_FORMAT) : ""} - ${value[1] ? dayjs(value[1], PRESENT_DATE_FORMAT).format(PRESENT_DATE_FORMAT) : ""}`
+    : value ? dayjs(value, PRESENT_DATE_FORMAT).format(PRESENT_DATE_FORMAT) : "")
+
+  const normalizedDate = getInputValue(continuousDateRange)
+
   return (
     <div className="flex-container pos-relative overflow-hidden">
       <div className="flex-container pos-relative">
@@ -137,17 +216,20 @@ const NewTask = ({openModalWindow}) => {
             >
               Отчет "Протокол роликов"
             </InformationCard>
-            <InformationCard
-            >
-              04.04.2022 - 05.04.2022
-            </InformationCard>
+            {normalizedDate.length > 3 && (
+              <InformationCard
+                style={{width: "200px"}}
+              >
+                {normalizedDate}
+              </InformationCard>
+            )}
             <InformationCard
             >
               !
             </InformationCard>
             <InformationCard
             >
-              !
+              <VscChecklist/>
             </InformationCard>
           </div>
         </WrapperButtons>
@@ -169,34 +251,80 @@ const NewTask = ({openModalWindow}) => {
           {
             activeOption === "Критерии отбора" && (
               <div className="display-flex">
-                <div className="p-r-10">
-                  <div className="color-grey p-b-5">Непрерывный диапазон дат:</div>
-                  <DatePicker
-                    id="continuousDateRange"
-                    range
-                    formPayload={formPayload}
-                    value={continuousDateRange}
-                    onInput={setContinuousDateRange}
-                    placeholder="Непрерывный диапазон дат"
-                  />
-                </div>
-                <div className="display-flex p-t-19">
-                  <BsButton
-                    type="button"
-                    className="border-black btn width-max color-greyDarken w-18 m-r-5"
-                    onClick={download}
-                  >
-                    Интервальный диапазон дат
-                  </BsButton>
-                  <BsButton
-                    type="button"
-                    className="border-black btn width-midi color-greyDarken w-18"
-                    onClick={download}
-                  >
-                    Временные интервалы
-                  </BsButton>
-                </div>
-                <InformationCard><Calendar/></InformationCard>
+                <TipsOverlayComponent
+                  tipsText="Выбор даты или периода"
+                  event={event}
+                />
+                <TipsOverlayComponent
+                  tipsText="Выбор интервального диапазона"
+                  event={eventIntervalRange}
+                />
+                <TipsOverlayComponent
+                  tipsText="Выбор временных интервалов"
+                  event={eventTimeRange}
+                />
+                <ContextMenuValueEditor
+                  id="ContinuousDateRange"
+                  label="Выбор даты или периода"
+                  fields={editConfig}
+                  formPayload={formPayload}
+                  value={continuousDateRange}
+                  onInput={setContinuousDateRange}
+                  minSize="320"
+                >
+                  {(onEditValue) => (
+                    <InformationCardMin
+                      onMouseEnter={showTips}
+                      onMouseLeave={closeTips}
+                      onClick={onEditValue}
+                      className="mini"
+                    >
+                      <BsCalendar/>
+                    </InformationCardMin>
+                  )}
+                </ContextMenuValueEditor>
+
+                <ContextMenuValueEditor
+                  id="IntervalRange"
+                  label="Выбор интервального диапазона"
+                  fields={editConfigIntervalRange}
+                  formPayload={formPayload}
+                  value={continuousIntervalRange}
+                  onInput={setContinuousIntervalRange}
+                  minSize="320"
+                >
+                  {(onEditValue) => (
+                    <InformationCardMin
+                      onMouseEnter={showTipsIntervalRange}
+                      onMouseLeave={closeTipsIntervalRange}
+                      onClick={onEditValue}
+                      className="mini"
+                    >
+                      <BsCalendar3/>
+                    </InformationCardMin>
+                  )}
+                </ContextMenuValueEditor>
+
+                <ContextMenuValueEditor
+                  id="TimeRange"
+                  label="Выбор временных интервалов"
+                  fields={editConfigTimeRange}
+                  formPayload={formPayload}
+                  value={continuousIntervalRange}
+                  onInput={setContinuousIntervalRange}
+                  minSize="320"
+                >
+                  {(onEditValue) => (
+                    <InformationCardMin
+                      onMouseEnter={showTipsTimeRange}
+                      onMouseLeave={closeTipsTimeRange}
+                      onClick={onEditValue}
+                      className="mini"
+                    >
+                      <BsCalendar3Range/>
+                    </InformationCardMin>
+                  )}
+                </ContextMenuValueEditor>
               </div>
             )
           }
