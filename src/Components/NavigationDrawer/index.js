@@ -8,6 +8,7 @@ import {RouteContext} from "../../constants"
 import TipsOverlayComponent from "../TipsHelp/TipsOverlayComponent";
 
 const NavigationDrawer = ({ routes }) => {
+  const [tipsName, setTipsName]= useState("")
   const { onOpenNewTab } = useContext(RouteContext)
   const [leftWidth, setLeftWidth] = useState(60)
   const [toggleArrow, setToggleArrow] = useState()
@@ -38,14 +39,16 @@ const NavigationDrawer = ({ routes }) => {
     setGetHidden(localStorage.getItem("APP_NAVBAR"))
   }
 
-  const showTips = useCallback((e) => {
+  const showTips = useCallback((name) => (e) => {
     clearTimeout(timerRef.current)
     timerRef.current = setTimeout(() => { setEvent(e) }, 500)
+    setTipsName(name)
   }, [])
 
   const closeTips = useCallback(() => {
     clearTimeout(timerRef.current)
     setEvent(undefined)
+    setTipsName("")
   }, [setEvent])
   // TipsOverlayComponent выводится неправильное название
   return (
@@ -60,18 +63,19 @@ const NavigationDrawer = ({ routes }) => {
         <LeftMenuItem
           key={name}
           style={style}
+          onMouseEnter={showTips(name)}
+          onMouseLeave={closeTips}
           // current={currentIdObject === ID_OBJ_OBJ}
         >
           <NavigationButton to={route} name={name} className="w-100 h-100" onClick={onOpenNewTab}>
             <ListTile hideToolbar={hideToolbar}>
               <div className="icon-container transition-icon cursor a-i-center j-c-center display-flex">
                 <Picture
-                  onMouseEnter={showTips}
-                  onMouseLeave={closeTips}
+
                   size={size}
                 />
               </div>
-              {hideToolbar && (
+              {hideToolbar && tipsName === name && (
                 <TipsOverlayComponent
                   tipsText={name}
                   event={event}

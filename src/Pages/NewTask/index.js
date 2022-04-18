@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState, useRef} from 'react';
 import BsButton from "../../Components/BsButton";
 import PracticesBar from "../../Components/PracticesBar";
 import {WrapperButtons} from "../DownloadTask/style";
@@ -146,13 +146,8 @@ const NewTask = ({openModalWindow}) => {
     <div className="flex-container pos-relative overflow-hidden">
       <div className="flex-container pos-relative">
         <WrapperButtons className="l-p-layout r-p-layout p-t-10 p-b-10 a-i-flex-start">
-          <div
-              className="display-flex a-i-center p-t-10 p-b-10"
-          >
+          <div className="display-flex a-i-center p-t-10 p-b-10">
             <div className="color-grey">Источник данных: </div>
-            <div className="text-align-left p-b-5">
-              {/*{dataSource.title}*/}
-            </div>
             <RenderOverlayMenu
               onOpenOverlayMenu={openMenu}
               renderOverlayMenu={openSourceMenu}
@@ -173,17 +168,19 @@ const NewTask = ({openModalWindow}) => {
                         className="cursor btn light-grey width-hover-grey-darken-0 m-l-14 link"
                         style={{"color": "black"}}
                         onClick={onOpenOverlayMenu}
-                      >{
+                      >
+                        {
                         Object.keys(dataSource).length > 0 ? sourceBtnTitle(dataSource.title) :
-                            <span>
-                              <span
-                                  className="fs-14"
-                              >
-                                + 
-                              </span>
-                              Добавить
+                          <span>
+                            <span
+                                className="fs-14"
+                            >
+                              + 
                             </span>
-                      }</div>
+                            Добавить
+                          </span>
+                        }
+                      </div>
                       {openSourceMenu && (
                         <OverlayMenu
                           className="display-flex flex-column j-c-center p-10 h-100"
@@ -196,11 +193,10 @@ const NewTask = ({openModalWindow}) => {
                                   <span
                                       onClick={changeDataSource}
                                       className="p-b-10"
-                                  >Заменить источник
-                                  </span>
-                                  <span
-                                      onClick={deleteDataSource}
                                   >
+                                    Заменить источник
+                                  </span>
+                                  <span onClick={deleteDataSource}>
                                     Удалить источник
                                   </span>
                                 </div>

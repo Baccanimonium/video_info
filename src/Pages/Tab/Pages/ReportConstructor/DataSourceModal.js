@@ -12,7 +12,7 @@ const DataSourceModal = ({setSelectedSource, selectSource}) => {
     const replaceTreeData = treeData.map((item) => ({...item, children: item.children.map(i => ({...i, title: i.title[0].toUpperCase() + i.title.slice(1).toLowerCase()}))}))
     return (
         <div
-            className="p-r-15 p-l-15 pos-relative overflow-hidden h-100"
+            className="p-r-15 p-l-15 pos-relative overflow-hidden h-300"
             onDoubleClick={selectSource}
         >
             <ScrollBar>
@@ -28,7 +28,7 @@ const DataSourceModal = ({setSelectedSource, selectSource}) => {
 };
 
 DataSourceModal.propTypes = {
-    
+
 };
 
 export default DataSourceModal;
