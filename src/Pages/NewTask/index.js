@@ -25,6 +25,20 @@ import { PRESENT_DATE_FORMAT } from "@/constants"
 import { BsCalendar, BsCalendar3, BsCalendar4, BsCalendar3Range } from 'react-icons/bs';
 import {VscChecklist} from 'react-icons/vsc';
 
+const configForBtnCalendar = [
+  {
+    id: "ContinuousDateRange",
+    label: "Выбор даты или периода",
+  },
+  {
+    id: "IntervalRange",
+    label: "Выбор интервального диапазона",
+  },
+  {
+    id: "ContinuousDateRange",
+    label: "Выбор временных интервалов",
+  }
+]
 
 const editConfig = {
   component: WithSubmitButtonHOC(DatePicker),
@@ -53,6 +67,8 @@ const editConfigTimeRange = {
   range: true
 }
 
+
+
 const NewTask = ({openModalWindow}) => {
   const download = () => {
 
@@ -65,8 +81,8 @@ const NewTask = ({openModalWindow}) => {
   const [continuousIntervalRange, setContinuousIntervalRange] = useState([])
   const [activeOption, setActiveOption] = useState("Критерии отбора")
   const [event, setEvent] = useState()
-  const [eventIntervalRange, setEventIntervalRange] = useState()
-  const [eventTimeRange, setEventTimeRange] = useState()
+  const [tipsName, setTipsName]= useState("")
+
   const timerRef = useRef()
 
   const selectSource = useCallback(() => {
@@ -102,37 +118,17 @@ const NewTask = ({openModalWindow}) => {
     setActiveOption(e.target.innerText)
   },[setActiveOption])
 
-  const showTips = useCallback((e) => {
+  const showTips = useCallback((name) => (e) => {
     clearTimeout(timerRef.current)
     timerRef.current = setTimeout(() => { setEvent(e) }, 500)
+    setTipsName(name)
   }, [])
 
   const closeTips = useCallback(() => {
     clearTimeout(timerRef.current)
     setEvent(undefined)
+    setTipsName("")
   }, [setEvent])
-
-
-  const showTipsIntervalRange = useCallback((e) => {
-    clearTimeout(timerRef.current)
-    timerRef.current = setTimeout(() => { setEventIntervalRange(e) }, 500)
-  }, [])
-
-  const closeTipsIntervalRange = useCallback(() => {
-    clearTimeout(timerRef.current)
-    setEventIntervalRange(undefined)
-  }, [setEventIntervalRange])
-
-
-  const showTipsTimeRange = useCallback((e) => {
-    clearTimeout(timerRef.current)
-    timerRef.current = setTimeout(() => { setEventTimeRange(e) }, 500)
-  }, [])
-
-  const closeTipsTimeRange = useCallback(() => {
-    clearTimeout(timerRef.current)
-    setEventTimeRange(undefined)
-  }, [setEventTimeRange])
 
   // Приводим любые даты к числам
   const getInputValue = memoizeOne((value) => Array.isArray(value)
@@ -216,23 +212,18 @@ const NewTask = ({openModalWindow}) => {
             </RenderOverlayMenu>
           </div>
           <div className="display-flex">
-            <InformationCard
-            >
+            <InformationCard>
               Отчет "Протокол роликов"
             </InformationCard>
             {normalizedDate.length > 3 && (
-              <InformationCard
-                style={{width: "200px"}}
-              >
+              <InformationCard style={{width: "200px"}}>
                 {normalizedDate}
               </InformationCard>
             )}
-            <InformationCard
-            >
+            <InformationCard>
               !
             </InformationCard>
-            <InformationCard
-            >
+            <InformationCard>
               <VscChecklist/>
             </InformationCard>
           </div>
@@ -255,18 +246,19 @@ const NewTask = ({openModalWindow}) => {
           {
             activeOption === "Критерии отбора" && (
               <div className="display-flex">
-                <TipsOverlayComponent
-                  tipsText="Выбор даты или периода"
-                  event={event}
-                />
-                <TipsOverlayComponent
-                  tipsText="Выбор интервального диапазона"
-                  event={eventIntervalRange}
-                />
-                <TipsOverlayComponent
-                  tipsText="Выбор временных интервалов"
-                  event={eventTimeRange}
-                />
+                {configForBtnCalendar.map(({label, id}) => (
+                  <>
+                    {
+                      tipsName === label && (
+                        <TipsOverlayComponent
+                          key={id}
+                          tipsText={label}
+                          event={event}
+                        />
+                      )
+                    }
+                  </>
+                ))}
                 <ContextMenuValueEditor
                   id="ContinuousDateRange"
                   label="Выбор даты или периода"
@@ -278,7 +270,7 @@ const NewTask = ({openModalWindow}) => {
                 >
                   {(onEditValue) => (
                     <InformationCardMin
-                      onMouseEnter={showTips}
+                      onMouseEnter={showTips("Выбор даты или периода")}
                       onMouseLeave={closeTips}
                       onClick={onEditValue}
                       className="mini"
@@ -299,8 +291,8 @@ const NewTask = ({openModalWindow}) => {
                 >
                   {(onEditValue) => (
                     <InformationCardMin
-                      onMouseEnter={showTipsIntervalRange}
-                      onMouseLeave={closeTipsIntervalRange}
+                      onMouseEnter={showTips("Выбор интервального диапазона")}
+                      onMouseLeave={closeTips}
                       onClick={onEditValue}
                       className="mini"
                     >
@@ -320,8 +312,8 @@ const NewTask = ({openModalWindow}) => {
                 >
                   {(onEditValue) => (
                     <InformationCardMin
-                      onMouseEnter={showTipsTimeRange}
-                      onMouseLeave={closeTipsTimeRange}
+                      onMouseEnter={showTips("Выбор временных интервалов")}
+                      onMouseLeave={closeTips}
                       onClick={onEditValue}
                       className="mini"
                     >

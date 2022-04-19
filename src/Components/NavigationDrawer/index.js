@@ -71,7 +71,6 @@ const NavigationDrawer = ({ routes }) => {
             <ListTile hideToolbar={hideToolbar}>
               <div className="icon-container transition-icon cursor a-i-center j-c-center display-flex">
                 <Picture
-
                   size={size}
                 />
               </div>
