@@ -18,8 +18,8 @@ export const InformationCard = styled.div`
 `
 
 export const InformationCardMin = styled.div`
-  height: 48px;
-  width: 48px;
+  height: 34px;
+  width: 34px;
   font-size: 22px;
   display: flex;
   justify-content: center;

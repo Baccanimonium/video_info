@@ -141,8 +141,8 @@ const NewTask = ({openModalWindow}) => {
   return (
     <div className="flex-container pos-relative overflow-hidden">
       <div className="flex-container pos-relative">
-        <WrapperButtons className="l-p-layout r-p-layout p-t-10 p-b-10 a-i-flex-start">
-          <div className="display-flex a-i-center p-t-10 p-b-10">
+        <WrapperButtons className="l-p-layout r-p-layout p-t-20 p-b-20 a-i-flex-start">
+          <div className="display-flex a-i-center">
             <div className="color-grey">Источник данных: </div>
             <RenderOverlayMenu
               onOpenOverlayMenu={openMenu}
@@ -161,8 +161,8 @@ const NewTask = ({openModalWindow}) => {
                       onMouseDown={onMouseDown}
                     >
                       <div
-                        className="cursor btn light-grey width-hover-grey-darken-0 m-l-14 link"
-                        style={{"color": "black"}}
+                        className="cursor btn light-grey width-hover-grey-darken-0 m-l-14 pos-relative"
+                        style={{color: "black", height: "34px"}}
                         onClick={onOpenOverlayMenu}
                       >
                         {
@@ -362,14 +362,14 @@ const NewTask = ({openModalWindow}) => {
           <div className="display-flex j-c-flex-end m-b-20">
             <BsButton
               type="button"
-              className="border-gold btn width-medium color-greyDarken w-18 m-r-10"
+              className="border-gold btn sign-up-btn color-greyDarken w-18 m-r-10"
               onClick={saveTask}
             >
               Сохранить
             </BsButton>
             <BsButton
               type="button"
-              className="border-gold btn width-medium color-greyDarken w-18"
+              className="border-gold btn sign-up-btn color-greyDarken w-18"
               onClick={download}
             >
               Продолжить

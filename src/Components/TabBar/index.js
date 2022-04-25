@@ -22,12 +22,10 @@ const TabBar = ({ tabs, currentTabIndex, onCloseTab, onChangeActiveTab, classNam
             notLast={i !== tabs.length - 1}
           >
             <span className="overflow-hidden text-overflow-ellipsis no-white-space">{tabName}</span>
-            {tabs.length > 1 && (
               <StyleRemoveIcon
                 size="10"
                 onClick={closeTabById(id)}
               />
-            )}
           </TabButton>
         )))}
       </Carousel>
