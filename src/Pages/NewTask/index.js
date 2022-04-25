@@ -102,16 +102,21 @@ const NewTask = ({openModalWindow}) => {
     closeMenu();
     closeDataSourceMenu()
   }
+
   useEffect(() => {
     closeDataSourceMenu()
   }, [dataSource])
+
   const saveTask = () => {
     if (dataSource || continuousDateRange.length) {
-      openModalWindow({
-        message: "Задача сохранена"
-      })
+      setTimeout( () => {
+        openModalWindow({
+          message: "Задача сохранена"
+        })
+      }, 1000)
     }
   }
+
   const sourceBtnTitle = (sourceName) => sourceName.length > 15 ? `${sourceName.substring(0, 15)}...` : sourceName
   const formPayload = { dateRange: []}
   const openOptions = useCallback((e) => {
@@ -138,6 +143,23 @@ const NewTask = ({openModalWindow}) => {
 
   const normalizedDate = getInputValue(continuousDateRange)
 
+  const showModalWindowForSave = useCallback(() => {
+    openModalWindow({
+      dialogueParams: {
+        title: "Изменения не сохранены!",
+        cancelLabel: "Не сохранять",
+        submitLabel: "Сохранить"
+      },
+      message: "Вы хотите сохранить изменения в задаче?",
+      onSubmit: async () => {
+        saveTask()
+      },
+      onCancel: () => {
+       console.log("cancel")
+      }
+    })
+  }, [])
+
   return (
     <div className="flex-container pos-relative overflow-hidden">
       <div className="flex-container pos-relative">
@@ -161,7 +183,7 @@ const NewTask = ({openModalWindow}) => {
                       onMouseDown={onMouseDown}
                     >
                       <div
-                        className="cursor btn light-grey width-hover-grey-darken-0 m-l-14 pos-relative"
+                        className="cursor a-i-center display-flex btn light-grey width-hover-grey-darken-0 m-l-14 pos-relative"
                         style={{color: "black", height: "34px"}}
                         onClick={onOpenOverlayMenu}
                       >
@@ -370,7 +392,7 @@ const NewTask = ({openModalWindow}) => {
             <BsButton
               type="button"
               className="border-gold btn sign-up-btn color-greyDarken w-18"
-              onClick={download}
+              onClick={showModalWindowForSave}
             >
               Продолжить
             </BsButton>
