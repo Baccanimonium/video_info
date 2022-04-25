@@ -16,63 +16,17 @@ import {Tabs} from "./constants"
 import {PracticeButton, PracticesButtonsContainer, WrapperButton} from "../../Components/PracticesBar/styles";
 import {InformationCard, InformationCardMin} from "./styles"
 import TipsOverlayComponent from "../../Components/TipsHelp/TipsOverlayComponent";
-import DefaultPreview from "@/Components/Fields/InputContstuctor/PreviewFields/DefaultPreview"
-import WithSubmitButtonHOC from "@/Core/Decorators/WithSubmitButtonHOC"
 import ContextMenuValueEditor from "@/Components/Fields/InputContstuctor/InputControllers/ContextMenuValueEditor"
 import memoizeOne from "memoize-one";
 import dayjs from "dayjs";
 import { PRESENT_DATE_FORMAT } from "@/constants"
 import { BsCalendar, BsCalendar3, BsCalendar4, BsCalendar3Range } from 'react-icons/bs';
 import {VscChecklist} from 'react-icons/vsc';
-
-const configForBtnCalendar = [
-  {
-    id: "ContinuousDateRange",
-    label: "Выбор даты или периода",
-  },
-  {
-    id: "IntervalRange",
-    label: "Выбор интервального диапазона",
-  },
-  {
-    id: "ContinuousDateRange",
-    label: "Выбор временных интервалов",
-  }
-]
-
-const editConfig = {
-  component: WithSubmitButtonHOC(DatePicker),
-  label: "Выбор даты или периода",
-  placeholder: "Выбор даты или периода",
-  allWaysOpen: true,
-  preview: DefaultPreview.constructor,
-  range: true
-}
-
-const editConfigIntervalRange = {
-  component: WithSubmitButtonHOC(DatePicker),
-  label: "Выбор интервального диапазона",
-  placeholder: "Выбор интервального диапазона",
-  allWaysOpen: true,
-  preview: DefaultPreview.constructor,
-  range: true
-}
-
-const editConfigTimeRange = {
-  component: WithSubmitButtonHOC(DatePicker),
-  label: "Выбор временных интервалов",
-  placeholder: "Выбор временных интервалов",
-  allWaysOpen: true,
-  preview: DefaultPreview.constructor,
-  range: true
-}
+import history from "@/history"
+import {editConfig, editConfigIntervalRange, editConfigTimeRange, configForBtnCalendar} from "./config"
 
 
-
-const NewTask = ({openModalWindow}) => {
-  const download = () => {
-
-  }
+const NewTask = ({openModalWindow, updateState}) => {
   const [selectedSource, setSelectedSource] = useState({})
   const [dataSource, setDataSource] = useState({})
   const [openSourceMenu, setOpenSourceMenu] = useState(false)
@@ -82,24 +36,32 @@ const NewTask = ({openModalWindow}) => {
   const [activeOption, setActiveOption] = useState("Критерии отбора")
   const [event, setEvent] = useState()
   const [tipsName, setTipsName]= useState("")
+  const [isDataChanged, setIsDataChanged] = useState(false)
 
   const timerRef = useRef()
 
   const selectSource = useCallback(() => {
+    updateState({
+      data: true
+    })
     setOpenSourceMenu(false)
     setSelectedSource((currentVal) => {
       setDataSource(currentVal)
       return {}
     })
+    setIsDataChanged(true)
   }, [selectedSource, dataSource])
-  const closeMenu = useCallback(() => { setOpenSourceMenu(false) }, [])
+
   const openMenu = useCallback(() => { setOpenSourceMenu(true) }, [])
-  const openChangeSourceMenu = useCallback(() => { setChangeSourceMenu(true) }, [])
-  const deleteDataSource = useCallback(() => { setDataSource({}) }, [])
+  const deleteDataSource = useCallback(() => {
+    setDataSource({})
+    setIsDataChanged(false)
+  }, [])
   const changeDataSource = useCallback(() => { setChangeSourceMenu(true) }, [])
   const closeDataSourceMenu = useCallback(() => { setChangeSourceMenu(false) }, [])
+
   const closeSourceMenu = () => {
-    closeMenu();
+    setOpenSourceMenu(false)
     closeDataSourceMenu()
   }
 
@@ -113,6 +75,7 @@ const NewTask = ({openModalWindow}) => {
         openModalWindow({
           message: "Задача сохранена"
         })
+        setIsDataChanged(false)
       }, 1000)
     }
   }
@@ -137,28 +100,36 @@ const NewTask = ({openModalWindow}) => {
 
   // Приводим любые даты к числам
   const getInputValue = memoizeOne((value) => Array.isArray(value)
-    // eslint-disable-next-line max-len
     ? `${value[0] ? dayjs(value[0], PRESENT_DATE_FORMAT).format(PRESENT_DATE_FORMAT) : ""} - ${value[1] ? dayjs(value[1], PRESENT_DATE_FORMAT).format(PRESENT_DATE_FORMAT) : ""}`
     : value ? dayjs(value, PRESENT_DATE_FORMAT).format(PRESENT_DATE_FORMAT) : "")
 
   const normalizedDate = getInputValue(continuousDateRange)
 
-  const showModalWindowForSave = useCallback(() => {
-    openModalWindow({
-      dialogueParams: {
-        title: "Изменения не сохранены!",
-        cancelLabel: "Не сохранять",
-        submitLabel: "Сохранить"
-      },
-      message: "Вы хотите сохранить изменения в задаче?",
-      onSubmit: async () => {
-        saveTask()
-      },
-      onCancel: () => {
-       console.log("cancel")
-      }
+  const setDataChangedFlag = () => {
+    const { openModalWindow } = this.props
+    history.block(({ pathname }) => {
+      openModalWindow({
+        dialogueParams: {
+          title: "Изменения не сохранены!",
+          cancelLabel: "Не сохранять",
+          submitLabel: "Сохранить"
+        },
+        message: "Вы хотите сохранить изменения в задаче?",
+        onSubmit: async () => {
+          saveTask()
+          setTimeout(() => {
+            history.push(pathname)
+          }, 150)
+        },
+        onCancel: () => {
+          console.log("cancel")
+          history.push(pathname)
+        }
+      })
+      return false
     })
-  }, [])
+    setIsDataChanged(true)
+  }
 
   return (
     <div className="flex-container pos-relative overflow-hidden">
@@ -190,9 +161,7 @@ const NewTask = ({openModalWindow}) => {
                         {
                         Object.keys(dataSource).length > 0 ? sourceBtnTitle(dataSource.title) :
                           <span>
-                            <span
-                                className="fs-14"
-                            >
+                            <span className="fs-14">
                               + 
                             </span>
                             Добавить
@@ -200,29 +169,27 @@ const NewTask = ({openModalWindow}) => {
                         }
                       </div>
                       {openSourceMenu && (
-                        <OverlayMenu
-                          className="display-flex flex-column j-c-center p-10 h-100"
-                        >
+                        <OverlayMenu className="display-flex flex-column j-c-center p-10 h-100">
                           {
                             Object.keys(dataSource).length > 0 && !changeSourceMenu ? (
-                                <div
-                                    className="display-flex fd-column p-8"
+                              <div className="display-flex fd-column p-8">
+                                <span
+                                  onClick={changeDataSource}
+                                  className="p-b-10"
                                 >
-                                  <span
-                                      onClick={changeDataSource}
-                                      className="p-b-10"
-                                  >
-                                    Заменить источник
-                                  </span>
-                                  <span onClick={deleteDataSource}>
-                                    Удалить источник
-                                  </span>
-                                </div>
-                            ) : (
-                                <DataSourceModal
-                                selectSource={selectSource}
-                                setSelectedSource={setSelectedSource}
-                                />
+                                  Заменить источник
+                                </span>
+                                <span onClick={deleteDataSource}>
+                                  Удалить источник
+                                </span>
+                              </div>
+                            )
+                            :
+                            (
+                            <DataSourceModal
+                              selectSource={selectSource}
+                              setSelectedSource={setSelectedSource}
+                            />
                             )
                           }
                         </OverlayMenu>
@@ -295,6 +262,7 @@ const NewTask = ({openModalWindow}) => {
                       onMouseEnter={showTips("Выбор даты или периода")}
                       onMouseLeave={closeTips}
                       onClick={onEditValue}
+                      onChange={setDataChangedFlag}
                       className="mini"
                     >
                       <BsCalendar/>
@@ -384,7 +352,7 @@ const NewTask = ({openModalWindow}) => {
           <div className="display-flex j-c-flex-end m-b-20">
             <BsButton
               type="button"
-              className="border-gold btn sign-up-btn color-greyDarken w-18 m-r-10"
+              className={`${isDataChanged ? "golden"  : "border-gold"} btn sign-up-btn color-greyDarken w-18 m-r-10 `}
               onClick={saveTask}
             >
               Сохранить
@@ -392,7 +360,7 @@ const NewTask = ({openModalWindow}) => {
             <BsButton
               type="button"
               className="border-gold btn sign-up-btn color-greyDarken w-18"
-              onClick={showModalWindowForSave}
+              onClick={saveTask}
             >
               Продолжить
             </BsButton>

@@ -8,7 +8,9 @@ import {treeData} from "./mok";
 
 const DataSourceModal = ({setSelectedSource, selectSource}) => {
     const selectRule = ({type}) => type !== "head"
-    const onSelect = ({node}) => setSelectedSource(node)
+    const onSelect = ({node}) => {
+      setSelectedSource(node)
+    }
     const replaceTreeData = treeData.map((item) => ({...item, children: item.children.map(i => ({...i, title: i.title[0].toUpperCase() + i.title.slice(1).toLowerCase()}))}))
     return (
         <div

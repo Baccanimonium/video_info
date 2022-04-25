@@ -8,6 +8,7 @@ import Home from "./Pages/Home";
 import NewTask from "../NewTask";
 import DownloadTask from "../DownloadTask";
 import {RouteContext} from "../../constants"
+import PureUpdateArrayItems from "../../Utils/Arrays/PureUpdateArrayItems";
 
 const Tab = (a) => {
   const path = "/tab"
@@ -29,6 +30,10 @@ const Tab = (a) => {
 
   const onChangeActiveTab = useCallback((newIndex) => {
     setTabIndex(newIndex)
+  }, [])
+
+  const updateState = useCallback((tabIndex) => (state) => {
+    editTabs(p => PureUpdateArrayItems(p, tabIndex, ({...p[tabIndex], ...state })))
   }, [])
 
   return (
@@ -53,7 +58,7 @@ const Tab = (a) => {
                <Routes>
                  <Route
                    path="/new_task"
-                   element={<NewTask/>}
+                   element={<NewTask state={tabs[currentTabIndex]} updateState={updateState}/>}
                  />
                  <Route
                    path="/download_task"
