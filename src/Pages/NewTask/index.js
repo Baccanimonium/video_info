@@ -182,17 +182,20 @@ const NewTask = ({openModalWindow}) => {
                       type="button"
                       onMouseDown={onMouseDown}
                     >
-                      <>
-                        <TipsOverlayComponent
-                          key="source"
-                          tipsText={dataSource.title}
-                          event={event}
-                          />
+                      {
+                        tipsName === dataSource.title && (
+                          <TipsOverlayComponent
+                            key="source"
+                            tipsText={dataSource.title}
+                            event={event}
+                            />
+                        )
+                      }
                         <div
                           className="cursor a-i-center display-flex btn light-grey width-hover-grey-darken-0 m-l-14 pos-relative"
                           style={{color: "black", height: "34px"}}
                           onClick={onOpenOverlayMenu}
-                          onMouseEnter={showTips("source")}
+                          onMouseEnter={showTips(dataSource.title)}
                           onMouseLeave={closeTips}
                         >
                           {
@@ -207,9 +210,9 @@ const NewTask = ({openModalWindow}) => {
                             </span>
                           }
                         </div>
-                      </>
                       {openSourceMenu && (
                         <OverlayMenu
+                          minSize="200"
                           className="display-flex flex-column j-c-center p-10 h-100"
                         >
                           {
