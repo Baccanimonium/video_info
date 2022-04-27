@@ -23,6 +23,7 @@ import { PRESENT_DATE_FORMAT } from "@/constants"
 import { BsCalendar, BsCalendar3, BsCalendar4, BsCalendar3Range } from 'react-icons/bs';
 import {VscChecklist} from 'react-icons/vsc';
 import {editConfig, editConfigIntervalRange, editConfigTimeRange, configForBtnCalendar} from "./config"
+import DataSet from "../Tab/Pages/SelectionCriteria";
 
 const NewTask = ({openModalWindow, updateState, state}) => {
   const [selectedSource, setSelectedSource] = useState({})
@@ -221,7 +222,7 @@ const NewTask = ({openModalWindow, updateState, state}) => {
         </WrapperButtons>
         {
           Object.keys(dataSource).length > 0 &&
-          <>
+          <div className="flex-container overflow-hidden">
             <PracticesButtonsContainer>
               <WrapperButton className="display-flex bg-color-greyLight-4">
                 {Tabs.map(({ path, text }) => (
@@ -236,75 +237,76 @@ const NewTask = ({openModalWindow, updateState, state}) => {
                 ))}
               </WrapperButton>
             </PracticesButtonsContainer>
-            <div className="p-t-10 p-b-10 p-r-10 p-l-10">
+            <div className="p-t-10 p-b-10 p-r-10 p-l-10 flex-container overflow-hidden">
               {
                 activeOption === "Критерии отбора" && (
-                    <div className="display-flex">
-                      {configForBtnCalendar.map(({label, id}) => (
-                          <>
-                            {
-                              tipsName === label && (
-                                  <TipsOverlayComponent
-                                      key={id}
-                                      tipsText={label}
-                                      event={event}
-                                  />
-                              )
-                            }
-                          </>
-                      ))}
-                      <ContextMenuValueEditor
-                          id="ContinuousDateRange"
-                          label="Выбор даты или периода"
-                          fields={editConfig}
-                          formPayload={formPayload}
-                          value={continuousDateRange}
-                          onInput={editContinuousDateRange}
-                          minSize="320"
-                      >
-                        {(onEditValue) => (
-                            <InformationCardMin
-                                onMouseEnter={showTips("Выбор даты или периода")}
-                                onMouseLeave={closeTips}
-                                onClick={onEditValue}
-                                className="mini"
-                            >
-                              <BsCalendar/>
-                            </InformationCardMin>
-                        )}
-                      </ContextMenuValueEditor>
+                  <div className="pos-relative  flex-container">
+                      <div className="display-flex">
+                        {configForBtnCalendar.map(({label, id}) => (
+                            <>
+                              {
+                                tipsName === label && (
+                                    <TipsOverlayComponent
+                                        key={id}
+                                        tipsText={label}
+                                        event={event}
+                                    />
+                                )
+                              }
+                            </>
+                        ))}
+                        <ContextMenuValueEditor
+                            id="ContinuousDateRange"
+                            label="Выбор даты или периода"
+                            fields={editConfig}
+                            formPayload={formPayload}
+                            value={continuousDateRange}
+                            onInput={editContinuousDateRange}
+                            minSize="320"
+                        >
+                          {(onEditValue) => (
+                              <InformationCardMin
+                                  onMouseEnter={showTips("Выбор даты или периода")}
+                                  onMouseLeave={closeTips}
+                                  onClick={onEditValue}
+                                  className="mini"
+                              >
+                                <BsCalendar/>
+                              </InformationCardMin>
+                          )}
+                        </ContextMenuValueEditor>
 
-                      <ContextMenuValueEditor
-                          id="IntervalRange"
-                          label="Выбор интервального диапазона"
-                          fields={editConfigIntervalRange}
-                          formPayload={formPayload}
-                          value={continuousIntervalRange}
-                          onInput={setContinuousIntervalRange}
-                          minSize="320"
-                      >
-                        {(onEditValue) => (
-                            <InformationCardMin
-                                onMouseEnter={showTips("Выбор интервального диапазона")}
-                                onMouseLeave={closeTips}
-                                onClick={!continuousDateRange.length && onEditValue}
-                                className="mini"
-                            >
-                              <BsCalendar3/>
-                            </InformationCardMin>
-                        )}
-                      </ContextMenuValueEditor>
+                        <ContextMenuValueEditor
+                            id="IntervalRange"
+                            label="Выбор интервального диапазона"
+                            fields={editConfigIntervalRange}
+                            formPayload={formPayload}
+                            value={continuousIntervalRange}
+                            onInput={setContinuousIntervalRange}
+                            minSize="320"
+                        >
+                          {(onEditValue) => (
+                              <InformationCardMin
+                                  onMouseEnter={showTips("Выбор интервального диапазона")}
+                                  onMouseLeave={closeTips}
+                                  onClick={!continuousDateRange.length && onEditValue}
+                                  className="mini"
+                              >
+                                <BsCalendar3/>
+                              </InformationCardMin>
+                          )}
+                        </ContextMenuValueEditor>
 
-                      <ContextMenuValueEditor
-                          id="TimeRange"
-                          label="Выбор временных интервалов"
-                          fields={editConfigTimeRange}
-                          formPayload={formPayload}
-                          value={continuousIntervalRange}
-                          onInput={setContinuousIntervalRange}
-                          minSize="320"
-                      >
-                        {(onEditValue) => (
+                        <ContextMenuValueEditor
+                            id="TimeRange"
+                            label="Выбор временных интервалов"
+                            fields={editConfigTimeRange}
+                            formPayload={formPayload}
+                            value={continuousIntervalRange}
+                            onInput={setContinuousIntervalRange}
+                            minSize="320"
+                        >
+                          {(onEditValue) => (
                             <InformationCardMin
                                 onMouseEnter={showTips("Выбор временных интервалов")}
                                 onMouseLeave={closeTips}
@@ -313,9 +315,11 @@ const NewTask = ({openModalWindow, updateState, state}) => {
                             >
                               <BsCalendar3Range/>
                             </InformationCardMin>
-                        )}
-                      </ContextMenuValueEditor>
-                    </div>
+                          )}
+                        </ContextMenuValueEditor>
+                      </div>
+                    <DataSet/>
+                  </div>
                 )
               }
               {
@@ -333,7 +337,25 @@ const NewTask = ({openModalWindow, updateState, state}) => {
                 )
               }
             </div>
-          </>
+            <div className="l-p-layout r-p-layout j-c-flex-end">
+              <div className="display-flex j-c-flex-end m-b-20">
+                <BsButton
+                  type="button"
+                  className={`${isDataChanged ? "golden"  : "border-gold"} btn sign-up-btn color-greyDarken w-18 m-r-10 `}
+                  onClick={saveTask}
+                >
+                  Сохранить
+                </BsButton>
+                <BsButton
+                  type="button"
+                  className="border-gold btn sign-up-btn color-greyDarken w-18"
+                  onClick={saveTask}
+                >
+                  Продолжить
+                </BsButton>
+              </div>
+            </div>
+          </div>
         }
         {/*<PracticesBar buttons={Tabs} parentUrl="/tab/new_task"/>*/}
         {/*<Routes>*/}
@@ -351,27 +373,6 @@ const NewTask = ({openModalWindow, updateState, state}) => {
         {/*  />*/}
         {/*</Routes>*/}
 
-        <div className="flex-container l-p-layout r-p-layout">
-          <div className="flex-container">
-
-          </div>
-          <div className="display-flex j-c-flex-end m-b-20">
-            <BsButton
-              type="button"
-              className={`${isDataChanged ? "golden"  : "border-gold"} btn sign-up-btn color-greyDarken w-18 m-r-10 `}
-              onClick={saveTask}
-            >
-              Сохранить
-            </BsButton>
-            <BsButton
-              type="button"
-              className="border-gold btn sign-up-btn color-greyDarken w-18"
-              onClick={saveTask}
-            >
-              Продолжить
-            </BsButton>
-          </div>
-        </div>
       </div>
     </div>
   );

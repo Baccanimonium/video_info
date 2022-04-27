@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const GridContainer = styled.div`
-  padding-top: 30px;
+  padding-top: 10px;
   display: grid;
   grid-template-columns: 1fr 500px;
   --separator-width: 1px;

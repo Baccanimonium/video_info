@@ -59,7 +59,6 @@ const Tab = ({openModalWindow}) => {
   }, [])
 
   const updateState = useCallback((tabIndex) => (state) => {
-    console.log(tabIndex, state)
     editTabs(p => PureUpdateArrayItems(p, tabIndex, ({...p[tabIndex], ...state })))
   }, [])
 

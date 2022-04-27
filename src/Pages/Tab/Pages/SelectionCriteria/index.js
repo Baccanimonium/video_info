@@ -135,7 +135,7 @@ const DataSet = props => {
   const selectRule = ({type}) => type === "condition"
 
   return (
-    <GridContainer className="p-r-15 p-l-15 pos-relative overflow-hidden h-100">
+    <GridContainer className="pos-relative overflow-hidden h-100">
       <ScrollBar>
         <Tree
           style={StyleTree}
@@ -172,7 +172,7 @@ const DataSet = props => {
           {selectedList.length > 0 &&
             <BsButton
               type="button"
-              className="golden btn width-midi color-greyDarken w-18"
+              className="golden btn sign-up-btn color-greyDarken w-18"
               onClick={setNewTree}
             >
               применить
