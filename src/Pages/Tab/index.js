@@ -9,16 +9,42 @@ import NewTask from "../NewTask";
 import DownloadTask from "../DownloadTask";
 import {RouteContext} from "../../constants"
 import PureUpdateArrayItems from "../../Utils/Arrays/PureUpdateArrayItems";
+import WithOpenModalWindow from "@/Core/Decorators/WithOpenModalWindow"
 
-const Tab = (a) => {
+const Tab = ({openModalWindow}) => {
   const path = "/tab"
   const n = useNavigate()
   const [tabs, editTabs] = useState([])
   const [currentTabIndex, setTabIndex] = useState(0)
 
   const closeTab = useCallback((index) => {
-    editTabs((tabs) => PureDeleteItems(tabs, index))
-  }, [])
+    const [ {saveData, editData, id} ] = tabs
+    if (saveData || !editData) {
+      editTabs((tabs) => PureDeleteItems(tabs, index))
+    } else {
+      openModalWindow({
+        dialogueParams: {
+          title: "Изменения не сохранены!",
+          cancelLabel: "Не сохранять",
+          submitLabel: "Сохранить"
+        },
+        message: "Вы хотите сохранить изменения в задаче?",
+        onSubmit: async () => {
+          editTabs((tabs) => {
+            return tabs.reduce((acc, item) => {
+              if (item.id === id) {
+                acc.push({...item, saveData: true})
+              }
+              return acc
+            }, [])
+          })
+        },
+        onCancel: () => {
+          console.log("cancel")
+        }
+      })
+    }
+  }, [tabs])
 
   const onOpenNewTab = useCallback((pathname) => {
     editTabs((tabs) => {
@@ -33,6 +59,7 @@ const Tab = (a) => {
   }, [])
 
   const updateState = useCallback((tabIndex) => (state) => {
+    console.log(tabIndex, state)
     editTabs(p => PureUpdateArrayItems(p, tabIndex, ({...p[tabIndex], ...state })))
   }, [])
 
@@ -58,7 +85,7 @@ const Tab = (a) => {
                <Routes>
                  <Route
                    path="/new_task"
-                   element={<NewTask state={tabs[currentTabIndex]} updateState={updateState}/>}
+                   element={<NewTask state={tabs[currentTabIndex]} updateState={updateState(currentTabIndex)}/>}
                  />
                  <Route
                    path="/download_task"
@@ -78,4 +105,4 @@ const Tab = (a) => {
 
 Tab.propTypes = {}
 
-export default Tab
+export default WithOpenModalWindow(Tab)

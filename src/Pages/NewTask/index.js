@@ -22,11 +22,9 @@ import dayjs from "dayjs";
 import { PRESENT_DATE_FORMAT } from "@/constants"
 import { BsCalendar, BsCalendar3, BsCalendar4, BsCalendar3Range } from 'react-icons/bs';
 import {VscChecklist} from 'react-icons/vsc';
-import history from "@/history"
 import {editConfig, editConfigIntervalRange, editConfigTimeRange, configForBtnCalendar} from "./config"
 
-
-const NewTask = ({openModalWindow, updateState}) => {
+const NewTask = ({openModalWindow, updateState, state}) => {
   const [selectedSource, setSelectedSource] = useState({})
   const [dataSource, setDataSource] = useState({})
   const [openSourceMenu, setOpenSourceMenu] = useState(false)
@@ -42,7 +40,8 @@ const NewTask = ({openModalWindow, updateState}) => {
 
   const selectSource = useCallback(() => {
     updateState({
-      data: true
+      editData: true,
+      saveData: false
     })
     setOpenSourceMenu(false)
     setSelectedSource((currentVal) => {
@@ -76,6 +75,9 @@ const NewTask = ({openModalWindow, updateState}) => {
           message: "Задача сохранена"
         })
         setIsDataChanged(false)
+        updateState({
+          saveData: true
+        })
       }, 1000)
     }
   }
@@ -105,31 +107,14 @@ const NewTask = ({openModalWindow, updateState}) => {
 
   const normalizedDate = getInputValue(continuousDateRange)
 
-  const setDataChangedFlag = () => {
-    const { openModalWindow } = this.props
-    history.block(({ pathname }) => {
-      openModalWindow({
-        dialogueParams: {
-          title: "Изменения не сохранены!",
-          cancelLabel: "Не сохранять",
-          submitLabel: "Сохранить"
-        },
-        message: "Вы хотите сохранить изменения в задаче?",
-        onSubmit: async () => {
-          saveTask()
-          setTimeout(() => {
-            history.push(pathname)
-          }, 150)
-        },
-        onCancel: () => {
-          console.log("cancel")
-          history.push(pathname)
-        }
-      })
-      return false
+  const editContinuousDateRange = useCallback((value) => {
+    setContinuousDateRange(value)
+    updateState({
+      editData: true,
+      saveData: false
     })
     setIsDataChanged(true)
-  }
+  }, [])
 
   return (
     <div className="flex-container pos-relative overflow-hidden">
@@ -254,7 +239,7 @@ const NewTask = ({openModalWindow, updateState}) => {
                   fields={editConfig}
                   formPayload={formPayload}
                   value={continuousDateRange}
-                  onInput={setContinuousDateRange}
+                  onInput={editContinuousDateRange}
                   minSize="320"
                 >
                   {(onEditValue) => (
@@ -262,7 +247,6 @@ const NewTask = ({openModalWindow, updateState}) => {
                       onMouseEnter={showTips("Выбор даты или периода")}
                       onMouseLeave={closeTips}
                       onClick={onEditValue}
-                      onChange={setDataChangedFlag}
                       className="mini"
                     >
                       <BsCalendar/>
