@@ -138,115 +138,143 @@ export const treeData = [
 export const nationalTV = [
     {
         id: 1,
-        title: "CHE"
+        title: "CHE",
+        condition: "OR"
     },
     {
         id: 2,
-        title: "DISNEY CHANNEL"
+        title: "DISNEY CHANNEL",
+        condition: "OR"
     },
     {
         id: 3,
-        title: "DOMASHNIY"
+        title: "DOMASHNIY",
+        condition: "OR"
     },
     {
         id: 4,
-        title: "EURONEWS"
+        title: "EURONEWS",
+        condition: "OR"
     },
     {
         id: 5,
-        title: "FRIDAY"
+        title: "FRIDAY",
+        condition: "OR"
     },
     {
         id: 6,
-        title: "KARUSEL"
+        title: "KARUSEL",
+        condition: "OR"
     },
     {
         id: 7,
-        title: "MIR"
+        title: "MIR",
+        condition: "OR"
     },
     {
         id: 8,
-        title: "MUZ TV"
+        title: "MUZ TV",
+      condition: "OR"
     },
     {
         id: 9,
-        title: "NTV"
+        title: "NTV",
+      condition: "OR"
     },
     {
         id: 10,
-        title: "PERVY KANAL"
+        title: "PERVY KANAL",
+      condition: "OR"
     },
     {
         id: 11,
-        title: "PYATY KANAL"
+        title: "PYATY KANAL",
+      condition: "OR"
     },
     {
         id: 12,
-        title: "RAMBLER"
+        title: "RAMBLER",
+      condition: "OR"
     },
     {
         id: 13,
-        title: "REN TV"
+        title: "REN TV",
+      condition: "OR"
     },
     {
         id: 14,
-        title: "ROSSIYA K"
+        title: "ROSSIYA K",
+      condition: "OR"
     },
     {
         id: 15,
-        title: "ROSSIYA 1"
+        title: "ROSSIYA 1",
+      condition: "OR"
     },
     {
         id: 16,
-        title: "ROSSIYA 2"
+        title: "ROSSIYA 2",
+      condition: "OR"
     },
     {
         id: 17,
-        title: "ROSSIYA 24"
+        title: "ROSSIYA 24",
+      condition: "OR"
     },
     {
         id: 18,
-        title: "RU.TV (TILL 31/12/2020)"
+        title: "RU.TV (TILL 31/12/2020)",
+      condition: "OR"
     },
     {
         id: 17,
-        title: "SEMYORKA"
+        title: "SEMYORKA",
+      condition: "OR"
     },
     {
         id: 18,
-        title: "STS"
+        title: "STS",
+      condition: "OR"
     },
     {
         id: 19,
-        title: "STS LOVE"
+        title: "STS LOVE",
+      condition: "OR"
     },
     {
         id: 20,
-        title: "TNT"
+        title: "TNT",
+      condition: "OR"
     },
     {
         id: 21,
-        title: "TV TSENTR"
+        title: "TV TSENTR",
+      condition: "OR"
     },
     {
         id: 22,
-        title: "TVS"
+        title: "TVS",
+      condition: "OR"
     },
     {
         id: 23,
-        title: "TV-3"
+        title: "TV-3",
+      condition: "OR"
     },
     {
         id: 24,
-        title: "TV-6"
+        title: "TV-6",
+      condition: "OR"
     },
     {
         id: 25,
-        title: "TV-6: TEMPORARY BROADCASTING"
+        title: "TV-6: TEMPORARY BROADCASTING",
+      condition: "OR"
     },
     {
         id: 26,
-        title: "U"
+        title: "U",
+      condition: "OR"
     },
     {
         id: 27,
@@ -256,233 +284,290 @@ export const nationalTV = [
 export const TVcompanies = [
     {
         id: 1,
-        title: "CHE / KA (MOSCOW)"
+        title: "CHE / KA (MOSCOW)",
+        condition: "OR"
     },
     {
         id: 2,
-        title: "DISCOVERY CHANNEL (TILL 31/12/2019) (NETWORK BROADCASTING)"
+        title: "DISCOVERY CHANNEL (TILL 31/12/2019) (NETWORK BROADCASTING)",
+        condition: "OR"
     },
     {
         id: 3,
-        title: "EURONEWS / 33 VIRT. (MOSCOW)"
+        title: "EURONEWS / 33 VIRT. (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 4,
-        title: "FRIDAY / KA (MOSCOW)"
+        title: "FRIDAY / KA (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 5,
-        title: "KULTURA TILL 04.2003 / 33 (MOSCOW)"
+        title: "KULTURA TILL 04.2003 / 33 (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 6,
-        title: "MUZ TV (MOSCOW)"
+        title: "MUZ TV (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 7,
-        title: "M1 / 31 (MOSCOW)"
+        title: "M1 / 31 (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 8,
-        title: "MUZ NTV / KA (MOSCOW)"
+        title: "MUZ NTV / KA (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 9,
-        title: "PERVY KANAL / KA (MOSCOW)"
+        title: "PERVY KANAL / KA (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 10,
-        title: "PERVY KANAL (NETWORK BROADCASTING)"
+        title: "PERVY KANAL (NETWORK BROADCASTING)",
+        condition: "OR",
     },
     {
         id: 11,
-        title: "PYATY KANAL / SP (MOSCOW)"
+        title: "PYATY KANAL / SP (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 12,
-        title: "REN TV / KA (MOSCOW)"
+        title: "REN TV / KA (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 13,
-        title: "ROSSIYA 1 / KA (MOSCOW)"
+        title: "ROSSIYA 1 / KA (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 14,
-        title: "ROSSIYA 1 (NETWORK BROADCASTING)"
+        title: "ROSSIYA 1 (NETWORK BROADCASTING)",
+        condition: "OR",
     },
     {
         id: 15,
-        title: "ROSSIYA 24 / KA (MOSCOW)"
+        title: "ROSSIYA 24 / KA (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 16,
-        title: "ROSSIYA 24 (NETWORK BROADCASTING)"
+        title: "ROSSIYA 24 (NETWORK BROADCASTING)",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "STS / KA (MOSCOW)"
+        title: "STS / KA (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "TELEEXPO / FRIDAY (MOSCOW)"
+        title: "TELEEXPO / FRIDAY (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "TLC (MOSCOW)"
+        title: "TLC (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "TNT / KA (MOSCOW)"
+        title: "TNT / KA (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 19,
-        title: "TV STOLITSA / KA (MOSCOW)"
+        title: "TV STOLITSA / KA (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 20,
-        title: "TV TSENTR (NETWORK BROADCASTING)"
+        title: "TV TSENTR (NETWORK BROADCASTING)",
+        condition: "OR",
     },
     {
         id: 21,
-        title: "TV TSENTR TILL 05.2005 / 03 (MOSCOW)"
+        title: "TV TSENTR TILL 05.2005 / 03 (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 22,
-        title: "TVS / 06 (MOSCOW)"
+        title: "TVS / 06 (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 23,
-        title: "TV-3 / KA (MOSCOW)"
+        title: "TV-3 / KA (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 24,
-        title: "TV-6 / 06 (MOSCOW)"
+        title: "TV-6 / 06 (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 25,
-        title: "U / KA (MOSCOW)"
+        title: "U / KA (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 26,
-        title: "VESTI / SP (MOSCOW)"
+        title: "VESTI / SP (MOSCOW)",
+        condition: "OR",
     },
     {
         id: 27,
-        title: "3 KANAL / 03 VIRT. (MOSCOW)"
+        title: "3 KANAL / 03 VIRT. (MOSCOW)",
+        condition: "OR",
     },
 ]
 export const TypeOfAdvertisement = [
     {
         id: 1,
-        title: "Анонс без даты"
+        title: "Анонс без даты",
+        condition: "OR",
     },
     {
         id: 2,
-        title: "Анонс: заставка блока без даты"
+        title: "Анонс: заставка блока без даты",
+        condition: "OR",
     },
     {
         id: 3,
-        title: "Анонс: заставка блока с датой"
+        title: "Анонс: заставка блока с датой",
+        condition: "OR",
     },
     {
         id: 4,
-        title: "Анонс с датой"
+        title: "Анонс с датой",
+        condition: "OR",
     },
     {
         id: 5,
-        title: "Анонс: спонсор"
+        title: "Анонс: спонсор",
+        condition: "OR",
     },
     {
         id: 6,
-        title: "Анонс: спонсорская заставка"
+        title: "Анонс: спонсорская заставка",
+        condition: "OR",
     },
     {
         id: 7,
-        title: "Анонс: упоминание спонсора"
+        title: "Анонс: упоминание спонсора",
+        condition: "OR",
     },
     {
         id: 8,
-        title: "Анонс-промо"
+        title: "Анонс-промо",
+        condition: "OR",
     },
     {
         id: 9,
-        title: "Атрибутика спонсора (декорации)"
+        title: "Атрибутика спонсора (декорации)",
+        condition: "OR",
     },
     {
         id: 10,
-        title: "Атрибутика спонсора (одежда)"
+        title: "Атрибутика спонсора (одежда)",
+        condition: "OR",
     },
     {
         id: 11,
-        title: "Атрибутика спонсора (продукция)"
+        title: "Атрибутика спонсора (продукция)",
+        condition: "OR",
     },
     {
         id: 12,
-        title: "Аудио/видео наименование юр.лица"
+        title: "Аудио/видео наименование юр.лица",
+        condition: "OR",
     },
     {
         id: 13,
-        title: "Благодарность в титрах"
+        title: "Благодарность в титрах",
+        condition: "OR",
     },
     {
         id: 14,
-        title: "Благодарность с реквизитами в титрах"
+        title: "Благодарность с реквизитами в титрах",
+        condition: "OR",
     },
     {
         id: 15,
-        title: "Вручение подарков"
+        title: "Вручение подарков",
+        condition: "OR",
     },
     {
         id: 16,
-        title: "Динамическая заставка"
+        title: "Динамическая заставка",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "Динамические титры"
+        title: "Динамические титры",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "Динамический логотип"
+        title: "Динамический логотип",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "Погода: спонсор"
+        title: "Погода: спонсор",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "Погода: упоминание спонсора"
+        title: "Погода: упоминание спонсора",
+        condition: "OR",
     },
     {
         id: 19,
-        title: "Ролик"
+        title: "Ролик",
+        condition: "OR",
     },
     {
         id: 20,
-        title: "Спонсор"
+        title: "Спонсор",
+        condition: "OR",
     },
     {
         id: 21,
-        title: "Спонсорская заставка"
+        title: "Спонсорская заставка",
+        condition: "OR",
     },
     {
         id: 22,
-        title: "Статические титры"
+        title: "Статические титры",
+        condition: "OR",
     },
     {
         id: 23,
-        title: "Телемагазин"
+        title: "Телемагазин",
+        condition: "OR",
     },
     {
         id: 24,
-        title: "Устное объявление"
+        title: "Устное объявление",
+        condition: "OR",
     },
     {
         id: 25,
-        title: "Устное объявление с демонстрацией продукции"
+        title: "Устное объявление с демонстрацией продукции",
+        condition: "OR",
     },
     {
         id: 26,
-        title: "Электронный логотип"
+        title: "Электронный логотип",
+        condition: "OR",
     },
     {
         id: 27,
@@ -492,115 +577,143 @@ export const TypeOfAdvertisement = [
 export const AdvertisersList = [
     {
         id: 1,
-        title: "BAYER AG"
+        title: "BAYER AG",
+        condition: "OR",
     },
     {
         id: 2,
-        title: "BRITISH-AMERICAN TOBACCO"
+        title: "BRITISH-AMERICAN TOBACCO",
+        condition: "OR",
     },
     {
         id: 3,
-        title: "COLGATE-PALMOLIVE"
+        title: "COLGATE-PALMOLIVE",
+        condition: "OR",
     },
     {
         id: 4,
-        title: "COMUS"
+        title: "COMUS",
+        condition: "OR",
     },
     {
         id: 5,
-        title: "CROCUS GROUP"
+        title: "CROCUS GROUP",
+        condition: "OR",
     },
     {
         id: 6,
-        title: "ESKADO BANK"
+        title: "ESKADO BANK",
+        condition: "OR",
     },
     {
         id: 7,
-        title: "FERRERO"
+        title: "FERRERO",
+        condition: "OR",
     },
     {
         id: 8,
-        title: "HITACHI MAXELL LTD."
+        title: "HITACHI MAXELL LTD.",
+        condition: "OR",
     },
     {
         id: 9,
-        title: "IBM"
+        title: "IBM",
+        condition: "OR",
     },
     {
         id: 10,
-        title: "INDESIT RUS"
+        title: "INDESIT RUS",
+        condition: "OR",
     },
     {
         id: 11,
-        title: "JOHNSON & JOHNSON"
+        title: "JOHNSON & JOHNSON",
+        condition: "OR",
     },
     {
         id: 12,
-        title: "JULIUS MEINL"
+        title: "JULIUS MEINL",
+        condition: "OR",
     },
     {
         id: 13,
-        title: "KONKOVO PASSAZH"
+        title: "KONKOVO PASSAZH",
+        condition: "OR",
     },
     {
         id: 14,
-        title: "KREWEL MEUSELBACH"
+        title: "KREWEL MEUSELBACH",
+        condition: "OR",
     },
     {
         id: 15,
-        title: "L'OREAL"
+        title: "L'OREAL",
+        condition: "OR",
     },
     {
         id: 16,
-        title: "NATUR PRODUKT"
+        title: "NATUR PRODUKT",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "OGNI MOSKVY BANK"
+        title: "OGNI MOSKVY BANK",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "PANASONIC CORPORATION"
+        title: "PANASONIC CORPORATION",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "PHILIPS"
+        title: "PHILIPS",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "PODRAVKA"
+        title: "PODRAVKA",
+        condition: "OR",
     },
     {
         id: 19,
-        title: "PROCTER & GAMBLE"
+        title: "PROCTER & GAMBLE",
+        condition: "OR",
     },
     {
         id: 20,
-        title: "RICHARD BITTNER"
+        title: "RICHARD BITTNER",
+        condition: "OR",
     },
     {
         id: 21,
-        title: "SALITA"
+        title: "SALITA",
+        condition: "OR",
     },
     {
         id: 22,
-        title: "SAMSUNG ELECTRONICS"
+        title: "SAMSUNG ELECTRONICS",
+        condition: "OR",
     },
     {
         id: 23,
-        title: "SEB GROUP"
+        title: "SEB GROUP",
+        condition: "OR",
     },
     {
         id: 24,
-        title: "SIEMENS-BOSCH"
+        title: "SIEMENS-BOSCH",
+        condition: "OR",
     },
     {
         id: 25,
-        title: "SONY LTD"
+        title: "SONY LTD",
+        condition: "OR",
     },
     {
         id: 26,
-        title: "VIDEO INTERNATIONAL"
+        title: "VIDEO INTERNATIONAL",
+        condition: "OR",
     },
     {
         id: 27,
@@ -610,111 +723,138 @@ export const AdvertisersList = [
 export const marking = [
     {
         id: 1,
-        title: "AQUAFRESH"
+        title: "AQUAFRESH",
+        condition: "OR",
     },
     {
         id: 2,
-        title: "CAFFETIN"
+        title: "CAFFETIN",
+        condition: "OR",
     },
     {
         id: 3,
-        title: "CARLSBERG"
+        title: "CARLSBERG",
+        condition: "OR",
     },
     {
         id: 4,
-        title: "CENTRUM"
+        title: "CENTRUM",
+        condition: "OR",
     },
     {
         id: 5,
-        title: "CHUPA CHUPS"
+        title: "CHUPA CHUPS",
+        condition: "OR",
     },
     {
         id: 6,
-        title: "DELONGHI"
+        title: "DELONGHI",
+        condition: "OR",
     },
     {
         id: 7,
-        title: "ENTRAPMENT"
+        title: "ENTRAPMENT",
+        condition: "OR",
     },
     {
         id: 8,
-        title: "FRUIT-TELLA"
+        title: "FRUIT-TELLA",
+        condition: "OR",
     },
     {
         id: 9,
-        title: "GALLINA BLANCA"
+        title: "GALLINA BLANCA",
+        condition: "OR",
     },
     {
         id: 10,
-        title: "GEDEON RICHTER"
+        title: "GEDEON RICHTER",
+        condition: "OR",
     },
     {
         id: 11,
-        title: "HIPP"
+        title: "HIPP",
+        condition: "OR",
     },
     {
         id: 12,
-        title: "HOLSTEN"
+        title: "HOLSTEN",
+        condition: "OR",
     },
     {
         id: 13,
-        title: "LIPTON"
+        title: "LIPTON",
+        condition: "OR",
     },
     {
         id: 14,
-        title: "MIRACLE BLADE"
+        title: "MIRACLE BLADE",
+        condition: "OR",
     },
     {
         id: 15,
-        title: "MONARCH (FOOTWEAR)"
+        title: "MONARCH (FOOTWEAR)",
+        condition: "OR",
     },
     {
         id: 16,
-        title: "MOULINEX"
+        title: "MOULINEX",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "MULTI-TABS"
+        title: "MULTI-TABS",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "OLIMPIYSKY"
+        title: "OLIMPIYSKY",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "PALMOLIVE"
+        title: "PALMOLIVE",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "PANANGIN"
+        title: "PANANGIN",
+        condition: "OR",
     },
     {
         id: 19,
-        title: "PEDIGREE"
+        title: "PEDIGREE",
+        condition: "OR",
     },
     {
         id: 20,
-        title: "REEBOK"
+        title: "REEBOK",
+        condition: "OR",
     },
     {
         id: 21,
-        title: "ROYAL CANIN"
+        title: "ROYAL CANIN",
+        condition: "OR",
     },
     {
         id: 22,
-        title: "SALAMANDER"
+        title: "SALAMANDER",
+        condition: "OR",
     },
     {
         id: 23,
-        title: "SAMSUNG"
+        title: "SAMSUNG",
+        condition: "OR",
     },
     {
         id: 24,
-        title: "SPRITE"
+        title: "SPRITE",
+        condition: "OR",
     },
     {
         id: 25,
-        title: "TUBORG"
+        title: "TUBORG",
+        condition: "OR",
     },
     {
         id: 26,
@@ -724,115 +864,143 @@ export const marking = [
 export const SubbrandsList = [
     {
         id: 1,
-        title: "BACK TO THE FUTURE"
+        title: "BACK TO THE FUTURE",
+        condition: "OR",
     },
     {
         id: 2,
-        title: "BOLSHAYA PROGULKA (FILM)"
+        title: "BOLSHAYA PROGULKA (FILM)",
+        condition: "OR",
     },
     {
         id: 3,
-        title: "CITROEN"
+        title: "CITROEN",
+        condition: "OR",
     },
     {
         id: 4,
-        title: "CORK"
+        title: "CORK",
+        condition: "OR",
     },
     {
         id: 5,
-        title: "ELDORADO.RU"
+        title: "ELDORADO.RU",
+        condition: "OR",
     },
     {
         id: 6,
-        title: "GALEREYA (FURNITURE)"
+        title: "GALEREYA (FURNITURE)",
+        condition: "OR",
     },
     {
         id: 7,
-        title: "GARDEMARINY-3"
+        title: "GARDEMARINY-3",
+        condition: "OR",
     },
     {
         id: 8,
-        title: "GIORGIO ARMANI ACQUA DI GIO"
+        title: "GIORGIO ARMANI ACQUA DI GIO",
+        condition: "OR",
     },
     {
         id: 9,
-        title: "GROMADA (FURNITURE CENTRE)"
+        title: "GROMADA (FURNITURE CENTRE)",
+        condition: "OR",
     },
     {
         id: 10,
-        title: "JERSEY GIRL"
+        title: "JERSEY GIRL",
+        condition: "OR",
     },
     {
         id: 11,
-        title: "KIVACH (CLINIC)"
+        title: "KIVACH (CLINIC)",
+        condition: "OR",
     },
     {
         id: 12,
-        title: "KONARMIYA"
+        title: "KONARMIYA",
+        condition: "OR",
     },
     {
         id: 13,
-        title: "LEXUS"
+        title: "LEXUS",
+        condition: "OR",
     },
     {
         id: 14,
-        title: "LG"
+        title: "LG",
+        condition: "OR",
     },
     {
         id: 15,
-        title: "LORENA"
+        title: "LORENA",
+        condition: "OR",
     },
     {
         id: 16,
-        title: "MAGGI"
+        title: "MAGGI",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "MASTERDENT"
+        title: "MASTERDENT",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "MERCEDES-BENZ"
+        title: "MERCEDES-BENZ",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "MON PLATIN"
+        title: "MON PLATIN",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "NEBESNIYE LASTOCHKI (FILM)"
+        title: "NEBESNIYE LASTOCHKI (FILM)",
+        condition: "OR",
     },
     {
         id: 19,
-        title: "NEW YORK MINUTE"
+        title: "NEW YORK MINUTE",
+        condition: "OR",
     },
     {
         id: 20,
-        title: "PETROELEKTROSBYT"
+        title: "PETROELEKTROSBYT",
+        condition: "OR",
     },
     {
         id: 21,
-        title: "PROTEFIX"
+        title: "PROTEFIX",
+        condition: "OR",
     },
     {
         id: 22,
-        title: "SHARP"
+        title: "SHARP",
+        condition: "OR",
     },
     {
         id: 23,
-        title: "TARKETT"
+        title: "TARKETT",
+        condition: "OR",
     },
     {
         id: 24,
-        title: "VES ETOT DZHAZ (FILM)"
+        title: "VES ETOT DZHAZ (FILM)",
+        condition: "OR",
     },
     {
         id: 25,
-        title: "VISA"
+        title: "VISA",
+        condition: "OR",
     },
     {
         id: 26,
-        title: "VODITEL DLYA VERY"
+        title: "VODITEL DLYA VERY",
+        condition: "OR",
     },
     {
         id: 26,
@@ -842,115 +1010,143 @@ export const SubbrandsList = [
 export const Models = [
     {
         id: 1,
-        title: "ADIDAS SPORTS FOOTWEAR"
+        title: "ADIDAS SPORTS FOOTWEAR",
+        condition: "OR",
     },
     {
         id: 2,
-        title: "ADIDAS SPORTS GOODS"
+        title: "ADIDAS SPORTS GOODS",
+        condition: "OR",
     },
     {
         id: 3,
-        title: "ADIDAS-SALOMON AG MANUAFCTURER OF SPORTSWEAR AND FOOTWEAR"
+        title: "ADIDAS-SALOMON AG MANUAFCTURER OF SPORTSWEAR AND FOOTWEAR",
+        condition: "OR",
     },
     {
         id: 4,
-        title: "ALFA-BANK BANKING SERVICES"
+        title: "ALFA-BANK BANKING SERVICES",
+        condition: "OR",
     },
     {
         id: 5,
-        title: "ARS ARRANGING CONCERTS"
+        title: "ARS ARRANGING CONCERTS",
+        condition: "OR",
     },
     {
         id: 6,
-        title: "BAYER AG TRADEMARK ADVERTISING"
+        title: "BAYER AG TRADEMARK ADVERTISING",
+        condition: "OR",
     },
     {
         id: 7,
-        title: "BRITISH-AMERICAN TOBACCO TOBACCO PRODUCER"
+        title: "BRITISH-AMERICAN TOBACCO TOBACCO PRODUCER",
+        condition: "OR",
     },
     {
         id: 8,
-        title: "CROCUS INTERNATIONAL TRADEMARK ADVERTISING"
+        title: "CROCUS INTERNATIONAL TRADEMARK ADVERTISING",
+        condition: "OR",
     },
     {
         id: 9,
-        title: "DELONGHI TRADEMARK ADVERTISING"
+        title: "DELONGHI TRADEMARK ADVERTISING",
+        condition: "OR",
     },
     {
         id: 10,
-        title: "ESKADO BANK BANKING SERVICES"
+        title: "ESKADO BANK BANKING SERVICES",
+        condition: "OR",
     },
     {
         id: 11,
-        title: "EUROPA PLUS RADIO STATIONS"
+        title: "EUROPA PLUS RADIO STATIONS",
+        condition: "OR",
     },
     {
         id: 12,
-        title: "FERRERO TRADEMARK ADVERTISING"
+        title: "FERRERO TRADEMARK ADVERTISING",
+        condition: "OR",
     },
     {
         id: 13,
-        title: "HITACHI MAXELL LTD. TRADEMARK ADVERTISING"
+        title: "HITACHI MAXELL LTD. TRADEMARK ADVERTISING",
+        condition: "OR",
     },
     {
         id: 14,
-        title: "JOHNSON & JOHNSON PERSONAL HYGIENIC PRODUCTS"
+        title: "JOHNSON & JOHNSON PERSONAL HYGIENIC PRODUCTS",
+        condition: "OR",
     },
     {
         id: 15,
-        title: "LONDA TRADEMARK ADVERTISING"
+        title: "LONDA TRADEMARK ADVERTISING",
+        condition: "OR",
     },
     {
         id: 16,
-        title: "MOSCOW YOUTH PALACE ENTERTAINING ACTIVITIES ORGANIZATION"
+        title: "MOSCOW YOUTH PALACE ENTERTAINING ACTIVITIES ORGANIZATION",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "NESTLE TRADEMARK ADVERTISING"
+        title: "NESTLE TRADEMARK ADVERTISING",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "OGNI MOSKVY BANK BANKING SERVICES"
+        title: "OGNI MOSKVY BANK BANKING SERVICES",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "OKTYABRSKIY ARRANGING CONCERTS"
+        title: "OKTYABRSKIY ARRANGING CONCERTS",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "PANASONIC CORPORATION TRADEMARK ADVERTISING"
+        title: "PANASONIC CORPORATION TRADEMARK ADVERTISING",
+        condition: "OR",
     },
     {
         id: 19,
-        title: "PHILIPS TRADEMARK ADVERTISING"
+        title: "PHILIPS TRADEMARK ADVERTISING",
+        condition: "OR",
     },
     {
         id: 20,
-        title: "PHILIPS TV SETS"
+        title: "PHILIPS TV SETS",
+        condition: "OR",
     },
     {
         id: 21,
-        title: "PROCTER & GAMBLE TRADEMARK ADVERTISING"
+        title: "PROCTER & GAMBLE TRADEMARK ADVERTISING",
+        condition: "OR",
     },
     {
         id: 22,
-        title: "RICHARD BITTNER TRADEMARK ADVERTISING"
+        title: "RICHARD BITTNER TRADEMARK ADVERTISING",
+        condition: "OR",
     },
     {
         id: 23,
-        title: "SAMSUNG ELECTRONICS SHOP OF ELECTRONICS AND HOUSEHOLD APPLIANCES"
+        title: "SAMSUNG ELECTRONICS SHOP OF ELECTRONICS AND HOUSEHOLD APPLIANCES",
+        condition: "OR",
     },
     {
         id: 24,
-        title: "SAMSUNG ELECTRONICS TRADEMARK ADVERTISING"
+        title: "SAMSUNG ELECTRONICS TRADEMARK ADVERTISING",
+        condition: "OR",
     },
     {
         id: 25,
-        title: "SIEMENS-BOSCH TRADEMARK ADVERTISING"
+        title: "SIEMENS-BOSCH TRADEMARK ADVERTISING",
+        condition: "OR",
     },
     {
         id: 26,
-        title: "SONY LTD TRADEMARK ADVERTISING"
+        title: "SONY LTD TRADEMARK ADVERTISING",
+        condition: "OR",
     },
     {
         id: 26,
@@ -960,31 +1156,38 @@ export const Models = [
 export const AdvertisingItemsLevel1 = [
     {
         id: 1,
-        title: "N/A"
+        title: "N/A",
+        condition: "OR",
     },
     {
         id: 2,
-        title: "КОСВЕННАЯ РЕКЛАМА"
+        title: "КОСВЕННАЯ РЕКЛАМА",
+        condition: "OR",
     },
     {
         id: 3,
-        title: "ОБЩЕСТВЕННО-ПОЛИТИЧЕСКИЕ ОРГАНИЗАЦИИ"
+        title: "ОБЩЕСТВЕННО-ПОЛИТИЧЕСКИЕ ОРГАНИЗАЦИИ",
+        condition: "OR",
     },
     {
         id: 4,
-        title: "РЕКЛАМА ТОРГОВОЙ МАРКИ"
+        title: "РЕКЛАМА ТОРГОВОЙ МАРКИ",
+        condition: "OR",
     },
     {
         id: 5,
-        title: "СОЦИАЛЬНАЯ РЕКЛАМА"
+        title: "СОЦИАЛЬНАЯ РЕКЛАМА",
+        condition: "OR",
     },
     {
         id: 6,
-        title: "СРЕДСТВА МАССОВОЙ ИНФОРМАЦИИ"
+        title: "СРЕДСТВА МАССОВОЙ ИНФОРМАЦИИ",
+        condition: "OR",
     },
     {
         id: 7,
-        title: "ТОВАРЫ"
+        title: "ТОВАРЫ",
+        condition: "OR",
     },
     {
         id: 8,
@@ -994,115 +1197,143 @@ export const AdvertisingItemsLevel1 = [
 export const AdvertisingItemsLevel2 = [
     {
         id: 1,
-        title: "N/A"
+        title: "N/A",
+        condition: "OR",
     },
     {
         id: 2,
-        title: "АЛКОГОЛЬНЫЕ НАПИТКИ"
+        title: "АЛКОГОЛЬНЫЕ НАПИТКИ",
+        condition: "OR",
     },
     {
         id: 3,
-        title: "АУДИО, ВИДЕО, КИНО И ФОТОТЕХНИКА"
+        title: "АУДИО, ВИДЕО, КИНО И ФОТОТЕХНИКА",
+        condition: "OR",
     },
     {
         id: 4,
-        title: "БЕЗАЛКОГОЛЬНЫЕ НАПИТКИ"
+        title: "БЕЗАЛКОГОЛЬНЫЕ НАПИТКИ",
+        condition: "OR",
     },
     {
         id: 5,
-        title: "БЫТОВАЯ ТЕХНИКА"
+        title: "БЫТОВАЯ ТЕХНИКА",
+        condition: "OR",
     },
     {
         id: 6,
-        title: "КОМПЬЮТЕРНАЯ ТЕХНИКА И ПО"
+        title: "КОМПЬЮТЕРНАЯ ТЕХНИКА И ПО",
+        condition: "OR",
     },
     {
         id: 7,
-        title: "КОНДИТЕРСКИЕ ИЗДЕЛИЯ"
+        title: "КОНДИТЕРСКИЕ ИЗДЕЛИЯ",
+        condition: "OR",
     },
     {
         id: 8,
-        title: "КОСВЕННАЯ РЕКЛАМА"
+        title: "КОСВЕННАЯ РЕКЛАМА",
+        condition: "OR",
     },
     {
         id: 9,
-        title: "КУХОННЫЕ И ХОЗЯЙСТВЕННЫЕ ПРИНАДЛЕЖНОСТИ"
+        title: "КУХОННЫЕ И ХОЗЯЙСТВЕННЫЕ ПРИНАДЛЕЖНОСТИ",
+        condition: "OR",
     },
     {
         id: 10,
-        title: "МАССОВЫЕ МЕРОПРИЯТИЯ"
+        title: "МАССОВЫЕ МЕРОПРИЯТИЯ",
+        condition: "OR",
     },
     {
         id: 11,
-        title: "МЕБЕЛЬ И ПРЕДМЕТЫ ИНТЕРЬЕРА"
+        title: "МЕБЕЛЬ И ПРЕДМЕТЫ ИНТЕРЬЕРА",
+        condition: "OR",
     },
     {
         id: 12,
-        title: "ОБЩЕСТВЕННО-РЕЛИГИОЗНЫЕ ОРГАНИЗАЦИИ"
+        title: "ОБЩЕСТВЕННО-РЕЛИГИОЗНЫЕ ОРГАНИЗАЦИИ",
+        condition: "OR",
     },
     {
         id: 13,
-        title: "ОБЩЕСТВЕННО-СПОРТИВНЫЕ ОРГАНИЗАЦИИ"
+        title: "ОБЩЕСТВЕННО-СПОРТИВНЫЕ ОРГАНИЗАЦИИ",
+        condition: "OR",
     },
     {
         id: 14,
-        title: "ОБЩЕСТВЕННЫЕ ОРГАНИЗАЦИИ"
+        title: "ОБЩЕСТВЕННЫЕ ОРГАНИЗАЦИИ",
+        condition: "OR",
     },
     {
         id: 15,
-        title: "ОРГТЕХНИКА И КАНЦЕЛЯРСКИЕ ТОВАРЫ"
+        title: "ОРГТЕХНИКА И КАНЦЕЛЯРСКИЕ ТОВАРЫ",
+        condition: "OR",
     },
     {
         id: 16,
-        title: "ПОЛИТИЧЕСКИЕ ОРГАНИЗАЦИИ"
+        title: "ПОЛИТИЧЕСКИЕ ОРГАНИЗАЦИИ",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "ПРОДУКТЫ ПИТАНИЯ"
+        title: "ПРОДУКТЫ ПИТАНИЯ",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "ПРОМЫШЛЕННОЕ ОБОРУДОВАНИЕ"
+        title: "ПРОМЫШЛЕННОЕ ОБОРУДОВАНИЕ",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "ПРОМЫШЛЕННЫЕ МАТЕРИАЛЫ"
+        title: "ПРОМЫШЛЕННЫЕ МАТЕРИАЛЫ",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "РЕКЛАМА ТОРГОВОЙ МАРКИ"
+        title: "РЕКЛАМА ТОРГОВОЙ МАРКИ",
+        condition: "OR",
     },
     {
         id: 19,
-        title: "СОЦИАЛЬНАЯ РЕКЛАМА: ЗДОРОВЫЙ ОБРАЗ ЖИЗНИ"
+        title: "СОЦИАЛЬНАЯ РЕКЛАМА: ЗДОРОВЫЙ ОБРАЗ ЖИЗНИ",
+        condition: "OR",
     },
     {
         id: 20,
-        title: "СОЦИАЛЬНАЯ РЕКЛАМА: НАУКА И ПРОГРЕСС"
+        title: "СОЦИАЛЬНАЯ РЕКЛАМА: НАУКА И ПРОГРЕСС",
+        condition: "OR",
     },
     {
         id: 21,
-        title: "СОЦИАЛЬНАЯ РЕКЛАМА: ОТНОШЕНИЯ МЕЖДУ ЛЮДЬМИ"
+        title: "СОЦИАЛЬНАЯ РЕКЛАМА: ОТНОШЕНИЯ МЕЖДУ ЛЮДЬМИ",
+        condition: "OR",
     },
     {
         id: 22,
-        title: "СОЦИАЛЬНАЯ РЕКЛАМА (РАЗНОЕ)"
+        title: "СОЦИАЛЬНАЯ РЕКЛАМА (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 23,
-        title: "СОЦИАЛЬНАЯ РЕКЛАМА: ЭКОЛОГИЯ"
+        title: "СОЦИАЛЬНАЯ РЕКЛАМА: ЭКОЛОГИЯ",
+        condition: "OR",
     },
     {
         id: 24,
-        title: "СРЕДСТВА ОХРАНЫ И ЛИЧНОЙ БЕЗОПАСНОСТИ"
+        title: "СРЕДСТВА ОХРАНЫ И ЛИЧНОЙ БЕЗОПАСНОСТИ",
+        condition: "OR",
     },
     {
         id: 25,
-        title: "СРЕДСТВА СВЯЗИ И ОБОРУДОВАНИЕ"
+        title: "СРЕДСТВА СВЯЗИ И ОБОРУДОВАНИЕ",
+        condition: "OR",
     },
     {
         id: 26,
-        title: "ТАБАК И КУРИТЕЛЬНЫЕ ПРИНАДЛЕЖНОСТИ"
+        title: "ТАБАК И КУРИТЕЛЬНЫЕ ПРИНАДЛЕЖНОСТИ",
+        condition: "OR",
     },
     {
         id: 26,
@@ -1112,115 +1343,143 @@ export const AdvertisingItemsLevel2 = [
 export const AdvertisingItemsLevel3 = [
     {
         id: 1,
-        title: "ГОСУДАРСТВЕННЫЙ СЛУЖАЩИЙ"
+        title: "ГОСУДАРСТВЕННЫЙ СЛУЖАЩИЙ",
+        condition: "OR",
     },
     {
         id: 2,
-        title: "ЗДОРОВЫЙ ОБРАЗ ЖИЗНИ (РАЗНОЕ)"
+        title: "ЗДОРОВЫЙ ОБРАЗ ЖИЗНИ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 3,
-        title: "КОСВЕННАЯ РЕКЛАМА"
+        title: "КОСВЕННАЯ РЕКЛАМА",
+        condition: "OR",
     },
     {
         id: 4,
-        title: "МАССОВЫЕ МЕРОПРИЯТИЯ (РАЗНОЕ)"
+        title: "МАССОВЫЕ МЕРОПРИЯТИЯ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 5,
-        title: "ОБЩЕСТВЕННЫЕ ОРГАНИЗАЦИИ (РАЗНОЕ)"
+        title: "ОБЩЕСТВЕННЫЕ ОРГАНИЗАЦИИ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 6,
-        title: "ПОЛИТИЧЕСКИЕ МЕРОПРИЯТИЯ"
+        title: "ПОЛИТИЧЕСКИЕ МЕРОПРИЯТИЯ",
+        condition: "OR",
     },
     {
         id: 7,
-        title: "ПОЛИТИЧЕСКИЕ ОРГАНИЗАЦИИ (РАЗНОЕ)"
+        title: "ПОЛИТИЧЕСКИЕ ОРГАНИЗАЦИИ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 8,
-        title: "ПОЛИТИЧЕСКИЙ ДЕЯТЕЛЬ"
+        title: "ПОЛИТИЧЕСКИЙ ДЕЯТЕЛЬ",
+        condition: "OR",
     },
     {
         id: 9,
-        title: "ПРОМЫШЛЕННОЕ ОБОРУДОВАНИЕ (РАЗНОЕ)"
+        title: "ПРОМЫШЛЕННОЕ ОБОРУДОВАНИЕ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 10,
-        title: "ПРОМЫШЛЕННЫЕ МАТЕРИАЛЫ (РАЗНОЕ)"
+        title: "ПРОМЫШЛЕННЫЕ МАТЕРИАЛЫ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 11,
-        title: "РАСТЕНИЯ,ТОВАРЫ ДЛЯ САДА И ОГОРОДА (РАЗНОЕ)"
+        title: "РАСТЕНИЯ,ТОВАРЫ ДЛЯ САДА И ОГОРОДА (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 12,
-        title: "СБОР СРЕДСТВ НА ВОССТАНОВЛЕНИЕ ХРАМОВ"
+        title: "СБОР СРЕДСТВ НА ВОССТАНОВЛЕНИЕ ХРАМОВ",
+        condition: "OR",
     },
     {
         id: 13,
-        title: "СОЦИАЛЬНАЯ РЕКЛАМА (РАЗНОЕ)"
+        title: "СОЦИАЛЬНАЯ РЕКЛАМА (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 14,
-        title: "СРЕДСТВА ОХРАНЫ И ЛИЧНОЙ БЕЗОПАСНОСТИ (РАЗНОЕ)"
+        title: "СРЕДСТВА ОХРАНЫ И ЛИЧНОЙ БЕЗОПАСНОСТИ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 15,
-        title: "СТРОИТЕЛЬСТВО И РЕМОНТ (РАЗНОЕ)"
+        title: "СТРОИТЕЛЬСТВО И РЕМОНТ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 16,
-        title: "УСЛУГИ БЫТОВЫЕ И СЕРВИС (РАЗНОЕ)"
+        title: "УСЛУГИ БЫТОВЫЕ И СЕРВИС (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "УСЛУГИ В ОБЛАСТИ РЕКЛАМЫ И МАРКЕТИНГА (РАЗНОЕ)"
+        title: "УСЛУГИ В ОБЛАСТИ РЕКЛАМЫ И МАРКЕТИНГА (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "УСЛУГИ В ОБЛАСТИ ТОРГОВЛИ (РАЗНОЕ)"
+        title: "УСЛУГИ В ОБЛАСТИ ТОРГОВЛИ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "УСЛУГИ В СИСТЕМЕ ОБРАЗОВ.,ТРУДОУСТРОЙСТВО (РАЗНОЕ)"
+        title: "УСЛУГИ В СИСТЕМЕ ОБРАЗОВ.,ТРУДОУСТРОЙСТВО (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "УСЛУГИ ИНДУСТРИИ РАЗВЛЕЧЕНИЙ (РАЗНОЕ)"
+        title: "УСЛУГИ ИНДУСТРИИ РАЗВЛЕЧЕНИЙ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 19,
-        title: "УСЛУГИ ПО ОПЕРАЦИЯМ С НЕДВИЖИМОСТЬЮ (РАЗНОЕ)"
+        title: "УСЛУГИ ПО ОПЕРАЦИЯМ С НЕДВИЖИМОСТЬЮ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 20,
-        title: "УСЛУГИ ПО ОХРАНЕ И БЕЗОПАСНОСТИ (РАЗНОЕ)"
+        title: "УСЛУГИ ПО ОХРАНЕ И БЕЗОПАСНОСТИ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 21,
-        title: "УСЛУГИ ПО ТУРИЗМУ, СПОРТУ И ОТДЫХУ (РАЗНОЕ)"
+        title: "УСЛУГИ ПО ТУРИЗМУ, СПОРТУ И ОТДЫХУ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 22,
-        title: "УСЛУГИ ПРОИЗВОДСТВЕННОГО ХАРАКТЕРА (РАЗНОЕ)"
+        title: "УСЛУГИ ПРОИЗВОДСТВЕННОГО ХАРАКТЕРА (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 23,
-        title: "УСЛУГИ СВЯЗИ (РАЗНОЕ)"
+        title: "УСЛУГИ СВЯЗИ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 24,
-        title: "УСЛУГИ СТРАХОВЫЕ (РАЗНОЕ)"
+        title: "УСЛУГИ СТРАХОВЫЕ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 25,
-        title: "УСЛУГИ ТРАНСПОРТНЫЕ (РАЗНОЕ)"
+        title: "УСЛУГИ ТРАНСПОРТНЫЕ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 26,
-        title: "УСЛУГИ ФИНАНСОВЫЕ (РАЗНОЕ)"
+        title: "УСЛУГИ ФИНАНСОВЫЕ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 26,
@@ -1230,118 +1489,147 @@ export const AdvertisingItemsLevel3 = [
 export const AdvertisingItemsLevel4 = [
     {
         id: 1,
-        title: "АЛКОГОЛЬНЫЕ НАПИТКИ (РАЗНОЕ)"
+        title: "АЛКОГОЛЬНЫЕ НАПИТКИ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 2,
-        title: "АУДИО, ВИДЕО, КИНО И ФОТОТЕХНИКА (РАЗНОЕ)"
+        title: "АУДИО, ВИДЕО, КИНО И ФОТОТЕХНИКА (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 3,
-        title: "АУДИО, ВИДЕОПРОДУКЦИЯ, ИГРЫ (РАЗНОЕ)"
+        title: "АУДИО, ВИДЕОПРОДУКЦИЯ, ИГРЫ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 4,
-        title: "БЕЗАЛКОГОЛЬНЫЕ НАПИТКИ (РАЗНОЕ)"
+        title: "БЕЗАЛКОГОЛЬНЫЕ НАПИТКИ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 5,
-        title: "БЫТОВАЯ ТЕХНИКА (РАЗНОЕ)"
+        title: "БЫТОВАЯ ТЕХНИКА (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 6,
-        title: "БЫТОВАЯ ХИМИЯ (РАЗНОЕ)"
+        title: "БЫТОВАЯ ХИМИЯ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 7,
-        title: "КОМПЬЮТЕРНАЯ ТЕХНИКА И ПО (РАЗНОЕ)"
+        title: "КОМПЬЮТЕРНАЯ ТЕХНИКА И ПО (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 8,
-        title: "КОНДИТЕРСКИЕ ИЗДЕЛИЯ (РАЗНОЕ)"
+        title: "КОНДИТЕРСКИЕ ИЗДЕЛИЯ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 9,
-        title: "КУХОННЫЕ И ХОЗЯЙСТВЕННЫЕ ПРИНАДЛЕЖНОСТИ (РАЗНОЕ)"
+        title: "КУХОННЫЕ И ХОЗЯЙСТВЕННЫЕ ПРИНАДЛЕЖНОСТИ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 10,
-        title: "ЛЕКАРСТВЕННЫЕ ПРЕПАРАТЫ И БАД (РАЗНОЕ)"
+        title: "ЛЕКАРСТВЕННЫЕ ПРЕПАРАТЫ И БАД (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 11,
-        title: "МАССОВЫЕ МЕРОПРИЯТИЯ (РАЗНОЕ)"
+        title: "МАССОВЫЕ МЕРОПРИЯТИЯ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 12,
-        title: "МЕБЕЛЬ И ПРЕДМЕТЫ ИНТЕРЬЕРА (РАЗНОЕ)"
+        title: "МЕБЕЛЬ И ПРЕДМЕТЫ ИНТЕРЬЕРА (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 13,
-        title: "ОДЕЖДА И ОБУВЬ (РАЗНОЕ)"
+        title: "ОДЕЖДА И ОБУВЬ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 14,
-        title: "ОРГТЕХНИКА И КАНЦЕЛЯРСКИЕ ТОВАРЫ (РАЗНОЕ)"
+        title: "ОРГТЕХНИКА И КАНЦЕЛЯРСКИЕ ТОВАРЫ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 15,
-        title: "ПАРФЮМЕРИЯ (РАЗНОЕ)"
+        title: "ПАРФЮМЕРИЯ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 16,
-        title: "ПРОДУКТЫ ПИТАНИЯ (РАЗНОЕ)"
+        title: "ПРОДУКТЫ ПИТАНИЯ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "ПРОМЫШЛЕННОЕ ОБОРУДОВАНИЕ (РАЗНОЕ)"
+        title: "ПРОМЫШЛЕННОЕ ОБОРУДОВАНИЕ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "ПРОМЫШЛЕННЫЕ МАТЕРИАЛЫ (РАЗНОЕ)"
+        title: "ПРОМЫШЛЕННЫЕ МАТЕРИАЛЫ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 17,
-        title: "РАСТЕНИЯ,ТОВАРЫ ДЛЯ САДА И ОГОРОДА (РАЗНОЕ)"
+        title: "РАСТЕНИЯ,ТОВАРЫ ДЛЯ САДА И ОГОРОДА (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 18,
-        title: "СПОРТИВНЫЕ ТОВАРЫ (РАЗНОЕ)"
+        title: "СПОРТИВНЫЕ ТОВАРЫ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 19,
-        title: "СРЕДСТВА МАССОВОЙ ИНФОРМАЦИИ (РАЗНОЕ)"
+        title: "СРЕДСТВА МАССОВОЙ ИНФОРМАЦИИ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 20,
-        title: "СРЕДСТВА ОХРАНЫ И ЛИЧНОЙ БЕЗОПАСНОСТИ (РАЗНОЕ)"
+        title: "СРЕДСТВА ОХРАНЫ И ЛИЧНОЙ БЕЗОПАСНОСТИ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 21,
-        title: "СРЕДСТВА СВЯЗИ И ОБОРУДОВАНИЕ (РАЗНОЕ)"
+        title: "СРЕДСТВА СВЯЗИ И ОБОРУДОВАНИЕ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 22,
-        title: "СТРОИТЕЛЬНЫЕ, ОТД. МАТЕРИАЛЫ, САНТЕХНИКА (РАЗНОЕ)"
+        title: "СТРОИТЕЛЬНЫЕ, ОТД. МАТЕРИАЛЫ, САНТЕХНИКА (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 23,
-        title: "ТОВАРЫ ДЛЯ ЖИВОТНЫХ (РАЗНОЕ)"
+        title: "ТОВАРЫ ДЛЯ ЖИВОТНЫХ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 24,
-        title: "ТОВАРЫ ДЛЯ КРАСОТЫ И ЗДОРОВЬЯ (РАЗНОЕ)"
+        title: "ТОВАРЫ ДЛЯ КРАСОТЫ И ЗДОРОВЬЯ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 25,
-        title: "ТРАНСПОРТ И СОПУТСТВУЮЩИЕ ТОВАРЫ (РАЗНОЕ)"
+        title: "ТРАНСПОРТ И СОПУТСТВУЮЩИЕ ТОВАРЫ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 26,
-        title: "ЧАСЫ, ЮВЕЛИРНЫЕ ИЗДЕЛИЯ (РАЗНОЕ)"
+        title: "ЧАСЫ, ЮВЕЛИРНЫЕ ИЗДЕЛИЯ (РАЗНОЕ)",
+        condition: "OR",
     },
     {
         id: 26,
-        title: "ШОКОЛАДНЫЕ ПЛИТКИ"
+        title: "ШОКОЛАДНЫЕ ПЛИТКИ",
+        condition: "OR",
     }
 ]
