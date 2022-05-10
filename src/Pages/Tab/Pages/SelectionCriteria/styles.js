@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const GridContainer = styled.div`
   padding-top: 10px;
   display: grid;
-  grid-template-columns: 1fr 500px;
+  grid-template-columns: 500px 1fr;
   --separator-width: 1px;
   --separator-color: var(--color-grey-Light-4);
 `

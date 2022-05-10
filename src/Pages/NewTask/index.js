@@ -14,7 +14,7 @@ import SelectionCriteria from "./Content/selectionCriteria";
 import Reports from "./Content/reports";
 import {Tabs} from "./constants"
 import {PracticeButton, PracticesButtonsContainer, WrapperButton} from "../../Components/PracticesBar/styles";
-import {InformationCard, InformationCardMin} from "./styles"
+import {CardForDirectory, InformationCard, InformationCardMin} from "./styles"
 import TipsOverlayComponent from "../../Components/TipsHelp/TipsOverlayComponent";
 import ContextMenuValueEditor from "@/Components/Fields/InputContstuctor/InputControllers/ContextMenuValueEditor"
 import memoizeOne from "memoize-one";
@@ -24,6 +24,8 @@ import { BsCalendar, BsCalendar3, BsCalendar4, BsCalendar3Range } from 'react-ic
 import {VscChecklist} from 'react-icons/vsc';
 import {editConfig, editConfigIntervalRange, editConfigTimeRange, configForBtnCalendar} from "./config"
 import DataSet from "../Tab/Pages/SelectionCriteria";
+import SelectionCriteriaForNewTask from "./SelectionCriteriaForNewTask";
+
 
 const NewTask = ({openModalWindow, updateState, state}) => {
   const [selectedSource, setSelectedSource] = useState({})
@@ -318,7 +320,7 @@ const NewTask = ({openModalWindow, updateState, state}) => {
                           )}
                         </ContextMenuValueEditor>
                       </div>
-                    <DataSet/>
+                    <SelectionCriteriaForNewTask/>
                   </div>
                 )
               }

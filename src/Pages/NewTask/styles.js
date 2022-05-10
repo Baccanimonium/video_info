@@ -43,3 +43,25 @@ export const InformationCardMin = styled.div`
     box-shadow: 0px 2px 6px rgba(161, 137, 69, 0.49);
   }
   `
+
+export const CardForDirectory = styled.div`
+  border-radius: 5px;
+  padding: 8px 14px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  text-align: center;
+  border-color: ${props => props.active ? "var(--color-grey)" : "var(--color-grey-light-1)"};
+  border-width: 1px;
+  border-style: solid;
+  min-height: var(--height-button);
+  color: ${props => props.active ? "var(--color-grey)" : "var(--color-white)"};
+  margin-right: 5px;
+  background: ${props => props.active ? "var(--color-white)" : "var(--color-grey-light-1)"};
+  cursor: ${props => props.active && "pointer"};
+  pointer-events: ${props => !props.active && "none"};
+  margin-bottom: 5px;
+  &:last-child {
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+`

@@ -33,6 +33,7 @@ const DataSet = props => {
 
   // создать useState чтобы при onSelect складывать туда title
   const onSelect = useCallback(({node: {title, children}, sequence}) => {
+    console.log(children, sequence)
     switch (title) {
       case "Нац.телекомпании":
         setSelectedList(nationalTV);

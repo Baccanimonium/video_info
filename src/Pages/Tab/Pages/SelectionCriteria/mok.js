@@ -138,112 +138,107 @@ export const treeData = [
 export const nationalTV = [
     {
         id: 1,
-        title: "CHE",
+        title: "N/A",
         condition: "OR"
     },
     {
         id: 2,
-        title: "DISNEY CHANNEL",
+        title: "PERVY KANAL",
         condition: "OR"
     },
     {
         id: 3,
-        title: "DOMASHNIY",
+        title: "ROSSIYA 1",
         condition: "OR"
     },
     {
         id: 4,
-        title: "EURONEWS",
+        title: "NTV",
         condition: "OR"
     },
     {
         id: 5,
-        title: "FRIDAY",
+        title: "TV-6",
         condition: "OR"
     },
     {
         id: 6,
-        title: "KARUSEL",
-        condition: "OR"
-    },
-    {
-        id: 7,
         title: "MIR",
         condition: "OR"
     },
     {
+        id: 7,
+        title: "STS",
+        condition: "OR"
+    },
+    {
         id: 8,
-        title: "MUZ TV",
+        title: "TV TSENTR",
       condition: "OR"
     },
     {
         id: 9,
-        title: "NTV",
+        title: "ROSSIYA K",
       condition: "OR"
     },
     {
         id: 10,
-        title: "PERVY KANAL",
+        title: "STS LOVE",
       condition: "OR"
     },
     {
         id: 11,
-        title: "PYATY KANAL",
+        title: "KARUSEL",
       condition: "OR"
     },
     {
         id: 12,
-        title: "RAMBLER",
-      condition: "OR"
-    },
-    {
-        id: 13,
         title: "REN TV",
       condition: "OR"
     },
     {
         id: 14,
-        title: "ROSSIYA K",
+        title: "TNT",
       condition: "OR"
     },
     {
         id: 15,
-        title: "ROSSIYA 1",
+        title: "DISNEY CHANNEL",
       condition: "OR"
     },
     {
         id: 16,
-        title: "ROSSIYA 2",
+        title: "MUZ TV",
       condition: "OR"
     },
     {
         id: 17,
-        title: "ROSSIYA 24",
+        title: "FRIDAY",
       condition: "OR"
     },
     {
         id: 18,
-        title: "RU.TV (TILL 31/12/2020)",
+        title: "U",
       condition: "OR"
     },
     {
         id: 17,
-        title: "SEMYORKA",
+        title: "TV-3",
       condition: "OR"
     },
     {
         id: 18,
-        title: "STS",
+        title: "TV-6: TEMPORARY BROADCASTING",
       condition: "OR"
     },
     {
         id: 19,
-        title: "STS LOVE",
+        title: "SEMYORKA",
       condition: "OR"
     },
     {
         id: 20,
-        title: "TNT",
+        title: "TVS",
       condition: "OR"
     },
     {
@@ -253,33 +248,129 @@ export const nationalTV = [
     },
     {
         id: 22,
-        title: "TVS",
+        title: "EURONEWS",
       condition: "OR"
     },
     {
         id: 23,
-        title: "TV-3",
+        title: "RAMBLER",
       condition: "OR"
     },
     {
         id: 24,
-        title: "TV-6",
+        title: "CHE",
       condition: "OR"
     },
     {
         id: 25,
-        title: "TV-6: TEMPORARY BROADCASTING",
+        title: "ROSSIYA 2",
       condition: "OR"
     },
     {
         id: 26,
-        title: "U",
+        title: "DOMASHNIY",
       condition: "OR"
     },
     {
         id: 27,
-        title: "ZVEZDA"
-    }
+        title: "ZVEZDA",
+        condition: "OR"
+    },
+    {
+        id: 28,
+        title: "PYATY KANAL",
+        condition: "OR"
+    },
+    {
+        id: 29,
+        title: "ROSSIYA 24",
+        condition: "OR"
+    },
+    {
+        id: 30,
+        title: "2X2",
+        condition: "OR"
+    },
+    {
+        id: 31,
+        title: "MEASURED LOCAL TV",
+        condition: "OR"
+    },
+    {
+        id: 32,
+        title: "VIDEO",
+        condition: "OR"
+    },
+    {
+        id: 33,
+        title: "MEASURED THEMATIC TV",
+        condition: "OR"
+    },
+    {
+        id: 34,
+        title: "OTHER",
+        condition: "OR"
+    },
+    {
+        id: 35,
+        title: "MATCH TV",
+        condition: "OR"
+    },
+    {
+        id: 36,
+        title: "TNT 4",
+        condition: "OR"
+    },
+    {
+        id: 37,
+        title: "DISCOVERY CHANNEL (TILL 31/12/2019)",
+        condition: "OR"
+    },
+    {
+        id: 38,
+        title: "DOM KINO",
+        condition: "OR"
+    },
+    {
+        id: 39,
+        title: "AD CHANNELS",
+        condition: "OR"
+    },
+    {
+        id: 40,
+        title: "MULT",
+        condition: "OR"
+    },
+    {
+        id: 41,
+        title: "SUBBOTA",
+        condition: "OR"
+    },
+    {
+        id: 42,
+        title: "EVRONOVOSTI",
+        condition: "OR"
+    },
+    {
+        id: 43,
+        title: "SPAS",
+        condition: "OR"
+    },
+    {
+        id: 44,
+        title: "OTHER TV SET",
+        condition: "OR"
+    },
+    {
+        id: 45,
+        title: "OTR (TILL 31/12/2020)",
+        condition: "OR"
+    },
+    {
+        id: 46,
+        title: "SOLOVIEVLIVE",
+        condition: "OR"
+    },
 ]
 export const TVcompanies = [
     {
@@ -1633,3 +1724,5 @@ export const AdvertisingItemsLevel4 = [
         condition: "OR",
     }
 ]
+
+
