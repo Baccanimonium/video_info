@@ -23,15 +23,22 @@ class CheckboxGroup extends Component {
   })
 
   sortedOptions = memoizeOne((tempQuery, options) => {
+    const { hidSelected } = this.state
+    console.log(hidSelected)
     if (!tempQuery) return options
-    return this.sortOptions(options)
+    return hidSelected
+      ? this.hiddenSelected(options)
+      : this.sortOptions(options)
   })
+
+
 
   constructor(props) {
     super(props)
     this.state = {
       edited: false,
       tempQuery: "",
+      hidSelected: false
     }
     this.searchInputRef = React.createRef()
   }
@@ -116,12 +123,22 @@ class CheckboxGroup extends Component {
     }
   }
 
+  hiddenSelected = (options) => {
+    const {value} = this.props
+    return options.filter(e => value.findIndex(i => i.title === e.title) === -1)
+  }
+
+  editHidSelected = () => {
+    this.setState(({hidSelected}) => ({hidSelected: !hidSelected}))
+  }
+
+
   render() {
     const {
       blockTitle, labelKey, maxHeight, options, value, reverseMode, loading, disabled, style, inputStyles,
       showToggleIndicator, filterable
     } = this.props
-    const { edited, tempQuery } = this.state
+    const { edited, tempQuery, hidSelected } = this.state
     const checkboxes = this.sortedOptions(tempQuery, options).map(item => {
       const { [labelKey]: label } = item
       return (
@@ -178,12 +195,23 @@ class CheckboxGroup extends Component {
             />
           )
           : (
-            <SearchIcon
-              className={`m-l-a transition-grey-gold ${edited ? "active" : ""}
-               cursor ${showToggleIndicator ? "m-r-15" : "m-r-0"}`}
-              size="14"
-              onClick={this.openSearchField}
-            />
+            <>
+              <SearchIcon
+                className={`m-l-a transition-grey-gold ${edited ? "active" : ""}
+                 cursor ${showToggleIndicator ? "m-r-15" : "m-r-0"}`}
+                size="14"
+                onClick={this.openSearchField}
+              />
+              <BsCheckBox
+                id="hiddenSelected"
+                label="Not"
+                value={hidSelected}
+                className="m-r-5"
+                disabled={disabled || loading}
+                onInput={this.editHidSelected}
+                style={style}
+              />
+            </>
           )}
       </div>
     );

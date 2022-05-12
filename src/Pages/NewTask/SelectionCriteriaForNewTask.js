@@ -179,29 +179,29 @@ const SelectionCriteriaForNewTask = () => {
           )
         )}
       </div>
+      <DataSet></DataSet>
       <GridContainer className="pos-relative overflow-hidden h-100">
-        <div className="separator-left p-l-15 m-b-15">
-          <CheckboxGroupContainer>
-            <CheckboxGroup
-              options={selectedList}
-              valueKey="id"
-              blockTitle={title}
-              labelKey="title"
-              value={checkedObject}
-              returnObjects
-              onInput={(value) => checkObject(value)}
-            />
-            {selectedList.length > 0 &&
-            <BsButton
-              type="button"
-              className="golden btn sign-up-btn color-greyDarken w-18"
-              onClick={setNewTree}
-            >
-              применить
-            </BsButton>
-            }
-          </CheckboxGroupContainer>
-        </div>
+        <CheckboxGroupContainer>
+          <CheckboxGroup
+            options={selectedList}
+            valueKey="id"
+            blockTitle={title}
+            labelKey="title"
+            value={checkedObject}
+            returnObjects
+            onInput={(value) => checkObject(value)}
+          />
+          {selectedList.length > 0 &&
+          <BsButton
+            type="button"
+            className="golden btn sign-up-btn color-greyDarken w-18"
+            onClick={setNewTree}
+          >
+            применить
+          </BsButton>
+          }
+        </CheckboxGroupContainer>
+      <div className="separator-left p-l-15 m-b-15">
         <ScrollBar>
           {/*<Tree*/}
           {/*  style={StyleTree}*/}
@@ -224,8 +224,9 @@ const SelectionCriteriaForNewTask = () => {
           {/*  rowComponent={RowComponent}*/}
           {/*/>*/}
         </ScrollBar>
+      </div>
 
-        <DataSet></DataSet>
+
       </GridContainer>
     </>
   );

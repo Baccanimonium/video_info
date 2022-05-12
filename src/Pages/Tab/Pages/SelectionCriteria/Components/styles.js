@@ -20,3 +20,23 @@ export const IconPlus = styled.div`
   }
   
 `
+
+export const CardForCondition = styled.div`
+  background: #404040;
+  width: 40px;
+  height: 35px;
+  color: var(--color-white);
+  border-radius: 100%;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  box-sizing: border-box;
+  outline: none;
+  white-space: nowrap;
+  text-align: center;
+  min-height: var(--height-button);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+`
