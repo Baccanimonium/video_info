@@ -62,6 +62,5 @@ export const CardForDirectory = styled.div`
   margin-bottom: 5px;
   &:last-child {
     margin-right: 0;
-    margin-bottom: 0;
   }
 `

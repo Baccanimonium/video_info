@@ -36,7 +36,7 @@ function emitCheckboxValue(id, onBlur, onFocus, onInput, normalizeCheckBoxVal, v
 
 const BsCheckBox = ({
   value, returnObjects, reverseMode, disabled, label, checkBoxLabel, checkBoxValue, valueKey,
-  id, onBlur, onFocus, onInput, className, style
+  id, onBlur, onFocus, onInput, className, style, styleLabel
 }) => {
   const normalizeCheckBoxVal = useMemo(
     () => resolveCheckboxValue(checkBoxValue, valueKey),
@@ -72,6 +72,7 @@ const BsCheckBox = ({
       </BoxContainer>
       {label && (
         <div
+          style={styleLabel}
           className="p-l-15 fw-400 ta-left l-h-16"
         >
           { checkBoxLabel || label }
@@ -95,7 +96,8 @@ BsCheckBox.propTypes = {
   onInput: PropTypes.func,
   className: PropTypes.string,
   style: PropTypes.object,
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  styleLabel: PropTypes.object,
 }
 
 BsCheckBox.defaultProps = {
@@ -103,7 +105,8 @@ BsCheckBox.defaultProps = {
   onBlur: () => null,
   onFocus: () => null,
   className: "",
-  style: {}
+  style: {},
+  styleLabel: {}
 }
 
 export default BsCheckBox

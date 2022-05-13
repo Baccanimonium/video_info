@@ -13,22 +13,26 @@ import CheckboxGroup from "../../Components/Fields/CheckboxGroup";
 import BsButton from "@/Components/BsButton";
 import RowComponent from "../Tab/Pages/SelectionCriteria/Components/RowComponent";
 import ScrollBar from "react-perfect-scrollbar";
+import Tree from '@/Components/Tree';
 
 const listDirectory = [
   {
     id: 1,
     name: "Нац.телекомпании",
-    active: true
+    active: true,
+    sequence: [0, 0, 0]
   },
   {
     id: 2,
     name: "Телекомпании",
-    active: true
+    active: true,
+    sequence: [0, 0, 0]
   },
   {
     id: 3,
     name: "Тип рекламы",
-    active: true
+    active: true,
+    sequence: [0, 0, 1]
   },
   {
     id: 4,
@@ -83,6 +87,7 @@ const listDirectory = [
     name: "Статус события"
   },
 ]
+const StyleTree = {width: "600px"}
 
 const SelectionCriteriaForNewTask = () => {
   const [selectedList, setSelectedList] = useState([])
@@ -90,8 +95,11 @@ const SelectionCriteriaForNewTask = () => {
   const [checkedObject, setCheckedObject] = useState([])
   const [pageData, setPageData] = useState(treeData)
   const [selectedKey, setSelectedKey] = useState([])
+  const [checked, setCheckedKey] = useState("")
 
-  const onSelect = useCallback((name) => {
+  const onSelect = useCallback((name, sequence) => {
+    // нужно получить children чтобы при выборе критериев в чекбоксах одного справочника
+    // не были выбраны критерии в чекбоксах другого справочника
     switch (name) {
       case "Нац.телекомпании":
         setSelectedList(nationalTV);
@@ -141,6 +149,8 @@ const SelectionCriteriaForNewTask = () => {
         setSelectedList([])
         break
     }
+    setSelectedKey(sequence)
+    // setCheckedObject(children)
   }, []);
 
   const checkObject = (value) => {
@@ -165,21 +175,43 @@ const SelectionCriteriaForNewTask = () => {
       return nextVal
     })
   }
+  const onDragStart = (info) => {
+    console.log("onDragStart", info)
+  }
+  const onDragEnter = (arg) => {
+    console.log("onDragEnter", arg)
+  }
+  const onDrop = (info) => {
+    console.log("onDrop", info)
+  }
+  const setRowCondition = () => {
+    console.log("setRowCondition")
+  }
+  const onExpand = useCallback(expandedKeys => {
+    console.log('onExpand', expandedKeys);
+  }, []);
+  const onCheck = useCallback((checkedKeys, info) => {
+    console.log('onCheck', checkedKeys, info);
+  }, []);
+  const onUpdateOptions = (nextOptions) => {
+    setPageData(nextOptions)
+  }
+  const selectRule = ({type}) => type === "condition"
   return (
     <>
       <div className="display-flex m-t-10 flex-wrap">
-        {listDirectory.map(({id, name, active}) => (
+        {listDirectory.map(({id, name, active, sequence}) => (
             <CardForDirectory
               key={id}
               active={active}
-              onClick={() => onSelect(name)}
+              onClick={() => onSelect(name, sequence)}
             >
               {name}
             </CardForDirectory>
           )
         )}
       </div>
-      <DataSet></DataSet>
+      {/*<DataSet></DataSet>*/}
       <GridContainer className="pos-relative overflow-hidden h-100">
         <CheckboxGroupContainer>
           <CheckboxGroup
@@ -203,30 +235,28 @@ const SelectionCriteriaForNewTask = () => {
         </CheckboxGroupContainer>
       <div className="separator-left p-l-15 m-b-15">
         <ScrollBar>
-          {/*<Tree*/}
-          {/*  style={StyleTree}*/}
-          {/*  onDragStart={onDragStart}*/}
-          {/*  onDragEnter={onDragEnter}*/}
-          {/*  onDrop={onDrop}*/}
-          {/*  showLine*/}
-          {/*  // selectable={false}*/}
-          {/*  setRowCondition={setRowCondition}*/}
-          {/*  draggable*/}
-          {/*  defaultExpandAll*/}
-          {/*  onExpand={onExpand}*/}
-          {/*  defaultSelectedKeys={selectedKey}*/}
-          {/*  defaultCheckedKeys={checked}*/}
-          {/*  onSelect={onSelect}*/}
-          {/*  onCheck={onCheck}*/}
-          {/*  options={pageData}*/}
-          {/*  selectRule={selectRule}*/}
-          {/*  onUpdateOptions={onUpdateOptions}*/}
-          {/*  rowComponent={RowComponent}*/}
-          {/*/>*/}
+          <Tree
+            style={StyleTree}
+            onDragStart={onDragStart}
+            onDragEnter={onDragEnter}
+            onDrop={onDrop}
+            showLine
+            // selectable={false}
+            setRowCondition={setRowCondition}
+            draggable
+            defaultExpandAll
+            onExpand={onExpand}
+            defaultSelectedKeys={selectedKey}
+            defaultCheckedKeys={checked}
+            onSelect={onSelect}
+            onCheck={onCheck}
+            options={pageData}
+            selectRule={selectRule}
+            onUpdateOptions={onUpdateOptions}
+            rowComponent={RowComponent}
+          />
         </ScrollBar>
       </div>
-
-
       </GridContainer>
     </>
   );

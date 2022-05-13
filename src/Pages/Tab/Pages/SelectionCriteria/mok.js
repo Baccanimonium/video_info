@@ -20,26 +20,26 @@ export const treeData = [
                 children: [
                     {
                         id: '15251',
-                        title: 'Нац.телекомпании',
+                        title: 'Нац.телекомпании и Телекомпании',
                         type: "condition",
                         condition: "AND",
                         // icon: Icon,
                         children: [
-                            {
-                                id: 1,
-                                condition: "OR",
-                                title: 'CHE',
-                            },
-                            {
-                                id: 2,
-                                condition: "OR",
-                                title: 'DISNEY CHANNEL',
-                            },
-                            {
-                                id: 3,
-                                condition: "OR",
-                                title: 'DOMASHNIY',
-                            },
+                            // {
+                            //     id: 1,
+                            //     condition: "OR",
+                            //     title: 'CHE',
+                            // },
+                            // {
+                            //     id: 2,
+                            //     condition: "OR",
+                            //     title: 'DISNEY CHANNEL',
+                            // },
+                            // {
+                            //     id: 3,
+                            //     condition: "OR",
+                            //     title: 'DOMASHNIY',
+                            // },
                         ],
                     },
                     {
@@ -48,90 +48,31 @@ export const treeData = [
                         condition: "AND",
                         type: "condition",
                         children: [
-                            {
-                                id: 4,
-                                condition: "OR",
-                                title: 'Анонс с датой',
-                            },
-                            {
-                                id: 5,
-                                condition: "OR",
-                                title: 'Анонс: спонсор',
-                            },
-                            {
-                                id: 8,
-                                condition: "OR",
-                                title: 'Анонс-промо',
-                            },
-                            {
-                                id: 9,
-                                condition: "OR",
-                                title: 'Атрибутика спонсора (декорации)',
-                            },
-                        ],
-                    },
-                ]
-            },
-            {
-                id: "444",
-                condition: "AND",
-                type: "block",
-                children: [
-                    {
-                        id: '0',
-                        title: 'Рекламодатели',
-                        type: "condition",
-                        condition: "AND",
-                        // icon: Icon,
-                        children: [
-                            {
-                                id: 1,
-                                condition: "OR",
-                                title: 'BAYER AG',
-                            },
-                            {
-                                id: 2,
-                                condition: "OR",
-                                title: 'BRITISH-AMERICAN TOBACCO',
-                            },
-                            {
-                                id: 3,
-                                condition: "OR",
-                                title: 'COLGATE-PALMOLIVE',
-                            },
-                        ],
-                    },
-                    {
-                        id: '1',
-                        title: 'Модели',
-                        condition: "AND",
-                        type: "condition",
-                        children: [
-                            {
-                                id: 1,
-                                condition: "OR",
-                                title: 'ADIDAS SPORTS FOOTWEAR',
-                            },
-                            {
-                                id: 2,
-                                condition: "OR",
-                                title: 'ADIDAS SPORTS GOODS',
-                            },
-                            {
-                                id: 3,
-                                condition: "OR",
-                                title: 'ADIDAS-SALOMON AG MANUAFCTURER OF SPORTSWEAR AND FOOTWEAR',
-                            },
-                            {
-                                id: 4,
-                                condition: "OR",
-                                title: 'ALFA-BANK BANKING SERVICES',
-                            },
+                            // {
+                            //     id: 4,
+                            //     condition: "OR",
+                            //     title: 'Анонс с датой',
+                            // },
+                            // {
+                            //     id: 5,
+                            //     condition: "OR",
+                            //     title: 'Анонс: спонсор',
+                            // },
+                            // {
+                            //     id: 8,
+                            //     condition: "OR",
+                            //     title: 'Анонс-промо',
+                            // },
+                            // {
+                            //     id: 9,
+                            //     condition: "OR",
+                            //     title: 'Атрибутика спонсора (декорации)',
+                            // },
                         ],
                     },
                 ]
             }
-        ]
+            ]
     }
 ];
 

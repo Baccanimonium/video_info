@@ -22,13 +22,10 @@ class CheckboxGroup extends Component {
     return reverseMode ? !isAllSelected : isAllSelected
   })
 
-  sortedOptions = memoizeOne((tempQuery, options) => {
-    const { hidSelected } = this.state
-    console.log(hidSelected)
-    if (!tempQuery) return options
-    return hidSelected
-      ? this.hiddenSelected(options)
-      : this.sortOptions(options)
+  sortedOptions = memoizeOne((tempQuery, options, hidSelected) => {
+    if (!tempQuery && !hidSelected) return options
+    if (tempQuery) return this.sortOptions(options)
+    if (hidSelected) return this.hiddenSelected(options)
   })
 
 
@@ -139,7 +136,7 @@ class CheckboxGroup extends Component {
       showToggleIndicator, filterable
     } = this.props
     const { edited, tempQuery, hidSelected } = this.state
-    const checkboxes = this.sortedOptions(tempQuery, options).map(item => {
+    const checkboxes = this.sortedOptions(tempQuery, options, hidSelected).map(item => {
       const { [labelKey]: label } = item
       return (
         <div className="p-r-14 p-l-14" key={label}>
@@ -206,10 +203,11 @@ class CheckboxGroup extends Component {
                 id="hiddenSelected"
                 label="Not"
                 value={hidSelected}
-                className="m-r-5"
+                className="m-r-10"
                 disabled={disabled || loading}
                 onInput={this.editHidSelected}
                 style={style}
+                styleLabel={{paddingLeft: "10px"}}
               />
             </>
           )}

@@ -37,6 +37,7 @@ const Tree = (props) => {
   }, resolver), [childrenKey])
 
   const handleSelectNode = useCallback((selectedState) => {
+
     const { selectRule, onSelect, valueKey } = refProps.current
     if (selectRule(selectedState.node, refProps.current)) {
       onSelect(selectedState)
