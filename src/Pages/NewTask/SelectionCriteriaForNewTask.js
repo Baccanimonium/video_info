@@ -125,7 +125,26 @@ const SelectionCriteriaForNewTask = () => {
       // } else {
       //   tv.children = checkedObject
       // }
-      workVal[0].children[0].children = [ ...workVal[0].children[0].children, child ]
+      console.log(checkedObject)
+      workVal[0].children[0].children = [
+        ...workVal[0].children[0].children,
+        lastIndex[0] === 1
+          ? {
+            id: '15251',
+            title: 'Нац.телекомпании и Телекомпании',
+            type: "condition",
+            condition: "AND",
+            children: checkedObject
+          }
+          :
+          {
+            id: '666',
+            title: 'Тип рекламы',
+            condition: "AND",
+            type: "condition",
+            children: checkedObject
+          }
+      ]
       // workVal[lastIndex].children = checkedObject
       return nextVal
     })
