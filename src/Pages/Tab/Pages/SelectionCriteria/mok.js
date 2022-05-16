@@ -17,62 +17,9 @@ export const treeData = [
                 title: "",
                 condition: "AND",
                 type: "block",
-                children: [
-                    {
-                        id: '15251',
-                        title: 'Нац.телекомпании и Телекомпании',
-                        type: "condition",
-                        condition: "AND",
-                        // icon: Icon,
-                        children: [
-                            // {
-                            //     id: 1,
-                            //     condition: "OR",
-                            //     title: 'CHE',
-                            // },
-                            // {
-                            //     id: 2,
-                            //     condition: "OR",
-                            //     title: 'DISNEY CHANNEL',
-                            // },
-                            // {
-                            //     id: 3,
-                            //     condition: "OR",
-                            //     title: 'DOMASHNIY',
-                            // },
-                        ],
-                    },
-                    {
-                        id: '666',
-                        title: 'Тип рекламы',
-                        condition: "AND",
-                        type: "condition",
-                        children: [
-                            // {
-                            //     id: 4,
-                            //     condition: "OR",
-                            //     title: 'Анонс с датой',
-                            // },
-                            // {
-                            //     id: 5,
-                            //     condition: "OR",
-                            //     title: 'Анонс: спонсор',
-                            // },
-                            // {
-                            //     id: 8,
-                            //     condition: "OR",
-                            //     title: 'Анонс-промо',
-                            // },
-                            // {
-                            //     id: 9,
-                            //     condition: "OR",
-                            //     title: 'Атрибутика спонсора (декорации)',
-                            // },
-                        ],
-                    },
-                ]
+                children: []
             }
-            ]
+        ]
     }
 ];
 
@@ -180,11 +127,6 @@ export const nationalTV = [
     {
         id: 20,
         title: "TVS",
-      condition: "OR"
-    },
-    {
-        id: 21,
-        title: "TV TSENTR",
       condition: "OR"
     },
     {

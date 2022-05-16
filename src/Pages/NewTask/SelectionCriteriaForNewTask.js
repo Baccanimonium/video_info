@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   AdvertisersList, AdvertisingItemsLevel1, AdvertisingItemsLevel2, AdvertisingItemsLevel3, AdvertisingItemsLevel4,
   marking, Models,
@@ -14,79 +14,8 @@ import BsButton from "@/Components/BsButton";
 import RowComponent from "../Tab/Pages/SelectionCriteria/Components/RowComponent";
 import ScrollBar from "react-perfect-scrollbar";
 import Tree from '@/Components/Tree';
+import {listDirectory} from "./config"
 
-const listDirectory = [
-  {
-    id: 1,
-    name: "Нац.телекомпании",
-    active: true,
-    sequence: [0, 0, 0]
-  },
-  {
-    id: 2,
-    name: "Телекомпании",
-    active: true,
-    sequence: [0, 0, 0]
-  },
-  {
-    id: 3,
-    name: "Тип рекламы",
-    active: true,
-    sequence: [0, 0, 1]
-  },
-  {
-    id: 4,
-    name: "Рекламодатели"
-  },
-  {
-    id: 5,
-    name: "Марки"
-  },
-  {
-    id: 6,
-    name: "Суббренды"
-  },
-  {
-    id: 7,
-    name: "Модели"
-  },
-  {
-    id: 8,
-    name: "Предметы рекламы"
-  },
-  {
-    id: 9,
-    name: "TV-списки ID, ListID"
-  },
-  {
-    id: 10,
-    name: "Р/блоки"
-  },
-  {
-    id: 11,
-    name: "Программы"
-  },
-  {
-    id: 12,
-    name: "Ролики"
-  },
-  {
-    id: 13,
-    name: "Признак рекл. кампании"
-  },
-  {
-    id: 14,
-    name: "TV-Виртуальный события"
-  },
-  {
-    id: 15,
-    name: "Дни недели, типы дней"
-  },
-  {
-    id: 16,
-    name: "Статус события"
-  },
-]
 const StyleTree = {width: "600px"}
 
 const SelectionCriteriaForNewTask = () => {
@@ -97,9 +26,11 @@ const SelectionCriteriaForNewTask = () => {
   const [selectedKey, setSelectedKey] = useState([])
   const [checked, setCheckedKey] = useState("")
 
+  useEffect(() => {
+    setCheckedObject([])
+  }, [selectedList])
+
   const onSelect = useCallback((name, sequence) => {
-    // нужно получить children чтобы при выборе критериев в чекбоксах одного справочника
-    // не были выбраны критерии в чекбоксах другого справочника
     switch (name) {
       case "Нац.телекомпании":
         setSelectedList(nationalTV);
@@ -150,7 +81,6 @@ const SelectionCriteriaForNewTask = () => {
         break
     }
     setSelectedKey(sequence)
-    // setCheckedObject(children)
   }, []);
 
   const checkObject = (value) => {
@@ -161,17 +91,42 @@ const SelectionCriteriaForNewTask = () => {
   }
 
   const setNewTree = () => {
+    let tv =  {
+      id: '15251',
+      title: 'Нац.телекомпании и Телекомпании',
+      type: "condition",
+      condition: "AND",
+      children: []
+    }
+    let advertising = {
+      id: '666',
+      title: 'Тип рекламы',
+      condition: "AND",
+      type: "condition",
+      children: []
+    }
     setPageData((pageData) => {
+      // получаем координаты
       const sequence = [...selectedKey]
+      // получаем номер группы
       const lastIndex = sequence.splice(sequence.length - 1, 1)
       let nextVal = [...pageData]
       let workVal = nextVal
-      sequence.forEach((i) => {
-        const {[i]: updatedVal} = workVal
-        workVal[i] = {...updatedVal, children: [...updatedVal.children]}
-        workVal = workVal[i].children
-      })
-      workVal[lastIndex].children = checkedObject
+      // sequence.forEach((i) => {
+      //   // const {[i]: updatedVal} = workVal
+      //   // workVal[i] = {...updatedVal, children: [...updatedVal.children]}
+      //   workVal = workVal[i]
+      // })
+      const child = lastIndex[0] === 1
+        ? advertising.children = checkedObject
+        : tv.children = checkedObject
+      // if (lastIndex[0] === 1) {
+      //   advertising.children = checkedObject
+      // } else {
+      //   tv.children = checkedObject
+      // }
+      workVal[0].children[0].children = [ ...workVal[0].children[0].children, child ]
+      // workVal[lastIndex].children = checkedObject
       return nextVal
     })
   }
@@ -221,16 +176,16 @@ const SelectionCriteriaForNewTask = () => {
             labelKey="title"
             value={checkedObject}
             returnObjects
-            onInput={(value) => checkObject(value)}
+            onInput={checkObject}
           />
           {selectedList.length > 0 &&
-          <BsButton
-            type="button"
-            className="golden btn sign-up-btn color-greyDarken w-18"
-            onClick={setNewTree}
-          >
-            применить
-          </BsButton>
+            <BsButton
+              type="button"
+              className="golden btn sign-up-btn color-greyDarken w-18"
+              onClick={setNewTree}
+            >
+              применить
+            </BsButton>
           }
         </CheckboxGroupContainer>
       <div className="separator-left p-l-15 m-b-15">
