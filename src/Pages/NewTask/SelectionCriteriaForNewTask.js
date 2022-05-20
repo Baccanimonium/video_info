@@ -1,8 +1,16 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {
-  AdvertisersList, AdvertisingItemsLevel1, AdvertisingItemsLevel2, AdvertisingItemsLevel3, AdvertisingItemsLevel4,
-  marking, Models,
-  nationalTV, SubbrandsList, treeData,
+  AdvertisersList,
+  AdvertisingItemsLevel1,
+  AdvertisingItemsLevel2,
+  AdvertisingItemsLevel3,
+  AdvertisingItemsLevel4,
+  GroupDictionary, GroupDictionaryParams,
+  marking,
+  Models,
+  nationalTV,
+  SubbrandsList,
+  treeData,
   TVcompanies,
   TypeOfAdvertisement
 } from "../Tab/Pages/SelectionCriteria/mok";
@@ -21,27 +29,28 @@ const StyleTree = {width: "600px"}
 const SelectionCriteriaForNewTask = () => {
   const [selectedList, setSelectedList] = useState([])
   const [title, setTitle] = useState("")
+  const [dictionaryGroup, setDictionaryGroup] = useState("")
   const [checkedObject, setCheckedObject] = useState([])
   const [pageData, setPageData] = useState(treeData)
   const [selectedKey, setSelectedKey] = useState([])
   const [checked, setCheckedKey] = useState("")
 
-  useEffect(() => {
-    setCheckedObject([])
-  }, [selectedList])
-
-  const onSelect = useCallback((name, sequence) => {
+  const onSelect = useCallback((name) => {
+    let dictionaryGroup
     switch (name) {
       case "Нац.телекомпании":
         setSelectedList(nationalTV);
+        dictionaryGroup = GroupDictionary[nationalTV]
         setTitle("Нац.телекомпании");
         break;
       case "Телекомпании":
         setSelectedList(TVcompanies);
+        dictionaryGroup = GroupDictionary[TVcompanies]
         setTitle("Телекомпании");
         break;
       case "Тип рекламы":
         setSelectedList(TypeOfAdvertisement);
+        dictionaryGroup = GroupDictionary[TypeOfAdvertisement]
         setTitle("Тип рекламы");
         break;
       case "Рекламодатели":
@@ -80,8 +89,15 @@ const SelectionCriteriaForNewTask = () => {
         setSelectedList([])
         break
     }
-    setSelectedKey(sequence)
+    // почему то Телекомпании dictionaryGroup ADVERSMENT_GROUP, а не TV_GROUP
+    setDictionaryGroup(dictionaryGroup)
+    console.log(dictionaryGroup)
+    setCheckedObject(pageData[0].children[0].children.get(dictionaryGroup).children)
   }, []);
+
+  useEffect(() => {
+    setCheckedObject([])
+  }, [selectedList])
 
   const checkObject = (value) => {
     if (checkedObject.some(a => !value.some(i => i.id === a.id))) {
@@ -90,65 +106,22 @@ const SelectionCriteriaForNewTask = () => {
       setCheckedObject(Array.from(new Set(checkedObject.concat(value))))
   }
 
-  const setNewTree = () => {
-    let tv =  {
-      id: '15251',
-      title: 'Нац.телекомпании и Телекомпании',
-      type: "condition",
-      condition: "AND",
-      children: []
-    }
-    let advertising = {
-      id: '666',
-      title: 'Тип рекламы',
-      condition: "AND",
-      type: "condition",
-      children: []
-    }
-    setPageData((pageData) => {
-      // получаем координаты
-      const sequence = [...selectedKey]
-      // получаем номер группы
-      const lastIndex = sequence.splice(sequence.length - 1, 1)
-      let nextVal = [...pageData]
-      let workVal = nextVal
-      // sequence.forEach((i) => {
-      //   // const {[i]: updatedVal} = workVal
-      //   // workVal[i] = {...updatedVal, children: [...updatedVal.children]}
-      //   workVal = workVal[i]
-      // })
-      const child = lastIndex[0] === 1
-        ? advertising.children = checkedObject
-        : tv.children = checkedObject
-      // if (lastIndex[0] === 1) {
-      //   advertising.children = checkedObject
-      // } else {
-      //   tv.children = checkedObject
-      // }
-      console.log(checkedObject)
-      workVal[0].children[0].children = [
-        ...workVal[0].children[0].children,
-        lastIndex[0] === 1
-          ? {
-            id: '15251',
-            title: 'Нац.телекомпании и Телекомпании',
-            type: "condition",
-            condition: "AND",
-            children: checkedObject
-          }
-          :
-          {
-            id: '666',
-            title: 'Тип рекламы',
-            condition: "AND",
-            type: "condition",
-            children: checkedObject
-          }
-      ]
-      // workVal[lastIndex].children = checkedObject
-      return nextVal
-    })
-  }
+  const setNewTree = useCallback(() => {
+    setPageData(([{ children: [{children, ...secondLvlChildrenData}, ...restChildren], ...pageData }]) => {
+      const newChildren = new Map(children)
+      if (!newChildren.has(dictionaryGroup)) {
+        newChildren.set(dictionaryGroup, {
+          ...GroupDictionaryParams[dictionaryGroup],
+          children: checkedObject
+        })
+      } else {
+        newChildren.set(dictionaryGroup, { ...newChildren.get(dictionaryGroup), children: checkedObject })
+      }
+      return [{
+      ...pageData,
+      children: [{...secondLvlChildrenData, children: newChildren }, ...restChildren]
+    }]})
+  }, [dictionaryGroup, checkedObject, pageData])
   const onDragStart = (info) => {
     console.log("onDragStart", info)
   }
@@ -171,21 +144,32 @@ const SelectionCriteriaForNewTask = () => {
     setPageData(nextOptions)
   }
   const selectRule = ({type}) => type === "condition"
+
+  const treeUnwrappedData = useMemo(() => {
+    return pageData.map(({ children, ...firstLvlData}) => ({
+      ...firstLvlData,
+      children: children.map(({ children: secondLvlChildren, ...secondLvlData }) => ({
+        ...secondLvlData,
+        children: Array.from(secondLvlChildren, (({ 1: v}) => v))
+      }))
+    }))
+
+  }, [pageData])
+
   return (
     <>
       <div className="display-flex m-t-10 flex-wrap">
-        {listDirectory.map(({id, name, active, sequence}) => (
+        {listDirectory.map(({id, name, active, nameGroup}) => (
             <CardForDirectory
               key={id}
               active={active}
-              onClick={() => onSelect(name, sequence)}
+              onClick={() => onSelect(name, nameGroup)}
             >
               {name}
             </CardForDirectory>
           )
         )}
       </div>
-      {/*<DataSet></DataSet>*/}
       <GridContainer className="pos-relative overflow-hidden h-100">
         <CheckboxGroupContainer>
           <CheckboxGroup
@@ -207,7 +191,7 @@ const SelectionCriteriaForNewTask = () => {
             </BsButton>
           }
         </CheckboxGroupContainer>
-      <div className="separator-left p-l-15 m-b-15">
+      <div className="separator-left p-l-15 m-b-15 overflow-hidden">
         <ScrollBar>
           <Tree
             style={StyleTree}
@@ -224,7 +208,7 @@ const SelectionCriteriaForNewTask = () => {
             defaultCheckedKeys={checked}
             onSelect={onSelect}
             onCheck={onCheck}
-            options={pageData}
+            options={treeUnwrappedData}
             selectRule={selectRule}
             onUpdateOptions={onUpdateOptions}
             rowComponent={RowComponent}

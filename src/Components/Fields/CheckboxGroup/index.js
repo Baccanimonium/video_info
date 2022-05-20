@@ -136,7 +136,7 @@ class CheckboxGroup extends Component {
       showToggleIndicator, filterable
     } = this.props
     const { edited, tempQuery, hidSelected } = this.state
-    const checkboxes = this.sortedOptions(tempQuery, options, hidSelected).map(item => {
+    const checkboxes = this.sortedOptions(tempQuery, options, hidSelected)?.map(item => {
       const { [labelKey]: label } = item
       return (
         <div className="p-r-14 p-l-14" key={label}>

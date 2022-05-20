@@ -23,8 +23,9 @@ import { PRESENT_DATE_FORMAT } from "@/constants"
 import { BsCalendar, BsCalendar3, BsCalendar4, BsCalendar3Range } from 'react-icons/bs';
 import {VscChecklist} from 'react-icons/vsc';
 import {editConfig, editConfigIntervalRange, editConfigTimeRange, configForBtnCalendar} from "./config"
-import DataSet from "../Tab/Pages/SelectionCriteria";
 import SelectionCriteriaForNewTask from "./SelectionCriteriaForNewTask";
+
+// при изменении источника данных данные в дереве менять
 
 
 const NewTask = ({openModalWindow, updateState, state}) => {
@@ -173,7 +174,8 @@ const NewTask = ({openModalWindow, updateState, state}) => {
                           className="display-flex flex-column j-c-center p-10 h-100"
                         >
                           {
-                            Object.keys(dataSource).length > 0 && !changeSourceMenu ? (
+                            Object.keys(dataSource).length > 0 && !changeSourceMenu
+                            ? (
                               <div className="display-flex fd-column p-8">
                                 <span
                                   onClick={changeDataSource}
@@ -188,10 +190,10 @@ const NewTask = ({openModalWindow, updateState, state}) => {
                             )
                             :
                             (
-                            <DataSourceModal
-                              selectSource={selectSource}
-                              setSelectedSource={setSelectedSource}
-                            />
+                              <DataSourceModal
+                                selectSource={selectSource}
+                                setSelectedSource={setSelectedSource}
+                              />
                             )
                           }
                         </OverlayMenu>

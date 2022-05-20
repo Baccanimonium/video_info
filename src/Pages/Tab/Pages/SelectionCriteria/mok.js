@@ -1,158 +1,141 @@
 import style from "./style.less"
 
 const Icon = () => (
-    <span
-        className="parent-icon"
-    />
+  <span
+    className="parent-icon"
+  />
 )
-
-export const treeData = [
-    {
-        id: "fdgdsf0gdfg",
-        title: "MEDIA SCOPE",
-        type: "head",
-        children: [
-            {
-                id: "123123",
-                title: "",
-                condition: "AND",
-                type: "block",
-                children: []
-            }
-        ]
-    }
-];
 
 export const nationalTV = [
     {
         id: 1,
         title: "N/A",
-        condition: "OR"
+        condition: "OR",
     },
     {
         id: 2,
         title: "PERVY KANAL",
-        condition: "OR"
+        condition: "OR",
     },
     {
         id: 3,
         title: "ROSSIYA 1",
-        condition: "OR"
+        condition: "OR",
     },
     {
         id: 4,
         title: "NTV",
-        condition: "OR"
+        condition: "OR",
     },
     {
         id: 5,
         title: "TV-6",
-        condition: "OR"
+        condition: "OR",
     },
     {
         id: 6,
         title: "MIR",
-        condition: "OR"
+        condition: "OR",
     },
     {
         id: 7,
         title: "STS",
-        condition: "OR"
+        condition: "OR",
     },
     {
         id: 8,
         title: "TV TSENTR",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 9,
         title: "ROSSIYA K",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 10,
         title: "STS LOVE",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 11,
         title: "KARUSEL",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 12,
         title: "REN TV",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 14,
         title: "TNT",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 15,
         title: "DISNEY CHANNEL",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 16,
         title: "MUZ TV",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 17,
         title: "FRIDAY",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 18,
         title: "U",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 17,
         title: "TV-3",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 18,
         title: "TV-6: TEMPORARY BROADCASTING",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 19,
         title: "SEMYORKA",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 20,
         title: "TVS",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 22,
         title: "EURONEWS",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 23,
         title: "RAMBLER",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 24,
         title: "CHE",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 25,
         title: "ROSSIYA 2",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 26,
         title: "DOMASHNIY",
-      condition: "OR"
+        condition: "OR"
     },
     {
         id: 27,
@@ -269,32 +252,32 @@ export const TVcompanies = [
     {
         id: 3,
         title: "EURONEWS / 33 VIRT. (MOSCOW)",
-        condition: "OR",
+        condition: "OR"
     },
     {
         id: 4,
         title: "FRIDAY / KA (MOSCOW)",
-        condition: "OR",
+        condition: "OR"
     },
     {
         id: 5,
         title: "KULTURA TILL 04.2003 / 33 (MOSCOW)",
-        condition: "OR",
+        condition: "OR"
     },
     {
         id: 6,
         title: "MUZ TV (MOSCOW)",
-        condition: "OR",
+        condition: "OR"
     },
     {
         id: 7,
         title: "M1 / 31 (MOSCOW)",
-        condition: "OR",
+        condition: "OR"
     },
     {
         id: 8,
         title: "MUZ NTV / KA (MOSCOW)",
-        condition: "OR",
+        condition: "OR"
     },
     {
         id: 9,
@@ -406,52 +389,61 @@ export const TypeOfAdvertisement = [
     {
         id: 1,
         title: "Анонс без даты",
-        condition: "OR",
+        condition: "OR"
+
     },
     {
         id: 2,
         title: "Анонс: заставка блока без даты",
-        condition: "OR",
+        condition: "OR"
     },
     {
         id: 3,
         title: "Анонс: заставка блока с датой",
-        condition: "OR",
+        condition: "OR"
+
     },
     {
         id: 4,
         title: "Анонс с датой",
-        condition: "OR",
+        condition: "OR"
+
     },
     {
         id: 5,
         title: "Анонс: спонсор",
-        condition: "OR",
+        condition: "OR"
+
     },
     {
         id: 6,
         title: "Анонс: спонсорская заставка",
-        condition: "OR",
+        condition: "OR"
+
     },
     {
         id: 7,
         title: "Анонс: упоминание спонсора",
-        condition: "OR",
+        condition: "OR"
+
     },
     {
         id: 8,
         title: "Анонс-промо",
-        condition: "OR",
+        condition: "OR"
+
     },
     {
         id: 9,
         title: "Атрибутика спонсора (декорации)",
-        condition: "OR",
+        condition: "OR"
+
     },
     {
         id: 10,
         title: "Атрибутика спонсора (одежда)",
-        condition: "OR",
+        condition: "OR"
+
     },
     {
         id: 11,
@@ -1607,5 +1599,46 @@ export const AdvertisingItemsLevel4 = [
         condition: "OR",
     }
 ]
+
+const TV_GROUP = "TV_GROUP"
+const ADVERSMENT_GROUP = 'ADVERSMENT_GROUP'
+
+export const GroupDictionary = {
+  [nationalTV]: TV_GROUP,
+  [TVcompanies]: TV_GROUP,
+  [TypeOfAdvertisement]: ADVERSMENT_GROUP
+}
+
+export const GroupDictionaryParams = {
+    [TV_GROUP]: {
+        id: '15251',
+        title: 'Нац.телекомпании',
+        type: "condition",
+        condition: "AND",
+    },
+    [ADVERSMENT_GROUP]: {
+        id: '666',
+        title: 'Тип рекламы',
+        condition: "AND",
+        type: "condition",
+    }
+}
+
+export const treeData = [
+  {
+    id: "fdgdsf0gdfg",
+    title: "MEDIA SCOPE",
+    type: "head",
+    children: [
+      {
+        id: "123123",
+        title: "",
+        condition: "AND",
+        type: "block",
+        children: new Map([])
+      }
+    ]
+  }
+];
 
 
