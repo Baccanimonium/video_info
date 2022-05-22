@@ -5,448 +5,452 @@ const Icon = () => (
     className="parent-icon"
   />
 )
+export const nationalTV = 'nationalTV'
+export const TVcompanies = 'TVcompanies'
+export const TypeOfAdvertisement = 'TypeOfAdvertisement'
 
-export const nationalTV = [
-    {
-        id: 1,
-        title: "N/A",
-        condition: "OR",
-    },
-    {
-        id: 2,
-        title: "PERVY KANAL",
-        condition: "OR",
-    },
-    {
-        id: 3,
-        title: "ROSSIYA 1",
-        condition: "OR",
-    },
-    {
-        id: 4,
-        title: "NTV",
-        condition: "OR",
-    },
-    {
-        id: 5,
-        title: "TV-6",
-        condition: "OR",
-    },
-    {
-        id: 6,
-        title: "MIR",
-        condition: "OR",
-    },
-    {
-        id: 7,
-        title: "STS",
-        condition: "OR",
-    },
-    {
-        id: 8,
-        title: "TV TSENTR",
-        condition: "OR"
-    },
-    {
-        id: 9,
-        title: "ROSSIYA K",
-        condition: "OR"
-    },
-    {
-        id: 10,
-        title: "STS LOVE",
-        condition: "OR"
-    },
+export const dictionary = {
+    [nationalTV]: [
+        {
+            id: 1,
+            title: "N/A",
+            condition: "OR",
+        },
+        {
+            id: 2,
+            title: "PERVY KANAL",
+            condition: "OR",
+        },
+        {
+            id: 3,
+            title: "ROSSIYA 1",
+            condition: "OR",
+        },
+        {
+            id: 4,
+            title: "NTV",
+            condition: "OR",
+        },
+        {
+            id: 5,
+            title: "TV-6",
+            condition: "OR",
+        },
+        {
+            id: 6,
+            title: "MIR",
+            condition: "OR",
+        },
+        {
+            id: 7,
+            title: "STS",
+            condition: "OR",
+        },
+        {
+            id: 8,
+            title: "TV TSENTR",
+            condition: "OR"
+        },
+        {
+            id: 9,
+            title: "ROSSIYA K",
+            condition: "OR"
+        },
+        {
+            id: 10,
+            title: "STS LOVE",
+            condition: "OR"
+        },
+        {
+            id: 11,
+            title: "KARUSEL",
+            condition: "OR"
+        },
+        {
+            id: 12,
+            title: "REN TV",
+            condition: "OR"
+        },
+        {
+            id: 14,
+            title: "TNT",
+            condition: "OR"
+        },
+        {
+            id: 15,
+            title: "DISNEY CHANNEL",
+            condition: "OR"
+        },
+        {
+            id: 16,
+            title: "MUZ TV",
+            condition: "OR"
+        },
+        {
+            id: 17,
+            title: "FRIDAY",
+            condition: "OR"
+        },
+        {
+            id: 18,
+            title: "U",
+            condition: "OR"
+        },
+        {
+            id: 17,
+            title: "TV-3",
+            condition: "OR"
+        },
+        {
+            id: 18,
+            title: "TV-6: TEMPORARY BROADCASTING",
+            condition: "OR"
+        },
+        {
+            id: 19,
+            title: "SEMYORKA",
+            condition: "OR"
+        },
+        {
+            id: 20,
+            title: "TVS",
+            condition: "OR"
+        },
+        {
+            id: 22,
+            title: "EURONEWS",
+            condition: "OR"
+        },
+        {
+            id: 23,
+            title: "RAMBLER",
+            condition: "OR"
+        },
+        {
+            id: 24,
+            title: "CHE",
+            condition: "OR"
+        },
+        {
+            id: 25,
+            title: "ROSSIYA 2",
+            condition: "OR"
+        },
+        {
+            id: 26,
+            title: "DOMASHNIY",
+            condition: "OR"
+        },
+        {
+            id: 27,
+            title: "ZVEZDA",
+            condition: "OR"
+        },
+        {
+            id: 28,
+            title: "PYATY KANAL",
+            condition: "OR"
+        },
+        {
+            id: 29,
+            title: "ROSSIYA 24",
+            condition: "OR"
+        },
+        {
+            id: 30,
+            title: "2X2",
+            condition: "OR"
+        },
+        {
+            id: 31,
+            title: "MEASURED LOCAL TV",
+            condition: "OR"
+        },
+        {
+            id: 32,
+            title: "VIDEO",
+            condition: "OR"
+        },
+        {
+            id: 33,
+            title: "MEASURED THEMATIC TV",
+            condition: "OR"
+        },
+        {
+            id: 34,
+            title: "OTHER",
+            condition: "OR"
+        },
+        {
+            id: 35,
+            title: "MATCH TV",
+            condition: "OR"
+        },
+        {
+            id: 36,
+            title: "TNT 4",
+            condition: "OR"
+        },
+        {
+            id: 37,
+            title: "DISCOVERY CHANNEL (TILL 31/12/2019)",
+            condition: "OR"
+        },
+        {
+            id: 38,
+            title: "DOM KINO",
+            condition: "OR"
+        },
+        {
+            id: 39,
+            title: "AD CHANNELS",
+            condition: "OR"
+        },
+        {
+            id: 40,
+            title: "MULT",
+            condition: "OR"
+        },
+        {
+            id: 41,
+            title: "SUBBOTA",
+            condition: "OR"
+        },
+        {
+            id: 42,
+            title: "EVRONOVOSTI",
+            condition: "OR"
+        },
+        {
+            id: 43,
+            title: "SPAS",
+            condition: "OR"
+        },
+        {
+            id: 44,
+            title: "OTHER TV SET",
+            condition: "OR"
+        },
+        {
+            id: 45,
+            title: "OTR (TILL 31/12/2020)",
+            condition: "OR"
+        },
+        {
+            id: 46,
+            title: "SOLOVIEVLIVE",
+            condition: "OR"
+        },
+    ],
+    [TVcompanies]: [
+        {
+            id: 111,
+            title: "CHE / KA (MOSCOW)",
+            condition: "OR"
+        },
+        {
+            id: 222,
+            title: "DISCOVERY CHANNEL (TILL 31/12/2019) (NETWORK BROADCASTING)",
+            condition: "OR"
+        },
+        {
+            id: 333,
+            title: "EURONEWS / 33 VIRT. (MOSCOW)",
+            condition: "OR"
+        },
+        {
+            id: 444,
+            title: "FRIDAY / KA (MOSCOW)",
+            condition: "OR"
+        },
+        {
+            id: 555,
+            title: "KULTURA TILL 04.2003 / 33 (MOSCOW)",
+            condition: "OR"
+        },
+        {
+            id: 6,
+            title: "MUZ TV (MOSCOW)",
+            condition: "OR"
+        },
+        {
+            id: 7,
+            title: "M1 / 31 (MOSCOW)",
+            condition: "OR"
+        },
+        {
+            id: 8,
+            title: "MUZ NTV / KA (MOSCOW)",
+            condition: "OR"
+        },
+        {
+            id: 9,
+            title: "PERVY KANAL / KA (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 10,
+            title: "PERVY KANAL (NETWORK BROADCASTING)",
+            condition: "OR",
+        },
+        {
+            id: 11,
+            title: "PYATY KANAL / SP (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 12,
+            title: "REN TV / KA (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 13,
+            title: "ROSSIYA 1 / KA (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 14,
+            title: "ROSSIYA 1 (NETWORK BROADCASTING)",
+            condition: "OR",
+        },
+        {
+            id: 15,
+            title: "ROSSIYA 24 / KA (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 16,
+            title: "ROSSIYA 24 (NETWORK BROADCASTING)",
+            condition: "OR",
+        },
+        {
+            id: 17,
+            title: "STS / KA (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 18,
+            title: "TELEEXPO / FRIDAY (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 17,
+            title: "TLC (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 18,
+            title: "TNT / KA (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 19,
+            title: "TV STOLITSA / KA (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 20,
+            title: "TV TSENTR (NETWORK BROADCASTING)",
+            condition: "OR",
+        },
+        {
+            id: 21,
+            title: "TV TSENTR TILL 05.2005 / 03 (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 22,
+            title: "TVS / 06 (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 23,
+            title: "TV-3 / KA (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 24,
+            title: "TV-6 / 06 (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 25,
+            title: "U / KA (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 26,
+            title: "VESTI / SP (MOSCOW)",
+            condition: "OR",
+        },
+        {
+            id: 27,
+            title: "3 KANAL / 03 VIRT. (MOSCOW)",
+            condition: "OR",
+        },
+    ],
+    [TypeOfAdvertisement]: [
     {
         id: 11,
-        title: "KARUSEL",
-        condition: "OR"
-    },
-    {
-        id: 12,
-        title: "REN TV",
-        condition: "OR"
-    },
-    {
-        id: 14,
-        title: "TNT",
-        condition: "OR"
-    },
-    {
-        id: 15,
-        title: "DISNEY CHANNEL",
-        condition: "OR"
-    },
-    {
-        id: 16,
-        title: "MUZ TV",
-        condition: "OR"
-    },
-    {
-        id: 17,
-        title: "FRIDAY",
-        condition: "OR"
-    },
-    {
-        id: 18,
-        title: "U",
-        condition: "OR"
-    },
-    {
-        id: 17,
-        title: "TV-3",
-        condition: "OR"
-    },
-    {
-        id: 18,
-        title: "TV-6: TEMPORARY BROADCASTING",
-        condition: "OR"
-    },
-    {
-        id: 19,
-        title: "SEMYORKA",
-        condition: "OR"
-    },
-    {
-        id: 20,
-        title: "TVS",
-        condition: "OR"
-    },
-    {
-        id: 22,
-        title: "EURONEWS",
-        condition: "OR"
-    },
-    {
-        id: 23,
-        title: "RAMBLER",
-        condition: "OR"
-    },
-    {
-        id: 24,
-        title: "CHE",
-        condition: "OR"
-    },
-    {
-        id: 25,
-        title: "ROSSIYA 2",
-        condition: "OR"
-    },
-    {
-        id: 26,
-        title: "DOMASHNIY",
-        condition: "OR"
-    },
-    {
-        id: 27,
-        title: "ZVEZDA",
-        condition: "OR"
-    },
-    {
-        id: 28,
-        title: "PYATY KANAL",
-        condition: "OR"
-    },
-    {
-        id: 29,
-        title: "ROSSIYA 24",
-        condition: "OR"
-    },
-    {
-        id: 30,
-        title: "2X2",
-        condition: "OR"
-    },
-    {
-        id: 31,
-        title: "MEASURED LOCAL TV",
-        condition: "OR"
-    },
-    {
-        id: 32,
-        title: "VIDEO",
-        condition: "OR"
-    },
-    {
-        id: 33,
-        title: "MEASURED THEMATIC TV",
-        condition: "OR"
-    },
-    {
-        id: 34,
-        title: "OTHER",
-        condition: "OR"
-    },
-    {
-        id: 35,
-        title: "MATCH TV",
-        condition: "OR"
-    },
-    {
-        id: 36,
-        title: "TNT 4",
-        condition: "OR"
-    },
-    {
-        id: 37,
-        title: "DISCOVERY CHANNEL (TILL 31/12/2019)",
-        condition: "OR"
-    },
-    {
-        id: 38,
-        title: "DOM KINO",
-        condition: "OR"
-    },
-    {
-        id: 39,
-        title: "AD CHANNELS",
-        condition: "OR"
-    },
-    {
-        id: 40,
-        title: "MULT",
-        condition: "OR"
-    },
-    {
-        id: 41,
-        title: "SUBBOTA",
-        condition: "OR"
-    },
-    {
-        id: 42,
-        title: "EVRONOVOSTI",
-        condition: "OR"
-    },
-    {
-        id: 43,
-        title: "SPAS",
-        condition: "OR"
-    },
-    {
-        id: 44,
-        title: "OTHER TV SET",
-        condition: "OR"
-    },
-    {
-        id: 45,
-        title: "OTR (TILL 31/12/2020)",
-        condition: "OR"
-    },
-    {
-        id: 46,
-        title: "SOLOVIEVLIVE",
-        condition: "OR"
-    },
-]
-export const TVcompanies = [
-    {
-        id: 1,
-        title: "CHE / KA (MOSCOW)",
-        condition: "OR"
-    },
-    {
-        id: 2,
-        title: "DISCOVERY CHANNEL (TILL 31/12/2019) (NETWORK BROADCASTING)",
-        condition: "OR"
-    },
-    {
-        id: 3,
-        title: "EURONEWS / 33 VIRT. (MOSCOW)",
-        condition: "OR"
-    },
-    {
-        id: 4,
-        title: "FRIDAY / KA (MOSCOW)",
-        condition: "OR"
-    },
-    {
-        id: 5,
-        title: "KULTURA TILL 04.2003 / 33 (MOSCOW)",
-        condition: "OR"
-    },
-    {
-        id: 6,
-        title: "MUZ TV (MOSCOW)",
-        condition: "OR"
-    },
-    {
-        id: 7,
-        title: "M1 / 31 (MOSCOW)",
-        condition: "OR"
-    },
-    {
-        id: 8,
-        title: "MUZ NTV / KA (MOSCOW)",
-        condition: "OR"
-    },
-    {
-        id: 9,
-        title: "PERVY KANAL / KA (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 10,
-        title: "PERVY KANAL (NETWORK BROADCASTING)",
-        condition: "OR",
-    },
-    {
-        id: 11,
-        title: "PYATY KANAL / SP (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 12,
-        title: "REN TV / KA (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 13,
-        title: "ROSSIYA 1 / KA (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 14,
-        title: "ROSSIYA 1 (NETWORK BROADCASTING)",
-        condition: "OR",
-    },
-    {
-        id: 15,
-        title: "ROSSIYA 24 / KA (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 16,
-        title: "ROSSIYA 24 (NETWORK BROADCASTING)",
-        condition: "OR",
-    },
-    {
-        id: 17,
-        title: "STS / KA (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 18,
-        title: "TELEEXPO / FRIDAY (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 17,
-        title: "TLC (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 18,
-        title: "TNT / KA (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 19,
-        title: "TV STOLITSA / KA (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 20,
-        title: "TV TSENTR (NETWORK BROADCASTING)",
-        condition: "OR",
-    },
-    {
-        id: 21,
-        title: "TV TSENTR TILL 05.2005 / 03 (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 22,
-        title: "TVS / 06 (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 23,
-        title: "TV-3 / KA (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 24,
-        title: "TV-6 / 06 (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 25,
-        title: "U / KA (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 26,
-        title: "VESTI / SP (MOSCOW)",
-        condition: "OR",
-    },
-    {
-        id: 27,
-        title: "3 KANAL / 03 VIRT. (MOSCOW)",
-        condition: "OR",
-    },
-]
-export const TypeOfAdvertisement = [
-    {
-        id: 1,
         title: "Анонс без даты",
         condition: "OR"
 
     },
     {
-        id: 2,
+        id: 22,
         title: "Анонс: заставка блока без даты",
         condition: "OR"
     },
     {
-        id: 3,
+        id: 33,
         title: "Анонс: заставка блока с датой",
         condition: "OR"
 
     },
     {
-        id: 4,
+        id: 44,
         title: "Анонс с датой",
         condition: "OR"
 
     },
     {
-        id: 5,
+        id: 55,
         title: "Анонс: спонсор",
         condition: "OR"
 
     },
     {
-        id: 6,
+        id: 66,
         title: "Анонс: спонсорская заставка",
         condition: "OR"
 
     },
     {
-        id: 7,
+        id: 77,
         title: "Анонс: упоминание спонсора",
         condition: "OR"
 
     },
     {
-        id: 8,
+        id: 88,
         title: "Анонс-промо",
         condition: "OR"
 
     },
     {
-        id: 9,
+        id: 993,
         title: "Атрибутика спонсора (декорации)",
         condition: "OR"
 
     },
     {
-        id: 10,
+        id: 1000,
         title: "Атрибутика спонсора (одежда)",
         condition: "OR"
 
     },
     {
-        id: 11,
+        id: 1541,
         title: "Атрибутика спонсора (продукция)",
         condition: "OR",
     },
@@ -540,6 +544,8 @@ export const TypeOfAdvertisement = [
         title: "3D-анимированная заставка"
     }
 ]
+}
+
 export const AdvertisersList = [
     {
         id: 1,
@@ -1623,22 +1629,73 @@ export const GroupDictionaryParams = {
         type: "condition",
     }
 }
-
+// pageData
 export const treeData = [
   {
     id: "fdgdsf0gdfg",
     title: "MEDIA SCOPE",
     type: "head",
     children: [
+      // secondLvlChildrenData
       {
         id: "123123",
         title: "",
         condition: "AND",
         type: "block",
-        children: new Map([])
+        children: new Map([
+            // [
+            //   TV_GROUP,
+            //   {
+            //     id: '15251',
+            //     title: 'Нац.телекомпании',
+            //     type: "condition",
+            //     condition: "AND",
+            //     name: "nationalTVGroup",
+            //     // icon: Icon,
+            //     children: [
+            //         {
+            //             id: 1,
+            //             title: "N/A",
+            //             condition: "OR",
+            //         },
+            //     ],
+            //   }],
+            // [
+            //   ADVERSMENT_GROUP,
+            //   {
+            //     id: '666',
+            //     title: 'Тип рекламы',
+            //     condition: "AND",
+            //     type: "condition",
+            //     name: "TypeOfAdvertisementGroup",
+            //     children: [
+            //         {
+            //             id: 1,
+            //             title: "Анонс без даты",
+            //             condition: "OR"
+            //
+            //         },
+            //     ],
+            //   }
+            // ],
+        ])
       }
     ]
   }
 ];
+// третий уровень
+// {
+//   "id": "666",
+//   "title": "Тип рекламы",
+//   "condition": "AND",
+//   "type": "condition",
+//   "children": [
+//     {
+//       "id": 1,
+//       "title": "Анонс без даты",
+//       "condition": "OR"
+//     }
+//   ]
+// }
 
 

@@ -12,7 +12,7 @@ import {
   SubbrandsList,
   treeData,
   TVcompanies,
-  TypeOfAdvertisement
+  TypeOfAdvertisement, dictionary
 } from "../Tab/Pages/SelectionCriteria/mok";
 import {CardForDirectory} from "./styles";
 import DataSet from "../Tab/Pages/SelectionCriteria";
@@ -23,6 +23,9 @@ import RowComponent from "../Tab/Pages/SelectionCriteria/Components/RowComponent
 import ScrollBar from "react-perfect-scrollbar";
 import Tree from '@/Components/Tree';
 import {listDirectory} from "./config"
+
+/// чтобы айди в чекбоксах не совпадали нужно добавлять в айди название справочника
+// id: "nationalTV/1"
 
 const StyleTree = {width: "600px"}
 
@@ -39,17 +42,17 @@ const SelectionCriteriaForNewTask = () => {
     let dictionaryGroup
     switch (name) {
       case "Нац.телекомпании":
-        setSelectedList(nationalTV);
+        setSelectedList(dictionary[nationalTV]);
         dictionaryGroup = GroupDictionary[nationalTV]
         setTitle("Нац.телекомпании");
         break;
       case "Телекомпании":
-        setSelectedList(TVcompanies);
+        setSelectedList(dictionary[TVcompanies]);
         dictionaryGroup = GroupDictionary[TVcompanies]
         setTitle("Телекомпании");
         break;
       case "Тип рекламы":
-        setSelectedList(TypeOfAdvertisement);
+        setSelectedList(dictionary[TypeOfAdvertisement]);
         dictionaryGroup = GroupDictionary[TypeOfAdvertisement]
         setTitle("Тип рекламы");
         break;
@@ -89,36 +92,47 @@ const SelectionCriteriaForNewTask = () => {
         setSelectedList([])
         break
     }
-    // почему то Телекомпании dictionaryGroup ADVERSMENT_GROUP, а не TV_GROUP
     setDictionaryGroup(dictionaryGroup)
-    console.log(dictionaryGroup)
     setCheckedObject(pageData[0].children[0].children.get(dictionaryGroup).children)
-  }, []);
-
-  useEffect(() => {
-    setCheckedObject([])
-  }, [selectedList])
+  }, [pageData]);
 
   const checkObject = (value) => {
     if (checkedObject.some(a => !value.some(i => i.id === a.id))) {
       setCheckedObject(value)
-    } else
+    } else {
       setCheckedObject(Array.from(new Set(checkedObject.concat(value))))
+    }
   }
 
   const setNewTree = useCallback(() => {
     setPageData(([{ children: [{children, ...secondLvlChildrenData}, ...restChildren], ...pageData }]) => {
+      // создаем нового ребенка
       const newChildren = new Map(children)
+      // если в данных в группе нет
       if (!newChildren.has(dictionaryGroup)) {
+        // то добавляем данные
         newChildren.set(dictionaryGroup, {
           ...GroupDictionaryParams[dictionaryGroup],
           children: checkedObject
         })
+        // если данные в группе есть
       } else {
-        newChildren.set(dictionaryGroup, { ...newChildren.get(dictionaryGroup), children: checkedObject })
+        // массив старых данных
+        // children.get(dictionaryGroup).children - [{}]
+        // checkedObject - [{}]
+        // то кладем старые данные и новые
+        newChildren.set(dictionaryGroup, {
+          ...newChildren.get(dictionaryGroup),
+          // тут перезаписывается критерий, если выбран критерий одной и той же группы
+          children: checkedObject
+        })
       }
+      // secondLvlChildrenData данные второго уровня
+      // restChildren остальные дети?
       return [{
+        // записываем старые данные,
       ...pageData,
+        // в children первого уровня записываем данные второго уровня и его children с данными группы
       children: [{...secondLvlChildrenData, children: newChildren }, ...restChildren]
     }]})
   }, [dictionaryGroup, checkedObject, pageData])
@@ -145,6 +159,7 @@ const SelectionCriteriaForNewTask = () => {
   }
   const selectRule = ({type}) => type === "condition"
 
+  // создаем данные дерева с критериями-массивами, а не мапами
   const treeUnwrappedData = useMemo(() => {
     return pageData.map(({ children, ...firstLvlData}) => ({
       ...firstLvlData,
@@ -153,9 +168,7 @@ const SelectionCriteriaForNewTask = () => {
         children: Array.from(secondLvlChildren, (({ 1: v}) => v))
       }))
     }))
-
   }, [pageData])
-
   return (
     <>
       <div className="display-flex m-t-10 flex-wrap">
