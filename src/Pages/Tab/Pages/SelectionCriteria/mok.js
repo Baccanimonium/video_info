@@ -269,122 +269,122 @@ export const dictionary = {
             condition: "OR"
         },
         {
-            id: 6,
+            id: 666,
             title: "MUZ TV (MOSCOW)",
             condition: "OR"
         },
         {
-            id: 7,
+            id: 777,
             title: "M1 / 31 (MOSCOW)",
             condition: "OR"
         },
         {
-            id: 8,
+            id: 888,
             title: "MUZ NTV / KA (MOSCOW)",
             condition: "OR"
         },
         {
-            id: 9,
+            id: 999,
             title: "PERVY KANAL / KA (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 10,
+            id: 1000525,
             title: "PERVY KANAL (NETWORK BROADCASTING)",
             condition: "OR",
         },
         {
-            id: 11,
+            id: 11424,
             title: "PYATY KANAL / SP (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 12,
+            id: 15242,
             title: "REN TV / KA (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 13,
+            id: 14243,
             title: "ROSSIYA 1 / KA (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 14,
+            id: 14244,
             title: "ROSSIYA 1 (NETWORK BROADCASTING)",
             condition: "OR",
         },
         {
-            id: 15,
+            id: 4215,
             title: "ROSSIYA 24 / KA (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 16,
+            id: 145246,
             title: "ROSSIYA 24 (NETWORK BROADCASTING)",
             condition: "OR",
         },
         {
-            id: 17,
+            id: 145247,
             title: "STS / KA (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 18,
+            id: 14528,
             title: "TELEEXPO / FRIDAY (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 17,
+            id: 1745,
             title: "TLC (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 18,
+            id: 1458,
             title: "TNT / KA (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 19,
+            id: 195,
             title: "TV STOLITSA / KA (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 20,
+            id: 2054,
             title: "TV TSENTR (NETWORK BROADCASTING)",
             condition: "OR",
         },
         {
-            id: 21,
+            id: 231,
             title: "TV TSENTR TILL 05.2005 / 03 (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 22,
+            id: 2542,
             title: "TVS / 06 (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 23,
+            id: 235,
             title: "TV-3 / KA (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 24,
+            id: 244,
             title: "TV-6 / 06 (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 25,
+            id: 254,
             title: "U / KA (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 26,
+            id: 226,
             title: "VESTI / SP (MOSCOW)",
             condition: "OR",
         },
         {
-            id: 27,
+            id: 274,
             title: "3 KANAL / 03 VIRT. (MOSCOW)",
             condition: "OR",
         },
@@ -455,67 +455,67 @@ export const dictionary = {
         condition: "OR",
     },
     {
-        id: 12,
+        id: 12445,
         title: "Аудио/видео наименование юр.лица",
         condition: "OR",
     },
     {
-        id: 13,
+        id: 14533,
         title: "Благодарность в титрах",
         condition: "OR",
     },
     {
-        id: 14,
+        id: 21414,
         title: "Благодарность с реквизитами в титрах",
         condition: "OR",
     },
     {
-        id: 15,
+        id: 1435,
         title: "Вручение подарков",
         condition: "OR",
     },
     {
-        id: 16,
+        id: 1456,
         title: "Динамическая заставка",
         condition: "OR",
     },
     {
-        id: 17,
+        id: 1745,
         title: "Динамические титры",
         condition: "OR",
     },
     {
-        id: 18,
+        id: 1845,
         title: "Динамический логотип",
         condition: "OR",
     },
     {
-        id: 17,
+        id: 14527,
         title: "Погода: спонсор",
         condition: "OR",
     },
     {
-        id: 18,
+        id: 45218,
         title: "Погода: упоминание спонсора",
         condition: "OR",
     },
     {
-        id: 19,
+        id: 1459,
         title: "Ролик",
         condition: "OR",
     },
     {
-        id: 20,
+        id: 2450,
         title: "Спонсор",
         condition: "OR",
     },
     {
-        id: 21,
+        id: 22541,
         title: "Спонсорская заставка",
         condition: "OR",
     },
     {
-        id: 22,
+        id: 2452,
         title: "Статические титры",
         condition: "OR",
     },
@@ -541,7 +541,8 @@ export const dictionary = {
     },
     {
         id: 27,
-        title: "3D-анимированная заставка"
+        title: "3D-анимированная заставка",
+        condition: "OR",
     }
 ]
 }

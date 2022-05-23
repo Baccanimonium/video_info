@@ -93,7 +93,7 @@ const SelectionCriteriaForNewTask = () => {
         break
     }
     setDictionaryGroup(dictionaryGroup)
-    setCheckedObject(pageData[0].children[0].children.get(dictionaryGroup).children)
+    setCheckedObject(pageData[0].children[0].children.get(dictionaryGroup)?.children || [])
   }, [pageData]);
 
   const checkObject = (value) => {
