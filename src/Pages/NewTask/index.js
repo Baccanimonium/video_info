@@ -153,7 +153,6 @@ const NewTask = ({openModalWindow, updateState, state}) => {
                       }
                         <div
                           className="cursor a-i-center display-flex btn light-grey width-hover-grey-darken-0 m-l-14 pos-relative"
-                          style={{color: "black", height: "34px"}}
                           onClick={onOpenOverlayMenu}
                           onMouseEnter={showTips(dataSource.title)}
                           onMouseLeave={closeTips}
@@ -211,13 +210,13 @@ const NewTask = ({openModalWindow, updateState, state}) => {
               {/*  Отчет "Протокол роликов"*/}
               {/*</InformationCard>*/}
               {normalizedDate.length > 3 && (
-                  <InformationCard style={{width: "200px"}}>
+                  <div className="btn light-grey width-hover-grey-darken-0 m-r-5" style={{width: "200px"}}>
                     {normalizedDate}
-                  </InformationCard>
+                  </div>
               )}
-              <InformationCard>
+              <div className="btn light-grey width-hover-grey-darken-0">
                 !
-              </InformationCard>
+              </div>
               {/*<InformationCard>*/}
               {/*  <VscChecklist/>*/}
               {/*</InformationCard>*/}

@@ -60,6 +60,9 @@ export const CardForDirectory = styled.div`
   cursor: ${props => props.active && "pointer"};
   pointer-events: ${props => !props.active && "none"};
   margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &:last-child {
     margin-right: 0;
   }

@@ -96,6 +96,9 @@ const SelectionCriteriaForNewTask = () => {
     setCheckedObject(pageData[0].children[0].children.get(dictionaryGroup)?.children || [])
   }, [pageData]);
 
+  // когда изменяется treeUnwrappedData, то и checkedObject должен измениться
+  // чтобы были не активны удаленные критерии в чекбоксгрупп
+
   const checkObject = (value) => {
     if (checkedObject.some(a => !value.some(i => i.id === a.id))) {
       setCheckedObject(value)

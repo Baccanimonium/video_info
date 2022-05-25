@@ -101,6 +101,7 @@ const Leaf = (props) => {
   }, [index, onUpdateOptions])
 
   const handleDeleteLeafOption = useCallback(() => {
+    console.log("handleDeleteLeafOption")
     onDeleteLeafOption(index)
   }, [index, onDeleteLeafOption])
 

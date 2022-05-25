@@ -1619,13 +1619,13 @@ export const GroupDictionary = {
 export const GroupDictionaryParams = {
     [TV_GROUP]: {
         id: '15251',
-        title: 'Нац.телекомпании',
+        title: 'Группа',
         type: "condition",
         condition: "AND",
     },
     [ADVERSMENT_GROUP]: {
         id: '666',
-        title: 'Тип рекламы',
+        title: 'Группа',
         condition: "AND",
         type: "condition",
     }
@@ -1634,7 +1634,7 @@ export const GroupDictionaryParams = {
 export const treeData = [
   {
     id: "fdgdsf0gdfg",
-    title: "MEDIA SCOPE",
+    title: "TV Media",
     type: "head",
     children: [
       // secondLvlChildrenData

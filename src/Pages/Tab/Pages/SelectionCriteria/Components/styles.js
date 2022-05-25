@@ -24,7 +24,7 @@ export const IconPlus = styled.div`
 export const CardForCondition = styled.div`
   background: #404040;
   width: 40px;
-  height: 35px;
+  height: 40px;
   color: var(--color-white);
   border-radius: 100%;
   text-transform: uppercase;

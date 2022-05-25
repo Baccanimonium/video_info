@@ -201,7 +201,7 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
         </WithOpenContextMenu>
       }
       {children}
-      {(type === "block" || type === "head") &&
+      {type === "head" &&
         <WithOpenContextMenu
           settings={{maxSize: "200", minSize: "200"}}
           onOpenContextMenu={openAddForm}
@@ -220,7 +220,6 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
           )}
         </WithOpenContextMenu>
       }
-      {(type === "block" || type === "condition") &&
       <WithOpenContextMenu
         settings={{maxSize: "150", minSize: "150"}}
         onOpenContextMenu={handleInitDelete}
@@ -229,7 +228,6 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
           <StyleTrashIcon title="Удалить узел" className="m-l-5" onClick={onOpenContextMenu}/>
         )}
       </WithOpenContextMenu>
-       }
     </div>
   );
 };
