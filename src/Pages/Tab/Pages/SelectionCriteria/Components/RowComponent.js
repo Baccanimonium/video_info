@@ -96,10 +96,7 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
                   },
                   {
                     title: "OR",
-                  },
-                  {
-                    title: "NOT",
-                  },
+                  }
                 ]
             }
           ]
@@ -133,24 +130,14 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
               valueKey: "condition",
               labelKey: "condition",
               allWaysOpen: true,
-              options: type === "block" ? [
-                  {
-                    condition: "AND",
-                  },
-                  {
-                    condition: "OR",
-                  },
-                ] : [
-                  {
-                    condition: "AND",
-                  },
-                  {
-                    condition: "OR",
-                  },
-                  {
-                    condition: "NOT",
-                  }
-                ]
+              options: [
+                {
+                  condition: "AND",
+                },
+                {
+                  condition: "OR",
+                },
+              ]
             }
           ]
 

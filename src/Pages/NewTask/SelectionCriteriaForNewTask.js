@@ -37,6 +37,7 @@ const SelectionCriteriaForNewTask = () => {
   const [pageData, setPageData] = useState(treeData)
   const [selectedKey, setSelectedKey] = useState([])
   const [checked, setCheckedKey] = useState("")
+  const [addNot, setAddNot] = useState(false)
 
   const onSelect = useCallback((name) => {
     let dictionaryGroup
@@ -98,14 +99,6 @@ const SelectionCriteriaForNewTask = () => {
 
   // когда изменяется treeUnwrappedData, то и checkedObject должен измениться
   // чтобы были не активны удаленные критерии в чекбоксгрупп
-
-  const checkObject = (value) => {
-    if (checkedObject.some(a => !value.some(i => i.id === a.id))) {
-      setCheckedObject(value)
-    } else {
-      setCheckedObject(Array.from(new Set(checkedObject.concat(value))))
-    }
-  }
 
   const setNewTree = useCallback(() => {
     setPageData(([{ children: [{children, ...secondLvlChildrenData}, ...restChildren], ...pageData }]) => {
@@ -172,6 +165,18 @@ const SelectionCriteriaForNewTask = () => {
       }))
     }))
   }, [pageData])
+
+  const checkObject = (value) => {
+    const newVal = value.reduce((acc, item) => {
+      acc.push({...item, title: `${addNot ? 'NOT' : ''} ${item.title} [${title}]`})
+      return acc
+    }, [])
+    setCheckedObject(newVal)
+  }
+
+  const flagNot = (value) => {
+    setAddNot(value)
+  }
   return (
     <>
       <div className="display-flex m-t-10 flex-wrap">
@@ -195,6 +200,7 @@ const SelectionCriteriaForNewTask = () => {
             labelKey="title"
             value={checkedObject}
             returnObjects
+            flagNot={flagNot}
             onInput={checkObject}
           />
           {selectedList.length > 0 &&
