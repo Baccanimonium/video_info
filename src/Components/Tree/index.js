@@ -56,7 +56,6 @@ const Tree = (props) => {
   }, [])
 
   const deleteLeaf = useCallback((childrenIndex) => {
-    console.log(childrenIndex, "deleteLeaf")
     const { options, onUpdateOptions, index } =  refProps.current = props
     const nextOptions = [...options]
     nextOptions.splice(childrenIndex, 1)

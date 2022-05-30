@@ -101,7 +101,6 @@ const Leaf = (props) => {
   }, [index, onUpdateOptions])
 
   const handleDeleteLeafOption = useCallback(() => {
-    console.log("handleDeleteLeafOption")
     onDeleteLeafOption(index)
   }, [index, onDeleteLeafOption])
 
@@ -157,7 +156,7 @@ const Leaf = (props) => {
         />
       </div>
       <div>
-        {expanded && children && children.map((item, index) =>
+        {expanded && children && children?.map((item, index) =>
           <Leaf
             getSequence={handleGetSequence}
             dropRule={dropRule}

@@ -130,12 +130,25 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
               valueKey: "condition",
               labelKey: "condition",
               allWaysOpen: true,
-              options: [
+              options: type === "block" ? [
                 {
                   condition: "AND",
                 },
                 {
                   condition: "OR",
+                },
+              ] : [
+                {
+                  condition: "AND",
+                },
+                {
+                  condition: "OR",
+                },
+                {
+                  condition: "OR NOT",
+                },
+                {
+                  condition: "AND NOT",
                 },
               ]
             }

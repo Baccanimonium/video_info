@@ -37,7 +37,6 @@ const SelectionCriteriaForNewTask = () => {
   const [pageData, setPageData] = useState(treeData)
   const [selectedKey, setSelectedKey] = useState([])
   const [checked, setCheckedKey] = useState("")
-  const [addNot, setAddNot] = useState(false)
 
   const onSelect = useCallback((name) => {
     let dictionaryGroup
@@ -104,6 +103,7 @@ const SelectionCriteriaForNewTask = () => {
     setPageData(([{ children: [{children, ...secondLvlChildrenData}, ...restChildren], ...pageData }]) => {
       // создаем нового ребенка
       const newChildren = new Map(children)
+      console.log(newChildren)
       // если в данных в группе нет
       if (!newChildren.has(dictionaryGroup)) {
         // то добавляем данные
@@ -150,33 +150,59 @@ const SelectionCriteriaForNewTask = () => {
   const onCheck = useCallback((checkedKeys, info) => {
     console.log('onCheck', checkedKeys, info);
   }, []);
-  const onUpdateOptions = (nextOptions) => {
-    setPageData(nextOptions)
-  }
+
+  const onUpdateOptions = useCallback((nextOptions) => {
+    // почему здесь не видно dictionaryGroup
+    // console.log(dictionaryGroup)
+    nextOptions.map(({ children, ...firstLvlData}) => ({
+      ...firstLvlData,
+      children: children.map(({ children: secondLvlChildren, ...secondLvlData }) => {
+        // secondLvlChildren.map((v, item) => console.log(item, v))
+        // console.log(new Map(secondLvlChildren.map((v, i) => [i, v])))
+      })
+    }))
+    // console.log(nextOptions.map(({ children, ...firstLvlData}) => ({
+    //   ...firstLvlData,
+    //   children: children.map(({ children: secondLvlChildren, ...secondLvlData }) => ({
+    //     ...secondLvlData,
+    //     children: new Map(secondLvlChildren.map((v, i) => [i, v]))
+    //   }))
+    // })))
+    setPageData(nextOptions.map(({ children, ...firstLvlData}) => ({
+      ...firstLvlData,
+      children: children.map(({ children: secondLvlChildren, ...secondLvlData }) => ({
+        ...secondLvlData,
+        // тут должно передаваться dictionaryGroup вместо i
+        children: new Map(secondLvlChildren.map((v, i) => [i, v]))
+      }))
+    })))
+  }, [dictionaryGroup])
   const selectRule = ({type}) => type === "condition"
 
-  // создаем данные дерева с критериями-массивами, а не мапами
+  // переписываем данные дерева с критериями-массивами, а не мапами
   const treeUnwrappedData = useMemo(() => {
     return pageData.map(({ children, ...firstLvlData}) => ({
       ...firstLvlData,
       children: children.map(({ children: secondLvlChildren, ...secondLvlData }) => ({
         ...secondLvlData,
-        children: Array.from(secondLvlChildren, (({ 1: v}) => v))
+        children: Array.isArray(secondLvlChildren) ? secondLvlChildren :  Array.from(secondLvlChildren, (({ 1: v}) => v))
       }))
     }))
   }, [pageData])
 
+  // добавление к критерию название справочника
   const checkObject = (value) => {
     const newVal = value.reduce((acc, item) => {
-      acc.push({...item, title: `${addNot ? 'NOT' : ''} ${item.title} [${title}]`})
+      if (checkedObject.findIndex((i) => i.id === item.id) !== 0) {
+        acc.push({...item, title: `${item.title} [${title}]`})
+      } else {
+        acc.push({...item})
+      }
       return acc
     }, [])
     setCheckedObject(newVal)
   }
 
-  const flagNot = (value) => {
-    setAddNot(value)
-  }
   return (
     <>
       <div className="display-flex m-t-10 flex-wrap">
@@ -200,8 +226,7 @@ const SelectionCriteriaForNewTask = () => {
             labelKey="title"
             value={checkedObject}
             returnObjects
-            flagNot={flagNot}
-            onInput={checkObject}
+            onInput={setCheckedObject}
           />
           {selectedList.length > 0 &&
             <BsButton

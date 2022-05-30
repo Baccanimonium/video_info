@@ -22,9 +22,10 @@ class CheckboxGroup extends Component {
     return reverseMode ? !isAllSelected : isAllSelected
   })
 
-  sortedOptions = memoizeOne((tempQuery, options) => {
-    if (!tempQuery) return options
+  sortedOptions = memoizeOne((tempQuery, options, hidSelected) => {
+    if (!tempQuery && !hidSelected) return options
     if (tempQuery) return this.sortOptions(options)
+    if (hidSelected) return this.hiddenSelected(options)
   })
 
 
@@ -33,7 +34,8 @@ class CheckboxGroup extends Component {
     super(props)
     this.state = {
       edited: false,
-      tempQuery: ""
+      tempQuery: "",
+      hidSelected: false
     }
     this.searchInputRef = React.createRef()
   }
@@ -123,21 +125,18 @@ class CheckboxGroup extends Component {
     return options.filter(e => value.findIndex(i => i.title === e.title) === -1)
   }
 
-  editNot = () => {
-    const {flagNot} = this.props
-    const { particleNot } = this.state
-    this.setState(({particleNot}) => ({particleNot: !particleNot}))
-    return flagNot(!particleNot)
+  editHidSelected = () => {
+    this.setState(({hidSelected}) => ({hidSelected: !hidSelected}))
   }
 
 
   render() {
     const {
       blockTitle, labelKey, maxHeight, options, value, reverseMode, loading, disabled, style, inputStyles,
-      showToggleIndicator, filterable, flagNot
+      showToggleIndicator, filterable
     } = this.props
-    const { edited, tempQuery, particleNot } = this.state
-    const checkboxes = this.sortedOptions(tempQuery, options)?.map(item => {
+    const { edited, tempQuery, hidSelected } = this.state
+    const checkboxes = this.sortedOptions(tempQuery, options, hidSelected)?.map(item => {
       const { [labelKey]: label } = item
       return (
         <div className="p-r-14 p-l-14" key={label}>
@@ -203,10 +202,10 @@ class CheckboxGroup extends Component {
               <BsCheckBox
                 id="hiddenSelected"
                 label="Not"
-                value={particleNot}
+                value={hidSelected}
                 className="m-r-10"
                 disabled={disabled || loading}
-                onInput={this.editNot}
+                onInput={this.editHidSelected}
                 style={style}
                 styleLabel={{paddingLeft: "10px"}}
               />
