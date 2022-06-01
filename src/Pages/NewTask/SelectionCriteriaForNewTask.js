@@ -23,11 +23,21 @@ import RowComponent from "../Tab/Pages/SelectionCriteria/Components/RowComponent
 import ScrollBar from "react-perfect-scrollbar";
 import Tree from '@/Components/Tree';
 import {listDirectory} from "./config"
+import {useWatch} from "../../Utils/hooks/useWatch";
 
 /// чтобы айди в чекбоксах не совпадали нужно добавлять в айди название справочника
 // id: "nationalTV/1"
 
 const StyleTree = {width: "600px"}
+
+const aaa = (children) => {
+  let arrayChildren = []
+  children.forEach(({children:secondLvlChildren, ...secondLvlData}, key) => {
+    arrayChildren.push({...secondLvlData, children: secondLvlChildren.map((item) => [{...item, nameGroup: key}]).flat()})
+    }
+  )
+  return arrayChildren
+}
 
 const SelectionCriteriaForNewTask = () => {
   const [selectedList, setSelectedList] = useState([])
@@ -37,64 +47,76 @@ const SelectionCriteriaForNewTask = () => {
   const [pageData, setPageData] = useState(treeData)
   const [selectedKey, setSelectedKey] = useState([])
   const [checked, setCheckedKey] = useState("")
+  const [nameSelect, setNameSelect] = useState("")
+
 
   const onSelect = useCallback((name) => {
-    let dictionaryGroup
-    switch (name) {
-      case "Нац.телекомпании":
-        setSelectedList(dictionary[nationalTV]);
-        dictionaryGroup = GroupDictionary[nationalTV]
-        setTitle("Нац.телекомпании");
-        break;
-      case "Телекомпании":
-        setSelectedList(dictionary[TVcompanies]);
-        dictionaryGroup = GroupDictionary[TVcompanies]
-        setTitle("Телекомпании");
-        break;
-      case "Тип рекламы":
-        setSelectedList(dictionary[TypeOfAdvertisement]);
-        dictionaryGroup = GroupDictionary[TypeOfAdvertisement]
-        setTitle("Тип рекламы");
-        break;
-      case "Рекламодатели":
-        setSelectedList(AdvertisersList);
-        setTitle("Рекламодатели");
-        break;
-      case "Марки":
-        setSelectedList(marking);
-        setTitle("Марки");
-        break;
-      case "Суббренды":
-        setSelectedList(SubbrandsList);
-        setTitle("Суббренды");
-        break;
-      case "Модели":
-        setSelectedList(Models);
-        setTitle("Модели");
-        break;
-      case "Предметы рекламы уровень 1":
-        setSelectedList(AdvertisingItemsLevel1);
-        setTitle("Предметы рекламы уровень 1");
-        break;
-      case "Предметы рекламы уровень 2":
-        setSelectedList(AdvertisingItemsLevel2);
-        setTitle("Предметы рекламы уровень 2");
-        break;
-      case "Предметы рекламы уровень 3":
-        setSelectedList(AdvertisingItemsLevel3);
-        setTitle("Предметы рекламы уровень 3");
-        break;
-      case "Предметы рекламы уровень 4":
-        setSelectedList(AdvertisingItemsLevel4);
-        setTitle("Предметы рекламы уровень 4");
-        break;
-      default:
-        setSelectedList([])
-        break
-    }
-    setDictionaryGroup(dictionaryGroup)
-    setCheckedObject(pageData[0].children[0].children.get(dictionaryGroup)?.children || [])
-  }, [pageData]);
+    setNameSelect(name)
+  }, [pageData])
+
+
+  // сделать useWatch
+  // name сделать useState и проверять на name
+  useWatch(nameSelect, (newVal, prevValue) => {
+    console.log(newVal, prevValue)
+    if (newVal !== prevValue) {
+      let dictionaryGroup
+      switch (nameSelect) {
+        case "Нац.телекомпании":
+          setSelectedList(dictionary[nationalTV]);
+          dictionaryGroup = GroupDictionary[nationalTV]
+          setTitle("Нац.телекомпании");
+          break;
+        case "Телекомпании":
+          setSelectedList(dictionary[TVcompanies]);
+          dictionaryGroup = GroupDictionary[TVcompanies]
+          setTitle("Телекомпании");
+          break;
+        case "Тип рекламы":
+          setSelectedList(dictionary[TypeOfAdvertisement]);
+          dictionaryGroup = GroupDictionary[TypeOfAdvertisement]
+          setTitle("Тип рекламы");
+          break;
+        case "Рекламодатели":
+          setSelectedList(AdvertisersList);
+          setTitle("Рекламодатели");
+          break;
+        case "Марки":
+          setSelectedList(marking);
+          setTitle("Марки");
+          break;
+        case "Суббренды":
+          setSelectedList(SubbrandsList);
+          setTitle("Суббренды");
+          break;
+        case "Модели":
+          setSelectedList(Models);
+          setTitle("Модели");
+          break;
+        case "Предметы рекламы уровень 1":
+          setSelectedList(AdvertisingItemsLevel1);
+          setTitle("Предметы рекламы уровень 1");
+          break;
+        case "Предметы рекламы уровень 2":
+          setSelectedList(AdvertisingItemsLevel2);
+          setTitle("Предметы рекламы уровень 2");
+          break;
+        case "Предметы рекламы уровень 3":
+          setSelectedList(AdvertisingItemsLevel3);
+          setTitle("Предметы рекламы уровень 3");
+          break;
+        case "Предметы рекламы уровень 4":
+          setSelectedList(AdvertisingItemsLevel4);
+          setTitle("Предметы рекламы уровень 4");
+          break;
+        default:
+          setSelectedList([])
+          break
+      }
+      setDictionaryGroup(dictionaryGroup)
+      setCheckedObject(pageData[0].children[0].children.get(dictionaryGroup)?.children || [])
+    }}
+    );
 
   // когда изменяется treeUnwrappedData, то и checkedObject должен измениться
   // чтобы были не активны удаленные критерии в чекбоксгрупп
@@ -103,7 +125,6 @@ const SelectionCriteriaForNewTask = () => {
     setPageData(([{ children: [{children, ...secondLvlChildrenData}, ...restChildren], ...pageData }]) => {
       // создаем нового ребенка
       const newChildren = new Map(children)
-      console.log(newChildren)
       // если в данных в группе нет
       if (!newChildren.has(dictionaryGroup)) {
         // то добавляем данные
@@ -151,32 +172,22 @@ const SelectionCriteriaForNewTask = () => {
     console.log('onCheck', checkedKeys, info);
   }, []);
 
+  // удаление данных из дерева
   const onUpdateOptions = useCallback((nextOptions) => {
-    // почему здесь не видно dictionaryGroup
-    // console.log(dictionaryGroup)
-    nextOptions.map(({ children, ...firstLvlData}) => ({
-      ...firstLvlData,
-      children: children.map(({ children: secondLvlChildren, ...secondLvlData }) => {
-        // secondLvlChildren.map((v, item) => console.log(item, v))
-        // console.log(new Map(secondLvlChildren.map((v, i) => [i, v])))
-      })
-    }))
-    // console.log(nextOptions.map(({ children, ...firstLvlData}) => ({
-    //   ...firstLvlData,
-    //   children: children.map(({ children: secondLvlChildren, ...secondLvlData }) => ({
-    //     ...secondLvlData,
-    //     children: new Map(secondLvlChildren.map((v, i) => [i, v]))
-    //   }))
-    // })))
     setPageData(nextOptions.map(({ children, ...firstLvlData}) => ({
       ...firstLvlData,
       children: children.map(({ children: secondLvlChildren, ...secondLvlData }) => ({
         ...secondLvlData,
-        // тут должно передаваться dictionaryGroup вместо i
-        children: new Map(secondLvlChildren.map((v, i) => [i, v]))
+        children: new Map(secondLvlChildren.reduce((acc, item) => {
+          if (item.children.length > 0) {
+            acc.push({...item, name: item.children[0].nameGroup})
+          }
+          return acc
+        }, []).map((v) => [v.name, v ]))
       }))
     })))
   }, [dictionaryGroup])
+
   const selectRule = ({type}) => type === "condition"
 
   // переписываем данные дерева с критериями-массивами, а не мапами
@@ -185,7 +196,7 @@ const SelectionCriteriaForNewTask = () => {
       ...firstLvlData,
       children: children.map(({ children: secondLvlChildren, ...secondLvlData }) => ({
         ...secondLvlData,
-        children: Array.isArray(secondLvlChildren) ? secondLvlChildren :  Array.from(secondLvlChildren, (({ 1: v}) => v))
+        children: Array.isArray(secondLvlChildren) ? secondLvlChildren :  aaa(secondLvlChildren)
       }))
     }))
   }, [pageData])
