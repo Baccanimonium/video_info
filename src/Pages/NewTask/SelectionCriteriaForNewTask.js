@@ -23,7 +23,6 @@ import RowComponent from "../Tab/Pages/SelectionCriteria/Components/RowComponent
 import ScrollBar from "react-perfect-scrollbar";
 import Tree from '@/Components/Tree';
 import {listDirectory} from "./config"
-import {useWatch} from "../../Utils/hooks/useWatch";
 
 /// чтобы айди в чекбоксах не совпадали нужно добавлять в айди название справочника
 // id: "nationalTV/1"
@@ -49,80 +48,74 @@ const SelectionCriteriaForNewTask = () => {
   const [checked, setCheckedKey] = useState("")
   const [nameSelect, setNameSelect] = useState("")
 
-
-  const onSelect = useCallback((name) => {
-    setNameSelect(name)
+  // срабатывает при клике на группу
+  const onSelect = useCallback((value) => {
+    console.log(value)
   }, [pageData])
 
-
-  // сделать useWatch
-  // name сделать useState и проверять на name
-  useWatch(nameSelect, (newVal, prevValue) => {
-    console.log(newVal, prevValue)
-    if (newVal !== prevValue) {
-      let dictionaryGroup
-      switch (nameSelect) {
-        case "Нац.телекомпании":
-          setSelectedList(dictionary[nationalTV]);
-          dictionaryGroup = GroupDictionary[nationalTV]
-          setTitle("Нац.телекомпании");
-          break;
-        case "Телекомпании":
-          setSelectedList(dictionary[TVcompanies]);
-          dictionaryGroup = GroupDictionary[TVcompanies]
-          setTitle("Телекомпании");
-          break;
-        case "Тип рекламы":
-          setSelectedList(dictionary[TypeOfAdvertisement]);
-          dictionaryGroup = GroupDictionary[TypeOfAdvertisement]
-          setTitle("Тип рекламы");
-          break;
-        case "Рекламодатели":
-          setSelectedList(AdvertisersList);
-          setTitle("Рекламодатели");
-          break;
-        case "Марки":
-          setSelectedList(marking);
-          setTitle("Марки");
-          break;
-        case "Суббренды":
-          setSelectedList(SubbrandsList);
-          setTitle("Суббренды");
-          break;
-        case "Модели":
-          setSelectedList(Models);
-          setTitle("Модели");
-          break;
-        case "Предметы рекламы уровень 1":
-          setSelectedList(AdvertisingItemsLevel1);
-          setTitle("Предметы рекламы уровень 1");
-          break;
-        case "Предметы рекламы уровень 2":
-          setSelectedList(AdvertisingItemsLevel2);
-          setTitle("Предметы рекламы уровень 2");
-          break;
-        case "Предметы рекламы уровень 3":
-          setSelectedList(AdvertisingItemsLevel3);
-          setTitle("Предметы рекламы уровень 3");
-          break;
-        case "Предметы рекламы уровень 4":
-          setSelectedList(AdvertisingItemsLevel4);
-          setTitle("Предметы рекламы уровень 4");
-          break;
-        default:
-          setSelectedList([])
-          break
-      }
-      setDictionaryGroup(dictionaryGroup)
-      setCheckedObject(pageData[0].children[0].children.get(dictionaryGroup)?.children || [])
-    }}
-    );
-
-  // когда изменяется treeUnwrappedData, то и checkedObject должен измениться
-  // чтобы были не активны удаленные критерии в чекбоксгрупп
+  useEffect(() => {
+    let dictionaryGroup
+    switch (nameSelect) {
+      case "Нац.телекомпании":
+        setSelectedList(dictionary[nationalTV]);
+        dictionaryGroup = GroupDictionary[nationalTV]
+        setTitle("Нац.телекомпании");
+        break;
+      case "Телекомпании":
+        setSelectedList(dictionary[TVcompanies]);
+        dictionaryGroup = GroupDictionary[TVcompanies]
+        setTitle("Телекомпании");
+        break;
+      case "Тип рекламы":
+        setSelectedList(dictionary[TypeOfAdvertisement]);
+        dictionaryGroup = GroupDictionary[TypeOfAdvertisement]
+        setTitle("Тип рекламы");
+        break;
+      case "Рекламодатели":
+        setSelectedList(AdvertisersList);
+        setTitle("Рекламодатели");
+        break;
+      case "Марки":
+        setSelectedList(marking);
+        setTitle("Марки");
+        break;
+      case "Суббренды":
+        setSelectedList(SubbrandsList);
+        setTitle("Суббренды");
+        break;
+      case "Модели":
+        setSelectedList(Models);
+        setTitle("Модели");
+        break;
+      case "Предметы рекламы уровень 1":
+        setSelectedList(AdvertisingItemsLevel1);
+        setTitle("Предметы рекламы уровень 1");
+        break;
+      case "Предметы рекламы уровень 2":
+        setSelectedList(AdvertisingItemsLevel2);
+        setTitle("Предметы рекламы уровень 2");
+        break;
+      case "Предметы рекламы уровень 3":
+        setSelectedList(AdvertisingItemsLevel3);
+        setTitle("Предметы рекламы уровень 3");
+        break;
+      case "Предметы рекламы уровень 4":
+        setSelectedList(AdvertisingItemsLevel4);
+        setTitle("Предметы рекламы уровень 4");
+        break;
+      default:
+        setSelectedList([])
+        break
+    }
+    setDictionaryGroup(dictionaryGroup)
+    setCheckedObject(pageData[0]?.children[0]?.children.get(dictionaryGroup)?.children || [])
+  }, [nameSelect, pageData])
 
   const setNewTree = useCallback(() => {
-    setPageData(([{ children: [{children, ...secondLvlChildrenData}, ...restChildren], ...pageData }]) => {
+    setPageData(([{ children:
+      [{children, ...secondLvlChildrenData}, ...restChildren],
+      ...pageData }]) => {
+      console.log(secondLvlChildrenData)
       // создаем нового ребенка
       const newChildren = new Map(children)
       // если в данных в группе нет
@@ -174,6 +167,7 @@ const SelectionCriteriaForNewTask = () => {
 
   // удаление данных из дерева
   const onUpdateOptions = useCallback((nextOptions) => {
+
     setPageData(nextOptions.map(({ children, ...firstLvlData}) => ({
       ...firstLvlData,
       children: children.map(({ children: secondLvlChildren, ...secondLvlData }) => ({
@@ -221,7 +215,7 @@ const SelectionCriteriaForNewTask = () => {
             <CardForDirectory
               key={id}
               active={active}
-              onClick={() => onSelect(name, nameGroup)}
+              onClick={() => setNameSelect(name)}
             >
               {name}
             </CardForDirectory>

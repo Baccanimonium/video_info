@@ -7,19 +7,16 @@ export const listDirectory = [
     id: 1,
     name: "Нац.телекомпании",
     active: true,
-    nameGroup: "nationalTV"
   },
   {
     id: 2,
     name: "Телекомпании",
     active: true,
-    nameGroup: "TVcompanies"
   },
   {
     id: 3,
     name: "Тип рекламы",
     active: true,
-    nameGroup: "TypeOfAdvertisement"
   },
   {
     id: 4,
