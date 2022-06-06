@@ -8,11 +8,113 @@ import {ButtonsContainer, Button} from "../../../../Components/ButtonsTabBar/sty
 import BsCheckBox from "../../../../Components/Fields/BsCheckBox";
 import RadioButton from "../../../../Components/Fields/RadioButton";
 import BsInput from "../../../../Components/Fields/BsInput";
+import Select from "../../../../Components/Fields/Select";
 import DatePicker from "../../../../Components/Fields/DatePicker";
 import {ContainerDatePicker} from "../../../../Components/TabHeader/style";
 import ScrollBar from "react-perfect-scrollbar";
+import Icon from '@/Components/Icon'
+import {copy } from "../../../../Icons/copy";
+import {file } from "../../../../Icons/file";
+import {basketTrash } from "../../../../Icons/basketTrash";
+
 
 import DemographicRow from "./Components/DemographicRow";
+import {NumericInputWithControls} from "../../../../Components/Fields/NumericInput";
+const FileIcon = Icon(file)
+const CopyIcon = Icon(copy)
+const BasketIcon = Icon(basketTrash)
+
+const ReportOptions = [
+  {
+    id: 1,
+    label: 'Отчет "Протокол роликов"'
+  },
+  // {
+  //   id: 2,
+  //   label: 'Отчет "Протокол блоков"'
+  // },
+  // {
+  //   id: 3,
+  //   label: 'Отчет "Протокол программ"'
+  // },
+  // {
+  //   id: 4,
+  //   label: 'Отчет "Time Band"'
+  // },
+]
+
+const CalculationOptions = [
+  "по сумме", "по среднему"
+]
+
+const dayOptions = [{ label: "Пн"}, { label: "Вт"}, { label: "Ср"}, { label: "Чт"}, { label: "Пт"}, { label: "Сб"}, { label: "Вс"}]
+
+const GenderOptions = [
+  {
+    id: 1,
+    title: "Базовая Аудитория"
+  },
+  {
+    id: 2,
+    title: "Affinity аудитория"
+  },
+  {
+    id: 3,
+    title: "Co-viewing аудитория"
+  },
+]
+
+const GeoOptions = [
+  {
+    id: 1,
+    label: "Определено ЦА"
+  },
+  {
+    id: 2,
+    label: "Россия Ноль Плюс"
+  },
+  {
+    id: 3,
+    label: "Россия Сто пПлюс"
+  },
+]
+
+const LocationOptions = [
+  {
+    id: '0',
+    title: 'Locations',
+    children: [
+      {
+        id: '0-0',
+        title: 'Total Location',
+      },
+    ]
+  }
+]
+
+const NdbCorrectionList = [
+  {
+    id: 0,
+    label: "None"
+  },
+  {
+    id: 1,
+    label: "Standard"
+  },
+  {
+    id: 2,
+    label: "Extended"
+  },
+]
+
+const CurrentAdsList = [
+  {
+    id: 0,
+    label: "Russia"
+  }
+]
+
+const BaseDayOptions = ["Автоматическое определение","Определение пользователем"]
 
 const statistics = [
   { key: 2274, title: "GRP" },
@@ -59,6 +161,18 @@ const optionsButtons = [
     id: 3,
     label: "Доп опции"
   }
+]
+
+
+const bottomOptionsButtons = [
+  {
+    id: 1,
+    label: "Geo",
+  },
+  {
+    id: 2,
+    label: "Location"
+  },
 ]
 
 const demographic = [
@@ -158,6 +272,11 @@ const demographic = [
 ]
 
 const Reports = () => {
+  const [reportState, setReportsState] = useState({
+    precision: 4,
+    time: " ",
+    duration: " ",
+  })
   const [selectedKey, setSelectedKey] = useState("")
   const [checked, setCheckedKey] = useState("")
   const [freeState, setFreeState] = useState([])
@@ -166,6 +285,7 @@ const Reports = () => {
 
   const [activeButton, setActiveButton] = useState("Статистика")
   const [activeOption, setActiveOption] = useState("Опции расчета")
+  const [bottomTabsState, setBottomTabsState] = useState("Geo")
 
   const [videoProtocol, setVideoProtocol] = useState()
   const [programProtocol, setProgramProtocol] = useState()
@@ -195,6 +315,9 @@ const Reports = () => {
   const [listAdvertising , setListAdvertising] = useState("")
   const [originalOutputs , setOriginalOutputs] = useState("")
 
+  const onFormInput = useCallback((id) => (value) => {
+    setReportsState((prevState) => ({ ...prevState, [id]: value }))
+  }, [])
 
   const formPayload = { dateRange: [] }
   const TreeData = useMemo(() => [
@@ -247,6 +370,10 @@ const Reports = () => {
     setActiveOption(e.target.innerText)
   },[setActiveOption])
 
+  const openTab = useCallback((tabKey, setTabFunc) => () => {
+    setTabFunc(tabKey)
+  },[setActiveOption])
+
 
   return (
     <DataSetContainer className="flex-container pos-relative overflow-hidden">
@@ -255,36 +382,16 @@ const Reports = () => {
           <ReportContainer className="h-100">
             <div className="p-r-15 separator-right m-b-15">
               <h3>
-                Доступные отчеты
+                Выбрать отчет
               </h3>
               <div className="m-b-20">
-                <BsCheckBox
-                  id="videoProtocol"
-                  label='Отчет "Протокол роликов"'
-                  value={videoProtocol}
-                  onInput={setVideoProtocol}
-                  className="m-b-15"
-                />
-                <BsCheckBox
-                  id="blockProtocol"
-                  label='Отчет "Протокол блоков"'
-                  value={blockProtocol}
-                  onInput={setBlockProtocol}
-                  className="m-b-15"
-                />
-                <BsCheckBox
-                  id="programProtocol"
-                  label='Отчет "Протокол программ"'
-                  value={programProtocol}
-                  onInput={setProgramProtocol}
-                  className="m-b-15"
-                />
-                <BsCheckBox
-                  id="timeBand"
-                  label='Отчет "Time Band"'
-                  value={timeBand}
-                  onInput={setTimeBand}
-                  className="m-b-15"
+                <Select
+                  labelKey="label"
+                  valueKey="id"
+                  id="report"
+                  value={reportState["report"]}
+                  options={ReportOptions}
+                  onInput={onFormInput("report")}
                 />
               </div>
               <div className="flex-container overflow-hidden">
@@ -296,25 +403,29 @@ const Reports = () => {
                       key={id}
                     >
                       {label}
+
+
                     </Button>
                   ))}
                 </ButtonsContainer>
-                <div className="m-t-15 flex-container overflow-hidden">
+                <div className="m-t-15 display-flex fd-column overflow-hidden">
                   {activeOption === "Опции расчета" && (
                     <div className="flex-container">
                       <div className="display-flex p-b-15 separator-bot-greyLight">
                         <RadioButton
                           id="byAmount"
                           label="по сумме"
-                          value={byAmount}
-                          onInput={setByAmount}
+                          value={reportState["calculationOptions"]}
+                          onInput={onFormInput("calculationOptions")}
+                          meaning={CalculationOptions[0]}
                           className="m-r-30"
                         />
                         <RadioButton
                           id="average"
                           label="по среднему"
-                          value={average}
-                          onInput={setAverage}
+                          meaning={CalculationOptions[1]}
+                          value={reportState["calculationOptions"]}
+                          onInput={onFormInput("calculationOptions")}
                           className=""
                         />
                       </div>
@@ -340,36 +451,59 @@ const Reports = () => {
                           onInput={setGrowing}
                           className="m-b-15"
                         />
-                      </div>
-                      <div className="p-t-15 separator-bot-greyLight">
-                        <WrapperInput>
-                          <div className="p-r-15">Первый день недели:</div>
+                        <WrapperInput
+                          value={reportState["precision"]}
+                        >
+                          <div className="p-r-15">Точность: </div>
                           <div>
-                            <BsInput
-                              id="week"
-                              value={week}
-                              onInput={setWeek}
+                            <NumericInputWithControls
+                              id={"precision"}
+                              value={reportState["precision"]}
+                              onInput={onFormInput("precision")}
                             />
                           </div>
                         </WrapperInput>
-                        <WrapperInput>
+                      </div>
+                      <div className="p-t-15 separator-bot-greyLight">
+                        <WrapperInput
+                          value="ПН     "
+                        >
+                          <div className="p-r-15">Первый день недели:</div>
+                          <div>
+                            <Select
+                              valueKey="label"
+                              labelKey="label"
+                              options={dayOptions}
+                              id={"week"}
+                              value={reportState["week"]}
+                              onInput={onFormInput("week")}
+                            />
+                          </div>
+                        </WrapperInput>
+                        <WrapperInput
+                          value={reportState["time"]}
+                        >
                           <div className="p-r-15">Время выхода событий:</div>
                           <div className="display-flex a-i-center">
-                            <BsInput
-                              id="time"
-                              value={time}
-                              onInput={setTime}
+                            <NumericInputWithControls
+                              id={"time"}
+                              value={reportState["time"]}
+                              onInput={onFormInput("time")}
                             />
                             <div className="p-l-5">мин</div>
                           </div>
                         </WrapperInput>
-                        <WrapperInput>
+                      </div>
+                      <div className="p-t-15 separator-bot-greyLight">
+                        <WrapperInput
+                          value={reportState["duration"]}
+                        >
                           <div className="p-r-15">Базовая длительность:</div>
                           <div className="display-flex a-i-center">
-                            <BsInput
-                              id="duration"
-                              value={duration}
-                              onInput={setDuration}
+                            <NumericInputWithControls
+                              id={"duration"}
+                              value={reportState["duration"]}
+                              onInput={onFormInput("duration")}
                             />
                             <div className="p-l-5">сек</div>
                           </div>
@@ -380,19 +514,22 @@ const Reports = () => {
                         label="Группировать события"
                         value={groupEvents}
                         onInput={setGroupEvents}
-                        className="m-b-15 p-t-15"
+                        className="m-b-15 p-t-15 p-b-15 separator-bot-greyLight"
                       />
                     </div>
                   )}
                   {activeOption === "Опции охвата" && (
                     <>
                       <WrapperInput className="display-flex a-i-center separator-bot-greyLight p-b-15">
-                        <div className="p-r-15">NBD канал:</div>
-                        <BsInput
-                          id="NBD"
-                          value={NBD}
+                        <div className="p-r-15">NBD коррекция:</div>
+                        <Select
+                          valueKey="label"
+                          labelKey="label"
+                          options={NdbCorrectionList}
+                          id={"NBD"}
+                          value={reportState["NBD"]}
+                          onInput={onFormInput("NBD")}
                           placeholder="Впишите NBD канал"
-                          onInput={setNBD}
                         />
                       </WrapperInput>
                       <div className=" p-b-15">
@@ -407,20 +544,22 @@ const Reports = () => {
                           className="m-b-15"
                         />
                         <RadioButton
-                          id="automaticDetection"
+                          id="baseDayOptions"
+                          value={reportState["baseDayOptions"]}
+                          onInput={onFormInput("baseDayOptions")}
+                          meaning={BaseDayOptions[0]}
                           label="Автоматическое определение"
-                          value={automaticDetection}
-                          onInput={setAutomaticDetection}
                           className="m-b-15"
                         />
                         <RadioButton
-                          id="userDetection"
+                          id="baseDayOptions"
+                          value={reportState["baseDayOptions"]}
+                          onInput={onFormInput("baseDayOptions")}
+                          meaning={BaseDayOptions[1]}
                           label="Определение пользователем"
-                          value={userDetection}
-                          onInput={setUserDetection}
                           className="p-b-15"
                         />
-                        <ContainerDatePicker className="ml-auto mr-auto">
+                        <ContainerDatePicker>
                           <DatePicker
                             id="dateRange"
                             formPayload={formPayload}
@@ -456,18 +595,20 @@ const Reports = () => {
                     </>
                   )}
                   {activeOption === "Доп опции" && (
-                    <div>
-                      <WrapperInput className="display-flex a-i-center">
-                        <div className="p-r-15">Текущий список <br/> предметов рекламы:</div>
-                        <BsInput
-                          id="listAdvertising"
-                          value={listAdvertising}
-                          onInput={setListAdvertising}
-                        />
-                      </WrapperInput>
+                    <div className="separator-bot-greyLight m-b-15">
+                      <div className="m-b-10">Текущий список предметов рекламы:</div>
+                      <Select
+                        className="m-b-10"
+                        options={CurrentAdsList}
+                        id="listAdvertising"
+                        value={reportState["listAdvertising"]}
+                        onInput={onFormInput("listAdvertising")}
+                        valueKey="id"
+                        labelKey="label"
+                      />
                       <BsCheckBox
                         id="originalOutputs"
-                        label="Количество оригинальных выходов"
+                        label="Количество только оригинальных выходов"
                         value={originalOutputs}
                         onInput={setOriginalOutputs}
                         className="m-b-15"
@@ -475,82 +616,133 @@ const Reports = () => {
                     </div>
                   )}
                 </div>
+                <Tree
+                  className="p-b-15 separator-bot-greyLight"
+                  options={GenderOptions}
+                />
+                <ButtonsContainer>
+                  {bottomOptionsButtons.map(({id, label}) => (
+                    <Button
+                      className={`${label === bottomTabsState ? 'current' : ''}`}
+                      onClick={openTab(label, setBottomTabsState)}
+                      key={id}
+                    >
+                      {label}
+                    </Button>
+                  ))}
+                </ButtonsContainer>
+                <div className="display-flex p-t-15 separator-bot-greyLight">
+                  {bottomTabsState === "Geo" && (
+                    <div className="w-100">
+                      <Select
+                        valueKey="label"
+                        labelKey="label"
+                        options={GeoOptions}
+                        id={"Geo"}
+                        value={reportState["Geo"]}
+                        onInput={onFormInput("Geo")}
+                      />
+                    </div>
+                  )}
+                  {bottomTabsState === "Location" && (
+                    <div className="w-100">
+                      <Tree
+                        defaultExpandAll
+                        options={LocationOptions}
+                      />
+                    </div>
+                  )}
+                  <div className="display-flex fd-column ml-auto p-l-10">
+                    <FileIcon
+                      className="m-b-10"
+                      size={22}
+                    />
+                    <CopyIcon
+                      className="m-b-10"
+                      size={22}
+                    />
+                    <BasketIcon
+                      className="m-b-10"
+                      size={22}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="display-flex flex-column">
-              <h3>
-                Выбранные атрибуты
-              </h3>
-              <Tree
-                showLine
-                defaultExpandAll
-                onExpand={onExpand}
-                defaultSelectedKeys={selectedKey}
-                defaultCheckedKeys={checked}
-                onSelect={onSelect}
-                draggable
-                options={TreeData}
-              />
-            </div>
-            <div className="separator-left p-l-15 m-b-15">
-              <ButtonsContainer>
-                {attributesButtons.map(({id, label}) => (
-                  <Button
-                    className={`${label === activeButton ? 'current' : ''}`}
-                    onClick={openAttributes}
-                    key={id}
-                  >
-                    {label}
-                  </Button>
-                ))}
-              </ButtonsContainer>
-              {activeButton === "Статистика" && (
-                <CheckboxGroup
-                  value={freeState}
-                  blockTitle="Статистика"
-                  labelKey="title"
-                  valueKey="key"
-                  options={statistics}
-                  onInput={setFreeState}
-                  returnObjects
-                />
-              )}
-              {activeButton === "Атрибуты" && (
-                <CheckboxGroup
-                  value={freeStateTwo}
-                  blockTitle="Атрибуты"
-                  labelKey="title"
-                  valueKey="key"
-                  options={attributes}
-                  onInput={setFreeStateTwo}
-                  returnObjects
-                />
-              )}
-              {activeButton === "Демография" && (
-                <div>
-                  <DemographicRow node={{
-                    folder: "Папка",
-                    type: "Тип",
-                    owner:  "Владелец",
-                    lastUpdateDate: "Обновленна",
-                    lastUpdater: "Изменивший",
-                  }}
+            {/*<div className="display-flex flex-column">*/}
+            {/*  <h3>*/}
+            {/*    Выбранные атрибуты*/}
+            {/*  </h3>*/}
+            {/*  <Tree*/}
+            {/*    showLine*/}
+            {/*    defaultExpandAll*/}
+            {/*    onExpand={onExpand}*/}
+            {/*    defaultSelectedKeys={selectedKey}*/}
+            {/*    defaultCheckedKeys={checked}*/}
+            {/*    onSelect={onSelect}*/}
+            {/*    draggable*/}
+            {/*    options={TreeData}*/}
+            {/*  />*/}
+            {/*</div>*/}
+            {/*<div className="separator-left p-l-15 m-b-15">*/}
+            {/*  <ButtonsContainer>*/}
+            {/*    {attributesButtons.map(({id, label}) => (*/}
+            {/*      <Button*/}
+            {/*        className={`${label === activeButton ? 'current' : ''}`}*/}
+            {/*        onClick={openAttributes}*/}
+            {/*        key={id}*/}
+            {/*      >*/}
+            {/*        {label}*/}
+            {/*      </Button>*/}
+            {/*    ))}*/}
+            {/*  </ButtonsContainer>*/}
+            {/*  {activeButton === "Статистика" && (*/}
+            {/*    <CheckboxGroup*/}
+            {/*      value={freeState}*/}
+            {/*      blockTitle="Статистика"*/}
+            {/*      labelKey="title"*/}
+            {/*      valueKey="key"*/}
+            {/*      options={statistics}*/}
+            {/*      onInput={setFreeState}*/}
+            {/*      returnObjects*/}
+            {/*    />*/}
+            {/*  )}*/}
+            {/*  {activeButton === "Атрибуты" && (*/}
+            {/*    <CheckboxGroup*/}
+            {/*      value={freeStateTwo}*/}
+            {/*      blockTitle="Атрибуты"*/}
+            {/*      labelKey="title"*/}
+            {/*      valueKey="key"*/}
+            {/*      options={attributes}*/}
+            {/*      onInput={setFreeStateTwo}*/}
+            {/*      returnObjects*/}
+            {/*    />*/}
+            {/*  )}*/}
+            {/*  {activeButton === "Демография" && (*/}
+            {/*    <div>*/}
+            {/*      <DemographicRow node={{*/}
+            {/*        folder: "Папка",*/}
+            {/*        type: "Тип",*/}
+            {/*        owner:  "Владелец",*/}
+            {/*        lastUpdateDate: "Обновленна",*/}
+            {/*        lastUpdater: "Изменивший",*/}
+            {/*      }}*/}
 
-                    className="separator-bot p-b-5"
-                  >
-                    <span>Name</span>
-                  </DemographicRow>
-                  <Tree
-                    defaultExpandAll
-                    options={demographic}
-                    rowComponent={DemographicRow}
-                    checkAble
-                    onInput={setDemographicState}
-                    value={demographicState}
-                  />
-                </div>
-              )}
-            </div>
+            {/*        className="separator-bot p-b-5"*/}
+            {/*      >*/}
+            {/*        <span>Name</span>*/}
+            {/*      </DemographicRow>*/}
+            {/*      <Tree*/}
+            {/*        defaultExpandAll*/}
+            {/*        options={demographic}*/}
+            {/*        rowComponent={DemographicRow}*/}
+            {/*        checkAble*/}
+            {/*        onInput={setDemographicState}*/}
+            {/*        value={demographicState}*/}
+            {/*      />*/}
+            {/*    </div>*/}
+            {/*  )}*/}
+            {/*</div>*/}
           </ReportContainer>
         </div>
       </ScrollBar>

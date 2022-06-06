@@ -34,12 +34,15 @@ const renderIcon = (children) => children.map((child, index) => {
 })
 
 export default ({ children, viewBox, attribs = {} }) => {
-  const Icon = ({ children: ch, size, title, className, style, onKeyUp, onKeyDown, onClick, onMouseEnter, onMouseLeave }) => (
+  const Icon = ({ children: ch, size, title, className, style, onKeyUp, onKeyDown, onClick, onMouseEnter, onMouseLeave,
+                  onMouseDown, onMouseUp }) => (
     <div
       className={`${className} icon-container transition-icon j-c-center display-flex`}
       style={style}
       onKeyUp={onKeyUp}
       onKeyDown={onKeyDown}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
@@ -65,6 +68,8 @@ export default ({ children, viewBox, attribs = {} }) => {
     style: PropTypes.object,
     onKeyUp: PropTypes.func,
     onKeyDown: PropTypes.func,
+    onMouseUp: PropTypes.func,
+    onMouseDown: PropTypes.func,
     onClick: PropTypes.func,
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,

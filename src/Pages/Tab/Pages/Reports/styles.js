@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const ReportContainer = styled.div`
-  padding-top: 30px;
+  padding-top: 15px;
   display: grid;
   grid-template-columns: 400px 1fr 1fr;
   grid-column-gap: 20px;
@@ -10,7 +10,7 @@ export const ReportContainer = styled.div`
 `
 
 export const WrapperInput = styled.div`
-  --width-input: 50px;
+  --width-input: ${({ value }) => value !== undefined ? 50 + String(value).length * 9 : 115}px;
   --height-input: 30px;
   margin-bottom: 15px;
   display: flex;

@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useState, useRef} from 'react';
+
 import BsButton from "../../Components/BsButton";
 import PracticesBar from "../../Components/PracticesBar";
 import {WrapperButtons} from "../DownloadTask/style";
@@ -11,7 +12,7 @@ import WithOpenModalWindow from "@/Core/Decorators/WithOpenModalWindow"
 import {Route, Routes} from "react-router-dom";
 import Result from "./Content/result";
 import SelectionCriteria from "./Content/selectionCriteria";
-import Reports from "./Content/reports";
+import Reports from "../Tab/Pages/Reports"
 import {Tabs} from "./constants"
 import {PracticeButton, PracticesButtonsContainer, WrapperButton} from "../../Components/PracticesBar/styles";
 import {CardForDirectory, InformationCard, InformationCardMin} from "./styles"
@@ -43,16 +44,18 @@ const NewTask = ({openModalWindow, updateState, state}) => {
   const timerRef = useRef()
 
   const selectSource = useCallback(() => {
-    updateState({
-      editData: true,
-      saveData: false
-    })
-    setOpenSourceMenu(false)
-    setSelectedSource((currentVal) => {
-      setDataSource(currentVal)
-      return {}
-    })
-    setIsDataChanged(true)
+    if (Object.keys(selectedSource).length > 0) {
+      updateState({
+        editData: true,
+        saveData: false
+      })
+      setOpenSourceMenu(false)
+      setSelectedSource((currentVal) => {
+        setDataSource(currentVal)
+        return {}
+      })
+      setIsDataChanged(true)
+    }
   }, [selectedSource, dataSource])
 
   const openMenu = useCallback(() => { setOpenSourceMenu(true) }, [])
@@ -70,6 +73,7 @@ const NewTask = ({openModalWindow, updateState, state}) => {
 
   useEffect(() => {
     closeDataSourceMenu()
+
   }, [dataSource])
 
   const saveTask = () => {
@@ -327,9 +331,7 @@ const NewTask = ({openModalWindow, updateState, state}) => {
               }
               {
                 activeOption === "Отчеты" && (
-                    <div>
-                      Отчеты
-                    </div>
+                   <Reports/>
                 )
               }
               {
