@@ -112,39 +112,78 @@ const SelectionCriteriaForNewTask = () => {
   }, [nameSelect, pageData])
 
   const setNewTree = useCallback(() => {
-    setPageData(([{ children:
-      [{children, ...secondLvlChildrenData}, ...restChildren],
-      ...pageData }]) => {
-      console.log(secondLvlChildrenData)
-      // создаем нового ребенка
-      const newChildren = new Map(children)
-      // если в данных в группе нет
-      if (!newChildren.has(dictionaryGroup)) {
-        // то добавляем данные
-        newChildren.set(dictionaryGroup, {
-          ...GroupDictionaryParams[dictionaryGroup],
-          children: checkedObject
-        })
-        // если данные в группе есть
-      } else {
-        // массив старых данных
-        // children.get(dictionaryGroup).children - [{}]
-        // checkedObject - [{}]
-        // то кладем старые данные и новые
-        newChildren.set(dictionaryGroup, {
-          ...newChildren.get(dictionaryGroup),
-          // тут перезаписывается критерий, если выбран критерий одной и той же группы
-          children: checkedObject
-        })
-      }
-      // secondLvlChildrenData данные второго уровня
-      // restChildren остальные дети?
-      return [{
-        // записываем старые данные,
-      ...pageData,
-        // в children первого уровня записываем данные второго уровня и его children с данными группы
-      children: [{...secondLvlChildrenData, children: newChildren }, ...restChildren]
-    }]})
+    if (pageData.length === 0) {
+      let newAr = [
+        {
+          id: "fdgdsf0gdfg",
+          title: "TV Media",
+          type: "head",
+          children: [
+            {
+              id: "123123",
+              title: "",
+              condition: "AND",
+              type: "block",
+              children: new Map().set(dictionaryGroup, {
+                ...GroupDictionaryParams[dictionaryGroup],
+                children: checkedObject
+              })
+            }
+          ]
+        }
+      ]
+      setPageData(newAr)
+    }
+    else if (pageData[0].children.length === 0) {
+      let newArr = pageData.map(({children, ...firstLvlData}) => ({
+        ...firstLvlData,
+        children: [
+          {
+            id: "123123",
+            title: "",
+            condition: "AND",
+            type: "block",
+            children: new Map().set(dictionaryGroup, {
+              ...GroupDictionaryParams[dictionaryGroup],
+              children: checkedObject
+            })
+          }
+        ]})
+      )
+      setPageData(newArr)
+    } else {
+      setPageData(([{ children:
+        [{children,  ...secondLvlChildrenData}, ...restChildren],
+        ...pageData }]) => {
+        // создаем нового ребенка
+        const newChildren = new Map(children)
+        // если в данных в группе нет
+        if (!newChildren.has(dictionaryGroup)) {
+          // то добавляем данные
+          newChildren.set(dictionaryGroup, {
+            ...GroupDictionaryParams[dictionaryGroup],
+            children: checkedObject
+          })
+          // если данные в группе есть
+        } else {
+          // массив старых данных
+          // children.get(dictionaryGroup).children - [{}]
+          // checkedObject - [{}]
+          // то кладем старые данные и новые
+          newChildren.set(dictionaryGroup, {
+            ...newChildren.get(dictionaryGroup),
+            // тут перезаписывается критерий, если выбран критерий одной и той же группы
+            children: checkedObject
+          })
+        }
+        // secondLvlChildrenData данные второго уровня
+        return [{
+          // записываем старые данные,
+          ...pageData,
+          // в children первого уровня записываем данные второго уровня и его children с данными группы
+          children: [{...secondLvlChildrenData, children: newChildren }, ...restChildren]
+        }]})
+    }
   }, [dictionaryGroup, checkedObject, pageData])
   const onDragStart = (info) => {
     console.log("onDragStart", info)
@@ -167,7 +206,6 @@ const SelectionCriteriaForNewTask = () => {
 
   // удаление данных из дерева
   const onUpdateOptions = useCallback((nextOptions) => {
-
     setPageData(nextOptions.map(({ children, ...firstLvlData}) => ({
       ...firstLvlData,
       children: children.map(({ children: secondLvlChildren, ...secondLvlData }) => ({
