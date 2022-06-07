@@ -8,7 +8,7 @@ import {
   LeftSideGrid,
   BodyGrid, HeaderCell, Cell
 } from './styles'
-import { AutoSizer, ScrollSync } from 'react-virtualized'
+import {AutoSizer, ScrollSync} from 'react-virtualized'
 import scrollbarSize from 'dom-helpers/scrollbarSize';
 
 const baseData = {
@@ -67,105 +67,93 @@ export default class GridExample extends React.PureComponent {
 
     return (
       <div className="flex-container m-l-5 m-r-5 m-t-20">
-
         <ScrollSync>
-          {({
-              onScroll,
-              scrollLeft,
-              scrollTop,
-            }) => {
-
-            return (
-              <GridRow>
-                <LeftSideGridContainer
-                  style={{
-                    position: 'absolute',
-                    left: 0,
-                    top: 0,
-                    color: leftColor,
-                    backgroundColor: `rgb(51, 51, 51)`,
-                  }}>
-                  <HeaderGrid
-                    cellRenderer={this._renderLeftHeaderCell}
-                    width={columnWidth}
-                    height={rowHeight}
-                    rowHeight={rowHeight}
-                    columnWidth={columnWidth}
-                    rowCount={1}
-                    columnCount={1}
-                  />
-                </LeftSideGridContainer>
-                <LeftSideGridContainer
-                  style={{
-                    position: 'absolute',
-                    left: 0,
-                    top: rowHeight,
-                    color: leftColor,
-                    backgroundColor: `#BFA764`,
-                  }}>
-                  <LeftSideGrid
-                    overscanColumnCount={overscanColumnCount}
-                    overscanRowCount={overscanRowCount}
-                    cellRenderer={this._renderLeftSideCell}
-                    columnWidth={columnWidth}
-                    columnCount={1}
-                    height={height - scrollbarSize()}
-                    rowHeight={rowHeight}
-                    rowCount={rowCount}
-                    scrollTop={scrollTop}
-                    width={columnWidth}
-                  />
-                </LeftSideGridContainer>
-                <GridColumn>
-                  <AutoSizer disableHeight>
-                    {({width}) => (
-                      <div>
-                        <div
-                          style={{
-                            backgroundColor: `rgb(51, 51, 51)`,
-                            color: topColor,
-                            height: rowHeight,
-                            width: width - scrollbarSize(),
-                          }}>
-                          <HeaderGrid
-                            columnWidth={columnWidth}
-                            columnCount={columnCount}
-                            height={rowHeight}
-                            overscanColumnCount={overscanColumnCount}
-                            cellRenderer={this._renderHeaderCell}
-                            rowHeight={rowHeight}
-                            rowCount={1}
-                            scrollLeft={scrollLeft}
-                            width={width - scrollbarSize()}
-                          />
-                        </div>
-                        <div
-                          style={{
-                            backgroundColor: `#545454`,
-                            color: middleColor,
-                            height,
-                            width,
-                          }}>
-                          <BodyGrid
-                            columnWidth={columnWidth}
-                            columnCount={columnCount}
-                            height={height}
-                            onScroll={onScroll}
-                            overscanColumnCount={overscanColumnCount}
-                            overscanRowCount={overscanRowCount}
-                            cellRenderer={this._renderBodyCell}
-                            rowHeight={rowHeight}
-                            rowCount={rowCount}
-                            width={width}
-                          />
-                        </div>
+          {({ onScroll, scrollLeft, scrollTop }) => (
+            <GridRow>
+              <LeftSideGridContainer
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  color: leftColor,
+                  backgroundColor: `rgb(51, 51, 51)`,
+                }}
+              >
+                <HeaderGrid
+                  cellRenderer={this._renderLeftHeaderCell}
+                  width={columnWidth}
+                  height={rowHeight}
+                  rowHeight={rowHeight}
+                  columnWidth={columnWidth}
+                  rowCount={1}
+                  columnCount={1}
+                />
+              </LeftSideGridContainer>
+              <LeftSideGridContainer
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: rowHeight,
+                  color: leftColor,
+                  backgroundColor: `#BFA764`,
+                }}
+              >
+                <LeftSideGrid
+                  overscanColumnCount={overscanColumnCount}
+                  overscanRowCount={overscanRowCount}
+                  cellRenderer={this._renderLeftSideCell}
+                  columnWidth={columnWidth}
+                  columnCount={1}
+                  height={height - scrollbarSize()}
+                  rowHeight={rowHeight}
+                  rowCount={rowCount}
+                  scrollTop={scrollTop}
+                  width={columnWidth}
+                />
+              </LeftSideGridContainer>
+              <GridColumn>
+                <AutoSizer disableHeight>
+                  {({width}) => (
+                    <div>
+                      <div style={{
+                        backgroundColor: `rgb(51, 51, 51)`,
+                        color: topColor,
+                        height: rowHeight,
+                        width: width - scrollbarSize()
+                      }}>
+                        <HeaderGrid
+                          columnWidth={columnWidth}
+                          columnCount={columnCount}
+                          height={rowHeight}
+                          overscanColumnCount={overscanColumnCount}
+                          cellRenderer={this._renderHeaderCell}
+                          rowHeight={rowHeight}
+                          rowCount={1}
+                          scrollLeft={scrollLeft}
+                          width={width - scrollbarSize()}
+                        />
                       </div>
-                    )}
-                  </AutoSizer>
-                </GridColumn>
-              </GridRow>
-            );
-          }}
+                      <div style={{backgroundColor: `#545454`, color: middleColor, height, width}}>
+                        <BodyGrid
+                          columnWidth={columnWidth}
+                          columnCount={columnCount}
+                          height={height}
+                          onScroll={onScroll}
+                          overscanColumnCount={overscanColumnCount}
+                          overscanRowCount={overscanRowCount}
+                          cellRenderer={this._renderBodyCell}
+                          rowHeight={rowHeight}
+                          rowCount={rowCount}
+                          width={width}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </AutoSizer>
+              </GridColumn>
+            </GridRow>
+          )
+          }
         </ScrollSync>
       </div>
     );

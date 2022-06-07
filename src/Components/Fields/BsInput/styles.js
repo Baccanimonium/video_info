@@ -11,3 +11,7 @@ export const InputFillIndicator = styled.div`
 export const InputContainer = styled.div`
   margin-bottom: 0;
 `
+
+export const InputComponentContainer = styled.div`
+  
+`

@@ -14,10 +14,12 @@ export const Button = styled.div`
   transition-duration: 150ms;
   background-color: var(--check-box-checked-bg);
   border-radius: 50%;
-  transform: ${props => props.checked ? "scale(1)" : "scale(0)"};
+  transform: ${props => props.checked ? "scale(0.8)" : "scale(0)"};
   position: absolute;
-  top: 2px;
-  bottom: 2px;
-  left: 2px;
-  right: 2px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+}
 `

@@ -1,7 +1,9 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import memoizeOne from "memoize-one"
-import { InputContainer, InputFillIndicator } from "./styles"
+import {InputComponentContainer, InputContainer, InputFillIndicator} from "./styles"
+
+export { InputComponentContainer, InputContainer }
 
 class BsInput extends Component {
   margeStyles = memoizeOne((styleInputBox, styleInput) => ({ ...styleInputBox, ...styleInput }))
@@ -81,7 +83,7 @@ class BsInput extends Component {
     const { Input, InputType } = this.getComponentType(type)
     const UnderlineStyles = this.getWidthLine(maxlength, value)
     return (
-      <div
+      <InputComponentContainer
         className={`${className} display-flex input-box `}
         style={this.margeStyles(styleInputBox, { minHeight, height })}
       >
@@ -114,7 +116,7 @@ class BsInput extends Component {
           )}
         </InputContainer>
         {children}
-      </div>
+      </InputComponentContainer>
     )
   }
 }
