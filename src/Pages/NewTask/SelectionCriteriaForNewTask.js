@@ -48,6 +48,9 @@ const SelectionCriteriaForNewTask = () => {
   const [checked, setCheckedKey] = useState("")
   const [nameSelect, setNameSelect] = useState("")
 
+  const [listBuffer, setListBuffer] = useState([])
+  const [checkedBuffer, setCheckedBuffer] = useState([])
+
   // срабатывает при клике на группу
   const onSelect = useCallback((value) => {
     console.log(value)
@@ -305,6 +308,19 @@ const SelectionCriteriaForNewTask = () => {
           />
         </ScrollBar>
       </div>
+        <div className="separator-left p-l-15 m-b-15 overflow-hidden">
+          <CheckboxGroupContainer>
+            <CheckboxGroup
+              options={selectedList}
+              valueKey="id"
+              blockTitle="Буфер"
+              labelKey="title"
+              value={checkedBuffer}
+              returnObjects
+              onInput={setCheckedBuffer}
+            />
+          </CheckboxGroupContainer>
+        </div>
       </GridContainer>
     </>
   );
