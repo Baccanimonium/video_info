@@ -23,9 +23,33 @@ import RowComponent from "../Tab/Pages/SelectionCriteria/Components/RowComponent
 import ScrollBar from "react-perfect-scrollbar";
 import Tree from '@/Components/Tree';
 import {listDirectory} from "./config"
+import BufferComponent from "@/Pages/NewTask/BufferComponent";
 
 /// чтобы айди в чекбоксах не совпадали нужно добавлять в айди название справочника
 // id: "nationalTV/1"
+
+// [ {
+//     id: "fdgdsf0gdfg",
+//     title: "Удаление всех параметров",
+//     type: "head",
+//     children: [
+//       {
+//         id: 1,
+//         title: "N/A",
+//         condition: "OR",
+//       },
+//       {
+//         id: 2,
+//         title: "NA",
+//         condition: "OR",
+//       },
+//       {
+//         id: 3,
+//         title: "N",
+//         condition: "OR",
+//       },
+//     ]
+//   } ]
 
 const StyleTree = {width: "600px"}
 
@@ -249,6 +273,11 @@ const SelectionCriteriaForNewTask = () => {
     setCheckedObject(newVal)
   }
 
+  const editListBuffer = useCallback(() => {
+    console.log(checkedObject)
+    setListBuffer(checkedObject)
+  }, [checkedObject])
+
   return (
     <>
       <div className="display-flex m-t-10 flex-wrap">
@@ -275,13 +304,22 @@ const SelectionCriteriaForNewTask = () => {
             onInput={setCheckedObject}
           />
           {selectedList.length > 0 &&
-            <BsButton
-              type="button"
-              className="golden btn sign-up-btn color-greyDarken w-18"
-              onClick={setNewTree}
-            >
-              применить
-            </BsButton>
+            <div className="display-flex a-i-center">
+              <BsButton
+                type="button"
+                className="golden btn sign-up-btn color-greyDarken w-18 m-r-5"
+                onClick={setNewTree}
+              >
+                применить
+              </BsButton>
+              <BsButton
+                type="button"
+                className="golden btn sign-up-btn color-greyDarken w-18"
+                onClick={editListBuffer}
+              >
+                В буфер
+              </BsButton>
+            </div>
           }
         </CheckboxGroupContainer>
       <div className="separator-left p-l-15 m-b-15 overflow-hidden">
@@ -309,17 +347,28 @@ const SelectionCriteriaForNewTask = () => {
         </ScrollBar>
       </div>
         <div className="separator-left p-l-15 m-b-15 overflow-hidden">
-          <CheckboxGroupContainer>
-            <CheckboxGroup
-              options={selectedList}
-              valueKey="id"
-              blockTitle="Буфер"
-              labelKey="title"
-              value={checkedBuffer}
-              returnObjects
-              onInput={setCheckedBuffer}
+          <ScrollBar>
+            <Tree
+              style={StyleTree}
+              onDragStart={onDragStart}
+              onDragEnter={onDragEnter}
+              onDrop={onDrop}
+              showLine
+              // selectable={false}
+              setRowCondition={setRowCondition}
+              draggable
+              defaultExpandAll
+              onExpand={onExpand}
+              defaultSelectedKeys={selectedKey}
+              defaultCheckedKeys={checked}
+              onSelect={onSelect}
+              onCheck={onCheck}
+              options={listBuffer}
+              selectRule={selectRule}
+              onUpdateOptions={setListBuffer}
+              rowComponent={BufferComponent}
             />
-          </CheckboxGroupContainer>
+          </ScrollBar>
         </div>
       </GridContainer>
     </>
