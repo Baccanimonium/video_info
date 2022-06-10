@@ -73,7 +73,7 @@ const SelectionCriteriaForNewTask = () => {
   const [nameSelect, setNameSelect] = useState("")
 
   const [listBuffer, setListBuffer] = useState([])
-  const [checkedBuffer, setCheckedBuffer] = useState([])
+  const [titleBuffer, setTitleBuffer] = useState("")
 
   // срабатывает при клике на группу
   const onSelect = useCallback((value) => {
@@ -137,6 +137,15 @@ const SelectionCriteriaForNewTask = () => {
     setDictionaryGroup(dictionaryGroup)
     setCheckedObject(pageData[0]?.children[0]?.children.get(dictionaryGroup)?.children || [])
   }, [nameSelect, pageData])
+
+  useEffect(() => {
+    console.log(selectedList, listBuffer)
+    if (listBuffer.length > 0) {
+      // setSelectedList(selectedList.filter(({id}) => id % 2 === 0 ))
+    } else {
+
+    }
+  }, [listBuffer])
 
   const setNewTree = useCallback(() => {
     if (pageData.length === 0) {
@@ -274,14 +283,18 @@ const SelectionCriteriaForNewTask = () => {
   }
 
   const editListBuffer = useCallback(() => {
-    console.log(checkedObject)
+    setTitleBuffer(title)
     setListBuffer(checkedObject)
-  }, [checkedObject])
+  }, [checkedObject, title])
+
+  const onUpdateBufferList = useCallback((value) => {
+    console.log(value)
+  }, [dictionaryGroup])
 
   return (
     <>
       <div className="display-flex m-t-10 flex-wrap">
-        {listDirectory.map(({id, name, active, nameGroup}) => (
+        {listDirectory.map(({id, name, active}) => (
             <CardForDirectory
               key={id}
               active={active}
@@ -347,6 +360,7 @@ const SelectionCriteriaForNewTask = () => {
         </ScrollBar>
       </div>
         <div className="separator-left p-l-15 m-b-15 overflow-hidden">
+          {titleBuffer && listBuffer.length > 0 && (<div className="m-b-10">Буфер {titleBuffer}:</div>)}
           <ScrollBar>
             <Tree
               style={StyleTree}
@@ -365,7 +379,7 @@ const SelectionCriteriaForNewTask = () => {
               onCheck={onCheck}
               options={listBuffer}
               selectRule={selectRule}
-              onUpdateOptions={setListBuffer}
+              onUpdateOptions={onUpdateBufferList}
               rowComponent={BufferComponent}
             />
           </ScrollBar>
