@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
 import React, { useMemo, useState, useRef, useEffect } from "react"
 import PropTypes from "prop-types"
 import Icon from "@/Components/Icon"
@@ -45,7 +44,6 @@ const Carousel = ({ children, arrowLeft: ArrowLeft, arrowRight: ArrowRight, valu
     }
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const nextAvailableScroll = slidesContainer.current.scrollWidth - carouselContainer.current.clientWidth
     if (scrollPosition > nextAvailableScroll) {
@@ -76,7 +74,6 @@ const Carousel = ({ children, arrowLeft: ArrowLeft, arrowRight: ArrowRight, valu
       updateScrollPosition(positiveDirection ? res < availableScroll ? res : availableScroll : res)
     }
     updateIndex(value)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [availableScroll, value])
 
   return (

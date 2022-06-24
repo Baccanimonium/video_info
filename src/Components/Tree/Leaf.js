@@ -15,9 +15,9 @@ const DotICon = Icon(Dot)
 const Leaf = (props) => {
   const {
     childrenKey, valueKey, options, options: { title, [childrenKey]: children, [valueKey]: leafVal }, level,
-    onInput, index, value, defaultExpandAll, getLeafSelectedStatus, onSelect, selectedNode, draggable,
+    onInput, index, defaultExpandAll, getLeafSelectedStatus, onSelect, selectedNode, draggable,
     checkAble, getSequence, dropRule, setDropState, dropState, rowComponent, parent, onUpdateOptions,
-    onDeleteLeafOption
+    onDeleteLeafOption, returnObjects
   } = props
 
   const refProps = useRef(props)
@@ -30,39 +30,29 @@ const Leaf = (props) => {
 
   const toggleOpen = useCallback(() => setExpanded(v => !v), [])
 
-  const handleInput = useCallback((value, sequence = []) => {
-    sequence.unshift(index)
-    onInput(value, sequence)
-
-  }, [onInput, index])
-
   const checkBoxInput = useCallback((value) => {
     if (children) {
-      const nextValue = {}
-      const stack = [[options, []]]
+      const nextValue = []
+      const stack = [options]
       if (value) {
         for (let i = 0; i < stack.length; i++) {
-          const [item, stackSequence] = stack[i];
+          const item = stack[i];
+
           const {[childrenKey]: stackChildren} = item
           if (stackChildren) {
-            stackChildren.forEach((item, index) => {
-              stack.push([item, [...stackSequence, index]])
+            stackChildren.forEach((item) => {
+              stack.push(item)
             })
           } else {
-            let workVal = nextValue
-            const lastIndex = stackSequence.splice(stackSequence.length - 1, 1)
-            stackSequence.forEach((v) => {
-              workVal = workVal[v]
-            })
-            workVal[lastIndex] = item[valueKey]
+            nextValue.push([item[valueKey], returnObjects ? item : item[valueKey]])
           }
         }
       }
-      handleInput(nextValue)
+      onInput(nextValue, value)
     } else {
-      handleInput(value ? leafVal : "")
+      onInput( [[leafVal, returnObjects ? options: leafVal]], value)
     }
-  }, [children, handleInput, childrenKey, options, valueKey, leafVal])
+  }, [children, onInput, childrenKey, options, valueKey, leafVal, returnObjects])
 
   const onDragEnd = useCallback(() => {
     setBorderState("")
@@ -138,7 +128,7 @@ const Leaf = (props) => {
         {checkAble && <BsCheckbox
           className="m-r-5"
           onInput={checkBoxInput}
-          value={children ? getLeafSelectedStatus(children, value) : !!value}
+          value={getLeafSelectedStatus(options)}
         />}
         <Row
           title={title}
@@ -166,8 +156,7 @@ const Leaf = (props) => {
             checkAble={checkAble}
             index={index}
             level={level + 1}
-            onInput={handleInput}
-            value={value ? value[index] : null}
+            onInput={onInput}
             getLeafSelectedStatus={getLeafSelectedStatus}
             onSelect={onSelect}
             selectedNode={selectedNode}

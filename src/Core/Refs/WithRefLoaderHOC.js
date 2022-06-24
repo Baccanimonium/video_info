@@ -96,8 +96,8 @@ const WithRefLoaderHoc = (Component) => {
       if (isAllDynamicParamsProvided && (props.allWaysOpen || (!props.returnOption && value))) {
         loadRef()
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
 
     return (
       <Component

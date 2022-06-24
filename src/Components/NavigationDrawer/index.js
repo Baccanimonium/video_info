@@ -26,7 +26,6 @@ const NavigationDrawer = ({ routes }) => {
       setToggleArrow("default-open")
       setIconArrowStyle("default-open")
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   useEffect(() => {
     setLeftWidth(getHidden === "close" ? 60 : 190)

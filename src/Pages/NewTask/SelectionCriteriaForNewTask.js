@@ -55,8 +55,11 @@ const StyleTree = {width: "600px"}
 
 const aaa = (children) => {
   let arrayChildren = []
-  children.forEach(({children:secondLvlChildren, ...secondLvlData}, key) => {
-    arrayChildren.push({...secondLvlData, children: secondLvlChildren.map((item) => [{...item, nameGroup: key}]).flat()})
+  children.forEach(({children: secondLvlChildren, ...secondLvlData}, key) => {
+      arrayChildren.push({
+        ...secondLvlData,
+        children: secondLvlChildren.map((item) => [{...item, nameGroup: key}]).flat()
+      })
     }
   )
   return arrayChildren
@@ -169,28 +172,30 @@ const SelectionCriteriaForNewTask = () => {
         }
       ]
       setPageData(newAr)
-    }
-    else if (pageData[0].children.length === 0) {
+    } else if (pageData[0].children.length === 0) {
       let newArr = pageData.map(({children, ...firstLvlData}) => ({
-        ...firstLvlData,
-        children: [
-          {
-            id: "123123",
-            title: "",
-            condition: "AND",
-            type: "block",
-            children: new Map().set(dictionaryGroup, {
-              ...GroupDictionaryParams[dictionaryGroup],
-              children: checkedObject
-            })
-          }
-        ]})
+          ...firstLvlData,
+          children: [
+            {
+              id: "123123",
+              title: "",
+              condition: "AND",
+              type: "block",
+              children: new Map().set(dictionaryGroup, {
+                ...GroupDictionaryParams[dictionaryGroup],
+                children: checkedObject
+              })
+            }
+          ]
+        })
       )
       setPageData(newArr)
     } else {
-      setPageData(([{ children:
-        [{children,  ...secondLvlChildrenData}, ...restChildren],
-        ...pageData }]) => {
+      setPageData(([{
+        children:
+          [{children, ...secondLvlChildrenData}, ...restChildren],
+        ...pageData
+      }]) => {
         // создаем нового ребенка
         const newChildren = new Map(children)
         // если в данных в группе нет
@@ -217,8 +222,9 @@ const SelectionCriteriaForNewTask = () => {
           // записываем старые данные,
           ...pageData,
           // в children первого уровня записываем данные второго уровня и его children с данными группы
-          children: [{...secondLvlChildrenData, children: newChildren }, ...restChildren]
-        }]})
+          children: [{...secondLvlChildrenData, children: newChildren}, ...restChildren]
+        }]
+      })
     }
   }, [dictionaryGroup, checkedObject, pageData])
   const onDragStart = (info) => {
@@ -242,16 +248,16 @@ const SelectionCriteriaForNewTask = () => {
 
   // удаление данных из дерева
   const onUpdateOptions = useCallback((nextOptions) => {
-    setPageData(nextOptions.map(({ children, ...firstLvlData}) => ({
+    setPageData(nextOptions.map(({children, ...firstLvlData}) => ({
       ...firstLvlData,
-      children: children.map(({ children: secondLvlChildren, ...secondLvlData }) => ({
+      children: children.map(({children: secondLvlChildren, ...secondLvlData}) => ({
         ...secondLvlData,
         children: new Map(secondLvlChildren.reduce((acc, item) => {
           if (item.children.length > 0) {
             acc.push({...item, name: item.children[0].nameGroup})
           }
           return acc
-        }, []).map((v) => [v.name, v ]))
+        }, []).map((v) => [v.name, v]))
       }))
     })))
   }, [dictionaryGroup])
@@ -260,11 +266,11 @@ const SelectionCriteriaForNewTask = () => {
 
   // переписываем данные дерева с критериями-массивами, а не мапами
   const treeUnwrappedData = useMemo(() => {
-    return pageData.map(({ children, ...firstLvlData}) => ({
+    return pageData.map(({children, ...firstLvlData}) => ({
       ...firstLvlData,
-      children: children.map(({ children: secondLvlChildren, ...secondLvlData }) => ({
+      children: children.map(({children: secondLvlChildren, ...secondLvlData}) => ({
         ...secondLvlData,
-        children: Array.isArray(secondLvlChildren) ? secondLvlChildren :  aaa(secondLvlChildren)
+        children: Array.isArray(secondLvlChildren) ? secondLvlChildren : aaa(secondLvlChildren)
       }))
     }))
   }, [pageData])
@@ -317,48 +323,48 @@ const SelectionCriteriaForNewTask = () => {
             onInput={setCheckedObject}
           />
           {selectedList.length > 0 &&
-            <div className="display-flex a-i-center">
-              <BsButton
-                type="button"
-                className="golden btn sign-up-btn color-greyDarken w-18 m-r-5"
-                onClick={setNewTree}
-              >
-                применить
-              </BsButton>
-              <BsButton
-                type="button"
-                className="golden btn sign-up-btn color-greyDarken w-18"
-                onClick={editListBuffer}
-              >
-                В буфер
-              </BsButton>
-            </div>
+          <div className="display-flex a-i-center">
+            <BsButton
+              type="button"
+              className="golden btn sign-up-btn color-greyDarken w-18 m-r-5"
+              onClick={setNewTree}
+            >
+              применить
+            </BsButton>
+            <BsButton
+              type="button"
+              className="golden btn sign-up-btn color-greyDarken w-18"
+              onClick={editListBuffer}
+            >
+              В буфер
+            </BsButton>
+          </div>
           }
         </CheckboxGroupContainer>
-      <div className="separator-left p-l-15 m-b-15 overflow-hidden">
-        <ScrollBar>
-          <Tree
-            style={StyleTree}
-            onDragStart={onDragStart}
-            onDragEnter={onDragEnter}
-            onDrop={onDrop}
-            showLine
-            // selectable={false}
-            setRowCondition={setRowCondition}
-            draggable
-            defaultExpandAll
-            onExpand={onExpand}
-            defaultSelectedKeys={selectedKey}
-            defaultCheckedKeys={checked}
-            onSelect={onSelect}
-            onCheck={onCheck}
-            options={treeUnwrappedData}
-            selectRule={selectRule}
-            onUpdateOptions={onUpdateOptions}
-            rowComponent={RowComponent}
-          />
-        </ScrollBar>
-      </div>
+        <div className="separator-left p-l-15 m-b-15 overflow-hidden">
+          <ScrollBar>
+            <Tree
+              style={StyleTree}
+              onDragStart={onDragStart}
+              onDragEnter={onDragEnter}
+              onDrop={onDrop}
+              showLine
+              // selectable={false}
+              setRowCondition={setRowCondition}
+              draggable
+              defaultExpandAll
+              onExpand={onExpand}
+              defaultSelectedKeys={selectedKey}
+              defaultCheckedKeys={checked}
+              onSelect={onSelect}
+              onCheck={onCheck}
+              options={treeUnwrappedData}
+              selectRule={selectRule}
+              onUpdateOptions={onUpdateOptions}
+              rowComponent={RowComponent}
+            />
+          </ScrollBar>
+        </div>
         <div className="separator-left p-l-15 m-b-15 overflow-hidden">
           {titleBuffer && listBuffer.length > 0 && (<div className="m-b-10">Буфер {titleBuffer}:</div>)}
           <ScrollBar>

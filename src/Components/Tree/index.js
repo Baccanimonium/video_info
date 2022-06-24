@@ -1,4 +1,4 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import {memoize} from "lodash/function";
 import Leaf from "@/Components/Tree/Leaf";
@@ -11,34 +11,57 @@ const Tree = (props) => {
   refProps.current = props
   const {
     value, onInput, onDrag, childrenKey, valueKey, labelKey, checkAble, options, draggable, dropRule,
-    defaultExpandAll, rowComponent, onUpdateOptions, style, className
+    defaultExpandAll, rowComponent, onUpdateOptions, style, className, returnObjects
   } = props
+
+  const [selectedState, setSelectedState] = useState(new Map())
+  const refValue = useRef(value)
+
+  useEffect(() => {
+    if (value !== refValue.current) {
+      setSelectedState(value.reduce(returnObjects
+        ? (acc, item) => {
+          acc.set(item[valueKey], item)
+          return acc
+        }
+        : (acc, item) => {
+          acc.set(item, item)
+          return acc
+        }, new Map()))
+      refValue.current = value
+    }
+  }, [value])
+
+
   const [selectedNode, setSelectedNode] = useState("")
   const [dropState, setDropState] = useState(null)
-  const handleInput = useCallback((leafValue, sequence) => {
-    const lastIndex = sequence.splice(sequence.length - 1, 1)
-    let nextVal = {...value}
-    let workVal = nextVal
-    sequence.forEach((i) => {
-      const { [i]: updatedVal = {} } = workVal
-      workVal[i] = {...updatedVal }
-      workVal = workVal[i]
+
+  const handleInput = useCallback((values, insert) => {
+    setSelectedState(prevSelectedState => {
+      const nextMap = new Map(prevSelectedState)
+      values.forEach(insert
+        ? ([key, v]) => nextMap.set(key, v)
+        : ([key]) => nextMap.delete(key))
+
+      const nextValue = []
+      for (const v of nextMap.values()) {
+        nextValue.push(v)
+      }
+      refValue.current = nextValue
+      onInput(nextValue)
+      return nextMap
     })
-    workVal[lastIndex] = leafValue
-    onInput(nextVal)
-  }, [value, onInput])
+  }, [onInput])
 
 
-  const getLeafSelectedStatus = useCallback(memoize((children, selectionTree = {}) => {
-   return children.every(({ [childrenKey]: nextChildren }, index) => {
-      return nextChildren ? getLeafSelectedStatus(nextChildren, selectionTree[index]) : !!selectionTree[index]
-    })
-
-  }, resolver), [childrenKey])
+  const getLeafSelectedStatus = useMemo(() => memoize((item) => {
+    return item[childrenKey] && item[childrenKey].length > 0
+      ? item[childrenKey].every(c => getLeafSelectedStatus(c))
+      : selectedState.has(item[valueKey])
+  }, resolver), [selectedState, childrenKey])
 
   const handleSelectNode = useCallback((selectedState) => {
-
-    const { selectRule, onSelect, valueKey } = refProps.current
+    const {selectRule, onSelect, valueKey} = refProps.current
     if (selectRule(selectedState.node, refProps.current)) {
       onSelect(selectedState)
       setSelectedNode(selectedState.node[valueKey])
@@ -49,14 +72,14 @@ const Tree = (props) => {
   const getSequence = useCallback((sequence) => sequence, [])
 
   const handleUpdateOptions = useCallback((nextLeafValue, childrenIndex) => {
-    const { options, onUpdateOptions } =  refProps.current = props
+    const {options, onUpdateOptions} = refProps.current = props
     const nextOptions = [...options]
     nextOptions[childrenIndex] = nextLeafValue
     onUpdateOptions(nextOptions)
   }, [])
 
   const deleteLeaf = useCallback((childrenIndex) => {
-    const { options, onUpdateOptions, index } =  refProps.current = props
+    const {options, onUpdateOptions, index} = refProps.current = props
     const nextOptions = [...options]
     nextOptions.splice(childrenIndex, 1)
     onUpdateOptions(nextOptions, index)
@@ -68,8 +91,8 @@ const Tree = (props) => {
         <Leaf
           draggable={draggable}
           key={item[valueKey]}
-          value={value[index]}
           options={item}
+          returnObjects={returnObjects}
           checkAble={checkAble}
           index={index}
           childrenKey={childrenKey}
@@ -104,11 +127,11 @@ Tree.defaultProps = {
   childrenKey: "children",
   valueKey: "id",
   labelKey: "title",
-  value: {},
+  value: [],
   onSelect: () => null,
   onUpdateOptions: () => null,
-  selectRule: (node, { childrenKey }) => !!node[childrenKey],
-  dropRule: ({valueKey, parent: { [valueKey]: originParentKey } = {}}, { parent: { [valueKey]: targetParentKey } = {} }) => {
+  selectRule: (node, {childrenKey}) => !!node[childrenKey],
+  dropRule: ({valueKey, parent: {[valueKey]: originParentKey} = {}}, {parent: {[valueKey]: targetParentKey} = {}}) => {
     return originParentKey === targetParentKey
   },
   style: {},

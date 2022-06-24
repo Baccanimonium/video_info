@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {DataSetContainer} from "@/Pages/Tab/Pages/DataSet/styles";
 import {ReportContainer, WrapperInput} from "./styles"
 import Tree from '@/Components/Tree';
-import CheckboxGroup from "../../../../Components/Fields/CheckboxGroup";
 import {ButtonsContainer, Button} from "../../../../Components/ButtonsTabBar/style";
 import BsCheckBox from "../../../../Components/Fields/BsCheckBox";
 import RadioButton from "../../../../Components/Fields/RadioButton";
@@ -13,13 +12,15 @@ import DatePicker from "../../../../Components/Fields/DatePicker";
 import {ContainerDatePicker} from "../../../../Components/TabHeader/style";
 import ScrollBar from "react-perfect-scrollbar";
 import Icon from '@/Components/Icon'
-import {copy } from "../../../../Icons/copy";
-import {file } from "../../../../Icons/file";
-import {basketTrash } from "../../../../Icons/basketTrash";
+import {copy} from "../../../../Icons/copy";
+import {file} from "../../../../Icons/file";
+import {basketTrash} from "../../../../Icons/basketTrash";
 
 
-import DemographicRow from "./Components/DemographicRow";
 import {NumericInputWithControls} from "../../../../Components/Fields/NumericInput";
+import SelectedParams from "./Components/SelectedParams";
+import Dictionaries from "./Components/Dictionaries";
+
 const FileIcon = Icon(file)
 const CopyIcon = Icon(copy)
 const BasketIcon = Icon(basketTrash)
@@ -47,7 +48,7 @@ const CalculationOptions = [
   "по сумме", "по среднему"
 ]
 
-const dayOptions = [{ label: "Пн"}, { label: "Вт"}, { label: "Ср"}, { label: "Чт"}, { label: "Пт"}, { label: "Сб"}, { label: "Вс"}]
+const dayOptions = [{label: "Пн"}, {label: "Вт"}, {label: "Ср"}, {label: "Чт"}, {label: "Пт"}, {label: "Сб"}, {label: "Вс"}]
 
 const GenderOptions = [
   {
@@ -114,39 +115,7 @@ const CurrentAdsList = [
   }
 ]
 
-const BaseDayOptions = ["Автоматическое определение","Определение пользователем"]
-
-const statistics = [
-  { key: 2274, title: "GRP" },
-  { key: 2272, title: "WRP" },
-  { key: 2270, title: "Mins" },
-  { key: 2268, title: "Share" },
-]
-
-const attributes = [
-  { key: 2274, title: "Year" },
-  { key: 2272, title: "Month" },
-  { key: 2270, title: "Month excl year" },
-  { key: 2268, title: "Month digt" },
-  { key: 2271, title: "TvCompany" },
-  { key: 2265, title: "TvNet" },
-]
-
-const attributesButtons = [
-  {
-    id: 1,
-    label: "Статистика",
-
-  },
-  {
-    id: 2,
-    label: "Атрибуты"
-  },
-  {
-    id: 3,
-    label: "Демография"
-  }
-]
+const BaseDayOptions = ["Автоматическое определение", "Определение пользователем"]
 
 const optionsButtons = [
   {
@@ -175,101 +144,6 @@ const bottomOptionsButtons = [
   },
 ]
 
-const demographic = [
-  {
-    id: "fdgdsf0gdfg",
-    title: "11-34",
-    folder: "",
-    type: "Public",
-    owner:  "Taschfd",
-    lastUpdateDate: "02.12.2018",
-    lastUpdater: "Ycvb",
-    children: [
-      {
-        id: "fdgdsf0gdfg1",
-        title: "11-34",
-      },
-      {
-        id: "fdgdsf0gdfg2",
-        title: "11-33",
-      },
-      {
-        id: "fdgdsf0gdfg3",
-        title: "11-32",
-      },
-      {
-        id: "fdgdsf0gdfg4",
-        title: "11-31",
-      },
-      {
-        id: "fdgdsf0gdfg5",
-        title: "11-30",
-      },
-    ]
-  },
-  {
-    id: "fdgdsf0gdfg1",
-    title: "15-20",
-    folder: "",
-    type: "Public",
-    owner:  "Oklfd",
-    lastUpdateDate: "17.12.2018",
-    lastUpdater: "Krocv",
-    children: [
-      {
-        id: "fdgdsf0gdfg01",
-        title: "11-34",
-      },
-      {
-        id: "fdgdsf0gdfg02",
-        title: "11-33",
-      },
-      {
-        id: "fdgdsf0gdfg03",
-        title: "11-32",
-      },
-      {
-        id: "fdgdsf0gdfg04",
-        title: "11-31",
-      },
-      {
-        id: "fdgdsf0gdfg05",
-        title: "11-30",
-      },
-    ]
-  },
-  {
-    id: "fdgdsf0gdfg2",
-    title: "15-24",
-    folder: "",
-    type: "Private",
-    owner:  "Tmndfui",
-    lastUpdateDate: "02.12.2018",
-    lastUpdater: "Lkjdfh",
-    children: [
-      {
-        id: "fdgdsf0gdfg012",
-        title: "11-34",
-      },
-      {
-        id: "fdgdsf0gdfg022",
-        title: "11-33",
-      },
-      {
-        id: "fdgdsf0gdfg032",
-        title: "11-32",
-      },
-      {
-        id: "fdgdsf0gdfg042",
-        title: "11-31",
-      },
-      {
-        id: "fdgdsf0gdfg052",
-        title: "11-30",
-      },
-    ]
-  },
-]
 
 const Reports = () => {
   const [reportState, setReportsState] = useState({
@@ -277,13 +151,9 @@ const Reports = () => {
     time: " ",
     duration: " ",
   })
-  const [selectedKey, setSelectedKey] = useState("")
-  const [checked, setCheckedKey] = useState("")
-  const [freeState, setFreeState] = useState([])
-  const [freeStateTwo, setFreeStateTwo] = useState([])
-  const [demographicState, setDemographicState] = useState([])
 
-  const [activeButton, setActiveButton] = useState("Статистика")
+
+
   const [activeOption, setActiveOption] = useState("Опции расчета")
   const [bottomTabsState, setBottomTabsState] = useState("Geo")
 
@@ -302,78 +172,36 @@ const Reports = () => {
   const [week, setWeek] = useState("")
   const [time, setTime] = useState("")
   const [duration, setDuration] = useState("")
-  const [groupEvents , setGroupEvents] = useState()
+  const [groupEvents, setGroupEvents] = useState()
 
-  const [NBD , setNBD] = useState()
+  const [NBD, setNBD] = useState()
   const [valueDate, setValueDate] = useState([])
   const [monitoringDates, setMonitoringDates] = useState()
-  const [automaticDetection , setAutomaticDetection] = useState()
-  const [userDetection , setUserDetection] = useState()
+  const [automaticDetection, setAutomaticDetection] = useState()
+  const [userDetection, setUserDetection] = useState()
   const [Qual, setQual] = useState("")
   const [aver, setAve] = useState("")
 
-  const [listAdvertising , setListAdvertising] = useState("")
-  const [originalOutputs , setOriginalOutputs] = useState("")
+  const [listAdvertising, setListAdvertising] = useState("")
+  const [originalOutputs, setOriginalOutputs] = useState("")
 
   const onFormInput = useCallback((id) => (value) => {
-    setReportsState((prevState) => ({ ...prevState, [id]: value }))
+    setReportsState((prevState) => ({...prevState, [id]: value}))
   }, [])
 
-  const formPayload = { dateRange: [] }
-  const TreeData = useMemo(() => [
-    {
-      id: '0',
-      title: 'Статистика',
-      children: freeState.map((item, i)=> ({
-        ...item, id: `0-${i}`
-      }) ),
-    },
-    {
-      id: '1',
-      title: 'Атрибуты',
-      children: freeStateTwo.map((item, i)=> ({
-        ...item, id: `1-${i}`
-      }) ),
-    },
-    {
-      id: '2',
-      title: 'Демография',
-      children: Object.entries(demographicState).map(([index, children]) => {
-        const originObj = demographic[index]
-        return {
-          title: originObj.title,
-          id: originObj.id,
-          children: Object.values(children).map((elemID) => originObj.children.find((originElem) => originElem.id === elemID))
-        }
-      }),
-    },
-
-  ], [freeStateTwo, freeState, demographicState])
-
-  const onSelect =  useCallback((selectedKeys, info) => {
-    console.log('selected', selectedKeys, info);
-    this.selKey = info.node.props.eventKey;
-  }, []);
-  const onExpand = useCallback(expandedKeys => {
-    console.log('onExpand', expandedKeys);
-  }, []);
+  const formPayload = {dateRange: []}
 
   const onCheck = useCallback((checkedKeys, info) => {
     console.log('onCheck', checkedKeys, info);
   }, []);
 
-  const openAttributes = useCallback((e) => {
-    setActiveButton(e.target.innerText)
-  },[setActiveButton])
-
   const openOptions = useCallback((e) => {
     setActiveOption(e.target.innerText)
-  },[setActiveOption])
+  }, [setActiveOption])
 
   const openTab = useCallback((tabKey, setTabFunc) => () => {
     setTabFunc(tabKey)
-  },[setActiveOption])
-
+  }, [setActiveOption])
 
   return (
     <DataSetContainer className="flex-container pos-relative overflow-hidden">
@@ -403,8 +231,6 @@ const Reports = () => {
                       key={id}
                     >
                       {label}
-
-
                     </Button>
                   ))}
                 </ButtonsContainer>
@@ -454,7 +280,7 @@ const Reports = () => {
                         <WrapperInput
                           value={reportState["precision"]}
                         >
-                          <div className="p-r-15">Точность: </div>
+                          <div className="p-r-15">Точность:</div>
                           <div>
                             <NumericInputWithControls
                               id={"precision"}
@@ -669,80 +495,14 @@ const Reports = () => {
                 </div>
               </div>
             </div>
-            {/*<div className="display-flex flex-column">*/}
-            {/*  <h3>*/}
-            {/*    Выбранные атрибуты*/}
-            {/*  </h3>*/}
-            {/*  <Tree*/}
-            {/*    showLine*/}
-            {/*    defaultExpandAll*/}
-            {/*    onExpand={onExpand}*/}
-            {/*    defaultSelectedKeys={selectedKey}*/}
-            {/*    defaultCheckedKeys={checked}*/}
-            {/*    onSelect={onSelect}*/}
-            {/*    draggable*/}
-            {/*    options={TreeData}*/}
-            {/*  />*/}
-            {/*</div>*/}
-            {/*<div className="separator-left p-l-15 m-b-15">*/}
-            {/*  <ButtonsContainer>*/}
-            {/*    {attributesButtons.map(({id, label}) => (*/}
-            {/*      <Button*/}
-            {/*        className={`${label === activeButton ? 'current' : ''}`}*/}
-            {/*        onClick={openAttributes}*/}
-            {/*        key={id}*/}
-            {/*      >*/}
-            {/*        {label}*/}
-            {/*      </Button>*/}
-            {/*    ))}*/}
-            {/*  </ButtonsContainer>*/}
-            {/*  {activeButton === "Статистика" && (*/}
-            {/*    <CheckboxGroup*/}
-            {/*      value={freeState}*/}
-            {/*      blockTitle="Статистика"*/}
-            {/*      labelKey="title"*/}
-            {/*      valueKey="key"*/}
-            {/*      options={statistics}*/}
-            {/*      onInput={setFreeState}*/}
-            {/*      returnObjects*/}
-            {/*    />*/}
-            {/*  )}*/}
-            {/*  {activeButton === "Атрибуты" && (*/}
-            {/*    <CheckboxGroup*/}
-            {/*      value={freeStateTwo}*/}
-            {/*      blockTitle="Атрибуты"*/}
-            {/*      labelKey="title"*/}
-            {/*      valueKey="key"*/}
-            {/*      options={attributes}*/}
-            {/*      onInput={setFreeStateTwo}*/}
-            {/*      returnObjects*/}
-            {/*    />*/}
-            {/*  )}*/}
-            {/*  {activeButton === "Демография" && (*/}
-            {/*    <div>*/}
-            {/*      <DemographicRow node={{*/}
-            {/*        folder: "Папка",*/}
-            {/*        type: "Тип",*/}
-            {/*        owner:  "Владелец",*/}
-            {/*        lastUpdateDate: "Обновленна",*/}
-            {/*        lastUpdater: "Изменивший",*/}
-            {/*      }}*/}
-
-            {/*        className="separator-bot p-b-5"*/}
-            {/*      >*/}
-            {/*        <span>Name</span>*/}
-            {/*      </DemographicRow>*/}
-            {/*      <Tree*/}
-            {/*        defaultExpandAll*/}
-            {/*        options={demographic}*/}
-            {/*        rowComponent={DemographicRow}*/}
-            {/*        checkAble*/}
-            {/*        onInput={setDemographicState}*/}
-            {/*        value={demographicState}*/}
-            {/*      />*/}
-            {/*    </div>*/}
-            {/*  )}*/}
-            {/*</div>*/}
+            <Dictionaries
+              reportState={reportState}
+              setReportsState={onFormInput}
+            />
+            <SelectedParams
+              reportState={reportState}
+              setReportsState={setReportsState}
+            />
           </ReportContainer>
         </div>
       </ScrollBar>
@@ -750,8 +510,6 @@ const Reports = () => {
   );
 };
 
-Reports.propTypes = {
-
-};
+Reports.propTypes = {};
 
 export default Reports;

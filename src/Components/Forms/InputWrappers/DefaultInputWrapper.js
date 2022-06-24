@@ -10,7 +10,6 @@ const DefaultInputWrapper = React.forwardRef(({
   validationAlerts, submitFailed, changed, touched, formHasSubmitted, validationRules, formPayload, slotLabel,
   classNameInputWrapper
 }, ref) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { hasError, isRequired } = useValidation(
     validationErrors, validationAlerts, submitFailed, changed, touched, formHasSubmitted, validationRules, formPayload
   )
