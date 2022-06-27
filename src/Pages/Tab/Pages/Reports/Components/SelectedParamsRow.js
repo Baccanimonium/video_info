@@ -4,6 +4,8 @@ import {basketTrash} from "../../SelectionCriteria/Icons/basketTrash";
 import Icon from '../../../../../component_ocean/Components/Icon'
 import { sigma } from "../Icons/sigmaIcon";
 import {AttributeLabel} from "../constants";
+import {BtnLink} from "./styles"
+import {StyleIcon} from "@/Components/styleIcon"
 
 const SelectedParamsRow = ({ node, node: {root, type, sigma: sigmaState}, children, onInput, onDelete}) => {
 
@@ -19,13 +21,13 @@ const SelectedParamsRow = ({ node, node: {root, type, sigma: sigmaState}, childr
   return (
     <div className="flex items-center">
       {children}
+      {sigmaState && (<span className="ml-1">(с подитогом)</span>)}
       <div className="ml-2">{
         root
-          ? <button className="fs-12" onClick={HandleDelete}>Отчистить выбор</button>
-          : <Icon icon={basketTrash} onClick={onDelete}/>
+          ? <BtnLink className="fs-12" onClick={HandleDelete}>Отчистить выбор</BtnLink>
+          : <StyleIcon icon={basketTrash} onClick={onDelete}/>
       }</div>
-      {type === AttributeLabel && <Icon icon={sigma} onClick={setSigma} className="ml-2"/>}
-      {sigmaState && "с подитогом"}
+      {type === AttributeLabel && <Icon active={sigmaState} icon={sigma} onClick={setSigma} className="ml-2"/>}
     </div>
   );
 };

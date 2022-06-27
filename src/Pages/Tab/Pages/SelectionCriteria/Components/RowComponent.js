@@ -10,6 +10,7 @@ import WithSubmitContainerHoc from "@/Core/Decorators/WithSubmitContainerHOC";
 import Select from "@/Components/Fields/Select";
 import uniqueId from 'lodash/uniqueId'
 import {CardForCondition, IconPlus, StyleTrashIcon} from "./styles"
+import {StyleIcon} from "@/Components/styleIcon";
 
 export const TrashIcon = Icon(basketTrash)
 export const PlusIcon = Icon(CirclePlus)
