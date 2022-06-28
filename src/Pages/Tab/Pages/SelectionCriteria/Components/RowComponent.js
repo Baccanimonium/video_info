@@ -9,7 +9,7 @@ import {ContextMenuForm} from "@/Components/Forms/StateFullForm";
 import WithSubmitContainerHoc from "@/Core/Decorators/WithSubmitContainerHOC";
 import Select from "@/Components/Fields/Select";
 import uniqueId from 'lodash/uniqueId'
-import {CardForCondition, IconPlus, StyleTrashIcon} from "./styles"
+import {CardForCondition, IconPlus} from "./styles"
 import {StyleIcon} from "@/Components/styleIcon";
 
 export const TrashIcon = Icon(basketTrash)
@@ -226,7 +226,7 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
         onOpenContextMenu={handleInitDelete}
       >
         {(onOpenContextMenu) => (
-          <StyleTrashIcon title="Удалить узел" className="m-l-5" onClick={onOpenContextMenu}/>
+          <StyleIcon title="Удалить узел" className="m-l-5" onClick={onOpenContextMenu} icon={basketTrash}/>
         )}
       </WithOpenContextMenu>
     </div>

@@ -1,7 +1,6 @@
 import React, {useCallback} from 'react';
 import PropTypes from 'prop-types';
 import {basketTrash} from "../../SelectionCriteria/Icons/basketTrash";
-import Icon from '../../../../../component_ocean/Components/Icon'
 import { sigma } from "../Icons/sigmaIcon";
 import {AttributeLabel} from "../constants";
 import {BtnLink} from "./styles"
@@ -27,7 +26,7 @@ const SelectedParamsRow = ({ node, node: {root, type, sigma: sigmaState}, childr
           ? <BtnLink className="fs-12" onClick={HandleDelete}>Отчистить выбор</BtnLink>
           : <StyleIcon icon={basketTrash} onClick={onDelete}/>
       }</div>
-      {type === AttributeLabel && <Icon active={sigmaState} icon={sigma} onClick={setSigma} className="ml-2"/>}
+      {type === AttributeLabel && <StyleIcon active={sigmaState} icon={sigma} onClick={setSigma} className="ml-2"/>}
     </div>
   );
 };

@@ -1,7 +1,9 @@
 import WithOpenContextMenu from "@/Core/RenderProps/WithOpenContextMenu";
-import {CardForCondition, StyleTrashIcon} from "@/Pages/Tab/Pages/SelectionCriteria/Components/styles";
+import {CardForCondition} from "@/Pages/Tab/Pages/SelectionCriteria/Components/styles";
 import React, {useCallback} from "react";
 import BsButton from "@/Components/BsButton";
+import {basketTrash} from "@/Icons/basketTrash";
+import {StyleIcon} from "@/Components/styleIcon";
 
 const BufferComponent = ({onDelete, node: {id, title, type}, node}) => {
   const handleInitDelete = useCallback(({applyContextMenu, e}) => {
@@ -34,7 +36,7 @@ const BufferComponent = ({onDelete, node: {id, title, type}, node}) => {
           onOpenContextMenu={handleInitDelete}
         >
           {(onOpenContextMenu) => (
-            <StyleTrashIcon title="Удалить узел" className="m-l-5" onClick={onOpenContextMenu}/>
+            <StyleIcon title="Удалить узел" className="m-l-5" onClick={onOpenContextMenu} icon={basketTrash}/>
           )}
         </WithOpenContextMenu>
       </div>

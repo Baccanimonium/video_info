@@ -32,8 +32,8 @@ export const BtnLink = styled.button`
 
 export const BtnPlus = styled.button`
   color: var(--color-grey-darken-0);
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border: 1px solid var(--color-grey-darken-0);
   border-radius: 5px;
   position: relative;

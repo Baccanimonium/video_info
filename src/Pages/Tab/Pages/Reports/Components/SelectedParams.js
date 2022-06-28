@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Tree from '@/Components/Tree';
 import {demographic, StatisticLabel, AttributeLabel, DemographicLabel} from "../constants"
 import SelectedParamsRow from "./SelectedParamsRow";
+import ScrollBar from "react-perfect-scrollbar";
 
 const SelectedParams = ({reportState, setReportsState}) => {
   const onExpand = useCallback(expandedKeys => {
@@ -57,20 +58,22 @@ const SelectedParams = ({reportState, setReportsState}) => {
   }, [setReportsState])
 
   return (
-    <div className="display-flex flex-column">
-      <h3>
-        Выбранные параметры отчета
-      </h3>
-      <Tree
-        showLine
-        defaultExpandAll
-        onExpand={onExpand}
-        onSelect={onSelect}
-        draggable
-        options={TreeData}
-        rowComponent={SelectedParamsRow}
-        onUpdateOptions={onTreeDataUpdate}
-      />
+    <div className="display-flex flex-column overflow-hidden pos-relative">
+      <ScrollBar>
+        <h3>
+          Выбранные параметры отчета
+        </h3>
+        <Tree
+          showLine
+          defaultExpandAll
+          onExpand={onExpand}
+          onSelect={onSelect}
+          draggable
+          options={TreeData}
+          rowComponent={SelectedParamsRow}
+          onUpdateOptions={onTreeDataUpdate}
+        />
+      </ScrollBar>
     </div>
   );
 };

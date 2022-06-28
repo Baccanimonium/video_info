@@ -15,6 +15,7 @@ import Icon from '@/Components/Icon'
 import {copy} from "../../../../Icons/copy";
 import {file} from "../../../../Icons/file";
 import {basketTrash} from "../../../../Icons/basketTrash";
+import {StyleIcon} from "@/Components/styleIcon";
 
 
 import {NumericInputWithControls} from "../../../../Components/Fields/NumericInput";
@@ -204,11 +205,11 @@ const Reports = () => {
   }, [setActiveOption])
 
   return (
-    <DataSetContainer className="flex-container pos-relative overflow-hidden">
-      <ScrollBar>
+    <DataSetContainer className="flex-container ">
         <div className="flex-container p-l-15 p-r-15">
           <ReportContainer className="h-100">
-            <div className="p-r-15 separator-right m-b-15">
+            <ScrollBar>
+            <div className="p-r-15 separator-right m-b-15 pos-relative overflow-hidden">
               <h3>
                 Выбрать отчет
               </h3>
@@ -443,7 +444,7 @@ const Reports = () => {
                   )}
                 </div>
                 <Tree
-                  className="p-b-15 separator-bot-greyLight"
+                  className="p-b-15 "
                   options={GenderOptions}
                 />
                 <ButtonsContainer>
@@ -457,7 +458,7 @@ const Reports = () => {
                     </Button>
                   ))}
                 </ButtonsContainer>
-                <div className="display-flex p-t-15 separator-bot-greyLight">
+                <div className="display-flex p-t-15">
                   {bottomTabsState === "Geo" && (
                     <div className="w-100">
                       <Select
@@ -478,23 +479,27 @@ const Reports = () => {
                       />
                     </div>
                   )}
-                  <div className="display-flex fd-column ml-auto p-l-10">
-                    <FileIcon
-                      className="m-b-10"
+                  <div className="display-flex ml-auto p-l-10 a-i-center">
+                    <StyleIcon
+                      icon={file}
+                      className="m-r-5"
+                      size={21}
+                    />
+                    <StyleIcon
+                      icon={copy}
+                      className="m-r-5"
                       size={22}
                     />
-                    <CopyIcon
-                      className="m-b-10"
-                      size={22}
-                    />
-                    <BasketIcon
-                      className="m-b-10"
+                    <StyleIcon
+                      icon={basketTrash}
+                      className=""
                       size={22}
                     />
                   </div>
                 </div>
               </div>
             </div>
+            </ScrollBar>
             <Dictionaries
               reportState={reportState}
               setReportsState={onFormInput}
@@ -505,7 +510,6 @@ const Reports = () => {
             />
           </ReportContainer>
         </div>
-      </ScrollBar>
     </DataSetContainer>
   );
 };

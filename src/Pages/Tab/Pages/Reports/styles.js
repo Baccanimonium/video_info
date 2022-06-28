@@ -7,6 +7,7 @@ export const ReportContainer = styled.div`
   grid-column-gap: 20px;
   --separator-width: 1px;
   --separator-color: var(--color-grey-Light-4);
+  padding-bottom: 15px;
 `
 
 export const WrapperInput = styled.div`
