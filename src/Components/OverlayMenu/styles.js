@@ -12,7 +12,7 @@ export const FixedContainer = styled.div`
   position: fixed;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
   background: none;
-  z-index: 2000;
+  z-index: 200000;
   border-radius: 2px;
   transition: none;
   text-align: left;
