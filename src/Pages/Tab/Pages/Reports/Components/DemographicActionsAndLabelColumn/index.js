@@ -15,7 +15,7 @@ const  DemographicActionsAndLabelColumn = ({ value, ParentValue, openModalWindow
     openModalWindow({
       component: AddData,
       message: "Коррекция аудитории",
-      width: 800,
+      width: "1000px",
       dialogueParams: {
         cancelLabel: "Отмена",
         submitLabel: "Сохранить",

@@ -19,7 +19,7 @@ const MessageRender = ({ message }) => (
 
 const AlertContainer = ({
   message, dialogueParams, componentProps, onlyCancellable, onDelete,
-  onSubmit, onCancel, component: Child = message ? MessageRender : Form,
+  onSubmit, onCancel, component: Child = message ? MessageRender : Form, width
 }) => {
   const [loading, setLoading] = useState(false)
 
@@ -48,6 +48,7 @@ const AlertContainer = ({
         const { onSubmit, formValid } = formP
         return (
           <ModalWindow
+            width={width}
             dialogueParams={dialogueParams}
             loading={loading}
             onSubmit={onSubmit}
