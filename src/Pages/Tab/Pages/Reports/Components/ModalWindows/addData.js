@@ -1,5 +1,4 @@
 import React, {useCallback, useMemo, useState} from 'react';
-import Form from "@/Components/Forms";
 import Tree from '@/Components/Tree';
 import PerfectScrollbar from "react-perfect-scrollbar"
 import RowComponent from "@/Pages/Tab/Pages/SelectionCriteria/Components/RowComponent";
@@ -12,8 +11,9 @@ import BsCheckBox from "@/Components/Fields/BsCheckBox";
 import Select from "@/Components/Fields/Select";
 import {ContainerForForm} from "./styles"
 import BsInput from "@/Components/Fields/BsInput";
+import ScrollBar from "@/Components/ScrollBar"
 
-const StyleTree = {width: "600px", height: "400px"}
+const StyleTree = {width: "700px", height: "170px"}
 
 const attributesButtons = [
   {
@@ -41,14 +41,18 @@ const secondAttributesButtons = [
 
 const DictionaryComponents = {
   [DemographicLabel]: (props) =>
-    <Tree
-      {...props}
-      style={StyleTree}
-      showLine
-      draggable
-      defaultExpandAll
-      rowComponent={RowComponent}
-    />,
+    <div className="overflow-hidden">
+      <ScrollBar>
+        <Tree
+          {...props}
+          style={StyleTree}
+          showLine
+          draggable
+          defaultExpandAll
+          rowComponent={RowComponent}
+        />
+      </ScrollBar>
+    </div>,
   [WeightVariables]: (props) =>
     <div>Весовые переменные</div>
 }
@@ -126,7 +130,7 @@ const AddData = (props) => {
   const selectRule = ({type}) => type === "condition"
   return (
     <PerfectScrollbar className="p-r-15">
-      <h3>Коррекция аудитории</h3>
+      <h3 className="ta-center">Коррекция аудитории</h3>
       <ContainerForForm>
         <div>
           <div>
@@ -141,24 +145,8 @@ const AddData = (props) => {
               onInput={setNameAudience}
             />
           </div>
-          <div className="flex m-t-10">
-            <BsCheckBox
-              id="viewingBased"
-              label="Viewing based"
-              value={viewingBased}
-              onInput={setViewingBased}
-              className="m-r-15"
-            />
-            <BsCheckBox
-              id="sql"
-              label="SQL-определение пользователя"
-              value={sql}
-              onInput={setSql}
-            />
-          </div>
         </div>
-        <div>
-          <div className="flex">
+        <div className="flex">
             <div className="m-r-10">
               <div className="p-b-10">
                 Тип:
@@ -205,9 +193,22 @@ const AddData = (props) => {
               />
             </div>
           </div>
-        </div>
       </ContainerForForm>
-
+      <div className="flex m-t-10">
+        <BsCheckBox
+          id="viewingBased"
+          label="Viewing based"
+          value={viewingBased}
+          onInput={setViewingBased}
+          className="m-r-15"
+        />
+        <BsCheckBox
+          id="sql"
+          label="SQL-определение пользователя"
+          value={sql}
+          onInput={setSql}
+        />
+      </div>
       <ButtonsContainer className="m-t-10">
         {attributesButtons.map(({id, label}) => (
           <Button

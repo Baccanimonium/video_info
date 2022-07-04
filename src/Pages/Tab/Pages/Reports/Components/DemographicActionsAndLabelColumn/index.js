@@ -15,7 +15,7 @@ const  DemographicActionsAndLabelColumn = ({ value, ParentValue, openModalWindow
     openModalWindow({
       component: AddData,
       message: "Коррекция аудитории",
-      width: "1000px",
+      width: "800px",
       dialogueParams: {
         cancelLabel: "Отмена",
         submitLabel: "Сохранить",
@@ -26,15 +26,7 @@ const  DemographicActionsAndLabelColumn = ({ value, ParentValue, openModalWindow
       onSubmit: () => {
         console.log("submit")
       },
-      componentProps: {
-        fields: [
-          {
-            id: "NAME",
-            label: "Наименование аудитории",
-            component: BsInput
-          },
-        ]
-      }
+
     })
   }
   return (

@@ -46,7 +46,7 @@ const ModalWindow = ({
                   <>
                     {submitLabel && (
                       <BsButton
-                        className="btn grey-bg"
+                        className="btn grey-bg sign-up-btn"
                         disabled={loading || !formValid}
                         loading={loading}
                         onClick={onSubmit}
@@ -55,7 +55,7 @@ const ModalWindow = ({
                       </BsButton>
                     )}
                     <BsButton
-                      className="btn golden"
+                      className="btn golden sign-up-btn"
                       disabled={loading}
                       loading={!submitLabel && loading}
                       onClick={cancelHandler}
@@ -67,7 +67,7 @@ const ModalWindow = ({
                 : (
                   <>
                     <BsButton
-                      className={`btn ${submitLabel ? "grey-bg" : "golden"}`}
+                      className={`btn sign-up-btn ${submitLabel ? "grey-bg" : "golden"}`}
                       disabled={loading}
                       loading={!submitLabel && loading}
                       onClick={cancelHandler}
@@ -77,7 +77,7 @@ const ModalWindow = ({
 
                     {submitLabel && (
                     <BsButton
-                      className="btn golden"
+                      className="btn golden sign-up-btn"
                       disabled={loading || !formValid}
                       loading={loading}
                       onClick={onSubmit}
