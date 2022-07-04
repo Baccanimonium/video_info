@@ -11,8 +11,9 @@ import {Button, ButtonsContainer} from "@/Components/ButtonsTabBar/style";
 import BsCheckBox from "@/Components/Fields/BsCheckBox";
 import Select from "@/Components/Fields/Select";
 import {ContainerForForm} from "./styles"
+import BsInput from "@/Components/Fields/BsInput";
 
-const StyleTree = {width: "600px"}
+const StyleTree = {width: "600px", height: "400px"}
 
 const attributesButtons = [
   {
@@ -74,6 +75,7 @@ const AddData = (props) => {
   const [secondActiveButton, setSecondActiveButton] = useState(SecondDemographicLabel)
   const [viewingBased, setViewingBased] = useState(false)
   const [sql, setSql] = useState(false)
+  const [nameAudience, setNameAudience] = useState("")
 
   const [reportState, setReportsState] = useState({
     precision: 4,
@@ -126,14 +128,39 @@ const AddData = (props) => {
     <PerfectScrollbar className="p-r-15">
       <h3>Коррекция аудитории</h3>
       <ContainerForForm>
-        <Form
-          className="m-t-10"
-          {...props}
-        />
+        <div>
+          <div>
+            <div className="p-b-10">
+              Наименование аудитории:
+            </div>
+            <BsInput
+              id="NAME"
+              placeholder="Наименование аудитории"
+              label="Наименование аудитории"
+              value={nameAudience}
+              onInput={setNameAudience}
+            />
+          </div>
+          <div className="flex m-t-10">
+            <BsCheckBox
+              id="viewingBased"
+              label="Viewing based"
+              value={viewingBased}
+              onInput={setViewingBased}
+              className="m-r-15"
+            />
+            <BsCheckBox
+              id="sql"
+              label="SQL-определение пользователя"
+              value={sql}
+              onInput={setSql}
+            />
+          </div>
+        </div>
         <div>
           <div className="flex">
             <div className="m-r-10">
-              <div className="p-b-5">
+              <div className="p-b-10">
                 Тип:
               </div>
               <Select
@@ -148,7 +175,7 @@ const AddData = (props) => {
               />
             </div>
             <div className="m-r-10">
-              <div className="p-b-5">
+              <div className="p-b-10">
                 Доступ:
               </div>
               <Select
@@ -163,7 +190,7 @@ const AddData = (props) => {
               />
             </div>
             <div>
-              <div className="p-b-5">
+              <div className="p-b-10">
                 Папка:
               </div>
               <Select
@@ -178,24 +205,7 @@ const AddData = (props) => {
               />
             </div>
           </div>
-          <div className="flex">
-            <BsCheckBox
-              id="viewingBased"
-              label="Viewing based"
-              value={viewingBased}
-              onInput={setViewingBased}
-              className="m-b-15"
-            />
-            <BsCheckBox
-              id="sql"
-              label="SQL-определение пользователя"
-              value={sql}
-              onInput={setSql}
-              className="m-b-15"
-            />
-          </div>
         </div>
-
       </ContainerForForm>
 
       <ButtonsContainer className="m-t-10">
