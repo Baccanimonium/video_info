@@ -638,40 +638,303 @@ export const attributes = [
   {
     id: "Date, time, Days",
     title: "Date, time, Days",
+    children: [
+      {
+        id: "Year",
+        title: "Year",
+      },
+      {
+        id: "Month",
+        title: "Month",
+      },
+      {
+        id: "Date",
+        title: "Date",
+      },
+      {
+        id: "Time start",
+        title: "Time start",
+      },
+      {
+        id: "Time end",
+        title: "Time end",
+      },
+    ]
+  },
+  {
+    id: "Prime/OffPrime, Dayparts",
+    title: "Prime/OffPrime, Dayparts",
+    children: [
+      {
+        id: "Prime/OffPrime (WD 19-24, WE)",
+        title: "Prime/OffPrime (WD 19-24, WE)",
+      },
+      {
+        id: "Prime/OffPrime (WD 19-24, WE+Holidays)",
+        title: "Prime/OffPrime (WD 19-24, WE+Holidays)",
+      },
+      {
+        id: "Prime/OffPrime (WD 18-24, WE+Holidays)",
+        title: "Prime/OffPrime (WD 18-24, WE+Holidays)",
+      },
+      {
+        id: "Prime1/Prime2/OffPrime",
+        title: "Prime1/Prime2/OffPrime",
+      },
+      {
+        id: "Dayparts",
+        title: "Dayparts",
+      },
+      {
+        id: "Prime/OffPrime (WD 18-24,WE)",
+        title: "Prime/OffPrime (WD 18-24,WE)",
+      },
+      {
+        id: "Prime/OffPrime2016",
+        title: "Prime/OffPrime2016",
+      },
+      {
+        id: "Prime/OffPrime2017",
+        title: "Prime/OffPrime2017",
+      },
+      {
+        id: "Prime/OffPrime2018",
+        title: "Prime/OffPrime2018",
+      },
+      {
+        id: "Prime/OffPrime2019",
+        title: "Prime/OffPrime2019",
+      },
+      {
+        id: "Prime/OffPrime2020",
+        title: "Prime/OffPrime2020",
+      },
+      {
+        id: "Prime/OffPrime2021",
+        title: "Prime/OffPrime2021",
+      },
+      {
+        id: "Prime/OffPrime2022",
+        title: "Prime/OffPrime2022",
+      },
+    ]
+  },
+  {
+    id: "Region, TvChannels",
+    title: "Region, TvChannels",
+    children: []
+  },
+  {
+    id: "Advertiser list... Article4 list",
+    title: "Advertiser list... Article4 list",
+    children: [
+      {
+        id: "AdvertiserList",
+        title: "AdvertiserList",
+      },
+      {
+        id: "BrandList",
+        title: "BrandList",
+      },
+      {
+        id: "SubbrandList",
+        title: "SubbrandList",
+      },
+      {
+        id: "ModelList",
+        title: "ModelList",
+      },
+      {
+        id: "ArticleList1",
+        title: "ArticleList1",
+      },
+      {
+        id: "ArticleList2",
+        title: "ArticleList2",
+      },
+      {
+        id: "ArticleList3",
+        title: "ArticleList3",
+      },
+      {
+        id: "ArticleList4",
+        title: "ArticleList4",
+      },
+    ]
+  },
+  {
+    id: "Advertiser list ID... Article4 list OD",
+    title: "Advertiser list ID... Article4 list OD",
+    children: [
+      {
+        id: "AdvertiserList ID",
+        title: "AdvertiserList ID",
+      },
+      {
+        id: "BrandList ID",
+        title: "BrandList ID",
+      },
+      {
+        id: "SubbrandList ID",
+        title: "SubbrandList ID",
+      },
+      {
+        id: "ModelList ID",
+        title: "ModelList ID",
+      },
+      {
+        id: "ArticleList2 ID",
+        title: "ArticleList2 ID",
+      },
+      {
+        id: "ArticleList3 ID",
+        title: "ArticleList3 ID",
+      },
+      {
+        id: "ArticleList4 ID",
+        title: "ArticleList4 ID",
+      },
+    ]
+  },
+  {
+    id: "Advertiser... Article4",
+    title: "Advertiser... Article4",
+    children: []
+  },
+  {
+    id: "Advertiser ID... Article4 ID",
+    title: "Advertiser ID... Article4 ID",
+    children: [
+      {
+        id: "Advertiser ID",
+        title: "Advertiser ID",
+      },
+      {
+        id: "Brand ID",
+        title: "Brand ID",
+      },
+      {
+        id: "Subbrand ID",
+        title: "Subbrand ID",
+      },
+      {
+        id: "Model ID",
+        title: "Model ID",
+      },
+      {
+        id: "Article2 ID",
+        title: "Article2 ID",
+      },
+      {
+        id: "Article3 ID",
+        title: "Article3 ID",
+      },
+      {
+        id: "Article4 ID",
+        title: "Article4 ID",
+      }
+    ]
+  },
+  {
+    id: "Clips",
+    title: "Clips",
+    children: [
+      {
+        id: "Clip ID",
+        title: "Clip ID",
+      },
+      {
+        id: "Clip",
+        title: "Clip",
+      },
+      {
+        id: "Clip duration",
+        title: "Clip duration",
+      },
+      {
+        id: "Clip real duration",
+        title: "Clip real duration",
+      },
+      {
+        id: "Clip description",
+        title: "Clip description",
+      },
+      {
+        id: "Clip flight description",
+        title: "Clip flight description",
+      },
+      {
+        id: "Clip first issue",
+        title: "Clip first issue",
+      },
+      {
+        id: "Clip position type",
+        title: "Clip position type",
+      },
+      {
+        id: "Clip ad pos",
+        title: "Clip ad pos",
+      },
+      {
+        id: "Clip pos fixed",
+        title: "Clip pos fixed",
+      },
+      {
+        id: "Real Clip pos fixed",
+        title: "Real Clip pos fixed",
+      },
+      {
+        id: "Clips count",
+        title: "Clips count",
+      },
+      {
+        id: "Clip type",
+        title: "Clip type",
+      },
+      {
+        id: "Clip style",
+        title: "Clip style",
+      },
+      {
+        id: "Clip distr",
+        title: "Clip distr",
+      },
+      {
+        id: "Clip audio slogan",
+        title: "Clip audio slogan",
+      },
+      {
+        id: "Clip video slogan",
+        title: "Clip video slogan",
+      },
+      {
+        id: "Clip QR",
+        title: "Clip QR",
+      },
+      {
+        id: "Clip QR dur",
+        title: "Clip QR dur",
+      },
+    ]
+  },
+  {
+    id: "Breaks",
+    title: "Breaks",
+    children: []
+  },
+  {
+    id: "Programs",
+    title: "Programs",
+    children: []
+  },
+  {
+    id: "Campaign type",
+    title: "Campaign type",
     children: []
   },
   {
     id: "User virtual events",
     title: "User virtual events",
-    children: [
-      {
-        id: "Estat",
-        title: "Estat",
-      },
-      {
-        id: "TV_arena",
-        title: "TV_arena",
-      },
-      {
-        id: "Nat",
-        title: "Nat",
-      },
-      {
-        id: "Aired in Moscow",
-        title: "Aired in Moscow",
-      },
-      {
-        id: "Sales House",
-        title: "Sales House",
-      },
-      {
-        id: "Spot Flight ID",
-        title: "Spot Flight ID",
-      },
-      {
-        id: "Break Flight ID",
-        title: "Break Flight ID",
-      },
-    ]
+    children: []
   },
 ]
