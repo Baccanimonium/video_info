@@ -50,7 +50,7 @@ const Dictionaries = ({ reportState, setReportsState }) => {
   const DictionaryComponent = DictionaryComponents[activeButton]
 
   return (
-    <div className="separator-right p-r-15 m-b-15">
+    <div className="separator-right p-r-15 m-b-15 flex-container overflow-hidden">
       <ButtonsContainer>
         {attributesButtons.map(({id, label}) => (
           <Button
