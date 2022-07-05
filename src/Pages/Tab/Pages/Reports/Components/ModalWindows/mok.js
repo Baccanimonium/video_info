@@ -64,15 +64,11 @@ export const demographic = [
     children: [
       {
         id: "11-1",
-        title: "1"
+        title: "Женский"
       },
       {
         id: "11-2",
-        title: "2"
-      },
-      {
-        id: "11-3",
-        title: "3+"
+        title: "Мужской"
       }
     ]
   },
@@ -126,6 +122,60 @@ export const demographic = [
       },
       {
         id: "44-3",
+        title: "3+"
+      }
+    ]
+  },
+  {
+    id: "5",
+    title: "Количество работающих телевизоров",
+    children: [
+      {
+        id: "55-1",
+        title: "1"
+      },
+      {
+        id: "55-2",
+        title: "2"
+      },
+      {
+        id: "55-3",
+        title: "3+"
+      }
+    ]
+  },
+  {
+    id: "6",
+    title: "Количество членов семьи",
+    children: [
+      {
+        id: "66-1",
+        title: "1"
+      },
+      {
+        id: "66-2",
+        title: "2"
+      },
+      {
+        id: "66-3",
+        title: "3+"
+      }
+    ]
+  },
+  {
+    id: "7",
+    title: "Затраты на питание",
+    children: [
+      {
+        id: "77-1",
+        title: "1"
+      },
+      {
+        id: "77-2",
+        title: "2"
+      },
+      {
+        id: "77-3",
         title: "3+"
       }
     ]

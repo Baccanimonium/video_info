@@ -59,27 +59,34 @@ const DictionaryComponents = {
 
 const SecondDictionaryComponents = {
   [SecondDemographicLabel]: (props) =>
-    <Tree
-      {...props}
-      returnObjects
-      labelKey="title"
-      valueKey="id"
-      options={demographic}
-      checkAble
-    />,
+    <div className="overflow-hidden">
+      <ScrollBar>
+        <Tree
+          {...props}
+          style={{height: "150px"}}
+          returnObjects
+          labelKey="title"
+          valueKey="id"
+          options={demographic}
+          checkAble
+        />
+      </ScrollBar>
+    </div>,
   [SecondWeightVariables]: (props) =>
     <div>Весовые переменные</div>
 }
 
 const AddData = (props) => {
-  const [pageData, setPageData] = useState(treeData)
+  const {value: {TREE_DATA, NAME}} = props
+
+  const [pageData, setPageData] = useState(TREE_DATA)
   const [selectedKey, setSelectedKey] = useState([])
   const [checked, setCheckedKey] = useState("")
   const [activeButton, setActiveButton] = useState(DemographicLabel)
   const [secondActiveButton, setSecondActiveButton] = useState(SecondDemographicLabel)
   const [viewingBased, setViewingBased] = useState(false)
   const [sql, setSql] = useState(false)
-  const [nameAudience, setNameAudience] = useState("")
+  const [nameAudience, setNameAudience] = useState(NAME)
 
   const [reportState, setReportsState] = useState({
     precision: 4,
@@ -125,13 +132,11 @@ const AddData = (props) => {
     console.log(value)
   }, [pageData])
 
-
-
   const selectRule = ({type}) => type === "condition"
   return (
     <PerfectScrollbar className="p-r-15">
       <h3 className="ta-center">Коррекция аудитории</h3>
-      <ContainerForForm>
+      <ContainerForForm >
         <div>
           <div>
             <div className="p-b-10">

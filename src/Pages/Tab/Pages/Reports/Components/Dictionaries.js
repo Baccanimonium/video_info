@@ -4,6 +4,7 @@ import {ButtonsContainer, Button} from "../../../../../Components/ButtonsTabBar/
 import {StatisticLabel, AttributeLabel, DemographicLabel, statistics, attributes} from '../constants'
 import DemographicTree from "./DemographicTree";
 import Tree from '@/Components/Tree';
+import ScrollBar from "@/Components/ScrollBar"
 
 const attributesButtons = [
   {
@@ -61,10 +62,14 @@ const Dictionaries = ({ reportState, setReportsState }) => {
           </Button>
         ))}
       </ButtonsContainer>
-      {<DictionaryComponent
-        value={reportState[activeButton]}
-        onInput={setReportsState(activeButton)}
-      />}
+      <div className="overflow-hidden">
+        <ScrollBar>
+          {<DictionaryComponent
+            value={reportState[activeButton]}
+            onInput={setReportsState(activeButton)}
+          />}
+        </ScrollBar>
+      </div>
     </div>
   );
 };
