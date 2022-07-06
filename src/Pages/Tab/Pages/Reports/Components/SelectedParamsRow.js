@@ -23,7 +23,7 @@ const SelectedParamsRow = ({ node, node: {root, type, sigma: sigmaState}, childr
       {sigmaState && (<span className="ml-1">(с подитогом)</span>)}
       <div className="ml-2">{
         root
-          ? <BtnLink className="fs-12" onClick={HandleDelete}>Отчистить выбор</BtnLink>
+          ? <BtnLink className="fs-12" onClick={HandleDelete}>Очистить выбор</BtnLink>
           : <StyleIcon icon={basketTrash} onClick={onDelete}/>
       }</div>
       {type === AttributeLabel && <StyleIcon active={sigmaState} icon={sigma} onClick={setSigma} className="ml-2"/>}

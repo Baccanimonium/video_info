@@ -51,6 +51,7 @@ const Dictionaries = ({ reportState, setReportsState }) => {
 
   return (
     <div className="separator-right p-r-15 m-b-15 flex-container overflow-hidden">
+      <h3>Параметры отчета</h3>
       <ButtonsContainer>
         {attributesButtons.map(({id, label}) => (
           <Button

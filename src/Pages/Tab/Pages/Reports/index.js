@@ -206,7 +206,7 @@ const Reports = () => {
 
   return (
     <DataSetContainer className="flex-container ">
-        <div className="flex-container p-l-15 p-r-15">
+        <div className="flex-container">
           <ReportContainer className="h-100">
             <ScrollBar>
             <div className="p-r-15 separator-right m-b-15 pos-relative overflow-hidden">
