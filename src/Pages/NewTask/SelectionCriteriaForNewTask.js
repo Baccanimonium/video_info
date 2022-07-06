@@ -80,8 +80,8 @@ const SelectionCriteriaForNewTask = () => {
 
   // срабатывает при клике на группу
   const onSelect = useCallback((value) => {
-    console.log(value)
-  }, [pageData])
+    console.log(value.node, pageData, checkedObject)
+  }, [dictionaryGroup, checkedObject])
 
   useEffect(() => {
     let dictionaryGroup
@@ -141,16 +141,8 @@ const SelectionCriteriaForNewTask = () => {
     setCheckedObject(pageData[0]?.children[0]?.children.get(dictionaryGroup)?.children || [])
   }, [nameSelect, pageData])
 
-  useEffect(() => {
-    console.log(selectedList, listBuffer)
-    if (listBuffer.length > 0) {
-      // setSelectedList(selectedList.filter(({id}) => id % 2 === 0 ))
-    } else {
-
-    }
-  }, [listBuffer])
-
   const setNewTree = useCallback(() => {
+    // когда нет узла
     if (pageData.length === 0) {
       let newAr = [
         {
@@ -172,6 +164,7 @@ const SelectionCriteriaForNewTask = () => {
         }
       ]
       setPageData(newAr)
+      // когда нет второго уровня
     } else if (pageData[0].children.length === 0) {
       let newArr = pageData.map(({children, ...firstLvlData}) => ({
           ...firstLvlData,
@@ -190,6 +183,7 @@ const SelectionCriteriaForNewTask = () => {
         })
       )
       setPageData(newArr)
+      // когда нет группы
     } else {
       setPageData(([{
         children:
@@ -262,7 +256,7 @@ const SelectionCriteriaForNewTask = () => {
     })))
   }, [dictionaryGroup])
 
-  const selectRule = ({type}) => type === "condition"
+  const selectRule = ({type}) => type === "block"
 
   // переписываем данные дерева с критериями-массивами, а не мапами
   const treeUnwrappedData = useMemo(() => {
