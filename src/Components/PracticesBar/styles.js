@@ -1,13 +1,16 @@
 import styled from "styled-components"
 import { NavLink } from "react-router-dom"
 
+export const ButtonsAndPracticesTabContainer = styled.div`
+  border-bottom: 1px solid var(--color-grey-darken-3);
+  padding: 0 10px;
+`
+
 export const PracticesButtonsContainer = styled.div`
   display: flex;
   border-top: 1px solid var(--color-grey-darken-1);
   align-items: center;
-  border-bottom: 1px solid var(--color-grey-darken-3);
   border-top: 2px solid var(--color-white);
-  margin-left: 10px;
 `
 
 export const PracticeButton = styled.div`
