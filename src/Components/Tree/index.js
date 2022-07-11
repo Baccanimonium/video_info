@@ -15,7 +15,7 @@ const Tree = (props) => {
   } = props
 
   const [selectedState, setSelectedState] = useState(new Map())
-  const refValue = useRef(value)
+  const refValue = useRef([])
 
   useEffect(() => {
     if (value !== refValue.current) {

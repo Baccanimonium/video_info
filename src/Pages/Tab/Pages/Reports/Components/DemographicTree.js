@@ -46,7 +46,8 @@ const DemographicTree = ({value, onInput}) => {
     <ListTable
       selectState={value}
       onSelect={onInput}
-      settings={tableSettings}
+      columns={tableSettings.columns}
+      plugins={tableSettings.plugins}
       value={demographic}
     />
   );

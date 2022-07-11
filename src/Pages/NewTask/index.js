@@ -10,11 +10,16 @@ import WithCloseWindow from "@/Core/RenderProps/withCloseWindow"
 import OverlayMenu from "@/Components/OverlayMenu"
 import WithOpenModalWindow from "@/Core/Decorators/WithOpenModalWindow"
 import {Route, Routes} from "react-router-dom";
-import Result from "./Content/result";
+import Result from "../Tab/Pages/Result";
 import SelectionCriteria from "./Content/selectionCriteria";
 import Reports from "../Tab/Pages/Reports"
 import {Tabs} from "./constants"
-import {PracticeButton, PracticesButtonsContainer, WrapperButton} from "../../Components/PracticesBar/styles";
+import {
+  ButtonsAndPracticesTabContainer,
+  PracticeButton,
+  PracticesButtonsContainer,
+  WrapperButton
+} from "../../Components/PracticesBar/styles";
 import {CardForDirectory, InformationCard, InformationCardMin} from "./styles"
 import TipsOverlayComponent from "../../Components/TipsHelp/TipsOverlayComponent";
 import ContextMenuValueEditor from "@/Components/Fields/InputContstuctor/InputControllers/ContextMenuValueEditor"
@@ -230,20 +235,36 @@ const NewTask = ({openModalWindow, updateState, state}) => {
         {
           Object.keys(dataSource).length > 0 &&
           <div className="flex-container overflow-hidden">
-            <PracticesButtonsContainer>
-              <WrapperButton className="display-flex bg-color-greyLight-4">
-                {Tabs.map(({ path, text }) => (
-                    <PracticeButton
-                        key={text}
-                        className={`${text === activeOption ? 'current-practice' : ''}`}
-                        type="button"
-                        onClick={openOptions}
-                    >
-                      {text}
-                    </PracticeButton>
-                ))}
-              </WrapperButton>
-            </PracticesButtonsContainer>
+            <ButtonsAndPracticesTabContainer className="flex items-center">
+              <PracticesButtonsContainer>
+                <WrapperButton className="display-flex bg-color-greyLight-4">
+                  {Tabs.map(({ path, text }) => (
+                      <PracticeButton
+                          key={text}
+                          className={`${text === activeOption ? 'current-practice' : ''}`}
+                          type="button"
+                          onClick={openOptions}
+                      >
+                        {text}
+                      </PracticeButton>
+                  ))}
+                </WrapperButton>
+              </PracticesButtonsContainer>
+              <div className="flex items-center ml-auto">
+                <BsButton
+                  type="button"
+                  className="border-gold btn sign-up-btn color-greyDarken w-18 mr-2"
+                >
+                  Загрузить
+                </BsButton>
+                <BsButton
+                  type="button"
+                  className="border-gold btn sign-up-btn color-greyDarken w-18"
+                >
+                  Остановить
+                </BsButton>
+              </div>
+            </ButtonsAndPracticesTabContainer>
             <div className="p-t-10 p-b-10 p-r-10 p-l-10 flex-container overflow-hidden">
               {
                 activeOption === "Критерии отбора" && (
@@ -336,9 +357,7 @@ const NewTask = ({openModalWindow, updateState, state}) => {
               }
               {
                 activeOption === "Результат" && (
-                    <div>
-                      Результат
-                    </div>
+                    <Result/>
                 )
               }
             </div>
@@ -350,13 +369,6 @@ const NewTask = ({openModalWindow, updateState, state}) => {
                   onClick={saveTask}
                 >
                   Сохранить
-                </BsButton>
-                <BsButton
-                  type="button"
-                  className="border-gold btn sign-up-btn color-greyDarken w-18"
-                  onClick={saveTask}
-                >
-                  Продолжить
                 </BsButton>
               </div>
             </div>

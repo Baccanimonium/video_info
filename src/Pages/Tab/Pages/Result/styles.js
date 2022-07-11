@@ -34,6 +34,8 @@ export const HeaderCell = styled.div`
   align-items: center;
   text-align: center;
   padding: 0 .5em;
+  border-bottom: 1px solid #BDBDBD;
+  border-right: 1px solid #BDBDBD;
 `
 export const Cell = styled.div`
   width: 100%;
@@ -44,6 +46,8 @@ export const Cell = styled.div`
   align-items: center;
   text-align: center;
   padding: 0 .5em;
+  border-bottom: 1px solid #BDBDBD;
+  border-right: 1px solid #BDBDBD;
 `
 // .oddRow {
 //   background-color: rgba(0, 0, 0, .1);
