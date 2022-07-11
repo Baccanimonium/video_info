@@ -29,7 +29,7 @@ import { PRESENT_DATE_FORMAT } from "@/constants"
 import { BsCalendar, BsCalendar3, BsCalendar4, BsCalendar3Range } from 'react-icons/bs';
 import {VscChecklist} from 'react-icons/vsc';
 import {editConfig, editConfigIntervalRange, editConfigTimeRange, configForBtnCalendar} from "./config"
-import SelectionCriteriaForNewTask from "./SelectionCriteriaForNewTask";
+import SelectionCriteriaForNewTask from "./Components/SelectionCriteriaForNewTask";
 
 // при изменении источника данных данные в дереве менять
 

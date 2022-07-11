@@ -1,8 +1,6 @@
 import React, {useCallback} from 'react';
 import PropTypes from 'prop-types';
-import Icon from '@/Components/Icon'
 import {basketTrash} from "../Icons/basketTrash"
-import {CirclePlus} from "../Icons/CirclePlus"
 import BsButton from "@/Components/BsButton";
 import WithOpenContextMenu from "@/Core/RenderProps/WithOpenContextMenu";
 import {ContextMenuForm} from "@/Components/Forms/StateFullForm";
@@ -11,10 +9,6 @@ import Select from "@/Components/Fields/Select";
 import uniqueId from 'lodash/uniqueId'
 import {CardForCondition, IconPlus} from "./styles"
 import {StyleIcon} from "@/Components/styleIcon";
-
-export const TrashIcon = Icon(basketTrash)
-export const PlusIcon = Icon(CirclePlus)
-
 
 const RowComponent = ({ node: { type, condition }, node, children, onInput, onDelete }) => {
 
@@ -176,7 +170,8 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
       },
       componentProps: {
         onSubmit: onDelete,
-        title: "Удалить узел?",
+        title: `Удалить
+         ${type === "block" ? 'узел' : type === "condition" ? 'группу' : 'критерий'}?`,
       }
     }])
   }, [onDelete])

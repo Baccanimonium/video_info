@@ -13,17 +13,21 @@ import {
   treeData,
   TVcompanies,
   TypeOfAdvertisement, dictionary
-} from "../Tab/Pages/SelectionCriteria/mok";
-import {CardForDirectory} from "./styles";
-import DataSet from "../Tab/Pages/SelectionCriteria";
-import {CheckboxGroupContainer, GridContainer} from "../Tab/Pages/SelectionCriteria/styles";
-import CheckboxGroup from "../../Components/Fields/CheckboxGroup";
+} from "../../Tab/Pages/SelectionCriteria/mok";
+import {CardForDirectory} from "../styles";
+import DataSet from "../../Tab/Pages/SelectionCriteria";
+import {CheckboxGroupContainer, GridContainer} from "../../Tab/Pages/SelectionCriteria/styles";
+import CheckboxGroup from "../../../Components/Fields/CheckboxGroup";
 import BsButton from "@/Components/BsButton";
-import RowComponent from "../Tab/Pages/SelectionCriteria/Components/RowComponent";
+import RowComponent from "../../Tab/Pages/SelectionCriteria/Components/RowComponent";
 import ScrollBar from "react-perfect-scrollbar";
 import Tree from '@/Components/Tree';
-import {listDirectory} from "./config"
-import BufferComponent from "@/Pages/NewTask/BufferComponent";
+import {listDirectory} from "../config"
+import BufferComponent from "@/Pages/NewTask/Components/BufferComponent";
+import {StyleIcon} from "@/Components/styleIcon";
+import {basketTrash} from "@/Icons/basketTrash";
+import WithOpenContextMenu from "@/Core/RenderProps/WithOpenContextMenu";
+import ButtonsForDelete from "@/Pages/NewTask/Components/ButtonsForDelete";
 
 /// чтобы айди в чекбоксах не совпадали нужно добавлять в айди название справочника
 // id: "nationalTV/1"
@@ -81,9 +85,8 @@ const SelectionCriteriaForNewTask = () => {
   const [selectedNode, setSelectedNode] = useState("")
 
   // срабатывает при клике на группу
-  const onSelect = useCallback((value) => {
-    console.log(value.node.id, pageData)
-    setSelectedNode(value.node.id)
+  const onSelect = useCallback(({node}) => {
+    setSelectedNode(node.id)
   }, [])
 
   useEffect(() => {
@@ -143,7 +146,12 @@ const SelectionCriteriaForNewTask = () => {
     setDictionaryGroup(dictionaryGroup)
     setCheckedObject(pageData[0]?.children[0]?.children.get(dictionaryGroup)?.children || [])
   }, [nameSelect, pageData])
-
+  useEffect(() => {
+    if(pageData && pageData.length > 0) {
+      // onSelect()
+      console.log(4445)
+    }
+  }, [])
 
   const setNewTree = useCallback(() => {
     // когда нет второго уровня
@@ -273,6 +281,20 @@ const SelectionCriteriaForNewTask = () => {
     console.log(value)
   }, [dictionaryGroup])
 
+  const handleInitDelete = useCallback(({applyContextMenu, e}) => {
+    e.stopPropagation()
+    e.preventDefault()
+    applyContextMenu([{
+      component: ({onClose, title, onSubmit}) => {
+        return <ButtonsForDelete title={title} onClose={onClose} onSubmit={onSubmit}/>
+      },
+      componentProps: {
+        onSubmit: () => setListBuffer([]),
+        title: "Удалить весь буфер?",
+      }
+    }])
+  }, [])
+
   return (
     <>
       <div className="display-flex m-t-10 flex-wrap">
@@ -320,12 +342,10 @@ const SelectionCriteriaForNewTask = () => {
         <div className="separator-left p-l-15 m-b-15 overflow-hidden">
           <ScrollBar>
             <Tree
-              style={StyleTree}
               onDragStart={onDragStart}
               onDragEnter={onDragEnter}
               onDrop={onDrop}
               showLine
-              // selectable={false}
               setRowCondition={setRowCondition}
               draggable
               defaultExpandAll
@@ -342,15 +362,28 @@ const SelectionCriteriaForNewTask = () => {
           </ScrollBar>
         </div>
         <div className="separator-left p-l-15 m-b-15 overflow-hidden">
-          {titleBuffer && listBuffer.length > 0 && (<div className="m-b-10">Буфер {titleBuffer}:</div>)}
+          <div className="m-b-10 display-flex a-i-center">
+            <h3 className="p-b-0">Буфер</h3>
+            {titleBuffer && listBuffer.length > 0 && (
+              <WithOpenContextMenu
+                settings={{maxSize: "150", minSize: "150"}}
+                onOpenContextMenu={handleInitDelete}
+              >
+                {(onOpenContextMenu) => (
+                  <StyleIcon title="Удалить буфер" className="m-l-5" onClick={onOpenContextMenu} icon={basketTrash}/>
+                )}
+              </WithOpenContextMenu>
+            )}
+          </div>
+          {titleBuffer && listBuffer.length > 0 && (
+            <div>{titleBuffer}:</div>
+          )}
           <ScrollBar>
             <Tree
-              style={StyleTree}
               onDragStart={onDragStart}
               onDragEnter={onDragEnter}
               onDrop={onDrop}
               showLine
-              // selectable={false}
               setRowCondition={setRowCondition}
               draggable
               defaultExpandAll
