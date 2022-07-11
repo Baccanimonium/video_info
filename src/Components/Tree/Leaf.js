@@ -34,23 +34,21 @@ const Leaf = (props) => {
     if (children) {
       const nextValue = []
       const stack = [options]
-      if (value) {
-        for (let i = 0; i < stack.length; i++) {
-          const item = stack[i];
+      for (let i = 0; i < stack.length; i++) {
+        const item = stack[i];
 
-          const {[childrenKey]: stackChildren} = item
-          if (stackChildren) {
-            stackChildren.forEach((item) => {
-              stack.push(item)
-            })
-          } else {
-            nextValue.push([item[valueKey], returnObjects ? item : item[valueKey]])
-          }
+        const {[childrenKey]: stackChildren} = item
+        if (stackChildren) {
+          stackChildren.forEach((item) => {
+            stack.push(item)
+          })
+        } else {
+          nextValue.push([item[valueKey], returnObjects ? item : item[valueKey]])
         }
       }
       onInput(nextValue, value)
     } else {
-      onInput( [[leafVal, returnObjects ? options: leafVal]], value)
+      onInput( [[leafVal, returnObjects ? options : leafVal]], value)
     }
   }, [children, onInput, childrenKey, options, valueKey, leafVal, returnObjects])
 
@@ -148,6 +146,7 @@ const Leaf = (props) => {
       <div>
         {expanded && children && children?.map((item, index) =>
           <Leaf
+            returnObjects={returnObjects}
             getSequence={handleGetSequence}
             dropRule={dropRule}
             draggable={draggable}
