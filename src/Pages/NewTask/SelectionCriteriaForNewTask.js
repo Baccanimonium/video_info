@@ -78,10 +78,13 @@ const SelectionCriteriaForNewTask = () => {
   const [listBuffer, setListBuffer] = useState([])
   const [titleBuffer, setTitleBuffer] = useState("")
 
+  const [selectedNode, setSelectedNode] = useState("")
+
   // срабатывает при клике на группу
   const onSelect = useCallback((value) => {
-    console.log(value.node, pageData, checkedObject)
-  }, [dictionaryGroup, checkedObject])
+    console.log(value.node.id, pageData)
+    setSelectedNode(value.node.id)
+  }, [])
 
   useEffect(() => {
     let dictionaryGroup
@@ -141,31 +144,10 @@ const SelectionCriteriaForNewTask = () => {
     setCheckedObject(pageData[0]?.children[0]?.children.get(dictionaryGroup)?.children || [])
   }, [nameSelect, pageData])
 
+
   const setNewTree = useCallback(() => {
-    // когда нет узла
-    if (pageData.length === 0) {
-      let newAr = [
-        {
-          id: "fdgdsf0gdfg",
-          title: "TV Media",
-          type: "head",
-          children: [
-            {
-              id: "123123",
-              title: "",
-              condition: "AND",
-              type: "block",
-              children: new Map().set(dictionaryGroup, {
-                ...GroupDictionaryParams[dictionaryGroup],
-                children: checkedObject
-              })
-            }
-          ]
-        }
-      ]
-      setPageData(newAr)
-      // когда нет второго уровня
-    } else if (pageData[0].children.length === 0) {
+    // когда нет второго уровня
+    if (pageData[0].children.length === 0) {
       let newArr = pageData.map(({children, ...firstLvlData}) => ({
           ...firstLvlData,
           children: [

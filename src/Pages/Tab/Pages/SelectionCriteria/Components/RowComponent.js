@@ -221,14 +221,16 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
           )}
         </WithOpenContextMenu>
       }
-      <WithOpenContextMenu
-        settings={{maxSize: "150", minSize: "150"}}
-        onOpenContextMenu={handleInitDelete}
-      >
-        {(onOpenContextMenu) => (
-          <StyleIcon title="Удалить узел" className="m-l-5" onClick={onOpenContextMenu} icon={basketTrash}/>
-        )}
-      </WithOpenContextMenu>
+      {type !== "head" &&
+        (<WithOpenContextMenu
+          settings={{maxSize: "150", minSize: "150"}}
+          onOpenContextMenu={handleInitDelete}
+        >
+          {(onOpenContextMenu) => (
+            <StyleIcon title="Удалить узел" className="m-l-5" onClick={onOpenContextMenu} icon={basketTrash}/>
+          )}
+        </WithOpenContextMenu>)
+      }
     </div>
   );
 };
