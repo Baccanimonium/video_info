@@ -49,7 +49,9 @@ const CalculationOptions = [
   "по сумме", "по среднему"
 ]
 
-const dayOptions = [{label: "Пн"}, {label: "Вт"}, {label: "Ср"}, {label: "Чт"}, {label: "Пт"}, {label: "Сб"}, {label: "Вс"}]
+const dayOptions = [{label: "Пн"}, {label: "Вс"}]
+const exitTime = [{label: "0"}, {label: "1"}, {label: "30"}, {label: "60"}, {label: "120"}]
+const durationOptions = [{label: "20"}, {label: "30"}]
 
 const GenderOptions = [
   {
@@ -293,7 +295,7 @@ const Reports = () => {
                       </div>
                       <div className="p-t-15 separator-bot-greyLight">
                         <WrapperInput
-                          value="ПН     "
+                          value="ПН"
                         >
                           <div className="p-r-15">Первый день недели:</div>
                           <div>
@@ -312,7 +314,10 @@ const Reports = () => {
                         >
                           <div className="p-r-15">Время выхода событий:</div>
                           <div className="display-flex a-i-center">
-                            <NumericInputWithControls
+                            <Select
+                              valueKey="label"
+                              labelKey="label"
+                              options={exitTime}
                               id={"time"}
                               value={reportState["time"]}
                               onInput={onFormInput("time")}
@@ -327,7 +332,10 @@ const Reports = () => {
                         >
                           <div className="p-r-15">Базовая длительность:</div>
                           <div className="display-flex a-i-center">
-                            <NumericInputWithControls
+                            <Select
+                              valueKey="label"
+                              labelKey="label"
+                              options={durationOptions}
                               id={"duration"}
                               value={reportState["duration"]}
                               onInput={onFormInput("duration")}
@@ -363,13 +371,6 @@ const Reports = () => {
                         <div className="p-b-15">
                           Базовый день:
                         </div>
-                        <BsCheckBox
-                          id="monitoringDates"
-                          label="По датам мониторинга компании"
-                          value={monitoringDates}
-                          onInput={setMonitoringDates}
-                          className="m-b-15"
-                        />
                         <RadioButton
                           id="baseDayOptions"
                           value={reportState["baseDayOptions"]}
@@ -396,28 +397,6 @@ const Reports = () => {
                             placeholder="Выберите дату"
                           />
                         </ContainerDatePicker>
-                      </div>
-                      <div className="separator-top-greyLight p-t-15">
-                        <WrapperInput className="display-flex a-i-center j-c-space-between">
-                          <div className="p-r-15">Qual.Reach viewer:</div>
-                          <BsInput
-                            styleInputBox={{maxWidth: "200px"}}
-                            id="Qual"
-                            value={Qual}
-                            placeholder="Qual.Reach viewer"
-                            onInput={setQual}
-                          />
-                        </WrapperInput>
-                        <WrapperInput className="display-flex a-i-center j-c-space-between">
-                          <div className="p-r-15">Average Weekly/<br/>Monthly Reach:</div>
-                          <BsInput
-                            styleInputBox={{maxWidth: "200px"}}
-                            id="average"
-                            value={aver}
-                            placeholder="Средний день"
-                            onInput={setAve}
-                          />
-                        </WrapperInput>
                       </div>
                     </>
                   )}

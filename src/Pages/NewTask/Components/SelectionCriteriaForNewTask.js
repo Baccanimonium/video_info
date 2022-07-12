@@ -55,8 +55,6 @@ import ButtonsForDelete from "@/Pages/NewTask/Components/ButtonsForDelete";
 //     ]
 //   } ]
 
-const StyleTree = {width: "600px"}
-
 const aaa = (children) => {
   let arrayChildren = []
   children.forEach(({children: secondLvlChildren, ...secondLvlData}, key) => {
@@ -82,10 +80,12 @@ const SelectionCriteriaForNewTask = () => {
   const [listBuffer, setListBuffer] = useState([])
   const [titleBuffer, setTitleBuffer] = useState("")
 
-  const [selectedNode, setSelectedNode] = useState("")
+  const [selectedNode, setSelectedNode] = useState("123123")
 
   // срабатывает при клике на группу
   const onSelect = useCallback(({node}) => {
+    // айди узла node.id
+    // группы node.children
     setSelectedNode(node.id)
   }, [])
 
@@ -146,10 +146,19 @@ const SelectionCriteriaForNewTask = () => {
     setDictionaryGroup(dictionaryGroup)
     setCheckedObject(pageData[0]?.children[0]?.children.get(dictionaryGroup)?.children || [])
   }, [nameSelect, pageData])
+
+  // мой говнокод
   useEffect(() => {
+    let asd = [{id_node: selectedNode, id: 1, children: []}]
+    asd.map(({id_node, children}) => console.log(id_node, children) )
+    let abs = []
+    abs.reduce((acc, item) => {
+      acc.push({id_node: selectedNode, children: []})
+      return acc
+    }, [])
     if(pageData && pageData.length > 0) {
       // onSelect()
-      console.log(4445)
+      // console.log(4445)
     }
   }, [])
 
@@ -295,6 +304,15 @@ const SelectionCriteriaForNewTask = () => {
     }])
   }, [])
 
+  const editCheckedObject = useCallback((value) => {
+    // value = [{
+    // condition: "OR"
+    // id: 1
+    // title: "N/A"}]
+    console.log(value)
+    setCheckedObject(value)
+  }, [])
+
   return (
     <>
       <div className="display-flex m-t-10 flex-wrap">
@@ -318,7 +336,7 @@ const SelectionCriteriaForNewTask = () => {
             labelKey="title"
             value={checkedObject}
             returnObjects
-            onInput={setCheckedObject}
+            onInput={editCheckedObject}
           />
           {selectedList.length > 0 &&
           <div className="display-flex a-i-center">
