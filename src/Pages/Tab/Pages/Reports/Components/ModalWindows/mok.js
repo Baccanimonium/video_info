@@ -203,3 +203,14 @@ export const folderOptions = [
     label: 'Folder'
   },
 ]
+
+export const typeRecord = [
+  {
+    id: 1,
+    label: 'Private'
+  },
+  {
+    id: 2,
+    label: 'General'
+  },
+]

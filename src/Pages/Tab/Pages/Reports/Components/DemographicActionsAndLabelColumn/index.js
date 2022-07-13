@@ -8,10 +8,11 @@ import {BtnPlus} from "@/Pages/Tab/Pages/Reports/Components/styles";
 import WithOpenModalWindow from "@/Core/Decorators/WithOpenModalWindow"
 import AddData from "@/Pages/Tab/Pages/Reports/Components/ModalWindows/addData";
 import { treeData} from "@/Pages/Tab/Pages/Reports/Components/ModalWindows/mok";
-
+import recordCorrectionForm from "@/Pages/Tab/Pages/Reports/Components/ModalWindows/recordCorrectionForm";
 
 const  DemographicActionsAndLabelColumn = ({ value, ParentValue, openModalWindow }) => {
-  const editData = () => {
+  // console.log(ParentValue[demographicChildrenKey], value)
+  const audienceСorrection = () => {
     openModalWindow({
       component: AddData,
       message: "Коррекция аудитории",
@@ -31,6 +32,22 @@ const  DemographicActionsAndLabelColumn = ({ value, ParentValue, openModalWindow
       }
     })
   }
+  const recordCorrection = () => {
+    openModalWindow({
+      component: recordCorrectionForm,
+      dialogueParams: {
+        cancelLabel: "Отмена",
+        submitLabel: "Сохранить",
+      },
+      onCancel: () => {
+        console.log("cancel")
+      },
+      onSubmit: () => {
+        console.log("submit")
+      },
+    })
+  }
+
   const addData = () => {
     openModalWindow({
       component: AddData,
@@ -68,11 +85,11 @@ const  DemographicActionsAndLabelColumn = ({ value, ParentValue, openModalWindow
       {ParentValue[demographicChildrenKey] !== undefined
         ? <div className="flex items-center">
             <BtnPlus className="mr-1" onClick={addData}/>
-            <StyleIcon className="mr-1" icon={editIcon} onClick={editData}/>
+            <StyleIcon className="mr-1" icon={editIcon} onClick={recordCorrection}/>
             <StyleIcon icon={basketTrash}/>
           </div>
         : <div className="flex items-center">
-            <StyleIcon className="mr-1" icon={editIcon}/>
+            <StyleIcon className="mr-1" icon={editIcon} onClick={audienceСorrection}/>
             <StyleIcon icon={basketTrash}/>
         </div>
       }

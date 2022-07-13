@@ -80,13 +80,58 @@ const SelectionCriteriaForNewTask = () => {
   const [listBuffer, setListBuffer] = useState([])
   const [titleBuffer, setTitleBuffer] = useState("")
 
-  const [selectedNode, setSelectedNode] = useState("123123")
+  const [selectedNode, setSelectedNode] = useState({
+      "id": "123123",
+      "title": "",
+      "condition": "AND",
+      "type": "block",
+      "children": [
+        {
+          "id": "15251",
+          "title": "Группа",
+          "type": "condition",
+          "condition": "AND",
+          "children": [
+            {
+              "id": 1,
+              "title": "N/A",
+              "condition": "OR",
+              "nameGroup": "TV_GROUP"
+            }
+          ]
+        }
+      ]
+    })
+  const [idSelectedNode, setIdSelectedNode] = useState("123123")
+
+  // {
+  //   "id": "123123",
+  //   "title": "",
+  //   "condition": "AND",
+  //   "type": "block",
+  //   "children": [
+  //     {
+  //       "id": "15251",
+  //       "title": "Группа",
+  //       "type": "condition",
+  //       "condition": "AND",
+  //       "children": [
+  //         {
+  //           "id": 1,
+  //           "title": "N/A",
+  //           "condition": "OR",
+  //           "nameGroup": "TV_GROUP"
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
 
   // срабатывает при клике на группу
   const onSelect = useCallback(({node}) => {
     // айди узла node.id
-    // группы node.children
-    setSelectedNode(node.id)
+    setIdSelectedNode(node.id)
+    setSelectedNode(node)
   }, [])
 
   useEffect(() => {
@@ -149,18 +194,24 @@ const SelectionCriteriaForNewTask = () => {
 
   // мой говнокод
   useEffect(() => {
-    let asd = [{id_node: selectedNode, id: 1, children: []}]
-    asd.map(({id_node, children}) => console.log(id_node, children) )
-    let abs = []
-    abs.reduce((acc, item) => {
-      acc.push({id_node: selectedNode, children: []})
-      return acc
-    }, [])
+    // собираем все критерии узла
+    let arrayCriteria = []
+    selectedNode.children.forEach(({children}) => {
+      arrayCriteria = arrayCriteria.concat(children)
+    })
+
+    // собираем мап критериев. ключ - айди выбраного узла
+    const mapCriteria = new Map()
+    mapCriteria.set(idSelectedNode, arrayCriteria)
+
+    // получаем массив критериев по айди
+    // console.log(mapCriteria.get(idSelectedNode))
+
     if(pageData && pageData.length > 0) {
       // onSelect()
       // console.log(4445)
     }
-  }, [])
+  }, [selectedNode, idSelectedNode])
 
   const setNewTree = useCallback(() => {
     // когда нет второго уровня
@@ -169,7 +220,7 @@ const SelectionCriteriaForNewTask = () => {
           ...firstLvlData,
           children: [
             {
-              id: "123123",
+              id: idSelectedNode,
               title: "",
               condition: "AND",
               type: "block",
@@ -184,6 +235,7 @@ const SelectionCriteriaForNewTask = () => {
       setPageData(newArr)
       // когда нет группы
     } else {
+      // setPageData(([{children: [item]}]) => {console.log(item)})
       setPageData(([{
         children:
           [{children, ...secondLvlChildrenData}, ...restChildren],
@@ -309,7 +361,6 @@ const SelectionCriteriaForNewTask = () => {
     // condition: "OR"
     // id: 1
     // title: "N/A"}]
-    console.log(value)
     setCheckedObject(value)
   }, [])
 
