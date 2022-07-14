@@ -5,7 +5,9 @@ import {typeRecord} from "@/Pages/Tab/Pages/Reports/Components/ModalWindows/mok"
 import BsCheckBox from "@/Components/Fields/BsCheckBox";
 
 const RecordCorrectionForm = (props) => {
-  const [nameAudience, setNameAudience] = useState("")
+  const {value: {NAME}} = props
+
+  const [nameAudience, setNameAudience] = useState(NAME)
 
   const [reportState, setReportsState] = useState({
     precision: 4,

@@ -32,28 +32,30 @@ import ButtonsForDelete from "@/Pages/NewTask/Components/ButtonsForDelete";
 /// чтобы айди в чекбоксах не совпадали нужно добавлять в айди название справочника
 // id: "nationalTV/1"
 
-// [ {
-//     id: "fdgdsf0gdfg",
-//     title: "Удаление всех параметров",
-//     type: "head",
-//     children: [
+// [
+//   {
+//     "id": "fdgdsf0gdfg",
+//     "title": "TV Media",
+//     "type": "head",
+//     "children": [
 //       {
-//         id: 1,
-//         title: "N/A",
-//         condition: "OR",
+//         "id": "123123",
+//         "title": "",
+//         "condition": "AND",
+//         "type": "block",
+//         "children": {
+//        }
 //       },
 //       {
-//         id: 2,
-//         title: "NA",
-//         condition: "OR",
-//       },
-//       {
-//         id: 3,
-//         title: "N",
-//         condition: "OR",
-//       },
+//         "title": "",
+//         "id": "2",
+//         "type": "block",
+//         "condition": "OR",
+//         "children": {}
+//       }
 //     ]
-//   } ]
+//   }
+// ]
 
 const aaa = (children) => {
   let arrayChildren = []
@@ -85,22 +87,7 @@ const SelectionCriteriaForNewTask = () => {
       "title": "",
       "condition": "AND",
       "type": "block",
-      "children": [
-        {
-          "id": "15251",
-          "title": "Группа",
-          "type": "condition",
-          "condition": "AND",
-          "children": [
-            {
-              "id": 1,
-              "title": "N/A",
-              "condition": "OR",
-              "nameGroup": "TV_GROUP"
-            }
-          ]
-        }
-      ]
+      "children": []
     })
   const [idSelectedNode, setIdSelectedNode] = useState("123123")
 
@@ -115,17 +102,9 @@ const SelectionCriteriaForNewTask = () => {
   //       "title": "Группа",
   //       "type": "condition",
   //       "condition": "AND",
-  //       "children": [
-  //         {
-  //           "id": 1,
-  //           "title": "N/A",
-  //           "condition": "OR",
-  //           "nameGroup": "TV_GROUP"
-  //         }
-  //       ]
-  //     }
-  //   ]
+  //       "children": Map()
   // }
+
 
   // срабатывает при клике на группу
   const onSelect = useCallback(({node}) => {
@@ -192,11 +171,10 @@ const SelectionCriteriaForNewTask = () => {
     setCheckedObject(pageData[0]?.children[0]?.children.get(dictionaryGroup)?.children || [])
   }, [nameSelect, pageData])
 
-  // мой говнокод
   useEffect(() => {
     // собираем все критерии узла
     let arrayCriteria = []
-    selectedNode.children.forEach(({children}) => {
+    selectedNode?.children.forEach(({children}) => {
       arrayCriteria = arrayCriteria.concat(children)
     })
 
@@ -215,7 +193,7 @@ const SelectionCriteriaForNewTask = () => {
 
   const setNewTree = useCallback(() => {
     // когда нет второго уровня
-    if (pageData[0].children.length === 0) {
+    if (selectedNode.length === 0) {
       let newArr = pageData.map(({children, ...firstLvlData}) => ({
           ...firstLvlData,
           children: [
@@ -235,12 +213,60 @@ const SelectionCriteriaForNewTask = () => {
       setPageData(newArr)
       // когда нет группы
     } else {
-      // setPageData(([{children: [item]}]) => {console.log(item)})
+      // в объект выделенного узла кладем критерии
+      setSelectedNode(({children}) => {
+        const newChildren = new Map(children)
+        if (!newChildren.has(dictionaryGroup)) {
+          // то добавляем данные
+          newChildren.set(dictionaryGroup, {
+            ...GroupDictionaryParams[dictionaryGroup],
+            children: checkedObject
+          })
+          // если данные в группе есть
+        } else {
+          // то кладем старые данные и новые
+          newChildren.set(dictionaryGroup, {
+            ...newChildren.get(dictionaryGroup),
+            // тут перезаписывается критерий, если выбран критерий одной и той же группы
+            children: checkedObject
+          })
+        }
+        return {
+          ...selectedNode,
+          children: newChildren
+        }
+      })
+      // добавление критериев в выделенный узел
+      // setPageData(([{children, ...pageData}]) => {
+      //   const newChild = children.reduce((acc, item) => {
+      //     if (item.id === idSelectedNode) {
+      //       acc.push(selectedNode)
+      //     } else {
+      //       acc.push(item)
+      //     }
+      //     return acc
+      //   }, [])
+      //   return [{
+      //     ...pageData,
+      //     newChild
+      //   }]
+      // })
+
       setPageData(([{
         children:
-          [{children, ...secondLvlChildrenData}, ...restChildren],
+          // второй узел
+          // критерии
+          [{children,
+            // данные второго узла
+            ...secondLvlChildrenData},
+            // данные другого второго узла
+            ...restChildren
+          ],
+        // данные первого уровня
         ...pageData
       }]) => {
+        // console.log(children, secondLvlChildrenData, restChildren, pageData)
+
         // создаем нового ребенка
         const newChildren = new Map(children)
         // если в данных в группе нет
@@ -263,6 +289,7 @@ const SelectionCriteriaForNewTask = () => {
           })
         }
         // secondLvlChildrenData данные второго уровня
+        console.log(newChildren)
         return [{
           // записываем старые данные,
           ...pageData,

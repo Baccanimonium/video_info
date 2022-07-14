@@ -11,7 +11,6 @@ import { treeData} from "@/Pages/Tab/Pages/Reports/Components/ModalWindows/mok";
 import recordCorrectionForm from "@/Pages/Tab/Pages/Reports/Components/ModalWindows/recordCorrectionForm";
 
 const  DemographicActionsAndLabelColumn = ({ value, ParentValue, openModalWindow }) => {
-  // console.log(ParentValue[demographicChildrenKey], value)
   const audienceСorrection = () => {
     openModalWindow({
       component: AddData,
@@ -45,6 +44,9 @@ const  DemographicActionsAndLabelColumn = ({ value, ParentValue, openModalWindow
       onSubmit: () => {
         console.log("submit")
       },
+      componentProps: {
+        initPayload: {NAME: value}
+      }
     })
   }
 
