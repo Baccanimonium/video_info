@@ -174,17 +174,22 @@ const SelectionCriteriaForNewTask = () => {
   useEffect(() => {
     // собираем все критерии узла
     let arrayCriteria = []
-    selectedNode?.children.forEach(({children}) => {
-      arrayCriteria = arrayCriteria.concat(children)
+    // если данных нет в selectedNode.children
+    // то setCheckedObject([])
+    selectedNode.children.forEach(({children}) => {
+      // в список критериев складываем критерии выбраного узла
+      setCheckedObject(arrayCriteria.concat(children))
+      // arrayCriteria = arrayCriteria.concat(children)
     })
 
+    // мап по идее не нужен
+    // потому что критерии будут всегда браться из узла
     // собираем мап критериев. ключ - айди выбраного узла
     const mapCriteria = new Map()
     mapCriteria.set(idSelectedNode, arrayCriteria)
 
     // получаем массив критериев по айди
     // console.log(mapCriteria.get(idSelectedNode))
-
     if(pageData && pageData.length > 0) {
       // onSelect()
       // console.log(4445)
@@ -248,7 +253,7 @@ const SelectionCriteriaForNewTask = () => {
       //   }, [])
       //   return [{
       //     ...pageData,
-      //     newChild
+      //     children: newChild
       //   }]
       // })
 
