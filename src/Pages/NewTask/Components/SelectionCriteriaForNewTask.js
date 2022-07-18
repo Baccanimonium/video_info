@@ -28,6 +28,7 @@ import {StyleIcon} from "@/Components/styleIcon";
 import {basketTrash} from "@/Icons/basketTrash";
 import WithOpenContextMenu from "@/Core/RenderProps/WithOpenContextMenu";
 import ButtonsForDelete from "@/Pages/NewTask/Components/ButtonsForDelete";
+import PureUpdateArrayItems from "@/Utils/Arrays/PureUpdateArrayItems";
 
 /// чтобы айди в чекбоксах не совпадали нужно добавлять в айди название справочника
 // id: "nationalTV/1"
@@ -198,7 +199,7 @@ const SelectionCriteriaForNewTask = () => {
 
   const setNewTree = useCallback(() => {
     // когда нет второго уровня
-    if (selectedNode.length === 0) {
+    if (pageData.length === 0) {
       let newArr = pageData.map(({children, ...firstLvlData}) => ({
           ...firstLvlData,
           children: [
@@ -218,60 +219,26 @@ const SelectionCriteriaForNewTask = () => {
       setPageData(newArr)
       // когда нет группы
     } else {
-      // в объект выделенного узла кладем критерии
-      setSelectedNode(({children}) => {
-        const newChildren = new Map(children)
-        if (!newChildren.has(dictionaryGroup)) {
-          // то добавляем данные
-          newChildren.set(dictionaryGroup, {
-            ...GroupDictionaryParams[dictionaryGroup],
-            children: checkedObject
-          })
-          // если данные в группе есть
-        } else {
-          // то кладем старые данные и новые
-          newChildren.set(dictionaryGroup, {
-            ...newChildren.get(dictionaryGroup),
-            // тут перезаписывается критерий, если выбран критерий одной и той же группы
-            children: checkedObject
-          })
-        }
-        return {
-          ...selectedNode,
-          children: newChildren
-        }
-      })
       // добавление критериев в выделенный узел
-      // setPageData(([{children, ...pageData}]) => {
-      //   const newChild = children.reduce((acc, item) => {
-      //     if (item.id === idSelectedNode) {
-      //       acc.push(selectedNode)
-      //     } else {
-      //       acc.push(item)
-      //     }
-      //     return acc
-      //   }, [])
-      //   return [{
-      //     ...pageData,
-      //     children: newChild
-      //   }]
-      // })
-
-      setPageData(([{
+      const indexNode = pageData[0].children.findIndex(({id}) => id === idSelectedNode)
+      setPageData(([
+        {
+          children: lvSecondChildren,
         children:
           // второй узел
           // критерии
-          [{children,
-            // данные второго узла
-            ...secondLvlChildrenData},
-            // данные другого второго узла
-            ...restChildren
-          ],
+          {
+            [indexNode]:
+              {
+                children,
+                // данные второго узла
+                ...secondLvlChildrenData
+              },
+          },
         // данные первого уровня
         ...pageData
-      }]) => {
-        // console.log(children, secondLvlChildrenData, restChildren, pageData)
-
+      }
+      ]) => {
         // создаем нового ребенка
         const newChildren = new Map(children)
         // если в данных в группе нет
@@ -283,9 +250,6 @@ const SelectionCriteriaForNewTask = () => {
           })
           // если данные в группе есть
         } else {
-          // массив старых данных
-          // children.get(dictionaryGroup).children - [{}]
-          // checkedObject - [{}]
           // то кладем старые данные и новые
           newChildren.set(dictionaryGroup, {
             ...newChildren.get(dictionaryGroup),
@@ -293,13 +257,11 @@ const SelectionCriteriaForNewTask = () => {
             children: checkedObject
           })
         }
-        // secondLvlChildrenData данные второго уровня
-        console.log(newChildren)
         return [{
           // записываем старые данные,
           ...pageData,
           // в children первого уровня записываем данные второго уровня и его children с данными группы
-          children: [{...secondLvlChildrenData, children: newChildren}, ...restChildren]
+          children: PureUpdateArrayItems(lvSecondChildren, indexNode, {...secondLvlChildrenData, children: newChildren})
         }]
       })
     }
