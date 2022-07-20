@@ -83,35 +83,14 @@ const SelectionCriteriaForNewTask = () => {
   const [listBuffer, setListBuffer] = useState([])
   const [titleBuffer, setTitleBuffer] = useState("")
 
-  const [selectedNode, setSelectedNode] = useState({
-      "id": "123123",
-      "title": "",
-      "condition": "AND",
-      "type": "block",
-      "children": []
-    })
   const [idSelectedNode, setIdSelectedNode] = useState("123123")
-
-  // {
-  //   "id": "123123",
-  //   "title": "",
-  //   "condition": "AND",
-  //   "type": "block",
-  //   "children": [
-  //     {
-  //       "id": "15251",
-  //       "title": "Группа",
-  //       "type": "condition",
-  //       "condition": "AND",
-  //       "children": Map()
-  // }
+  const [indexAllocateNode, setIndexAllocateNode] = useState(0)
 
 
   // срабатывает при клике на группу
   const onSelect = useCallback(({node}) => {
     // айди узла node.id
     setIdSelectedNode(node.id)
-    setSelectedNode(node)
   }, [])
 
   useEffect(() => {
@@ -169,45 +148,22 @@ const SelectionCriteriaForNewTask = () => {
         break
     }
     setDictionaryGroup(dictionaryGroup)
-    setCheckedObject(pageData[0]?.children[0]?.children.get(dictionaryGroup)?.children || [])
-  }, [nameSelect, pageData])
+    setCheckedObject(pageData[0]?.children[indexAllocateNode]?.children.get(dictionaryGroup)?.children || [])
+  }, [nameSelect, pageData, indexAllocateNode])
 
   useEffect(() => {
-    // собираем все критерии узла
-    let arrayCriteria = []
-    // если данных нет в selectedNode.children
-    // то setCheckedObject([])
-    selectedNode.children.forEach(({children}) => {
-      // в список критериев складываем критерии выбраного узла
-      setCheckedObject(arrayCriteria.concat(children))
-      // arrayCriteria = arrayCriteria.concat(children)
-    })
-
-    // мап по идее не нужен
-    // потому что критерии будут всегда браться из узла
-    // собираем мап критериев. ключ - айди выбраного узла
-    const mapCriteria = new Map()
-    mapCriteria.set(idSelectedNode, arrayCriteria)
-
-    // получаем массив критериев по айди
-    // console.log(mapCriteria.get(idSelectedNode))
-    if(pageData && pageData.length > 0) {
-      // onSelect()
-      // console.log(4445)
-    }
-  }, [selectedNode, idSelectedNode])
+    setIndexAllocateNode(pageData[0].children.findIndex(({id}) => id === idSelectedNode))
+  }, [idSelectedNode])
 
   const setNewTree = useCallback(() => {
+    // добавление критериев в выделенный узел
     // когда нет второго уровня
     if (pageData.length === 0) {
-      let newArr = pageData.map(({children, ...firstLvlData}) => ({
+      let newArr = pageData.map(({children, children: lvSecondChildren, ...firstLvlData}) => ({
           ...firstLvlData,
           children: [
             {
-              id: idSelectedNode,
-              title: "",
-              condition: "AND",
-              type: "block",
+              ...lvSecondChildren,
               children: new Map().set(dictionaryGroup, {
                 ...GroupDictionaryParams[dictionaryGroup],
                 children: checkedObject
@@ -219,16 +175,12 @@ const SelectionCriteriaForNewTask = () => {
       setPageData(newArr)
       // когда нет группы
     } else {
-      // добавление критериев в выделенный узел
-      const indexNode = pageData[0].children.findIndex(({id}) => id === idSelectedNode)
-      setPageData(([
-        {
-          children: lvSecondChildren,
+      setPageData(([{
+        children: lvSecondChildren,
         children:
           // второй узел
-          // критерии
           {
-            [indexNode]:
+            [indexAllocateNode]:
               {
                 children,
                 // данные второго узла
@@ -236,8 +188,7 @@ const SelectionCriteriaForNewTask = () => {
               },
           },
         // данные первого уровня
-        ...pageData
-      }
+        ...pageData}
       ]) => {
         // создаем нового ребенка
         const newChildren = new Map(children)
@@ -260,8 +211,8 @@ const SelectionCriteriaForNewTask = () => {
         return [{
           // записываем старые данные,
           ...pageData,
-          // в children первого уровня записываем данные второго уровня и его children с данными группы
-          children: PureUpdateArrayItems(lvSecondChildren, indexNode, {...secondLvlChildrenData, children: newChildren})
+          // в children записываем данные второго уровня по индексу выделенного узла
+          children: PureUpdateArrayItems(lvSecondChildren, indexAllocateNode, {...secondLvlChildrenData, children: newChildren})
         }]
       })
     }
@@ -300,7 +251,7 @@ const SelectionCriteriaForNewTask = () => {
       }))
     })))
   }, [dictionaryGroup])
-
+// назначаем что будет выделяться в узле
   const selectRule = ({type}) => type === "block"
 
   // переписываем данные дерева с критериями-массивами, а не мапами
@@ -326,16 +277,16 @@ const SelectionCriteriaForNewTask = () => {
     }, [])
     setCheckedObject(newVal)
   }
-
+// собираем список буфера
   const editListBuffer = useCallback(() => {
     setTitleBuffer(title)
     setListBuffer(checkedObject)
   }, [checkedObject, title])
-
+// удаление одного буфера
   const onUpdateBufferList = useCallback((value) => {
     console.log(value)
   }, [dictionaryGroup])
-
+// удаление всего буфера
   const handleInitDelete = useCallback(({applyContextMenu, e}) => {
     e.stopPropagation()
     e.preventDefault()
@@ -348,14 +299,6 @@ const SelectionCriteriaForNewTask = () => {
         title: "Удалить весь буфер?",
       }
     }])
-  }, [])
-
-  const editCheckedObject = useCallback((value) => {
-    // value = [{
-    // condition: "OR"
-    // id: 1
-    // title: "N/A"}]
-    setCheckedObject(value)
   }, [])
 
   return (
@@ -381,7 +324,7 @@ const SelectionCriteriaForNewTask = () => {
             labelKey="title"
             value={checkedObject}
             returnObjects
-            onInput={editCheckedObject}
+            onInput={setCheckedObject}
           />
           {selectedList.length > 0 &&
           <div className="display-flex a-i-center">
