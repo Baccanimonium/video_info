@@ -21,7 +21,7 @@ import CheckboxGroup from "../../../Components/Fields/CheckboxGroup";
 import BsButton from "@/Components/BsButton";
 import RowComponent from "../../Tab/Pages/SelectionCriteria/Components/RowComponent";
 import ScrollBar from "react-perfect-scrollbar";
-import Tree from '@/Components/Tree';
+import Tree from '@/component_ocean/Components/Tree';
 import {listDirectory} from "../config"
 import BufferComponent from "@/Pages/NewTask/Components/BufferComponent";
 import {StyleIcon} from "@/Components/styleIcon";
@@ -85,7 +85,6 @@ const SelectionCriteriaForNewTask = () => {
 
   const [idSelectedNode, setIdSelectedNode] = useState("123123")
   const [indexAllocateNode, setIndexAllocateNode] = useState(0)
-
 
   // срабатывает при клике на группу
   const onSelect = useCallback(({node}) => {
@@ -362,6 +361,7 @@ const SelectionCriteriaForNewTask = () => {
               onCheck={onCheck}
               options={treeUnwrappedData}
               selectRule={selectRule}
+              selectedNode={idSelectedNode}
               onUpdateOptions={onUpdateOptions}
               rowComponent={RowComponent}
             />

@@ -374,22 +374,6 @@ const NewTask = ({openModalWindow, updateState, state}) => {
             </div>
           </div>
         }
-        {/*<PracticesBar buttons={Tabs} parentUrl="/tab/new_task"/>*/}
-        {/*<Routes>*/}
-        {/*  <Route*/}
-        {/*    path="/result"*/}
-        {/*    element={<Result/>}*/}
-        {/*  />*/}
-        {/*  <Route*/}
-        {/*    path="/selection_criteria"*/}
-        {/*    element={<SelectionCriteria/>}*/}
-        {/*  />*/}
-        {/*  <Route*/}
-        {/*    path="/reports"*/}
-        {/*    element={<Reports/>}*/}
-        {/*  />*/}
-        {/*</Routes>*/}
-
       </div>
     </div>
   );
