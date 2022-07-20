@@ -4,16 +4,15 @@ import Select from "@/Components/Fields/Select";
 import {typeRecord} from "@/Pages/Tab/Pages/Reports/Components/ModalWindows/mok";
 import BsCheckBox from "@/Components/Fields/BsCheckBox";
 
-const RecordCorrectionForm = (props) => {
-  const {value: {NAME}} = props
-
-  const [nameAudience, setNameAudience] = useState(NAME)
-
+const RecordCorrectionForm = ({value, onInput}) => {
   const [reportState, setReportsState] = useState({
     precision: 4,
     time: " ",
     duration: " ",
   })
+  const handleInput = (val, idVal) => {
+    onInput({ ...value, [idVal]: val })
+  }
 
   const onFormInput = useCallback((id) => (value) => {
     setReportsState((prevState) => ({...prevState, [id]: value}))
@@ -25,11 +24,11 @@ const RecordCorrectionForm = (props) => {
         Наименование папки аудитории:
       </div>
       <BsInput
-        id="NAME"
+        id="title"
         placeholder="Наименование папки аудитории"
         label="Наименование папки аудитории"
-        value={nameAudience}
-        onInput={setNameAudience}
+        value={value.title}
+        onInput={handleInput}
       />
       <div className="m-t-10">
         <div className="p-b-10">
@@ -53,13 +52,13 @@ const RecordCorrectionForm = (props) => {
           </div>
           <Select
             labelKey="label"
-            valueKey="id"
+            valueKey="label"
             id="type"
             label="Тип"
             placeholder="Тип"
-            value={reportState["type"]}
+            value={value.type}
             options={typeRecord}
-            onInput={onFormInput("type")}
+            onInput={handleInput}
           />
         </div>
         <BsCheckBox

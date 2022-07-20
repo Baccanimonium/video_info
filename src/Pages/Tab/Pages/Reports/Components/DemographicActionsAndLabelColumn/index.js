@@ -10,7 +10,7 @@ import AddData from "@/Pages/Tab/Pages/Reports/Components/ModalWindows/addData";
 import { treeData} from "@/Pages/Tab/Pages/Reports/Components/ModalWindows/mok";
 import recordCorrectionForm from "@/Pages/Tab/Pages/Reports/Components/ModalWindows/recordCorrectionForm";
 
-const  DemographicActionsAndLabelColumn = ({ value, ParentValue, openModalWindow }) => {
+const  DemographicActionsAndLabelColumn = ({ value, ParentValue, openModalWindow, onInput }) => {
   const audienceСorrection = () => {
     openModalWindow({
       component: AddData,
@@ -41,11 +41,15 @@ const  DemographicActionsAndLabelColumn = ({ value, ParentValue, openModalWindow
       onCancel: () => {
         console.log("cancel")
       },
-      onSubmit: () => {
-        console.log("submit")
+      onSubmit: ({ title, type }) => {
+        onInput(title, "title")
+        onInput(type, "type")
       },
       componentProps: {
-        initPayload: {NAME: value}
+        initPayload: {
+          title: value,
+          type: ParentValue.type
+        }
       }
     })
   }

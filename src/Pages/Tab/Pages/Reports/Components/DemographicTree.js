@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import DemographicRow from "./DemographicRow";
 import {demographic} from "../constants";
@@ -19,7 +19,7 @@ const tableSettings = {
       id: "title",
       label: "Название",
       component: DemographicActionsAndLabelColumn,
-      sizes: 220
+      sizes: 220,
     },
     {
       id: "type",
@@ -41,14 +41,20 @@ const tableSettings = {
 }
 
 const DemographicTree = ({value, onInput}) => {
-
+  const [data, setData] = useState(demographic)
+  useEffect(() => {
+    if (value && value.length > 0) {
+      setData(value)
+    }
+  }, [value])
   return (
     <ListTable
       selectState={value}
       onSelect={onInput}
+      onInput={onInput}
       columns={tableSettings.columns}
       plugins={tableSettings.plugins}
-      value={demographic}
+      value={data}
     />
   );
 };
