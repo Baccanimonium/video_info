@@ -21,7 +21,7 @@ import {StyleIcon} from "@/Components/styleIcon";
 import {NumericInputWithControls} from "../../../../Components/Fields/NumericInput";
 import SelectedParams from "./Components/SelectedParams";
 import Dictionaries from "./Components/Dictionaries";
-import {Resizer} from "@/component_ocean/Components/Tables/ListTable/styles";
+import {Resizer} from "./styles";
 import {useRecoilState} from "recoil";
 import {cachedLocalStorageValue} from "@/component_ocean/Logic/Storages/localStorageCache";
 

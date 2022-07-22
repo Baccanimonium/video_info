@@ -16,3 +16,24 @@ export const WrapperInput = styled.div`
   display: flex;
   align-items: center;
 `
+
+export const Resizer = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 3px;
+  cursor: e-resize;
+  transition: background-color 500ms ease-in-out;
+  &:hover {
+    background-color: #e5e7eb;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    right: -2px;
+    left: -2px;
+    top: 0;
+    bottom: 0;
+  }
+`
