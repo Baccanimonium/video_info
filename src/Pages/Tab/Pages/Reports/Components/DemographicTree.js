@@ -41,12 +41,7 @@ const tableSettings = {
 }
 
 const DemographicTree = ({value, onInput}) => {
-  const [data, setData] = useState(demographic)
-  useEffect(() => {
-    if (value && value.length > 0) {
-      setData(value)
-    }
-  }, [value])
+
   return (
     <ListTable
       selectState={value}
@@ -54,7 +49,7 @@ const DemographicTree = ({value, onInput}) => {
       onInput={onInput}
       columns={tableSettings.columns}
       plugins={tableSettings.plugins}
-      value={data}
+      value={demographic}
     />
   );
 };

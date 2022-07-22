@@ -3,7 +3,6 @@ import styled from "styled-components"
 export const ReportContainer = styled.div`
   padding-top: 15px;
   display: grid;
-  grid-template-columns: 1.4fr 2fr 1fr;
   grid-column-gap: 20px;
   --separator-width: 1px;
   --separator-color: var(--color-grey-Light-4);

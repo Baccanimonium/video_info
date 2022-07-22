@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import {DataSetContainer} from "@/Pages/Tab/Pages/DataSet/styles";
 import {ReportContainer, WrapperInput} from "./styles"
@@ -21,6 +21,9 @@ import {StyleIcon} from "@/Components/styleIcon";
 import {NumericInputWithControls} from "../../../../Components/Fields/NumericInput";
 import SelectedParams from "./Components/SelectedParams";
 import Dictionaries from "./Components/Dictionaries";
+import {Resizer} from "@/component_ocean/Components/Tables/ListTable/styles";
+import {useRecoilState} from "recoil";
+import {cachedLocalStorageValue} from "@/component_ocean/Logic/Storages/localStorageCache";
 
 const FileIcon = Icon(file)
 const CopyIcon = Icon(copy)
@@ -149,12 +152,19 @@ const bottomOptionsButtons = [
 
 
 const Reports = () => {
+  const refColumnsContainer = useRef()
+  const [resizeState, setResizeState] = useState({})
+  const [columnState, setColumnState] = useRecoilState(cachedLocalStorageValue("task_reports"))
+  const gridStyles = useMemo(() => {
+    const [firstColumn = "1.4fr", secondColumn = "2fr"] = resizeState.columnState || columnState || []
+    return { gridTemplateColumns: `${firstColumn} ${secondColumn} auto` };
+  }, [columnState,resizeState])
+
   const [reportState, setReportsState] = useState({
     precision: 4,
     time: " ",
     duration: " ",
   })
-
 
 
   const [activeOption, setActiveOption] = useState("Опции расчета")
@@ -206,11 +216,54 @@ const Reports = () => {
     setTabFunc(tabKey)
   }, [setActiveOption])
 
+
+  const onColumnResizing = useCallback(({clientX}) => {
+    setResizeState((prevState) => {
+      const {columnState, index, initialWidth, initPointerPosition} = prevState
+      const nextColumnsState = [...columnState]
+      nextColumnsState[index] = `${initialWidth - initPointerPosition + clientX}px`
+      return ({
+        ...prevState,
+        columnState: nextColumnsState,
+      })
+    })
+  }, []);
+
+  const onColumnStopResize = useCallback(() => {
+    document.body.style.cursor = ""
+    document.body.style.userSelect = ""
+    let state
+    setResizeState(({ columnState }) => {
+      state = columnState
+      return {}
+    })
+    document.removeEventListener("mousemove", onColumnResizing)
+    document.removeEventListener("mouseup", onColumnStopResize)
+    setColumnState(state)
+  }, [setColumnState, columnState]);
+
+  const handleResize = useCallback((index) => (e) => {
+    const { children: {0: firstChild, 1: secondChild } } = refColumnsContainer.current
+
+    e.preventDefault()
+    e.stopPropagation()
+    document.addEventListener("mousemove", onColumnResizing)
+    document.addEventListener("mouseup", onColumnStopResize)
+    setResizeState({
+      initPointerPosition: e.clientX,
+      index,
+      initialWidth: refColumnsContainer.current.children[index].clientWidth,
+      columnState: [`${firstChild.clientWidth}px`, `${secondChild.clientWidth}px`]
+    })
+    document.body.style.cursor = "e-resize"
+    document.body.style.userSelect = "none"
+  }, [])
+
   return (
     <DataSetContainer className="flex-container ">
-        <div className="flex-container">
-          <ReportContainer className="h-100">
-            <ScrollBar>
+      <div className="flex-container">
+        <ReportContainer className="h-100" style={gridStyles} ref={refColumnsContainer}>
+          <ScrollBar>
             <div className="p-r-15 separator-right m-b-15 pos-relative overflow-hidden">
               <h3>
                 Выбрать отчет
@@ -419,76 +472,80 @@ const Reports = () => {
                         onInput={setOriginalOutputs}
                         className="m-b-15"
                       />
-                    </div>
-                  )}
-                </div>
-                <Tree
-                  className="p-b-15 "
-                  options={GenderOptions}
-                />
-                <ButtonsContainer>
-                  {bottomOptionsButtons.map(({id, label}) => (
-                    <Button
-                      className={`${label === bottomTabsState ? 'current' : ''}`}
-                      onClick={openTab(label, setBottomTabsState)}
-                      key={id}
-                    >
-                      {label}
-                    </Button>
-                  ))}
-                </ButtonsContainer>
-                <div className="display-flex p-t-15">
-                  {bottomTabsState === "Geo" && (
-                    <div className="w-100">
-                      <Select
-                        valueKey="label"
-                        labelKey="label"
-                        options={GeoOptions}
-                        id={"Geo"}
-                        value={reportState["Geo"]}
-                        onInput={onFormInput("Geo")}
-                      />
-                    </div>
-                  )}
-                  {bottomTabsState === "Location" && (
-                    <div className="w-100">
                       <Tree
-                        defaultExpandAll
-                        options={LocationOptions}
+                        className="p-b-15 "
+                        options={GenderOptions}
                       />
+                      <ButtonsContainer>
+                        {bottomOptionsButtons.map(({id, label}) => (
+                          <Button
+                            className={`${label === bottomTabsState ? 'current' : ''}`}
+                            onClick={openTab(label, setBottomTabsState)}
+                            key={id}
+                          >
+                            {label}
+                          </Button>
+                        ))}
+                      </ButtonsContainer>
+                      <div className="display-flex p-t-15">
+                        {bottomTabsState === "Geo" && (
+                          <div className="w-100">
+                            <Select
+                              valueKey="label"
+                              labelKey="label"
+                              options={GeoOptions}
+                              id={"Geo"}
+                              value={reportState["Geo"]}
+                              onInput={onFormInput("Geo")}
+                            />
+                          </div>
+                        )}
+                        {bottomTabsState === "Location" && (
+                          <div className="w-100">
+                            <Tree
+                              defaultExpandAll
+                              options={LocationOptions}
+                            />
+                          </div>
+                        )}
+                        <div className="display-flex ml-auto p-l-10 a-i-center">
+                          <StyleIcon
+                            icon={file}
+                            className="m-r-5"
+                            size={21}
+                          />
+                          <StyleIcon
+                            icon={copy}
+                            className="m-r-5"
+                            size={22}
+                          />
+                          <StyleIcon
+                            icon={basketTrash}
+                            className=""
+                            size={22}
+                          />
+                        </div>
+                      </div>
                     </div>
                   )}
-                  <div className="display-flex ml-auto p-l-10 a-i-center">
-                    <StyleIcon
-                      icon={file}
-                      className="m-r-5"
-                      size={21}
-                    />
-                    <StyleIcon
-                      icon={copy}
-                      className="m-r-5"
-                      size={22}
-                    />
-                    <StyleIcon
-                      icon={basketTrash}
-                      className=""
-                      size={22}
-                    />
-                  </div>
                 </div>
               </div>
             </div>
-            </ScrollBar>
+            <Resizer onMouseDown={handleResize(0)} />
+          </ScrollBar>
+          <div className="flex-container overflow-hidden relative">
             <Dictionaries
               reportState={reportState}
               setReportsState={onFormInput}
             />
-            <SelectedParams
-              reportState={reportState}
-              setReportsState={setReportsState}
-            />
-          </ReportContainer>
-        </div>
+            <Resizer onMouseDown={handleResize(1)} />
+          </div>
+          <SelectedParams
+            reportState={reportState}
+            setReportsState={setReportsState}
+          />
+        </ReportContainer>
+      </div>
     </DataSetContainer>
   );
 };
