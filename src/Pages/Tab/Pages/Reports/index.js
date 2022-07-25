@@ -6,16 +6,17 @@ import Tree from '@/Components/Tree';
 import {ButtonsContainer, Button} from "../../../../Components/ButtonsTabBar/style";
 import BsCheckBox from "../../../../Components/Fields/BsCheckBox";
 import RadioButton from "../../../../Components/Fields/RadioButton";
-import BsInput from "../../../../Components/Fields/BsInput";
 import Select from "../../../../Components/Fields/Select";
 import DatePicker from "../../../../Components/Fields/DatePicker";
 import {ContainerDatePicker} from "../../../../Components/TabHeader/style";
 import ScrollBar from "react-perfect-scrollbar";
-import Icon from '@/Components/Icon'
 import {copy} from "../../../../Icons/copy";
 import {file} from "../../../../Icons/file";
 import {basketTrash} from "../../../../Icons/basketTrash";
 import {StyleIcon} from "@/Components/styleIcon";
+import {ReportOptions, CalculationOptions, dayOptions, exitTime, durationOptions, GenderOptions,
+  GeoOptions, LocationOptions, NdbCorrectionList, CurrentAdsList, BaseDayOptions, optionsButtons, bottomOptionsButtons
+} from "./constants"
 
 
 import {NumericInputWithControls} from "../../../../Components/Fields/NumericInput";
@@ -24,131 +25,6 @@ import Dictionaries from "./Components/Dictionaries";
 import {Resizer} from "./styles";
 import {useRecoilState} from "recoil";
 import {cachedLocalStorageValue} from "@/component_ocean/Logic/Storages/localStorageCache";
-
-const FileIcon = Icon(file)
-const CopyIcon = Icon(copy)
-const BasketIcon = Icon(basketTrash)
-
-const ReportOptions = [
-  {
-    id: 1,
-    label: 'Отчет "Протокол роликов"'
-  },
-  // {
-  //   id: 2,
-  //   label: 'Отчет "Протокол блоков"'
-  // },
-  // {
-  //   id: 3,
-  //   label: 'Отчет "Протокол программ"'
-  // },
-  // {
-  //   id: 4,
-  //   label: 'Отчет "Time Band"'
-  // },
-]
-
-const CalculationOptions = [
-  "по сумме", "по среднему"
-]
-
-const dayOptions = [{label: "Пн"}, {label: "Вс"}]
-const exitTime = [{label: "0"}, {label: "1"}, {label: "30"}, {label: "60"}, {label: "120"}]
-const durationOptions = [{label: "20"}, {label: "30"}]
-
-const GenderOptions = [
-  {
-    id: 1,
-    title: "Базовая Аудитория"
-  },
-  {
-    id: 2,
-    title: "Affinity аудитория"
-  },
-  {
-    id: 3,
-    title: "Co-viewing аудитория"
-  },
-]
-
-const GeoOptions = [
-  {
-    id: 1,
-    label: "Определено ЦА"
-  },
-  {
-    id: 2,
-    label: "Россия Ноль Плюс"
-  },
-  {
-    id: 3,
-    label: "Россия Сто пПлюс"
-  },
-]
-
-const LocationOptions = [
-  {
-    id: '0',
-    title: 'Locations',
-    children: [
-      {
-        id: '0-0',
-        title: 'Total Location',
-      },
-    ]
-  }
-]
-
-const NdbCorrectionList = [
-  {
-    id: 0,
-    label: "None"
-  },
-  {
-    id: 1,
-    label: "Standard"
-  },
-  {
-    id: 2,
-    label: "Extended"
-  },
-]
-
-const CurrentAdsList = [
-  {
-    id: 0,
-    label: "Russia"
-  }
-]
-
-const BaseDayOptions = ["Автоматическое определение", "Определение пользователем"]
-
-const optionsButtons = [
-  {
-    id: 1,
-    label: "Опции расчета",
-  },
-  {
-    id: 2,
-    label: "Опции охвата"
-  },
-  {
-    id: 3,
-    label: "Доп опции"
-  }
-]
-
-
-const bottomOptionsButtons = [
-  {
-    id: 1,
-    label: "Geo",
-  },
-  {
-    id: 2,
-    label: "Location"
-  },
-]
 
 
 const Reports = () => {
@@ -170,32 +46,13 @@ const Reports = () => {
   const [activeOption, setActiveOption] = useState("Опции расчета")
   const [bottomTabsState, setBottomTabsState] = useState("Geo")
 
-  const [videoProtocol, setVideoProtocol] = useState()
-  const [programProtocol, setProgramProtocol] = useState()
-  const [blockProtocol, setBlockProtocol] = useState()
-  const [timeBand, setTimeBand] = useState()
-
-  const [byAmount, setByAmount] = useState()
-  const [average, setAverage] = useState()
-
   const [totalLine, setTotalLine] = useState()
   const [interval, setInterval] = useState()
   const [growing, setGrowing] = useState()
 
-  const [week, setWeek] = useState("")
-  const [time, setTime] = useState("")
-  const [duration, setDuration] = useState("")
   const [groupEvents, setGroupEvents] = useState()
 
-  const [NBD, setNBD] = useState()
   const [valueDate, setValueDate] = useState([])
-  const [monitoringDates, setMonitoringDates] = useState()
-  const [automaticDetection, setAutomaticDetection] = useState()
-  const [userDetection, setUserDetection] = useState()
-  const [Qual, setQual] = useState("")
-  const [aver, setAve] = useState("")
-
-  const [listAdvertising, setListAdvertising] = useState("")
   const [originalOutputs, setOriginalOutputs] = useState("")
 
   const onFormInput = useCallback((id) => (value) => {
