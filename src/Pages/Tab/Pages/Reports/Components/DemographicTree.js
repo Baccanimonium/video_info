@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import DemographicRow from "./DemographicRow";
 import {demographic} from "../constants";
-import Tree from '@/Components/Tree';
 import ListTable from "../../../../../component_ocean/Components/Tables/ListTable";
 import {NonParentsSelect} from "../../../../../component_ocean/Components/Tables/Plugins/selectable";
 import DemographicActionsAndLabelColumn from "./DemographicActionsAndLabelColumn";
@@ -11,11 +9,33 @@ import Leaf from '@/component_ocean/Components/Tables/Plugins/TreePlugin/Compone
 import {file} from 'react-icons-kit/feather/file'
 import {folderPlus} from 'react-icons-kit/feather/folderPlus'
 import {folderMinus} from 'react-icons-kit/feather/folderMinus'
-import { checkMarkIcon } from "../../../../../component_ocean/Icons/checkMarkIcon"
+import Icon from "@/component_ocean/Components/Icon";
 
 const CustomLeafComponent = (props) => <Leaf
   {...props}
-  // OpenIcon={checkMarkIcon}
+  OpenIcon={(props) => (
+    <Icon
+      {...props}
+      icon={folderPlus}
+      size={16}
+      className="mr-1"
+    />
+  )}
+  CloseIcon={(props) => (
+    <Icon
+      {...props}
+      icon={folderMinus}
+      size={16}
+      className="mr-1"
+    />
+  )}
+  ChildrenLessIcon={() => (
+    <Icon
+      icon={file}
+      size={14}
+      className="mr-1"
+    />
+  )}
 />
 
 const tableSettings = {
