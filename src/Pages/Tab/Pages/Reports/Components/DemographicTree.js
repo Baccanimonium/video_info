@@ -41,15 +41,16 @@ const tableSettings = {
 }
 
 const DemographicTree = ({value, onInput}) => {
+  const [data, setData] = useState(demographic)
 
   return (
     <ListTable
       selectState={value}
       onSelect={onInput}
-      onInput={onInput}
+      onInput={setData}
       columns={tableSettings.columns}
       plugins={tableSettings.plugins}
-      value={demographic}
+      value={data}
     />
   );
 };

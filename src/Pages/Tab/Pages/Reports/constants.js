@@ -938,3 +938,124 @@ export const attributes = [
     children: []
   },
 ]
+
+export const ReportOptions = [
+  {
+    id: 1,
+    label: 'Отчет "Протокол роликов"'
+  },
+  // {
+  //   id: 2,
+  //   label: 'Отчет "Протокол блоков"'
+  // },
+  // {
+  //   id: 3,
+  //   label: 'Отчет "Протокол программ"'
+  // },
+  // {
+  //   id: 4,
+  //   label: 'Отчет "Time Band"'
+  // },
+]
+
+export const CalculationOptions = [
+  "по сумме", "по среднему"
+]
+
+export const dayOptions = [{label: "Пн"}, {label: "Вс"}]
+export const exitTime = [{label: "0"}, {label: "1"}, {label: "30"}, {label: "60"}, {label: "120"}]
+export const durationOptions = [{label: "20"}, {label: "30"}]
+
+export const GenderOptions = [
+  {
+    id: 1,
+    title: "Базовая Аудитория"
+  },
+  {
+    id: 2,
+    title: "Affinity аудитория"
+  },
+  {
+    id: 3,
+    title: "Co-viewing аудитория"
+  },
+]
+
+export const GeoOptions = [
+  {
+    id: 1,
+    label: "Определено ЦА"
+  },
+  {
+    id: 2,
+    label: "Россия Ноль Плюс"
+  },
+  {
+    id: 3,
+    label: "Россия Сто пПлюс"
+  },
+]
+
+export const LocationOptions = [
+  {
+    id: '0',
+    title: 'Locations',
+    children: [
+      {
+        id: '0-0',
+        title: 'Total Location',
+      },
+    ]
+  }
+]
+
+export const NdbCorrectionList = [
+  {
+    id: 0,
+    label: "None"
+  },
+  {
+    id: 1,
+    label: "Standard"
+  },
+  {
+    id: 2,
+    label: "Extended"
+  },
+]
+
+export const CurrentAdsList = [
+  {
+    id: 0,
+    label: "Russia"
+  }
+]
+
+export const BaseDayOptions = ["Автоматическое определение", "Определение пользователем"]
+
+export const optionsButtons = [
+  {
+    id: 1,
+    label: "Опции расчета",
+  },
+  {
+    id: 2,
+    label: "Опции охвата"
+  },
+  {
+    id: 3,
+    label: "Доп опции"
+  }
+]
+
+
+export const bottomOptionsButtons = [
+  {
+    id: 1,
+    label: "Geo",
+  },
+  {
+    id: 2,
+    label: "Location"
+  },
+]
