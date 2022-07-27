@@ -80,17 +80,6 @@ export const ListTile = styled.div`
   }
 `
 
-export const Copyright = styled.div`
-  position: absolute;
-  bottom: 15px;
-  left: 11px;
-  opacity: 0;
-  transition: all .3s ease 0s;
-  ${props => props.hideToolbar} {
-    opacity: 1;
-  }
-`
-
 export const ToggleToolbar = styled.div`
   width: 30px;
   height: 30px;

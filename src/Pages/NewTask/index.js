@@ -14,10 +14,7 @@ import Result from "../Tab/Pages/Result";
 import Reports from "../Tab/Pages/Reports"
 import {SelectionCriteriaTab, Tabs, ReportsTab, ResultTab} from "./constants"
 import {
-  ButtonsAndPracticesTabContainer,
-  PracticeButton,
-  PracticesButtonsContainer,
-  WrapperButton
+  ButtonsAndPracticesTabContainer
 } from "../../Components/PracticesBar/styles";
 import {CardForDirectory, InformationCard, InformationCardMin} from "./styles"
 import TipsOverlayComponent from "../../Components/TipsHelp/TipsOverlayComponent";
@@ -335,20 +332,6 @@ const NewTask = ({openModalWindow, updateState, state}) => {
         { Object.keys(dataSource).length > 0 &&
           <div className="flex-container overflow-hidden">
             <ButtonsAndPracticesTabContainer className="flex items-center">
-              {/*<PracticesButtonsContainer>*/}
-              {/*  <WrapperButton className="display-flex bg-color-greyLight-4">*/}
-              {/*    {Tabs.map(({ path, text }) => (*/}
-              {/*        <PracticeButton*/}
-              {/*            key={text}*/}
-              {/*            className={`${text === activeOption ? 'current-practice' : ''}`}*/}
-              {/*            type="button"*/}
-              {/*            onClick={openOptions}*/}
-              {/*        >*/}
-              {/*          {text}*/}
-              {/*        </PracticeButton>*/}
-              {/*    ))}*/}
-              {/*  </WrapperButton>*/}
-              {/*</PracticesButtonsContainer>*/}
               <ButtonsContainer>
                 {Tabs.map(({id, label}) => (
                   <Button
