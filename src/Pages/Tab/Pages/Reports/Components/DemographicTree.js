@@ -7,11 +7,19 @@ import ListTable from "../../../../../component_ocean/Components/Tables/ListTabl
 import {NonParentsSelect} from "../../../../../component_ocean/Components/Tables/Plugins/selectable";
 import DemographicActionsAndLabelColumn from "./DemographicActionsAndLabelColumn";
 import {demographicChildrenKey} from "./constants";
+import Leaf from '@/component_ocean/Components/Tables/Plugins/TreePlugin/Components/Leaf'
+import {file} from 'react-icons-kit/feather/file'
+import {folderPlus} from 'react-icons-kit/feather/folderPlus'
+import {folderMinus} from 'react-icons-kit/feather/folderMinus'
+import { checkMarkIcon } from "../../../../../component_ocean/Icons/checkMarkIcon"
 
+const CustomLeafComponent = (props) => <Leaf
+  // OpenIcon={checkMarkIcon}
+/>
 
 const tableSettings = {
   plugins: {
-    treePlugin: { valueKey: "id", nestedDataKey: demographicChildrenKey },
+    treePlugin: { valueKey: "id", nestedDataKey: demographicChildrenKey, component: CustomLeafComponent },
     selectPlugin: { driver: NonParentsSelect, valueKey: "id", returnObjects: true }
   },
   columns: [
