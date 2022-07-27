@@ -15,7 +15,6 @@ import {
   TypeOfAdvertisement, dictionary
 } from "../../Tab/Pages/SelectionCriteria/mok";
 import {CardForDirectory} from "../styles";
-import DataSet from "../../Tab/Pages/SelectionCriteria";
 import {CheckboxGroupContainer, GridContainer} from "../../Tab/Pages/SelectionCriteria/styles";
 import CheckboxGroup from "../../../Components/Fields/CheckboxGroup";
 import BsButton from "@/Components/BsButton";
@@ -30,35 +29,7 @@ import WithOpenContextMenu from "@/Core/RenderProps/WithOpenContextMenu";
 import ButtonsForDelete from "@/Pages/NewTask/Components/ButtonsForDelete";
 import PureUpdateArrayItems from "@/Utils/Arrays/PureUpdateArrayItems";
 
-/// чтобы айди в чекбоксах не совпадали нужно добавлять в айди название справочника
-// id: "nationalTV/1"
-
-// [
-//   {
-//     "id": "fdgdsf0gdfg",
-//     "title": "TV Media",
-//     "type": "head",
-//     "children": [
-//       {
-//         "id": "123123",
-//         "title": "",
-//         "condition": "AND",
-//         "type": "block",
-//         "children": {
-//        }
-//       },
-//       {
-//         "title": "",
-//         "id": "2",
-//         "type": "block",
-//         "condition": "OR",
-//         "children": {}
-//       }
-//     ]
-//   }
-// ]
-
-const aaa = (children) => {
+const creatingArrayFromMap = (children) => {
   let arrayChildren = []
   children.forEach(({children: secondLvlChildren, ...secondLvlData}, key) => {
       arrayChildren.push({
@@ -76,8 +47,6 @@ const SelectionCriteriaForNewTask = () => {
   const [dictionaryGroup, setDictionaryGroup] = useState("")
   const [checkedObject, setCheckedObject] = useState([])
   const [pageData, setPageData] = useState(treeData)
-  const [selectedKey, setSelectedKey] = useState([])
-  const [checked, setCheckedKey] = useState("")
   const [nameSelect, setNameSelect] = useState("")
 
   const [listBuffer, setListBuffer] = useState([])
@@ -88,7 +57,6 @@ const SelectionCriteriaForNewTask = () => {
 
   // срабатывает при клике на группу
   const onSelect = useCallback(({node}) => {
-    // айди узла node.id
     setIdSelectedNode(node.id)
   }, [])
 
@@ -157,35 +125,37 @@ const SelectionCriteriaForNewTask = () => {
   const setNewTree = useCallback(() => {
     // добавление критериев в выделенный узел
     // когда нет второго уровня
-    if (pageData.length === 0) {
-      let newArr = pageData.map(({children, children: lvSecondChildren, ...firstLvlData}) => ({
-          ...firstLvlData,
+    if (pageData[0].children.length === 0) {
+      setPageData(([{
+        children,
+        ...firstLvlData
+      }]) => ([{
+      ...firstLvlData,
           children: [
-            {
-              ...lvSecondChildren,
-              children: new Map().set(dictionaryGroup, {
-                ...GroupDictionaryParams[dictionaryGroup],
-                children: checkedObject
-              })
-            }
-          ]
-        })
-      )
-      setPageData(newArr)
+          {
+            id: "123123",
+            title: "",
+            condition: "AND",
+            type: "block",
+            children: new Map().set(dictionaryGroup, {
+              ...GroupDictionaryParams[dictionaryGroup],
+              children: checkedObject
+            })
+          }
+        ]
+      }]))
       // когда нет группы
     } else {
       setPageData(([{
         children: lvSecondChildren,
-        children:
-          // второй узел
-          {
-            [indexAllocateNode]:
-              {
-                children,
-                // данные второго узла
-                ...secondLvlChildrenData
-              },
+        // второй узел
+        children: {
+          [indexAllocateNode]: {
+            children,
+            // данные второго узла
+            ...secondLvlChildrenData
           },
+        },
         // данные первого уровня
         ...pageData}
       ]) => {
@@ -216,24 +186,6 @@ const SelectionCriteriaForNewTask = () => {
       })
     }
   }, [dictionaryGroup, checkedObject, pageData])
-  const onDragStart = (info) => {
-    console.log("onDragStart", info)
-  }
-  const onDragEnter = (arg) => {
-    console.log("onDragEnter", arg)
-  }
-  const onDrop = (info) => {
-    console.log("onDrop", info)
-  }
-  const setRowCondition = () => {
-    console.log("setRowCondition")
-  }
-  const onExpand = useCallback(expandedKeys => {
-    console.log('onExpand', expandedKeys);
-  }, []);
-  const onCheck = useCallback((checkedKeys, info) => {
-    console.log('onCheck', checkedKeys, info);
-  }, []);
 
   // удаление данных из дерева
   const onUpdateOptions = useCallback((nextOptions) => {
@@ -259,23 +211,11 @@ const SelectionCriteriaForNewTask = () => {
       ...firstLvlData,
       children: children.map(({children: secondLvlChildren, ...secondLvlData}) => ({
         ...secondLvlData,
-        children: Array.isArray(secondLvlChildren) ? secondLvlChildren : aaa(secondLvlChildren)
+        children: Array.isArray(secondLvlChildren) ? secondLvlChildren : creatingArrayFromMap(secondLvlChildren)
       }))
     }))
   }, [pageData])
 
-  // добавление к критерию название справочника
-  const checkObject = (value) => {
-    const newVal = value.reduce((acc, item) => {
-      if (checkedObject.findIndex((i) => i.id === item.id) !== 0) {
-        acc.push({...item, title: `${item.title} [${title}]`})
-      } else {
-        acc.push({...item})
-      }
-      return acc
-    }, [])
-    setCheckedObject(newVal)
-  }
 // собираем список буфера
   const editListBuffer = useCallback(() => {
     setTitleBuffer(title)
@@ -304,13 +244,13 @@ const SelectionCriteriaForNewTask = () => {
     <>
       <div className="display-flex m-t-10 flex-wrap">
         {listDirectory.map(({id, name, active}) => (
-            <CardForDirectory
-              key={id}
-              active={active}
-              onClick={() => setNameSelect(name)}
-            >
-              {name}
-            </CardForDirectory>
+          <CardForDirectory
+            key={id}
+            active={active}
+            onClick={() => setNameSelect(name)}
+          >
+            {name}
+          </CardForDirectory>
           )
         )}
       </div>
@@ -347,18 +287,10 @@ const SelectionCriteriaForNewTask = () => {
         <div className="separator-left p-l-15 m-b-15 overflow-hidden">
           <ScrollBar>
             <Tree
-              onDragStart={onDragStart}
-              onDragEnter={onDragEnter}
-              onDrop={onDrop}
               showLine
-              setRowCondition={setRowCondition}
               draggable
               defaultExpandAll
-              onExpand={onExpand}
-              defaultSelectedKeys={selectedKey}
-              defaultCheckedKeys={checked}
               onSelect={onSelect}
-              onCheck={onCheck}
               options={treeUnwrappedData}
               selectRule={selectRule}
               selectedNode={idSelectedNode}
@@ -386,18 +318,10 @@ const SelectionCriteriaForNewTask = () => {
           )}
           <ScrollBar>
             <Tree
-              onDragStart={onDragStart}
-              onDragEnter={onDragEnter}
-              onDrop={onDrop}
               showLine
-              setRowCondition={setRowCondition}
               draggable
               defaultExpandAll
-              onExpand={onExpand}
-              defaultSelectedKeys={selectedKey}
-              defaultCheckedKeys={checked}
               onSelect={onSelect}
-              onCheck={onCheck}
               options={listBuffer}
               selectRule={selectRule}
               onUpdateOptions={onUpdateBufferList}
