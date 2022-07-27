@@ -1,14 +1,20 @@
+export const SelectionCriteriaTab = "Критерии отбора"
+export const ReportsTab = "Отчеты"
+export const ResultTab = "Результат"
+
 export const Tabs = [
   {
-    path: "/selection_criteria",
-    text: "Критерии отбора"
+    id: 1,
+    label: SelectionCriteriaTab,
+
   },
   {
-    path: "/reports",
-    text: "Отчеты"
+    id: 2,
+    label: ReportsTab
   },
   {
-    path: "/result",
-    text: "Результат"
-  },
+    id: 3,
+    label: ResultTab
+  }
 ]
+

@@ -1630,7 +1630,7 @@ export const GroupDictionaryParams = {
         type: "condition",
     }
 }
-// pageData
+
 export const treeData = [
   {
     id: "fdgdsf0gdfg",
@@ -1684,19 +1684,5 @@ export const treeData = [
     ]
   }
 ];
-// третий уровень
-// {
-//   "id": "666",
-//   "title": "Тип рекламы",
-//   "condition": "AND",
-//   "type": "condition",
-//   "children": [
-//     {
-//       "id": 1,
-//       "title": "Анонс без даты",
-//       "condition": "OR"
-//     }
-//   ]
-// }
 
 

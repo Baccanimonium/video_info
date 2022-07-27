@@ -11,9 +11,8 @@ import OverlayMenu from "@/Components/OverlayMenu"
 import WithOpenModalWindow from "@/Core/Decorators/WithOpenModalWindow"
 import {Route, Routes} from "react-router-dom";
 import Result from "../Tab/Pages/Result";
-import SelectionCriteria from "./Content/selectionCriteria";
 import Reports from "../Tab/Pages/Reports"
-import {Tabs} from "./constants"
+import {SelectionCriteriaTab, Tabs, ReportsTab, ResultTab} from "./constants"
 import {
   ButtonsAndPracticesTabContainer,
   PracticeButton,
@@ -30,9 +29,96 @@ import { BsCalendar, BsCalendar3, BsCalendar4, BsCalendar3Range } from 'react-ic
 import {VscChecklist} from 'react-icons/vsc';
 import {editConfig, editConfigIntervalRange, editConfigTimeRange, configForBtnCalendar} from "./config"
 import SelectionCriteriaForNewTask from "./Components/SelectionCriteriaForNewTask";
+import {Button, ButtonsContainer} from "@/Components/ButtonsTabBar/style";
+import {StatisticLabel} from "@/Pages/Tab/Pages/Reports/constants";
 
-// при изменении источника данных данные в дереве менять
+const DictionaryComponents = {
+  [SelectionCriteriaTab]: (props) => <div></div>,
+  [ReportsTab]: (props) => <Reports/>,
+  [ResultTab]: (props) => <Result/>
+}
 
+//<div
+//     className="pos-relative  flex-container">
+//     <div className="display-flex">
+//       {configForBtnCalendar.map(({label, id}) => (
+//         <>
+//           {
+//             tipsName === label && (
+//               <TipsOverlayComponent
+//                 key={id}
+//                 tipsText={label}
+//                 event={event}
+//               />
+//             )
+//           }
+//         </>
+//       ))}
+//       <ContextMenuValueEditor
+//         id="ContinuousDateRange"
+//         label="Выбор даты или периода"
+//         fields={editConfig}
+//         formPayload={formPayload}
+//         value={continuousDateRange}
+//         onInput={editContinuousDateRange}
+//         minSize="320"
+//       >
+//         {(onEditValue) => (
+//           <InformationCardMin
+//             onMouseEnter={showTips("Выбор даты или периода")}
+//             onMouseLeave={closeTips}
+//             onClick={onEditValue}
+//             className="mini"
+//           >
+//             <BsCalendar/>
+//           </InformationCardMin>
+//         )}
+//       </ContextMenuValueEditor>
+//
+//       <ContextMenuValueEditor
+//         id="IntervalRange"
+//         label="Выбор интервального диапазона"
+//         fields={editConfigIntervalRange}
+//         formPayload={formPayload}
+//         value={continuousIntervalRange}
+//         onInput={setContinuousIntervalRange}
+//         minSize="320"
+//       >
+//         {(onEditValue) => (
+//           <InformationCardMin
+//             onMouseEnter={showTips("Выбор интервального диапазона")}
+//             onMouseLeave={closeTips}
+//             onClick={!continuousDateRange.length && onEditValue}
+//             className="mini"
+//           >
+//             <BsCalendar3/>
+//           </InformationCardMin>
+//         )}
+//       </ContextMenuValueEditor>
+//
+//       <ContextMenuValueEditor
+//         id="TimeRange"
+//         label="Выбор временных интервалов"
+//         fields={editConfigTimeRange}
+//         formPayload={formPayload}
+//         value={continuousIntervalRange}
+//         onInput={setContinuousIntervalRange}
+//         minSize="320"
+//       >
+//         {(onEditValue) => (
+//           <InformationCardMin
+//             onMouseEnter={showTips("Выбор временных интервалов")}
+//             onMouseLeave={closeTips}
+//             onClick={!continuousDateRange.length && onEditValue}
+//             className="mini"
+//           >
+//             <BsCalendar3Range/>
+//           </InformationCardMin>
+//         )}
+//       </ContextMenuValueEditor>
+//     </div>
+//     <SelectionCriteriaForNewTask/>
+//   </div>
 
 const NewTask = ({openModalWindow, updateState, state}) => {
   const [selectedSource, setSelectedSource] = useState({})
@@ -45,6 +131,17 @@ const NewTask = ({openModalWindow, updateState, state}) => {
   const [event, setEvent] = useState()
   const [tipsName, setTipsName]= useState("")
   const [isDataChanged, setIsDataChanged] = useState(false)
+  const [activeButton, setActiveButton] = useState(SelectionCriteriaTab)
+  const [reportState, setReportsState] = useState({
+    precision: 4,
+    time: " ",
+    duration: " ",
+  })
+
+  const openAttributes = useCallback((label) => () => setActiveButton(label), [setActiveButton])
+
+  const DictionaryComponent = DictionaryComponents[activeButton]
+
 
   const timerRef = useRef()
 
@@ -129,6 +226,10 @@ const NewTask = ({openModalWindow, updateState, state}) => {
     setIsDataChanged(true)
   }, [])
 
+  const onInputDictionary = useCallback(() => {
+    setReportsState(activeButton)
+  }, [activeButton])
+
   return (
     <div className="flex-container pos-relative overflow-hidden">
       <div className="flex-container pos-relative">
@@ -212,8 +313,7 @@ const NewTask = ({openModalWindow, updateState, state}) => {
               )}
             </RenderOverlayMenu>
           </div>
-          {
-            Object.keys(dataSource).length > 0 &&
+          { Object.keys(dataSource).length > 0 &&
             <div className="display-flex">
               {/*<InformationCard>*/}
               {/*  Отчет "Протокол роликов"*/}
@@ -232,24 +332,34 @@ const NewTask = ({openModalWindow, updateState, state}) => {
             </div>
           }
         </WrapperButtons>
-        {
-          Object.keys(dataSource).length > 0 &&
+        { Object.keys(dataSource).length > 0 &&
           <div className="flex-container overflow-hidden">
             <ButtonsAndPracticesTabContainer className="flex items-center">
-              <PracticesButtonsContainer>
-                <WrapperButton className="display-flex bg-color-greyLight-4">
-                  {Tabs.map(({ path, text }) => (
-                      <PracticeButton
-                          key={text}
-                          className={`${text === activeOption ? 'current-practice' : ''}`}
-                          type="button"
-                          onClick={openOptions}
-                      >
-                        {text}
-                      </PracticeButton>
-                  ))}
-                </WrapperButton>
-              </PracticesButtonsContainer>
+              {/*<PracticesButtonsContainer>*/}
+              {/*  <WrapperButton className="display-flex bg-color-greyLight-4">*/}
+              {/*    {Tabs.map(({ path, text }) => (*/}
+              {/*        <PracticeButton*/}
+              {/*            key={text}*/}
+              {/*            className={`${text === activeOption ? 'current-practice' : ''}`}*/}
+              {/*            type="button"*/}
+              {/*            onClick={openOptions}*/}
+              {/*        >*/}
+              {/*          {text}*/}
+              {/*        </PracticeButton>*/}
+              {/*    ))}*/}
+              {/*  </WrapperButton>*/}
+              {/*</PracticesButtonsContainer>*/}
+              <ButtonsContainer>
+                {Tabs.map(({id, label}) => (
+                  <Button
+                    className={`${label === activeButton ? 'current' : ''}`}
+                    onClick={openAttributes(label)}
+                    key={id}
+                  >
+                    {label}
+                  </Button>
+                ))}
+              </ButtonsContainer>
               <div className="flex items-center ml-auto">
                 <BsButton
                   type="button"
@@ -266,100 +376,10 @@ const NewTask = ({openModalWindow, updateState, state}) => {
               </div>
             </ButtonsAndPracticesTabContainer>
             <div className="p-t-10 p-b-10 p-r-10 p-l-10 flex-container overflow-hidden">
-              {
-                activeOption === "Критерии отбора" && (
-                  <div className="pos-relative  flex-container">
-                      <div className="display-flex">
-                        {configForBtnCalendar.map(({label, id}) => (
-                            <>
-                              {
-                                tipsName === label && (
-                                    <TipsOverlayComponent
-                                        key={id}
-                                        tipsText={label}
-                                        event={event}
-                                    />
-                                )
-                              }
-                            </>
-                        ))}
-                        <ContextMenuValueEditor
-                            id="ContinuousDateRange"
-                            label="Выбор даты или периода"
-                            fields={editConfig}
-                            formPayload={formPayload}
-                            value={continuousDateRange}
-                            onInput={editContinuousDateRange}
-                            minSize="320"
-                        >
-                          {(onEditValue) => (
-                              <InformationCardMin
-                                  onMouseEnter={showTips("Выбор даты или периода")}
-                                  onMouseLeave={closeTips}
-                                  onClick={onEditValue}
-                                  className="mini"
-                              >
-                                <BsCalendar/>
-                              </InformationCardMin>
-                          )}
-                        </ContextMenuValueEditor>
-
-                        <ContextMenuValueEditor
-                            id="IntervalRange"
-                            label="Выбор интервального диапазона"
-                            fields={editConfigIntervalRange}
-                            formPayload={formPayload}
-                            value={continuousIntervalRange}
-                            onInput={setContinuousIntervalRange}
-                            minSize="320"
-                        >
-                          {(onEditValue) => (
-                              <InformationCardMin
-                                  onMouseEnter={showTips("Выбор интервального диапазона")}
-                                  onMouseLeave={closeTips}
-                                  onClick={!continuousDateRange.length && onEditValue}
-                                  className="mini"
-                              >
-                                <BsCalendar3/>
-                              </InformationCardMin>
-                          )}
-                        </ContextMenuValueEditor>
-
-                        <ContextMenuValueEditor
-                            id="TimeRange"
-                            label="Выбор временных интервалов"
-                            fields={editConfigTimeRange}
-                            formPayload={formPayload}
-                            value={continuousIntervalRange}
-                            onInput={setContinuousIntervalRange}
-                            minSize="320"
-                        >
-                          {(onEditValue) => (
-                            <InformationCardMin
-                                onMouseEnter={showTips("Выбор временных интервалов")}
-                                onMouseLeave={closeTips}
-                                onClick={!continuousDateRange.length && onEditValue}
-                                className="mini"
-                            >
-                              <BsCalendar3Range/>
-                            </InformationCardMin>
-                          )}
-                        </ContextMenuValueEditor>
-                      </div>
-                    <SelectionCriteriaForNewTask/>
-                  </div>
-                )
-              }
-              {
-                activeOption === "Отчеты" && (
-                   <Reports/>
-                )
-              }
-              {
-                activeOption === "Результат" && (
-                    <Result/>
-                )
-              }
+              {<DictionaryComponent
+                value={reportState[activeButton]}
+                onInput={onInputDictionary}
+              />}
             </div>
             <div className="l-p-layout r-p-layout j-c-flex-end">
               <div className="display-flex j-c-flex-end m-b-20">

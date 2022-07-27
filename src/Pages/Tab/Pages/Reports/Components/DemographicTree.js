@@ -14,7 +14,7 @@ import {folderMinus} from 'react-icons-kit/feather/folderMinus'
 import { checkMarkIcon } from "../../../../../component_ocean/Icons/checkMarkIcon"
 
 const CustomLeafComponent = (props) => <Leaf
-  // OpenIcon={checkMarkIcon}
+  OpenIcon={checkMarkIcon}
 />
 
 const tableSettings = {
