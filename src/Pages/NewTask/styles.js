@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Link } from 'react-router-dom'
 
 export const InformationCard = styled.div`
   border-radius: 5px;
@@ -65,5 +66,38 @@ export const CardForDirectory = styled.div`
   justify-content: center;
   &:last-child {
     margin-right: 0;
+  }
+`
+
+export const PageLink = styled(Link)`
+  font-size: 14px;
+  height: 30px;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-grey-darken-6);
+  padding: 4px 10px;
+  margin-right: 2px;
+  cursor: pointer;
+  will-change: width;
+  transition: background 0.2s ease 0s, width 0.3s ease-in-out;
+  border-radius: 5px;
+  &:hover {
+    color: var(--color-black-darken-1);
+  }
+  &.active {
+    background: var(--color-white);
+    justify-content: center;
+    color: var(--color-black-darken-1);
+  }
+`
+
+export const DataSetContainer = styled.div`
+  --layout-left-padding: 10%;
+  --layout-right-padding: 10%;
+  @media (max-width: 1024px) {
+    --layout-left-padding: 5%;
+    --layout-right-padding: 5%;
   }
 `

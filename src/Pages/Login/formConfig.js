@@ -1,31 +1,30 @@
-import BsInput from "@/Components/Fields/BsInput"
-import BsCheckBox from "@/Components/Fields/BsCheckBox"
-import Select from "@/Components/Fields/Select"
-import FilterSelect from "@/Core/Refs/FilterSelect"
+import Input from "@/component_ocean/Components/Inputs/Input"
+import CheckBox from "@/component_ocean/Components/Inputs/CheckBox"
+import {VALIDATION_RULE_REQUIRED} from "@/component_ocean/Logic/Validator/constants";
 
 export const fieldMap = [
   {
     label: "Username",
     id: "login",
-    component: BsInput,
+    component: Input,
     placeholder: "Login"
   },
   {
     label: "Password",
     id: "password",
     type: "password",
-    component: BsInput,
+    component: Input,
     placeholder: "Password"
   },
   {
     id: "storeCredentials",
     inputWrapper: ({ children }) => children,
-    component: BsCheckBox,
+    component: CheckBox,
     label: "Remember my login"
   }
 ]
 
 export const rules = {
-  login: "required",
-  password: "required"
+  login: [{ name: VALIDATION_RULE_REQUIRED}],
+  password: [{ name: VALIDATION_RULE_REQUIRED}],
 }

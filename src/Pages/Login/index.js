@@ -1,19 +1,20 @@
-import React, {Component, useState} from "react"
+import React, {useState} from "react"
 import PropTypes from "prop-types"
-import StateLessForm from "@/Components/Forms/StateLessForm"
-import BsButton from "@/Components/BsButton"
-import { AuthRequest } from "@/Store/userObject"
-import WithOpenModalWindow from "@/Core/Decorators/WithOpenModalWindow"
 import { useNavigate } from "react-router-dom";
 import {
   PageContainer, ContentContainer, FormContainer, FormTittle, ImgLogo
 } from "./styles"
 
+import { AlertWindow } from "@/Components/ModalWindows";
+import {WithWithValidationForm} from '@/component_ocean/Components/Forms'
+
 import { rules, fieldMap } from "./formConfig"
+import BaseButton from "@/component_ocean/Components/Button";
 
 const LOCAL_STORAGE_REMEBER_ME = "LOCAL_STORAGE_REMEBER_ME"
 
-const Login = ({onSubmit, initialRoute, openModalWindow}) => {
+const Login = ({onSubmit, initialRoute}) => {
+  const [error, setError] = useState("")
   const [value, setValue] = useState({
     storeCredentials: Boolean(localStorage.getItem(LOCAL_STORAGE_REMEBER_ME))
   })
@@ -43,14 +44,10 @@ const Login = ({onSubmit, initialRoute, openModalWindow}) => {
           navigate("/tab")
         }
       } else {
-        openModalWindow({
-          message: "Couldn't connect to login server. <br> Please contact your administrator"
-        })
+        setError("Couldn't connect to login server. Please contact your administrator")
       }
     } catch (e) {
-      openModalWindow({
-        message: "Couldn't connect to login server. \n Please contact your administrator"
-      })
+      setError("Couldn't connect to login server. Please contact your administrator")
       console.log("login error", e)
     } finally {
       setLoading(false)
@@ -61,28 +58,39 @@ const Login = ({onSubmit, initialRoute, openModalWindow}) => {
     return (
       <PageContainer>
         <ImgLogo src="./assets/bg/img-login.jpg" alt="" />
+        <AlertWindow
+          className="flex flex-col items-center mt-90"
+          open={error}
+          onClose={() => setError("")}
+        >
+          <text className="text-center break-words my-auto mx-12">
+            {error}
+          </text>
+          <BaseButton className="bg-color-lightGold color-white w-48 mt-auto mb-8">
+            Ок
+          </BaseButton>
+        </AlertWindow>
         <ContentContainer>
           <FormContainer className="display-flex fd-column">
             <FormTittle className="fw700">
               Welcome
             </FormTittle>
-            <StateLessForm
+            <WithWithValidationForm
               fields={fieldMap}
               rules={rules}
               value={value}
               onInput={handleInput}
               onSubmit={submitForm}
             >
-              <BsButton
+              <BaseButton
                 className="golden sign-up-btn btn m-l-a m-r-a m-t-20"
                 loading={loading}
                 disabled={loading}
-                name="Login"
                 type="submit"
               >
                 Log in
-              </BsButton>
-            </StateLessForm>
+              </BaseButton>
+            </WithWithValidationForm>
           </FormContainer>
         </ContentContainer>
       </PageContainer>
@@ -92,13 +100,7 @@ const Login = ({onSubmit, initialRoute, openModalWindow}) => {
 
 Login.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  openModalWindow: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    action: PropTypes.string.isRequired,
-    goBack: PropTypes.func.isRequired,
-    push: PropTypes.func.isRequired
-  }),
   initialRoute: PropTypes.string,
 }
 
-export default WithOpenModalWindow(Login)
+export default Login

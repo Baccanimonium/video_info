@@ -1,15 +1,14 @@
 import React, {useCallback, useState, useRef} from 'react';
-import BsButton from "../../Components/BsButton";
 import {IconClose, WrapperButtons} from "./style"
-import PracticesBar from "../../Components/PracticesBar";
-import DataSourceModal from "../Tab/Pages/ReportConstructor/DataSourceModal";
-import RenderOverlayMenu from "@/Components/OverlayMenu/RenderOverlayMenu"
-import WithCloseWindow from "@/Core/RenderProps/withCloseWindow"
-import OverlayMenu from "@/Components/OverlayMenu"
-import WithOpenModalWindow from "@/Core/Decorators/WithOpenModalWindow"
-import DatePicker from "../../Components/Fields/DatePicker";
+import DataSourceModal from "../NewTask/Components/ReportConstructor/DataSourceModal";
+import ContextMenu from "@/component_ocean/Components/ContextMenu";
+import DatePicker from "@/component_ocean/Components/Inputs/DatePicker";
+import {BorderButtonBlack, BorderButtonGold} from "@/Components/Buttons";
+import BaseButton from "@/component_ocean/Components/Button";
+import { AlertWindow } from "@/Components/ModalWindows";
 
-const DownloadTask = ({openModalWindow}) => {
+const DownloadTask = () => {
+  const [error, setError] = useState("")
   const download = () => {
 
   }
@@ -36,96 +35,71 @@ const DownloadTask = ({openModalWindow}) => {
     if (files[0].type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || files[0].type === "text/plain") {
       setShowTask(true)
     } else {
-      openModalWindow({
-        message: "Файл не корректного формата"
-      })
+      setError("Файл не корректного формата")
     }
   }, [])
 
   const saveTask = () => {
     if (dataSource || continuousDateRange.length) {
-      openModalWindow({
-        message: "Задача сохранена"
-      })
+      setError("Задача сохранена")
     }
   }
 
   return (
-    <div className="flex-container pos-relative overflow-hidden">
-      {!showTask
+    <div className="flex-container relative overflow-hidden">
+      {showTask
         ? (
-          <div className="l-p-layout r-p-layout">
-            <BsButton
+          <div className="pl-5 pr-5">
+            <BorderButtonGold
               type="button"
-              className="border-gold btn width-medium color-greyDarken w-18 m-t-20"
+              className="w-52 mt-5"
               onClick={focusInput}
             >
               Загрузить задачу
               <input
-                className="display-none"
+                className="hidden"
                 id="download_task"
                 type="file"
                 onInput={handleInput}
                 ref={fileInputRef}
               />
-            </BsButton>
+            </BorderButtonGold>
           </div>
         )
         : (
-          <div className="flex-container pos-relative">
-            <WrapperButtons className="l-p-layout r-p-layout p-t-10 p-b-10 a-i-flex-start">
+          <div className="flex-container relative">
+            <WrapperButtons className="pl-5 pr-5 pt-2.5 pb-2.5 items-start">
               <div>
-                <div className="color-grey p-b-5">Источник данных: </div>
-                <div className="text-align-left p-b-5">
+                <div className="color-grey pb-1">Источник данных: </div>
+                <div className="text-left pb-1">
                   {dataSource.title}
                 </div>
-                <RenderOverlayMenu
-                  onOpenOverlayMenu={openMenu}
-                  renderOverlayMenu={openSourceMenu}
-                  menuComponent={OverlayMenu}
-                >
-                  {(overlayBoundRef, onOpenOverlayMenu, OverlayMenu) => (
-                    <WithCloseWindow
-                      closeWindow={closeMenu}
-                      byKey={openSourceMenu}
-                    >
-                      {(onMouseDown) => (
-                        <button
-                          ref={overlayBoundRef}
-                          type="button"
-                          onMouseDown={onMouseDown}
-                        >
-                          <div
-                            className="cursor color-lightGold link"
-                            onClick={onOpenOverlayMenu}
-                          >
-                            Добавить источник данных
-                          </div>
-                          {openSourceMenu && (
-                            <OverlayMenu
-                              className="display-flex flex-column j-c-center p-10 h-100"
-                            >
-                              <DataSourceModal
-                                setSelectedSource={setSelectedSource}
-                                setDataSource={setDataSource}
-                              />
-                              <button
-                                className="border-gold btn min text-uppercase"
-                                type="button"
-                                onClick={selectSource}
-                              >
-                                ok
-                              </button>
-                            </OverlayMenu>
-                          )}
-                        </button>
-                      )}
-                    </WithCloseWindow>
-                  )}
-                </RenderOverlayMenu>
+                <div >
+                  <button
+                    className="cursor color-lightGold link"
+                    onClick={openMenu}
+                  >
+                    Добавить источник данных
+                  </button>
+                  {openSourceMenu && <ContextMenu onClose={closeMenu}>
+                    <div className="bg-white w-96 shadow-3 p-2.5">
+                      <DataSourceModal
+                        setSelectedSource={setSelectedSource}
+                        setDataSource={setDataSource}
+                      />
+                      <BorderButtonGold
+                        className="w-full text-uppercase mt-3"
+                        type="button"
+                        onClick={selectSource}
+                      >
+                        ok
+                      </BorderButtonGold>
+                    </div>
+                  </ContextMenu>}
+                </div>
               </div>
-              <div className="">
-                <div className="color-grey p-b-5">Непрерывный диапазон дат: </div>
+              <div>
+                <div className="color-grey pb-1.5">Непрерывный диапазон дат: </div>
                 <DatePicker
                   id="continuousDateRange"
                   range
@@ -135,46 +109,56 @@ const DownloadTask = ({openModalWindow}) => {
                   placeholder="Непрерывный диапазон дат"
                 />
               </div>
-              <div className="display-flex p-t-19">
-                <BsButton
+              <div className="flex pt-5">
+                <BorderButtonBlack
                   type="button"
-                  className="border-black btn width-max color-greyDarken w-18 m-r-5"
+                  className="w-60 mr-2"
                   onClick={download}
                 >
                   Интервальный диапазон дат
-                </BsButton>
-                <BsButton
+                </BorderButtonBlack>
+                <BorderButtonBlack
                   type="button"
-                  className="border-black btn width-midi color-greyDarken w-18"
+                  className="w-52"
                   onClick={download}
                 >
                   Временные интервалы
-                </BsButton>
+                </BorderButtonBlack>
               </div>
             </WrapperButtons>
 
-            <PracticesBar/>
-
-            <div className="flex-container l-p-layout r-p-layout">
+            <div className="flex-container pl-5 pr-5">
               <div className="flex-container">
               </div>
-              <div className="display-flex j-c-flex-end m-b-20">
-                <BsButton
+              <div className="flex justify-end mb-5">
+                <BorderButtonGold
                   type="button"
-                  className="border-gold btn width-medium color-greyDarken w-18 m-r-10"
+                  className="w-32 mr-2"
                   onClick={saveTask}
                 >
                   Сохранить
-                </BsButton>
-                <BsButton
+                </BorderButtonGold>
+                <BorderButtonGold
                   type="button"
-                  className="border-gold btn width-medium color-greyDarken w-18"
+                  className="w-32"
                   onClick={download}
                 >
                   Продолжить
-                </BsButton>
+                </BorderButtonGold>
               </div>
             </div>
+            <AlertWindow
+              className="flex flex-col items-center mt-90"
+              open={error}
+              onClose={() => setError("")}
+            >
+              <text className="text-center break-words my-auto mx-12">
+                {error}
+              </text>
+              <BaseButton className="bg-color-lightGold color-white w-48 mt-auto mb-8">
+                Ок
+              </BaseButton>
+            </AlertWindow>
           </div>
         )
       }
@@ -182,4 +166,4 @@ const DownloadTask = ({openModalWindow}) => {
   );
 };
 
-export default WithOpenModalWindow(DownloadTask);
+export default DownloadTask;

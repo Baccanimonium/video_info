@@ -1,14 +1,14 @@
 export const Tabs = [
   {
-    path: "/selection_criteria",
+    path: "selection_criteria",
     text: "Критерии отбора"
   },
   {
-    path: "/reports",
+    path: "reports",
     text: "Отчеты"
   },
   {
-    path: "/result",
+    path: "result",
     text: "Результат"
   },
 ]

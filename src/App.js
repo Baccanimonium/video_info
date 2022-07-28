@@ -3,7 +3,7 @@ import Login from "./Pages/Login"
 import history from "./history"
 import {useRecoilState} from "recoil";
 import {TOKEN_KEY, tokenAtom} from "./Store/userObject";
-import Tab from "./Pages/Tab"
+import Tab from "./Tab"
 
 import AlertFactory from "./AlertFactory"
 import ContextMenuFactory from "./ContextMenuFactory"
@@ -13,6 +13,7 @@ import {useWatch} from "./Utils/hooks/useWatch";
 let initialRoute = history.location.pathname !== "/login" ? history.location.pathname : "/"
 
 function App() {
+
   const [token, setToken] = useRecoilState(tokenAtom)
 
   useWatch(token, (token, prevToken) => {

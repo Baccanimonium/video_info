@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { Spring } from "react-spring/renderprops"
+import { Spring } from "react-spring"
 
 import React from "react"
 import styled from "styled-components"

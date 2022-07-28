@@ -1,92 +1,89 @@
-import React, {useCallback, useEffect, useState, useRef} from 'react';
+import React, {useCallback, useEffect, useState, useRef, useMemo} from 'react';
+import dayjs from "dayjs";
 
-import BsButton from "../../Components/BsButton";
-import PracticesBar from "../../Components/PracticesBar";
 import {WrapperButtons} from "../DownloadTask/style";
-import DataSourceModal from "../Tab/Pages/ReportConstructor/DataSourceModal";
-import DatePicker from "../../Components/Fields/DatePicker";
-import RenderOverlayMenu from "@/Components/OverlayMenu/RenderOverlayMenu"
-import WithCloseWindow from "@/Core/RenderProps/withCloseWindow"
-import OverlayMenu from "@/Components/OverlayMenu"
-import WithOpenModalWindow from "@/Core/Decorators/WithOpenModalWindow"
-import {Route, Routes} from "react-router-dom";
-import Result from "../Tab/Pages/Result";
-import SelectionCriteria from "./Content/selectionCriteria";
-import Reports from "../Tab/Pages/Reports"
+import DataSourceModal from "./Components/ReportConstructor/DataSourceModal";
+import {Navigate, Route, Routes} from "react-router-dom";
+import Result from "./Pages/Result";
+import SelectionCriteria from "./Pages/SelectionCriteria";
+import Reports from "./Pages/Reports"
 import {Tabs} from "./constants"
 import {
   ButtonsAndPracticesTabContainer,
-  PracticeButton,
   PracticesButtonsContainer,
   WrapperButton
-} from "../../Components/PracticesBar/styles";
-import {CardForDirectory, InformationCard, InformationCardMin} from "./styles"
+} from "@/Components/PracticesBar/styles";
+import {PageLink} from "./styles"
 import TipsOverlayComponent from "../../Components/TipsHelp/TipsOverlayComponent";
-import ContextMenuValueEditor from "@/Components/Fields/InputContstuctor/InputControllers/ContextMenuValueEditor"
-import memoizeOne from "memoize-one";
-import dayjs from "dayjs";
-import { PRESENT_DATE_FORMAT } from "@/constants"
-import { BsCalendar, BsCalendar3, BsCalendar4, BsCalendar3Range } from 'react-icons/bs';
-import {VscChecklist} from 'react-icons/vsc';
-import {editConfig, editConfigIntervalRange, editConfigTimeRange, configForBtnCalendar} from "./config"
-import SelectionCriteriaForNewTask from "./Components/SelectionCriteriaForNewTask";
-
+import {PRESENT_DATE_FORMAT} from "@/constants"
+import useTabItem from '@/component_ocean/Logic/Tab/TabItem'
+import ContextMenu from "@/component_ocean/Components/ContextMenu";
+import {BorderButtonGold, GoldButton, LightGrayButton} from "@/Components/Buttons";
+import BaseButton from "@/component_ocean/Components/Button";
+import {AlertWindow} from "@/Components/ModalWindows";
 // при изменении источника данных данные в дереве менять
 
+const NewTask = ({ updateState}) => {
+  const [alert, setAlert] = useState("")
 
-const NewTask = ({openModalWindow, updateState, state}) => {
+  const {
+    tabState,
+    setTabState,
+    tabState: {dataSource}
+  } = useTabItem({
+    setTabName: useCallback(() => "new task", []),
+    stateId: "task",
+  })
   const [selectedSource, setSelectedSource] = useState({})
-  const [dataSource, setDataSource] = useState({})
   const [openSourceMenu, setOpenSourceMenu] = useState(false)
   const [changeSourceMenu, setChangeSourceMenu] = useState(false)
   const [continuousDateRange, setContinuousDateRange] = useState([])
-  const [continuousIntervalRange, setContinuousIntervalRange] = useState([])
-  const [activeOption, setActiveOption] = useState("Критерии отбора")
   const [event, setEvent] = useState()
-  const [tipsName, setTipsName]= useState("")
+  const [tipsName, setTipsName] = useState("")
   const [isDataChanged, setIsDataChanged] = useState(false)
 
   const timerRef = useRef()
 
   const selectSource = useCallback(() => {
     if (Object.keys(selectedSource).length > 0) {
-      updateState({
-        editData: true,
-        saveData: false
-      })
       setOpenSourceMenu(false)
       setSelectedSource((currentVal) => {
-        setDataSource(currentVal)
+        setTabState({
+          dataSource: currentVal
+        })
         return {}
       })
       setIsDataChanged(true)
     }
   }, [selectedSource, dataSource])
 
-  const openMenu = useCallback(() => { setOpenSourceMenu(true) }, [])
+  const openMenu = useCallback(() => {
+    setOpenSourceMenu(true)
+  }, [])
   const deleteDataSource = useCallback(() => {
-    setDataSource({})
     setIsDataChanged(false)
   }, [])
-  const changeDataSource = useCallback(() => { setChangeSourceMenu(true) }, [])
-  const closeDataSourceMenu = useCallback(() => { setChangeSourceMenu(false) }, [])
+  const changeDataSource = useCallback(() => {
+    setChangeSourceMenu(true)
+  }, [])
+  const closeDataSourceMenu = useCallback(() => {
+    setChangeSourceMenu(false)
+  }, [])
 
-  const closeSourceMenu = () => {
+  const closeSourceMenu = useCallback(() => {
     setOpenSourceMenu(false)
     closeDataSourceMenu()
-  }
+  }, [])
 
-  useEffect(() => {
-    closeDataSourceMenu()
-
-  }, [dataSource])
+  // useEffect(() => {
+  //   closeDataSourceMenu()
+  //
+  // }, [dataSource])
 
   const saveTask = () => {
     if (dataSource || continuousDateRange.length) {
-      setTimeout( () => {
-        openModalWindow({
-          message: "Задача сохранена"
-        })
+      setTimeout(() => {
+        setAlert("Задача сохранена")
         setIsDataChanged(false)
         updateState({
           saveData: true
@@ -96,14 +93,12 @@ const NewTask = ({openModalWindow, updateState, state}) => {
   }
 
   const sourceBtnTitle = (sourceName) => sourceName.length > 15 ? `${sourceName.substring(0, 15)}...` : sourceName
-  const formPayload = { dateRange: []}
-  const openOptions = useCallback((e) => {
-    setActiveOption(e.target.innerText)
-  },[setActiveOption])
 
   const showTips = useCallback((name) => (e) => {
     clearTimeout(timerRef.current)
-    timerRef.current = setTimeout(() => { setEvent(e) }, 500)
+    timerRef.current = setTimeout(() => {
+      setEvent(e)
+    }, 500)
     setTipsName(name)
   }, [])
 
@@ -113,119 +108,94 @@ const NewTask = ({openModalWindow, updateState, state}) => {
     setTipsName("")
   }, [setEvent])
 
-  // Приводим любые даты к числам
-  const getInputValue = memoizeOne((value) => Array.isArray(value)
-    ? `${value[0] ? dayjs(value[0], PRESENT_DATE_FORMAT).format(PRESENT_DATE_FORMAT) : ""} - ${value[1] ? dayjs(value[1], PRESENT_DATE_FORMAT).format(PRESENT_DATE_FORMAT) : ""}`
-    : value ? dayjs(value, PRESENT_DATE_FORMAT).format(PRESENT_DATE_FORMAT) : "")
-
-  const normalizedDate = getInputValue(continuousDateRange)
-
-  const editContinuousDateRange = useCallback((value) => {
-    setContinuousDateRange(value)
-    updateState({
-      editData: true,
-      saveData: false
-    })
-    setIsDataChanged(true)
-  }, [])
+  const normalizedDate = useMemo(() => continuousDateRange.length > 0
+    ? `${continuousDateRange[0]
+      ? dayjs(continuousDateRange[0], PRESENT_DATE_FORMAT).format(PRESENT_DATE_FORMAT)
+      : ""} - ${continuousDateRange[1]
+      ? dayjs(continuousDateRange[1], PRESENT_DATE_FORMAT).format(PRESENT_DATE_FORMAT)
+      : ""}`
+    :  "", [])
 
   return (
-    <div className="flex-container pos-relative overflow-hidden">
-      <div className="flex-container pos-relative">
-        <WrapperButtons className="l-p-layout r-p-layout p-t-20 p-b-20 a-i-flex-start">
-          <div className="display-flex a-i-center">
-            <div className="color-grey">Источник данных: </div>
-            <RenderOverlayMenu
-              onOpenOverlayMenu={openMenu}
-              renderOverlayMenu={openSourceMenu}
-              menuComponent={OverlayMenu}
+    <div className="flex-container relative overflow-hidden">
+      <div className="flex-container relative">
+        <WrapperButtons className="pl-5 pr-5 pt-5 pb-5 items-start">
+          <div className="flex items-center">
+            <div className="color-grey">Источник данных:</div>
+            <button
+              type="button"
+              onMouseDown={openMenu}
             >
-              {(overlayBoundRef, onOpenOverlayMenu, OverlayMenu) => (
-                <WithCloseWindow
-                  closeWindow={closeSourceMenu}
-                  byKey={openSourceMenu}
+              {
+                dataSource && (
+                  <TipsOverlayComponent
+                    key="source"
+                    tipsText={dataSource.title}
+                    event={event}
+                  />
+                )
+              }
+              {dataSource ? <LightGrayButton
+                  className="items-center flex ml-3.5 relative"
+                  onMouseEnter={showTips(dataSource.title)}
+                  onMouseLeave={closeTips}
                 >
-                  {(onMouseDown) => (
-                    <button
-                      ref={overlayBoundRef}
-                      type="button"
-                      onMouseDown={onMouseDown}
-                    >
-                      {
-                        tipsName === dataSource.title && (
-                          <TipsOverlayComponent
-                            key="source"
-                            tipsText={dataSource.title}
-                            event={event}
-                            />
-                        )
-                      }
-                        <div
-                          className="cursor a-i-center display-flex btn light-grey width-hover-grey-darken-0 m-l-14 pos-relative"
-                          onClick={onOpenOverlayMenu}
-                          onMouseEnter={showTips(dataSource.title)}
-                          onMouseLeave={closeTips}
+                  {sourceBtnTitle(dataSource.title)}
+                </LightGrayButton>
+                :
+                <span>
+                  <span className="fs-14">
+                    + 
+                  </span>
+                  Добавить
+                </span>
+              }
+            </button>
+            {openSourceMenu && <ContextMenu
+              onClose={closeSourceMenu}
+              className="flex flex-col justify-center p-2.5"
+              width={350}
+            >
+              {
+                dataSource && !changeSourceMenu
+                  ? (
+                    <div className="flex flex-col p-2">
+                        <span
+                          onClick={changeDataSource}
+                          className="pb-2.5"
                         >
-                          {
-                          Object.keys(dataSource).length > 0 ? sourceBtnTitle(dataSource.title) :
-                            <span>
-                              <span className="fs-14">
-                                + 
-                              </span>
-                              Добавить
-                            </span>
-                          }
-                        </div>
-                      {openSourceMenu && (
-                        <OverlayMenu
-                          minSize="200"
-                          className="display-flex flex-column j-c-center p-10 h-100"
-                        >
-                          {
-                            Object.keys(dataSource).length > 0 && !changeSourceMenu
-                            ? (
-                              <div className="display-flex fd-column p-8">
-                                <span
-                                  onClick={changeDataSource}
-                                  className="p-b-10"
-                                >
-                                  Заменить источник
-                                </span>
-                                <span onClick={deleteDataSource}>
-                                  Удалить источник
-                                </span>
-                              </div>
-                            )
-                            :
-                            (
-                              <DataSourceModal
-                                selectSource={selectSource}
-                                setSelectedSource={setSelectedSource}
-                              />
-                            )
-                          }
-                        </OverlayMenu>
-                      )}
-                    </button>
-                  )}
-                </WithCloseWindow>
-              )}
-            </RenderOverlayMenu>
+                          Заменить источник
+                        </span>
+                      <span onClick={deleteDataSource}>
+                          Удалить источник
+                        </span>
+                    </div>
+                  )
+                  :
+                  (
+                    <DataSourceModal
+                      selectSource={selectSource}
+                      setSelectedSource={setSelectedSource}
+                    />
+                  )
+              }
+            </ContextMenu>
+            }
           </div>
           {
-            Object.keys(dataSource).length > 0 &&
-            <div className="display-flex">
+            dataSource &&
+            <div className="flex">
               {/*<InformationCard>*/}
               {/*  Отчет "Протокол роликов"*/}
               {/*</InformationCard>*/}
               {normalizedDate.length > 3 && (
-                  <div className="btn light-grey width-hover-grey-darken-0 m-r-5" style={{width: "200px"}}>
-                    {normalizedDate}
-                  </div>
+                <LightGrayButton className="m-r-5 w-52">
+                  {normalizedDate}
+                </LightGrayButton>
               )}
-              <div className="btn light-grey width-hover-grey-darken-0">
+              <diLightGrayButtonv>
                 !
-              </div>
+              </diLightGrayButtonv>
               {/*<InformationCard>*/}
               {/*  <VscChecklist/>*/}
               {/*</InformationCard>*/}
@@ -233,150 +203,86 @@ const NewTask = ({openModalWindow, updateState, state}) => {
           }
         </WrapperButtons>
         {
-          Object.keys(dataSource).length > 0 &&
+          dataSource &&
           <div className="flex-container overflow-hidden">
             <ButtonsAndPracticesTabContainer className="flex items-center">
               <PracticesButtonsContainer>
-                <WrapperButton className="display-flex bg-color-greyLight-4">
-                  {Tabs.map(({ path, text }) => (
-                      <PracticeButton
-                          key={text}
-                          className={`${text === activeOption ? 'current-practice' : ''}`}
-                          type="button"
-                          onClick={openOptions}
-                      >
-                        {text}
-                      </PracticeButton>
+                <WrapperButton className="flex bg-color-greyLight-4">
+                  {Tabs.map(({path, text}) => (
+                    <PageLink
+                      to={path}
+                      key={text}
+                      type="button"
+                    >
+                      {text}
+                    </PageLink>
                   ))}
                 </WrapperButton>
               </PracticesButtonsContainer>
               <div className="flex items-center ml-auto">
-                <BsButton
+                <BorderButtonGold
                   type="button"
-                  className="border-gold btn sign-up-btn color-greyDarken w-18 mr-2"
+                  className="w-36 mr-2"
                 >
                   Загрузить
-                </BsButton>
-                <BsButton
+                </BorderButtonGold>
+                <BorderButtonGold
                   type="button"
-                  className="border-gold btn sign-up-btn color-greyDarken w-18"
+                  className="w-36"
                 >
                   Остановить
-                </BsButton>
+                </BorderButtonGold>
               </div>
             </ButtonsAndPracticesTabContainer>
-            <div className="p-t-10 p-b-10 p-r-10 p-l-10 flex-container overflow-hidden">
-              {
-                activeOption === "Критерии отбора" && (
-                  <div className="pos-relative  flex-container">
-                      <div className="display-flex">
-                        {configForBtnCalendar.map(({label, id}) => (
-                            <>
-                              {
-                                tipsName === label && (
-                                    <TipsOverlayComponent
-                                        key={id}
-                                        tipsText={label}
-                                        event={event}
-                                    />
-                                )
-                              }
-                            </>
-                        ))}
-                        <ContextMenuValueEditor
-                            id="ContinuousDateRange"
-                            label="Выбор даты или периода"
-                            fields={editConfig}
-                            formPayload={formPayload}
-                            value={continuousDateRange}
-                            onInput={editContinuousDateRange}
-                            minSize="320"
-                        >
-                          {(onEditValue) => (
-                              <InformationCardMin
-                                  onMouseEnter={showTips("Выбор даты или периода")}
-                                  onMouseLeave={closeTips}
-                                  onClick={onEditValue}
-                                  className="mini"
-                              >
-                                <BsCalendar/>
-                              </InformationCardMin>
-                          )}
-                        </ContextMenuValueEditor>
-
-                        <ContextMenuValueEditor
-                            id="IntervalRange"
-                            label="Выбор интервального диапазона"
-                            fields={editConfigIntervalRange}
-                            formPayload={formPayload}
-                            value={continuousIntervalRange}
-                            onInput={setContinuousIntervalRange}
-                            minSize="320"
-                        >
-                          {(onEditValue) => (
-                              <InformationCardMin
-                                  onMouseEnter={showTips("Выбор интервального диапазона")}
-                                  onMouseLeave={closeTips}
-                                  onClick={!continuousDateRange.length && onEditValue}
-                                  className="mini"
-                              >
-                                <BsCalendar3/>
-                              </InformationCardMin>
-                          )}
-                        </ContextMenuValueEditor>
-
-                        <ContextMenuValueEditor
-                            id="TimeRange"
-                            label="Выбор временных интервалов"
-                            fields={editConfigTimeRange}
-                            formPayload={formPayload}
-                            value={continuousIntervalRange}
-                            onInput={setContinuousIntervalRange}
-                            minSize="320"
-                        >
-                          {(onEditValue) => (
-                            <InformationCardMin
-                                onMouseEnter={showTips("Выбор временных интервалов")}
-                                onMouseLeave={closeTips}
-                                onClick={!continuousDateRange.length && onEditValue}
-                                className="mini"
-                            >
-                              <BsCalendar3Range/>
-                            </InformationCardMin>
-                          )}
-                        </ContextMenuValueEditor>
-                      </div>
-                    <SelectionCriteriaForNewTask/>
-                  </div>
-                )
-              }
-              {
-                activeOption === "Отчеты" && (
-                   <Reports/>
-                )
-              }
-              {
-                activeOption === "Результат" && (
-                    <Result/>
-                )
-              }
+            <div className="p-2.5 flex-container overflow-hidden">
+              <Routes>
+                <Route
+                  path="/selection_criteria/*"
+                  element={<SelectionCriteria tabState={tabState}/>}
+                />
+                <Route
+                  path="/reports/*"
+                  element={<Reports tabState={tabState} />}
+                />
+                <Route
+                  path="/result/*"
+                  element={<Result tabState={tabState}/>}
+                />
+                <Route
+                  path="*"
+                  element={<Navigate to="selection_criteria"/>}
+                />
+              </Routes>
             </div>
-            <div className="l-p-layout r-p-layout j-c-flex-end">
-              <div className="display-flex j-c-flex-end m-b-20">
-                <BsButton
+            <div className="pl-5 pr-5 justify-end">
+              <div className="flex justify-end mb-5">
+                <GoldButton
                   type="button"
-                  className={`${isDataChanged ? "golden"  : "border-gold"} btn sign-up-btn color-greyDarken w-18 m-r-10 `}
+                  disabled={isDataChanged}
+                  className="btn sign-up-btn color-greyDarken w-18"
                   onClick={saveTask}
                 >
                   Сохранить
-                </BsButton>
+                </GoldButton>
               </div>
             </div>
           </div>
         }
       </div>
+      <AlertWindow
+        className="flex flex-col items-center mt-90"
+        open={alert}
+        onClose={() => setAlert("")}
+      >
+        <text className="text-center break-words my-auto mx-12">
+          {alert}
+        </text>
+        <BaseButton className="bg-color-lightGold color-white w-48 mt-auto mb-8">
+          Ок
+        </BaseButton>
+      </AlertWindow>
     </div>
-  );
+  )
 };
 
-export default WithOpenModalWindow(NewTask);
+export default NewTask;

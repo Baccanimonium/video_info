@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo } from "react"
 import PropTypes from "prop-types"
-import { Spring } from "react-spring/renderprops"
 import BsButton from "@/Components/BsButton"
 import { close } from "@/Icons/close"
 import Icon from "@/Components/Icon/index"
@@ -13,20 +12,15 @@ const from = { opacity: 0 }
 const to = { opacity: 1 }
 
 const ModalWindow = ({
-  children, dialogueParams: { title, cancelLabel, submitLabel, reverseButtonPosition }, loading, formValid, onClose,
-  onSubmit, onCancel, onlyCancellable, offsetTop, width
-}) => {
+                       children, dialogueParams: { title, cancelLabel, submitLabel, reverseButtonPosition }, loading, formValid, onClose,
+                       onSubmit, onCancel, onlyCancellable, offsetTop, width
+                     }) => {
   const cancelHandler = !submitLabel && onSubmit ? onSubmit : (onCancel || onClose)
   const closeHandler = onlyCancellable ? cancelHandler : onClose
   const cancelButtonLabel = useMemo(() => cancelLabel || (submitLabel ? "cancel" : "ok"), [cancelLabel, submitLabel])
   const containerStyles = useMemo(() => ({ marginTop: offsetTop, width }), [offsetTop, width])
   return (
-    <Spring
-      from={from}
-      to={to}
-    >
-      {style => (
-        <ModalContainer style={style}>
+        <ModalContainer >
           <DialogueBackground />
           <DialogueContainer style={containerStyles}>
             <CloseIconButton
@@ -46,7 +40,7 @@ const ModalWindow = ({
                   <>
                     {submitLabel && (
                       <BsButton
-                        className="btn grey-bg sign-up-btn"
+                        className="btn grey-bg"
                         disabled={loading || !formValid}
                         loading={loading}
                         onClick={onSubmit}
@@ -55,7 +49,7 @@ const ModalWindow = ({
                       </BsButton>
                     )}
                     <BsButton
-                      className="btn golden sign-up-btn"
+                      className="btn golden"
                       disabled={loading}
                       loading={!submitLabel && loading}
                       onClick={cancelHandler}
@@ -67,7 +61,7 @@ const ModalWindow = ({
                 : (
                   <>
                     <BsButton
-                      className={`btn sign-up-btn ${submitLabel ? "grey-bg" : "golden"}`}
+                      className={`btn ${submitLabel ? "grey-bg" : "golden"}`}
                       disabled={loading}
                       loading={!submitLabel && loading}
                       onClick={cancelHandler}
@@ -76,22 +70,20 @@ const ModalWindow = ({
                     </BsButton>
 
                     {submitLabel && (
-                    <BsButton
-                      className="btn golden sign-up-btn"
-                      disabled={loading || !formValid}
-                      loading={loading}
-                      onClick={onSubmit}
-                    >
-                      {submitLabel}
-                    </BsButton>
+                      <BsButton
+                        className="btn golden"
+                        disabled={loading || !formValid}
+                        loading={loading}
+                        onClick={onSubmit}
+                      >
+                        {submitLabel}
+                      </BsButton>
                     )}
                   </>
                 )}
             </ButtonsContainer>
           </DialogueContainer>
         </ModalContainer>
-      )}
-    </Spring>
   )
 }
 

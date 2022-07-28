@@ -2,14 +2,12 @@ import React, { useEffect, useState, useContext, useCallback, useRef } from "rea
 import PropTypes from "prop-types"
 import { NavLink } from "react-router-dom"
 import { LeftMenuContainer, LeftMenuLogo, LeftMenuItem, ToggleToolbar, ListTile,
-  Copyright, OpenMenuItem, TextLogo, MenuLink, WrapperMenuLink } from "./styles"
+  OpenMenuItem, TextLogo, MenuLink, WrapperMenuLink } from "./styles"
 import NavigationButton from "../NavigationButton";
-import {RouteContext} from "../../constants"
 import TipsOverlayComponent from "../TipsHelp/TipsOverlayComponent";
 
-const NavigationDrawer = ({ routes }) => {
+const NavigationDrawer = ({ routes, onOpenNewTab }) => {
   const [tipsName, setTipsName]= useState("")
-  const { onOpenNewTab } = useContext(RouteContext)
   const [leftWidth, setLeftWidth] = useState(60)
   const [toggleArrow, setToggleArrow] = useState()
   const [iconArrowStyle, setIconArrowStyle] = useState()
@@ -31,6 +29,7 @@ const NavigationDrawer = ({ routes }) => {
     setLeftWidth(getHidden === "close" ? 60 : 190)
   }, [getHidden])
   const hideToolbar = leftWidth === 60
+
   const toggleToolbar = () => {
     localStorage.setItem("APP_NAVBAR", getHidden === "close" ? "open" : "close")
     setToggleArrow(getHidden === "close" ? "open" : "close")
@@ -49,7 +48,7 @@ const NavigationDrawer = ({ routes }) => {
     setEvent(undefined)
     setTipsName("")
   }, [setEvent])
-  // TipsOverlayComponent выводится неправильное название
+
   return (
     <LeftMenuContainer style={{ width: leftWidth }}>
       <LeftMenuLogo>
@@ -64,9 +63,8 @@ const NavigationDrawer = ({ routes }) => {
           style={style}
           onMouseEnter={showTips(name)}
           onMouseLeave={closeTips}
-          // current={currentIdObject === ID_OBJ_OBJ}
         >
-          <NavigationButton to={route} name={name} className="w-100 h-100" onClick={onOpenNewTab}>
+          <NavigationButton to={`/tab${route}`} name={name} className="w-100 h-100" onClick={onOpenNewTab}>
             <ListTile hideToolbar={hideToolbar}>
               <div className="icon-container transition-icon cursor a-i-center j-c-center display-flex">
                 <Picture

@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, {css} from "styled-components"
 import { RemoveIcon } from "@/Components/Icon/CommonIcons"
 
 export const TabBarContainer = styled.div`
@@ -10,23 +10,25 @@ export const TabButton = styled.button`
   min-width: 100px;
   padding-left: 15px;
   padding-right: 13px;
-  background: var(--color-grey-darken-0);
   color: var(--color-white);
   transition-property: color, background-color;
   transition-timing-function: ease-in-out;
   transition-duration: 250ms;
   margin-right: ${props => props.notLast ? "2px" : "0px"};
-
-  &:hover:not(.active) {
-    color: var(--color-black-darken-1);
-  }
-  .active > & {
-    background: var(--color-light-gold-1);
-  }
+  ${({ active }) => active
+          ? css`
+      background: var(--color-light-gold-1);
+    `
+          : css`
+      background: var(--color-grey-darken-0);
+      &:hover {
+        color: var(--color-black-darken-1);
+      }
+  `};
 `
 
 export const StyleRemoveIcon = styled(RemoveIcon)`
-position: relative;
+  position: relative;
   &::after {
     content: "";
     position: absolute;

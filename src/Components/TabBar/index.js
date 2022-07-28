@@ -1,11 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { TabBarContainer, TabButton, StyleRemoveIcon, AlertAndUserInfoContainer } from "./styles"
-import Carousel from "@/Components/Carousel"
+import Carousel from "@/component_ocean/Components/Carousel"
 import UserInfo from "../UserInfo";
 
 const TabBar = ({ tabs, currentTabIndex, onCloseTab, onChangeActiveTab, className, children }) => {
-  const closeTabById = (index) => (e) => {
+  const closeTabByIndex = (index) => (e) => {
     e.preventDefault()
     e.stopPropagation()
     onCloseTab(index)
@@ -16,15 +16,17 @@ const TabBar = ({ tabs, currentTabIndex, onCloseTab, onChangeActiveTab, classNam
       <Carousel value={currentTabIndex} onInput={onChangeActiveTab}>
         {tabs.map((({ tabName, id }, i) => (
           <TabButton
-            key={tabName}
+            onClick={() => onChangeActiveTab(i)}
+            key={id}
             type="button"
+            active={currentTabIndex === i}
             className="display-flex a-i-center j-c-space-between h-100 capitalize fw700"
             notLast={i !== tabs.length - 1}
           >
             <span className="overflow-hidden text-overflow-ellipsis no-white-space">{tabName}</span>
               <StyleRemoveIcon
                 size="10"
-                onClick={closeTabById(id)}
+                onClick={closeTabByIndex(i)}
               />
           </TabButton>
         )))}
