@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 
 import {WrapperButtons} from "../DownloadTask/style";
 import DataSourceModal from "./Components/ReportConstructor/DataSourceModal";
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes, useParams} from "react-router-dom";
 import Result from "./Pages/Result";
 import SelectionCriteria from "./Pages/SelectionCriteria";
 import Reports from "./Pages/Reports"
@@ -17,11 +17,10 @@ import {PageLink} from "./styles"
 import TipsOverlayComponent from "../../Components/TipsHelp/TipsOverlayComponent";
 import {PRESENT_DATE_FORMAT} from "@/constants"
 import useTabItem from '@/component_ocean/Logic/Tab/TabItem'
-import ContextMenu from "@/component_ocean/Components/ContextMenu";
+import {ContextMenuStyle} from "@/Components/ContextMenu";
 import {BorderButtonGold, GoldButton, LightGrayButton} from "@/Components/Buttons";
 import BaseButton from "@/component_ocean/Components/Button";
 import {AlertWindow} from "@/Components/ModalWindows";
-// при изменении источника данных данные в дереве менять
 
 const NewTask = ({ updateState}) => {
   const [alert, setAlert] = useState("")
@@ -39,7 +38,6 @@ const NewTask = ({ updateState}) => {
   const [changeSourceMenu, setChangeSourceMenu] = useState(false)
   const [continuousDateRange, setContinuousDateRange] = useState([])
   const [event, setEvent] = useState()
-  const [tipsName, setTipsName] = useState("")
   const [isDataChanged, setIsDataChanged] = useState(false)
 
   const timerRef = useRef()
@@ -99,13 +97,11 @@ const NewTask = ({ updateState}) => {
     timerRef.current = setTimeout(() => {
       setEvent(e)
     }, 500)
-    setTipsName(name)
   }, [])
 
   const closeTips = useCallback(() => {
     clearTimeout(timerRef.current)
     setEvent(undefined)
-    setTipsName("")
   }, [setEvent])
 
   const normalizedDate = useMemo(() => continuousDateRange.length > 0
@@ -114,7 +110,13 @@ const NewTask = ({ updateState}) => {
       : ""} - ${continuousDateRange[1]
       ? dayjs(continuousDateRange[1], PRESENT_DATE_FORMAT).format(PRESENT_DATE_FORMAT)
       : ""}`
-    :  "", [])
+    :  "", [continuousDateRange])
+
+  const updateTaskState = useCallback((obj) => {
+    const {date, editData, isDataChanged, saveData} = obj
+    setContinuousDateRange(date)
+    setIsDataChanged(isDataChanged)
+  }, [])
 
   return (
     <div className="flex-container relative overflow-hidden">
@@ -143,15 +145,17 @@ const NewTask = ({ updateState}) => {
                   {sourceBtnTitle(dataSource.title)}
                 </LightGrayButton>
                 :
-                <span>
+                <LightGrayButton
+                  className="items-center flex ml-3.5"
+                >
                   <span className="fs-14">
                     + 
                   </span>
                   Добавить
-                </span>
+                </LightGrayButton>
               }
             </button>
-            {openSourceMenu && <ContextMenu
+            {openSourceMenu && <ContextMenuStyle
               onClose={closeSourceMenu}
               className="flex flex-col justify-center p-2.5"
               width={350}
@@ -179,26 +183,18 @@ const NewTask = ({ updateState}) => {
                     />
                   )
               }
-            </ContextMenu>
+            </ContextMenuStyle>
             }
           </div>
           {
-            dataSource &&
+            normalizedDate &&
             <div className="flex">
-              {/*<InformationCard>*/}
-              {/*  Отчет "Протокол роликов"*/}
-              {/*</InformationCard>*/}
               {normalizedDate.length > 3 && (
                 <LightGrayButton className="m-r-5 w-52">
                   {normalizedDate}
                 </LightGrayButton>
               )}
-              <diLightGrayButtonv>
-                !
-              </diLightGrayButtonv>
-              {/*<InformationCard>*/}
-              {/*  <VscChecklist/>*/}
-              {/*</InformationCard>*/}
+              <LightGrayButton>!</LightGrayButton>
             </div>
           }
         </WrapperButtons>
@@ -238,7 +234,7 @@ const NewTask = ({ updateState}) => {
               <Routes>
                 <Route
                   path="/selection_criteria/*"
-                  element={<SelectionCriteria tabState={tabState}/>}
+                  element={<SelectionCriteria tabState={tabState} updateState={updateTaskState}/>}
                 />
                 <Route
                   path="/reports/*"

@@ -28,8 +28,7 @@ export const LightGrayButton = styled(BaseButton)`
     background: var(--color-light-gold-1);
     color: var(--color-white);
   }
-  color: #1d1d1d;
-  height: 34px;
+  color: var(--color-black-darken-2);
   &:hover {
     background-color: var(--color-grey-darken-0);
   }

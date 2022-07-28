@@ -7,19 +7,22 @@ import {InformationCardMin} from "@/Pages/NewTask/styles";
 import {BsCalendar, BsCalendar3, BsCalendar3Range} from "react-icons/bs";
 import SelectionCriteriaForNewTask from "@/Pages/NewTask/Pages/SelectionCriteria/Components/SelectionCriteriaForNewTask";
 
-const SelectionCriteria = ({ tabState }) => {
+const SelectionCriteria = ({ tabState, updateState }) => {
   const [tipsName, setTipsName] = useState("")
   const [event, setEvent] = useState()
   const [continuousDateRange, setContinuousDateRange] = useState([])
   const [continuousIntervalRange, setContinuousIntervalRange] = useState([])
+
   const editContinuousDateRange = useCallback((value) => {
     setContinuousDateRange(value)
     updateState({
       editData: true,
-      saveData: false
+      saveData: false,
+      date: value,
+      isDataChanged: true
     })
-    setIsDataChanged(true)
   }, [])
+
   const timerRef = useRef()
   const showTips = useCallback((name) => (e) => {
     clearTimeout(timerRef.current)

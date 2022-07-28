@@ -39,9 +39,8 @@ const Tab = () => {
                    path="/download_task"
                    element={<DownloadTask/>}
                  />
-             </Routes>
-               {/*<TabFooter buttons={FooterTabs} parentUrl="/tab"/>*/}
-             </>
+              </Routes>
+            </>
             :
             <Home/>
           }
