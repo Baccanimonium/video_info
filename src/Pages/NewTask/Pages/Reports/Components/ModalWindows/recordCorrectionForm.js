@@ -1,8 +1,8 @@
 import React, {useCallback, useState} from 'react';
-import BsInput from "@/Components/Fields/BsInput";
-import Select from "@/Components/Fields/Select";
+import BsInput from "@/component_ocean/Components/Inputs/Input";
 import {typeRecord} from "@/Pages/NewTask/Pages/Reports/Components/ModalWindows/mok";
-import BsCheckBox from "@/Components/Fields/BsCheckBox";
+import BsCheckBox from "@/component_ocean/Components/Inputs/CheckBox";
+import Select from "@/component_ocean/Components/Inputs/Select";
 
 const RecordCorrectionForm = ({value, onInput}) => {
   const [reportState, setReportsState] = useState({

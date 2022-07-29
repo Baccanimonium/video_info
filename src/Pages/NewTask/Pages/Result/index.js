@@ -10,7 +10,7 @@ import {
 } from './styles'
 import {AutoSizer, ScrollSync} from 'react-virtualized'
 import scrollbarSize from 'dom-helpers/scrollbarSize';
-import Grid from '../../../../component_ocean/Components/Tables/Grid'
+import Grid from "@/component_ocean/Components/Tables/Grid"
 import {useMemo} from "react";
 
 const baseData = {

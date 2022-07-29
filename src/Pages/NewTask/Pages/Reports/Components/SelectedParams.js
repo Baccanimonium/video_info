@@ -1,6 +1,6 @@
 import React, {useCallback, useState, useMemo} from 'react';
 import PropTypes from 'prop-types';
-import Tree from '@/Components/Tree';
+import Tree from '@/component_ocean/Components/Tree';
 import {demographic, StatisticLabel, AttributeLabel, DemographicLabel} from "../constants"
 import SelectedParamsRow from "./SelectedParamsRow";
 import ScrollBar from "react-perfect-scrollbar";

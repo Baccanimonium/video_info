@@ -15,9 +15,7 @@ import {
   TypeOfAdvertisement, dictionary
 } from "../mok";
 import {CardForDirectory} from "../../../styles";
-import {CheckboxGroupContainer, GridContainer} from "./styles";
-import CheckboxGroup from "../../../../../Components/Fields/CheckboxGroup";
-import BsButton from "@/Components/BsButton";
+import {CheckboxGroupContainer, GridContainer, CheckboxGroupStyle} from "./styles";
 import RowComponent from "../../../Components/RowComponent";
 import ScrollBar from "react-perfect-scrollbar";
 import Tree from '@/component_ocean/Components/Tree';
@@ -28,6 +26,7 @@ import {basketTrash} from "@/Icons/basketTrash";
 import WithOpenContextMenu from "@/Core/RenderProps/WithOpenContextMenu";
 import ButtonsForDelete from "@/Pages/NewTask/Components/ButtonsForDelete";
 import PureUpdateArrayItems from "@/Utils/Arrays/PureUpdateArrayItems";
+import {GoldButton} from "@/Components/Buttons";
 
 const creatingArrayFromMap = (children) => {
   let arrayChildren = []
@@ -256,7 +255,7 @@ const SelectionCriteriaForNewTask = () => {
       </div>
       <GridContainer className="pos-relative overflow-hidden h-100">
         <CheckboxGroupContainer>
-          <CheckboxGroup
+          <CheckboxGroupStyle
             options={selectedList}
             valueKey="id"
             blockTitle={title}
@@ -266,21 +265,19 @@ const SelectionCriteriaForNewTask = () => {
             onInput={setCheckedObject}
           />
           {selectedList.length > 0 &&
-          <div className="display-flex a-i-center">
-            <BsButton
-              type="button"
-              className="golden btn sign-up-btn color-greyDarken w-18 m-r-5"
+          <div className="flex a-i-center mt-3">
+            <GoldButton
+              className="w-36 mr-2"
               onClick={setNewTree}
             >
               применить
-            </BsButton>
-            <BsButton
-              type="button"
-              className="golden btn sign-up-btn color-greyDarken w-18"
+            </GoldButton>
+            <GoldButton
+              className="w-36"
               onClick={editListBuffer}
             >
               В буфер
-            </BsButton>
+            </GoldButton>
           </div>
           }
         </CheckboxGroupContainer>

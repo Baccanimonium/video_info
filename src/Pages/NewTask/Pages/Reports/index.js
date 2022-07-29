@@ -2,12 +2,12 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import {DataSetContainer} from "../../styles";
 import {ReportContainer, WrapperInput} from "./styles"
-import Tree from '@/Components/Tree';
+import Tree from '@/component_ocean/Components/Tree';
 import {ButtonsContainer, Button} from "@/Components/ButtonsTabBar/style";
-import BsCheckBox from "../../../../Components/Fields/BsCheckBox";
+import BsCheckBox from "@/component_ocean/Components/Inputs/CheckBox";
 import RadioButton from "../../../../Components/Fields/RadioButton";
-import Select from "../../../../Components/Fields/Select";
-import DatePicker from "../../../../Components/Fields/DatePicker";
+import Select from "@/component_ocean/Components/Inputs/Select";
+import DatePicker from "@/component_ocean/Components/Inputs/DatePicker";
 import {ContainerDatePicker} from "@/Components/TabHeader/style";
 import ScrollBar from "react-perfect-scrollbar";
 import {copy} from "@/Icons/copy";
@@ -297,7 +297,8 @@ const Reports = () => {
                           label="Определение пользователем"
                           className="p-b-15"
                         />
-                        <ContainerDatePicker>
+                        <ContainerDatePicker className="flex">
+                          <div className="p-r-15">Выберите дату:</div>
                           <DatePicker
                             id="dateRange"
                             formPayload={formPayload}

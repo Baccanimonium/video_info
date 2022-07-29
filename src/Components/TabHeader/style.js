@@ -5,6 +5,7 @@ export const HeaderContainer = styled.div`
 `
 
 export const ContainerDatePicker = styled.div`
-  width: 270px;
+  //width: 270px;
   --background-input: var(--color-white);
+  --width-input: 150px;
 `

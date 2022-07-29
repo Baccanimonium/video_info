@@ -7,11 +7,11 @@ import {
   typeOptions, accessOptions, folderOptions
 } from "./mok";
 import {Button, ButtonsContainer} from "@/Components/ButtonsTabBar/style";
-import BsCheckBox from "@/Components/Fields/BsCheckBox";
-import Select from "@/Components/Fields/Select";
+import BsCheckBox from "@/component_ocean/Components/Inputs/CheckBox";
+import Select from "@/component_ocean/Components/Inputs/Select";
 import {ContainerForForm} from "./styles"
-import BsInput from "@/Components/Fields/BsInput";
-import ScrollBar from "@/Components/ScrollBar"
+import ScrollBar from "react-perfect-scrollbar";
+import BsInput from "@/component_ocean/Components/Inputs/Input";
 
 const StyleTree = {width: "700px", height: "170px"}
 
@@ -109,29 +109,6 @@ const AddData = (props) => {
     setPageData(nextOptions)
   }, [])
 
-  const onDragStart = (info) => {
-    console.log("onDragStart", info)
-  }
-  const onDragEnter = (arg) => {
-    console.log("onDragEnter", arg)
-  }
-  const onDrop = (info) => {
-    console.log("onDrop", info)
-  }
-  const setRowCondition = () => {
-    console.log("setRowCondition")
-  }
-  const onExpand = useCallback(expandedKeys => {
-    console.log('onExpand', expandedKeys);
-  }, []);
-  const onCheck = useCallback((checkedKeys, info) => {
-    console.log('onCheck', checkedKeys, info);
-  }, []);
-  // срабатывает при клике на группу
-  const onSelect = useCallback((value) => {
-    console.log(value)
-  }, [pageData])
-
   const selectRule = ({type}) => type === "condition"
   return (
     <PerfectScrollbar className="p-r-15">
@@ -226,15 +203,8 @@ const AddData = (props) => {
         ))}
       </ButtonsContainer>
       {<DictionaryComponent
-        onDragStart={onDragStart}
-        onDragEnter={onDragEnter}
-        onDrop={onDrop}
-        setRowCondition={setRowCondition}
-        onExpand={onExpand}
         defaultSelectedKeys={selectedKey}
         defaultCheckedKeys={checked}
-        onSelect={onSelect}
-        onCheck={onCheck}
         options={pageData}
         selectRule={selectRule}
         onUpdateOptions={onUpdateOptions}

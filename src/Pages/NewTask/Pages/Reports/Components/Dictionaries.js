@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {ButtonsContainer, Button} from "../../../../../Components/ButtonsTabBar/style";
 import {StatisticLabel, AttributeLabel, DemographicLabel, statistics, attributes} from '../constants'
 import DemographicTree from "./DemographicTree";
-import Tree from '@/Components/Tree';
+import Tree from '@/component_ocean/Components/Tree';
 import ScrollBar from "@/Components/ScrollBar"
 
 const attributesButtons = [
