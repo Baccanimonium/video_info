@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import ScrollBar from "@/Components/ScrollBar"
+import ScrollBar from "react-perfect-scrollbar";
 import { IconToggleIndicator } from "@/Components/Icon/CommonIcons"
 
 export const MultipleOptionContainer = styled.div`

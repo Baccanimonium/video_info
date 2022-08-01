@@ -7,7 +7,6 @@ import Tab from "./Tab"
 
 import AlertFactory from "./AlertFactory"
 import ContextMenuFactory from "./ContextMenuFactory"
-import ApiRecoilBounder from "./ApiRecoilBounder"
 import {useWatch} from "./Utils/hooks/useWatch";
 
 let initialRoute = history.location.pathname !== "/login" ? history.location.pathname : "/"
@@ -29,7 +28,6 @@ function App() {
     <>
       <AlertFactory />
       <ContextMenuFactory />
-      <ApiRecoilBounder />
       {/*{token === null*/}
       {/*  ? (*/}
       {/*    <Routes>*/}

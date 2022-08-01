@@ -4,7 +4,7 @@ import {ButtonsContainer, Button} from "../../../../../Components/ButtonsTabBar/
 import {StatisticLabel, AttributeLabel, DemographicLabel, statistics, attributes} from '../constants'
 import DemographicTree from "./DemographicTree";
 import Tree from '@/component_ocean/Components/Tree';
-import ScrollBar from "@/Components/ScrollBar"
+import ScrollBar from "react-perfect-scrollbar";
 
 const attributesButtons = [
   {

@@ -1,13 +1,13 @@
 import React from 'react';
-import BsButton from "@/Components/BsButton";
+import {GoldButton, LightGrayButton} from "@/Components/Buttons";
 
 const ButtonsForDelete = ({onClose, title, onSubmit}) => {
   return (
-    <div className="display-flex a-i-center flex-column p-15">
+    <div className="flex items-center flex-col p-4">
       <div>{title}</div>
-      <div className="display-flex a-i-center m-t-20 j-c-space-between w-100">
-        <BsButton className="btn grey-bg" onClick={onSubmit}>Да</BsButton>
-        <BsButton className="btn golden" onClick={onClose}>Нет</BsButton>
+      <div className="flex items-center mt-5 justify-between w-full">
+        <GoldButton onClick={onSubmit}>Да</GoldButton>
+        <LightGrayButton  onClick={onClose}>Нет</LightGrayButton>
       </div>
     </div>
   );

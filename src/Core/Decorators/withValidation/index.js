@@ -1,12 +1,10 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import Validator from "@/Core/Validator"
-import { OverrideSaveData } from "@/Core/PageController/constants"
 
 const withValidationHoc = (OriginalComponent) => {
   class WithValidation extends Component {
     // eslint-disable-next-line react/static-property-placement
-    static contextType = OverrideSaveData
 
     constructor(props) {
       super(props)

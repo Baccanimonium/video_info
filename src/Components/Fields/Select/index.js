@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react"
 import PropTypes from "prop-types"
 import { RemoveIcon } from "@/Components/Icon/CommonIcons"
-import ScrollBar from "@/Components/ScrollBar"
 import memoizeOne from "memoize-one"
 import PureDeleteItems from "@/Utils/Arrays/PureDeleteItems"
 import StopPreventFunction from "@/Utils/Events/StopPreventFunction"
