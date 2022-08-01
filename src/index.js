@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import { RecoilRoot } from "recoil"
-import AppPreloader from "./AppPreloader"
+import AppPreloader from "@/Components/AppPreloader/AppPreloader"
 import { BrowserRouter as Router } from "react-router-dom";
 import history from "./history"
 
@@ -23,7 +23,6 @@ import "@/style/misc.scss"
 import "@/style/colors.scss"
 import "@/style/markupHelpers.scss"
 import "@/style/typography.scss"
-import "@/style/iconEffects/style.scss"
 import "@/style/style-btn.scss"
 import "@/style/style-text.scss"
 import axios from "axios";

@@ -30,43 +30,20 @@ function App() {
       <AlertFactory />
       <ContextMenuFactory />
       <ApiRecoilBounder />
-      {/*{token === null*/}
-      {/*  ? (*/}
-      {/*    <Routes>*/}
-      {/*      <Route*/}
-      {/*        path="/login"*/}
-      {/*        element={<Login initialRoute={initialRoute} onSubmit={setToken}/>}*/}
-      {/*      />*/}
-      {/*      <Route*/}
-      {/*        path="*"*/}
-      {/*        element={<Navigate to="/login"/>}*/}
-      {/*      />*/}
-      {/*    </Routes>*/}
-        {/*)*/}
-        {/*: (*/}
-          <Routes>
-            <Route
-                path="/login"
-                element={<Login initialRoute={initialRoute} onSubmit={setToken}/>}
-            />
-            {/*<Route*/}
-            {/*    path="*"*/}
-            {/*    element={<Navigate to="/login"/>}*/}
-            {/*/>*/}
-            <Route
-              path="/tab/*"
-              element={<Tab />}
-            />
-            {/*<Route*/}
-            {/*  path="/login"*/}
-            {/*  element={<Login onSubmit={setToken}/>}*/}
-            {/*/>*/}
-            <Route
-              path="*"
-              element={<Navigate to="/tab"/>}
-            />
-          </Routes>
-        {/*)}*/}
+        <Routes>
+          <Route
+              path="/login"
+              element={<Login initialRoute={initialRoute} onSubmit={setToken}/>}
+          />
+          <Route
+            path="/tab/*"
+            element={<Tab />}
+          />
+          <Route
+            path="*"
+            element={<Navigate to="/tab"/>}
+          />
+        </Routes>
     </>
   );
 }
