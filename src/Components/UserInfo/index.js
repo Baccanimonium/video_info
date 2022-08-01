@@ -41,7 +41,7 @@ const UserInfo = () => {
             <button
               ref={overlayBoundRef}
               type="button"
-              className="display-flex a-i-center m-l-25"
+              className="flex items-center m-l-25"
               onMouseDown={onMouseDown}
               onClick={onOpenOverlayMenu}
             >
@@ -53,11 +53,11 @@ const UserInfo = () => {
                 onClick={() => navigate("/login")}
               />
               {isMenuOpen && (
-              <OverlayMenu className="display-flex a-i-center p-t-5 p-b-5 fd-column">
+              <OverlayMenu className="flex items-center p-t-5 p-b-5 fd-column">
                 {menuItems.map(({ Component, Icon, label, ...props }) => (
                   <Component
                     key={label}
-                    className="display-flex a-i-center p-t-10 p-b-10 p-r-15 p-l-15 w-100 item"
+                    className="flex items-center p-t-10 p-b-10 p-r-15 p-l-15 w-100 item"
                     {...props}
                   >
                     <Icon

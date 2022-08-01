@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const SelectPreview = ({ value }) => (
-  <div className="display-flex flex-wrap">
+  <div className="flex flex-wrap">
     {value.map(({ SYS_NAME, ID }) => (
       <div
         key={ID}

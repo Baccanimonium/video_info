@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import "./styles.scss"
 
 const renderIcon = (children) => children.map((child, index) => {
   const { name: Icon, attribs, children = null } = child
@@ -36,7 +37,7 @@ export default ({ children, viewBox, attribs = {} }) => {
   const Icon = ({ children: ch, size, title, className, style, onKeyUp, onKeyDown, onClick, onMouseEnter, onMouseLeave,
                   onMouseDown, onMouseUp }) => (
     <div
-      className={`${className} icon-container transition-icon j-c-center display-flex`}
+      className={`${className} icon-container transition-icon j-c-center flex`}
       style={style}
       onKeyUp={onKeyUp}
       onKeyDown={onKeyDown}

@@ -241,7 +241,7 @@ const SelectionCriteriaForNewTask = () => {
 
   return (
     <>
-      <div className="display-flex m-t-10 flex-wrap">
+      <div className="flex m-t-10 flex-wrap">
         {listDirectory.map(({id, name, active}) => (
           <CardForDirectory
             key={id}
@@ -253,7 +253,7 @@ const SelectionCriteriaForNewTask = () => {
           )
         )}
       </div>
-      <GridContainer className="pos-relative overflow-hidden h-100">
+      <GridContainer className="relative overflow-hidden h-full">
         <CheckboxGroupContainer>
           <CheckboxGroupStyle
             options={selectedList}
@@ -265,7 +265,7 @@ const SelectionCriteriaForNewTask = () => {
             onInput={setCheckedObject}
           />
           {selectedList.length > 0 &&
-          <div className="flex a-i-center mt-3">
+          <div className="flex items-center mt-3">
             <GoldButton
               className="w-36 mr-2"
               onClick={setNewTree}
@@ -297,7 +297,7 @@ const SelectionCriteriaForNewTask = () => {
           </ScrollBar>
         </div>
         <div className="separator-left p-l-15 m-b-15 overflow-hidden">
-          <div className="m-b-10 display-flex a-i-center">
+          <div className="m-b-10 flex items-center">
             <h3 className="p-b-0">Буфер</h3>
             {titleBuffer && listBuffer.length > 0 && (
               <WithOpenContextMenu

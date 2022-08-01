@@ -23,7 +23,7 @@ const RadioButton = ({label, className, id, onBlur, onFocus, onInput, value, ret
   return (
     <button
       onMouseDown={updateValue}
-      className={`${className} display-flex a-i-center no-user-select`}
+      className={`${className} flex items-center no-user-select`}
       type="button"
     >
       <BoxContainer>

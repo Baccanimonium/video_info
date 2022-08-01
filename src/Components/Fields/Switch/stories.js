@@ -37,7 +37,7 @@ export default {
 }
 
 const Template = (args) => (
-  <div className="display-flex fd-column j-c-start">
+  <div className="flex fd-column j-c-start">
     <div className="p-b-10"><Switch {...args} /></div>
     <div className="p-b-10"><Switch {...args} value="1" fieldLabel="Switch" /></div>
     <div className="p-b-10"><Switch

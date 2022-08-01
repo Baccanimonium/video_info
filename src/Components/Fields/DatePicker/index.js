@@ -429,11 +429,11 @@ class DatePicker extends PureComponent {
                 <div
                   onMouseDown={onMouseDown}
                   style={style}
-                  className={`display-flex pos-relative flex-full-with fd-column ${className}`}
+                  className={`flex relative flex-full-with fd-column ${className}`}
                 >
                   <div
                     ref={overlayBoundRef}
-                    className="w-100 input-box display-flex flex-min-with bs-date-picker-input"
+                    className="w-100 input-box flex flex-min-with bs-date-picker-input"
                     disabled={disabled}
                     onClick={onOpenOverlayMenu}
                   >
@@ -446,23 +446,23 @@ class DatePicker extends PureComponent {
                       ref={refHiddenInput}
                     />
                     <div
-                      className="input-control display-flex h-100 "
+                      className="input-control flex h-full "
                       style={{ height: "var(--height-input)" }}
                     >
                       <div
-                        className="pos-relative flex-container"
+                        className="relative flex-container"
                         ref={refSuggestInputContainer}
                       >
                         {suggestData
                           ? (
                             <div
-                              className="display-flex a-i-center color-blackDarken-1"
+                              className="flex items-center color-blackDarken-1"
                               style={{ height: "var(--height-input)" }}
                             >
                               {suggestData.reduce((acc, dateItem, i) => {
                                 acc.push(
-                                  <div key={i} className="display-flex a-i-center">
-                                    <div className="pos-relative color-white">
+                                  <div key={i} className="flex items-center">
+                                    <div className="relative color-white">
                                       <SuggestDataInput
                                         id={i}
                                         autoComplete="off"

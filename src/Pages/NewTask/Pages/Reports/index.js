@@ -119,9 +119,9 @@ const Reports = () => {
   return (
     <DataSetContainer className="flex-container ">
       <div className="flex-container">
-        <ReportContainer className="h-100" style={gridStyles} ref={refColumnsContainer}>
+        <ReportContainer className="h-full" style={gridStyles} ref={refColumnsContainer}>
           <ScrollBar>
-            <div className="p-r-15 separator-right m-b-15 pos-relative overflow-hidden">
+            <div className="p-r-15 separator-right m-b-15 relative overflow-hidden">
               <h3>
                 Выбрать отчет
               </h3>
@@ -147,10 +147,10 @@ const Reports = () => {
                     </Button>
                   ))}
                 </ButtonsContainer>
-                <div className="m-t-15 display-flex fd-column overflow-hidden">
+                <div className="m-t-15 flex fd-column overflow-hidden">
                   {activeOption === "Опции расчета" && (
                     <div className="flex-container">
-                      <div className="display-flex p-b-15 separator-bot-greyLight">
+                      <div className="flex p-b-15 separator-bot-greyLight">
                         <RadioButton
                           id="byAmount"
                           label="по сумме"
@@ -223,7 +223,7 @@ const Reports = () => {
                           value={reportState["time"]}
                         >
                           <div className="p-r-15">Время выхода событий:</div>
-                          <div className="display-flex a-i-center">
+                          <div className="flex items-center">
                             <Select
                               valueKey="label"
                               labelKey="label"
@@ -241,7 +241,7 @@ const Reports = () => {
                           value={reportState["duration"]}
                         >
                           <div className="p-r-15">Базовая длительность:</div>
-                          <div className="display-flex a-i-center">
+                          <div className="flex items-center">
                             <Select
                               valueKey="label"
                               labelKey="label"
@@ -265,7 +265,7 @@ const Reports = () => {
                   )}
                   {activeOption === "Опции охвата" && (
                     <>
-                      <WrapperInput className="display-flex a-i-center separator-bot-greyLight p-b-15">
+                      <WrapperInput className="flex items-center separator-bot-greyLight p-b-15">
                         <div className="p-r-15">NBD коррекция:</div>
                         <Select
                           valueKey="label"
@@ -345,7 +345,7 @@ const Reports = () => {
                           </Button>
                         ))}
                       </ButtonsContainer>
-                      <div className="display-flex p-t-15">
+                      <div className="flex p-t-15">
                         {bottomTabsState === "Geo" && (
                           <div className="w-100">
                             <Select
@@ -366,7 +366,7 @@ const Reports = () => {
                             />
                           </div>
                         )}
-                        <div className="display-flex ml-auto p-l-10 a-i-center">
+                        <div className="flex ml-auto p-l-10 items-center">
                           <StyleIcon
                             icon={file}
                             className="m-r-5"

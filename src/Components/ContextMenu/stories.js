@@ -22,7 +22,7 @@ export default {
 }
 
 const Template = (args) => (
-  <div className="display-flex fd-column j-c-start">
+  <div className="flex fd-column j-c-start">
     <div className="p-b-30"><PreviewValueContextMenu {...args} /></div>
     <div className="p-b-30"><PreviewValueContextMenu {...args} textBtn="название кнопки" /></div>
   </div>

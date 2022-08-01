@@ -39,7 +39,7 @@ export default {
 }
 
 const Template = (args) =>
-  <div className="display-flex fd-column j-c-start">
+  <div className="flex fd-column j-c-start">
     <div className="p-b-10"><MultipleInput {...args} /></div>
     <div className="p-b-10"><MultipleInput {...args} InputComponent={Select} addButtonLabel="Добавить еще Select" /></div>
   </div>

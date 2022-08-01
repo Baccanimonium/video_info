@@ -28,13 +28,3 @@
     //transform: rotate(180deg);
   }
 }
-
-.transition-color {
-  transition: color ease-in-out 250ms;
-}
-
-.transition-icon {
-  transition-property: color, transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 250ms;
-}

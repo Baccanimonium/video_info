@@ -16,13 +16,13 @@ export default (OriginalComponent) => {
     }, [onInput])
     return (
       <button
-        className="display-flex a-i-center"
+        className="flex items-center"
         type="button"
         onClick={generatePassword}
       >
         <OriginalComponent
           {...props}
-          className="display-flex align-content-start fw700 color-lightGold"
+          className="flex align-content-start fw700 color-lightGold"
         />
         <RefreshPassGenIcon className="m-l-10" />
       </button>

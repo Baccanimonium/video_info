@@ -63,7 +63,7 @@ const DocumentBusinessButtons = ({ buttonGroupName, renderButtonLimit, customHan
   }, [dropDownButtons, onChangeStatus])
 
   return (
-    <div className="display-flex a-i-center">
+    <div className="flex items-center">
       {defaultButtons
         .map(({ BTN_ID, BUTTON_NAME, COLOR, HINT_TEXT, POPUP, STATUS_ONCLICK, TIMER, DATE_STATUS, HANDLER, disabled }, index) => {
           const ButtonComponent = TIMER !== 0 ? ButtonWithTimer : BsButton
@@ -93,7 +93,7 @@ const DocumentBusinessButtons = ({ buttonGroupName, renderButtonLimit, customHan
               type="button"
               disabled={dropDownButtons.some(({ disabled }) => disabled)}
               open={isContextMenuOpen}
-              className={`m-l-5 btn  black-btn display-flex a-i-center j-c-center ${isContextMenuOpen ? "active" : ""}`}
+              className={`m-l-5 btn  black-btn flex items-center j-c-center ${isContextMenuOpen ? "active" : ""}`}
               onClick={onOpenContextMenu}
             >
               <ExpandIcon className="pos-absolute no-pointer-events" />

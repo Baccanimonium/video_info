@@ -159,9 +159,9 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
     e.preventDefault()
     applyContextMenu([{
       component: ({onClose, title, onSubmit}) => {
-        return <div className="display-flex a-i-center flex-column p-15">
+        return <div className="flex items-center flex-column p-15">
           <div>{title}</div>
-          <div className="display-flex a-i-center m-t-20 j-c-space-between w-100">
+          <div className="flex items-center m-t-20 j-c-space-between w-100">
             <BsButton className="btn grey-bg" onClick={onSubmit}>Да</BsButton>
             <BsButton className="btn golden" onClick={onClose}>Нет</BsButton>
           </div>
@@ -177,7 +177,7 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
   }, [onDelete])
 
   return (
-    <div className="display-flex a-i-center">
+    <div className="flex items-center">
       {type === "condition" ?
         <CardForCondition>
           AND

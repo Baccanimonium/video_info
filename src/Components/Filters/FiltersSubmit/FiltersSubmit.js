@@ -67,20 +67,20 @@ const FiltersSubmit = (
   const disabledFiltersSubmit = useMemo(() => Object.keys(filterQuery).length === 0 && uploadDataOnce && data.length === 0,
     [data, filterQuery, uploadDataOnce])
   return (
-    <div className={`j-c-space-between display-flex m-b-15 h-30 ${className}`}>
-      <div className="display-flex" id="buttonFilter">
+    <div className={`j-c-space-between flex m-b-15 h-30 ${className}`}>
+      <div className="flex" id="buttonFilter">
         {!withouthFilter && (
         <StyleBtn
           disabled={disabledFiltersSubmit}
-          className="golden btn-filter btn j-c-center display-flex a-i-center m-r-10"
+          className="golden btn-filter btn j-c-center flex items-center m-r-10"
           onClick={toggleSideBarFilter}
-          classNameChildren="j-c-center display-flex a-i-center"
+          classNameChildren="j-c-center flex items-center"
           name="Filter"
         >
           filter
           {filtersCount > 0 && (
           <span
-            className="b-r-50percent w-18 h-18 bg-color-blackDarken-2 j-c-center display-flex a-i-center fs-10 fw-400 m-l-10"
+            className="b-r-50percent w-18 h-18 bg-color-blackDarken-2 j-c-center flex items-center fs-10 fw-400 m-l-10"
           >
             {filtersCount}
           </span>
@@ -100,7 +100,7 @@ const FiltersSubmit = (
         <WrapperBtnAndTitle>
           {!withouthSort && (
             <StyleBtn
-              className="min-button golden btn-filter btn j-c-center display-flex a-i-center m-r-10"
+              className="min-button golden btn-filter btn j-c-center flex items-center m-r-10"
               disabled={disabledFiltersSubmit}
               onClick={getSort}
             >

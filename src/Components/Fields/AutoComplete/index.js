@@ -106,7 +106,7 @@ const AutoComplete = ({ onInput, onFocus, onBlur, localStorageKey, memoizeTimeou
         >
           {(overlayBoundRef, onOpenOverlayMenu, OverlayMenu) => (
             <div
-              className="display-flex w-100"
+              className="flex w-100"
               ref={overlayBoundRef}
               onMouseDown={onMouseDown}
             >

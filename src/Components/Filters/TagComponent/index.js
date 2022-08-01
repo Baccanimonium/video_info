@@ -7,8 +7,8 @@ const CloseIcon = Icon(close)
 
 const TagComponent = ({ client, prefix, closeTag }) => (
   <div
-    className="fs-14 bg-color-blackDarken-1 pos-relative p-t-5 p-b-5 p-r-15 p-l-15
-     m-b-5 b-r-4 w-100 display-flex j-c-space-between a-i-center"
+    className="fs-14 bg-color-blackDarken-1 relative p-t-5 p-b-5 p-r-15 p-l-15
+     m-b-5 b-r-4 w-100 flex j-c-space-between items-center"
   >
     <div>
       <div className="color-greyDarken fs-10 l-h-12">

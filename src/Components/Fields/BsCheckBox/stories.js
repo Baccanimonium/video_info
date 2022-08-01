@@ -52,7 +52,7 @@ export default {
 }
 
 const Template = (args) => (
-  <div className="display-flex fd-column j-c-start">
+  <div className="flex fd-column j-c-start">
     <div className="p-b-10"><BsCheckBox {...args} label="Label" id="CheckBox" /></div>
     <div className="p-b-10"><BsCheckBox {...args} label="Label" id="CheckBox2" reverseMode /></div>
     <div className="p-b-10"><BsCheckBox {...args} label="Label" id="CheckBox3" reverseMode disabled /></div>

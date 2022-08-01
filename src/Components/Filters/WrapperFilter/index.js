@@ -13,7 +13,7 @@ const WrapperFilter = ({
 
   return (
     <div
-      className={`${className} ${showFilterList && `separator-bot`}  overflow-hidden display-flex fd-column m-b-15`}
+      className={`${className} ${showFilterList && `separator-bot`}  overflow-hidden flex fd-column m-b-15`}
       style={style}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}

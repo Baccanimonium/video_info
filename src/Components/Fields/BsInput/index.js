@@ -84,11 +84,11 @@ class BsInput extends Component {
     const UnderlineStyles = this.getWidthLine(maxlength, value)
     return (
       <InputComponentContainer
-        className={`${className} display-flex input-box `}
+        className={`${className} flex input-box `}
         style={this.margeStyles(styleInputBox, { minHeight, height })}
       >
         <InputContainer
-          className="pos-relative flex-full-with display-flex wrapper-input-control"
+          className="relative flex-full-with flex wrapper-input-control"
           type={InputType}
         >
           <Input

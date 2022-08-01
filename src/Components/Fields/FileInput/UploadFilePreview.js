@@ -69,7 +69,7 @@ const UploadFilePreview = ({ value, limit, renderLabel, disabled, onRemoveItem, 
             size="30"
             onClick={onDownLoadHandler}
           />
-          <div className="display-flex j-c-space-between w-100 overflow-hidden">
+          <div className="flex j-c-space-between w-100 overflow-hidden">
             <PreviewItemInfo
               type="button"
               onClick={onDownLoadHandler}
@@ -82,7 +82,7 @@ const UploadFilePreview = ({ value, limit, renderLabel, disabled, onRemoveItem, 
               </PreviewItemInfoLabel>
               {fail && (<div className="fs-12 color-pink m-t-5">Download canceled, try again</div>)}
               {progress >= 0 && (
-              <div className="display-flex a-i-center m-t-5">
+              <div className="flex items-center m-t-5">
                 <span className="w-50">{ progress }%</span>
                 <BsProgressbar
                   className="m-l-10"
@@ -91,7 +91,7 @@ const UploadFilePreview = ({ value, limit, renderLabel, disabled, onRemoveItem, 
               </div>
               )}
             </PreviewItemInfo>
-            <div className="display-flex a-i-center">
+            <div className="flex items-center">
               {fail && (
               <ReloadIcon
                 className="m-r-10 color-pink"

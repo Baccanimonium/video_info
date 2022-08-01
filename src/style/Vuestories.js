@@ -162,7 +162,7 @@ vuestories.add("misc.css", () => ({
           <div class="w-100" style="background-color: burlywood; margin: 10px 0">
             w-100
           </div>
-          <div class="h-100" style="background-color: burlywood; margin: 0 10px">
+          <div class="h-full" style="background-color: burlywood; margin: 0 10px">
             h-100
           </div>
         </div>

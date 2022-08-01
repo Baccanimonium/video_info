@@ -9,7 +9,7 @@ const TabHeader = ({path}) => {
 
   return (
     <HeaderContainer
-      className="p-l-15 p-r-15 p-b-10 p-t-10 display-flex j-c-space-between bg-color-greyLight-4 a-i-center"
+      className="p-l-15 p-r-15 p-b-10 p-t-10 flex j-c-space-between bg-color-greyLight-4 items-center"
     >
       <ContainerDatePicker>
         <div className="p-b-10">

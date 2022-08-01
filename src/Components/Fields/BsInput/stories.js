@@ -61,7 +61,7 @@ export default {
 }
 
 const Template = (args) => (
-  <div className="display-flex fd-column j-c-start">
+  <div className="flex fd-column j-c-start">
     <div className="p-b-10"><BsInput {...args} placeholder="type: input" /></div>
     <div className="p-b-10"><BsInput {...args} placeholder="type: input, disabled" disabled /></div>
     <div className="p-b-10"><BsInput {...args} placeholder="type: textarea" type="textarea" /></div>

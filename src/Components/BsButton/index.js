@@ -22,7 +22,7 @@ const BsButton = ({
   className, loading, children, classNameChildren, disabled, onClick, onMouseDown, onMouseUp, type, style, name, id
 }) => (
   <button
-    className={`${className} pos-relative`}
+    className={`${className} relative`}
     disabled={disabled}
     onClick={onClick}
     onMouseDown={onMouseDown}
@@ -33,7 +33,7 @@ const BsButton = ({
     id={id}
   >
     {loading && (
-      <LoaderContainer className="display-flex j-c-center a-i-center no-pointer-events">
+      <LoaderContainer className="flex j-c-center items-center no-pointer-events">
         <PreloaderIcon size="25" className="color-lightGold" />
       </LoaderContainer>
     )}

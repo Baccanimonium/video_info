@@ -16,7 +16,7 @@ const SelectedFilterItems = ({ value, labelKey, onInput, id }) => {
     onInput(value, id)
   }, [id, onInput])
   return (
-    <div className="display-flex fd-column h-100 overflow-hidden">
+    <div className="flex fd-column h-full overflow-hidden">
 
       <WithMoveAbleItems
         value={value}
@@ -30,7 +30,7 @@ const SelectedFilterItems = ({ value, labelKey, onInput, id }) => {
               {({ refContainer, onStartScroll }) => (
                 <ScrollBar
                   ref={refContainer}
-                  className="display-flex flex-wrap h-100"
+                  className="flex flex-wrap h-full"
                 >
                   {value.map(({ [labelKey]: label, suppressFilter }, index) => (
                     <SelectedElement
@@ -41,7 +41,7 @@ const SelectedFilterItems = ({ value, labelKey, onInput, id }) => {
                       onDragEnd={onDragEnd}
                       onMouseDown={onStartScroll}
                       key={label}
-                      className="cursor-grab no-user-select bg-color-blackDarken-1 p-l-10 p-r-10 p-t-5 p-b-5 m-b-5 display-flex a-i-center"
+                      className="cursor-grab no-user-select bg-color-blackDarken-1 p-l-10 p-r-10 p-t-5 p-b-5 m-b-5 flex items-center"
                     >
                       <IconDragIndicator
                         size="12"
@@ -55,7 +55,7 @@ const SelectedFilterItems = ({ value, labelKey, onInput, id }) => {
             </RenderAutoScroll>
             <DeleteContainer
               type="button"
-              className="m-t-20 display-flex fw-300"
+              className="m-t-20 flex fw-300"
               isItemMoving={isItemMoving}
               onDrop={onDropAndDelete}
               onDragOver={onDragOverDeleteContainer}

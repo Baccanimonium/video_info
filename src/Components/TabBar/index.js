@@ -20,7 +20,7 @@ const TabBar = ({ tabs, currentTabIndex, onCloseTab, onChangeActiveTab, classNam
             key={id}
             type="button"
             active={currentTabIndex === i}
-            className="flex a-i-center j-c-space-between h-100 capitalize fw700"
+            className="flex items-center j-c-space-between h-full capitalize fw700"
             notLast={i !== tabs.length - 1}
           >
             <span className="overflow-hidden text-overflow-ellipsis no-white-space">{tabName}</span>

@@ -4,7 +4,7 @@ import { PracticesButtonsContainer, PracticeButton, OpenVersionButton, WrapperBu
 const PracticesBar = ({parentUrl, buttons}) => {
   return (
     <PracticesButtonsContainer>
-      <WrapperButton className="display-flex bg-color-greyLight-4">
+      <WrapperButton className="flex bg-color-greyLight-4">
         {useMemo(() => buttons.map(({ path, text }) => (
           <PracticeButton
             key={text}

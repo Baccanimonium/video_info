@@ -159,7 +159,7 @@ class CheckboxGroup extends Component {
       )
     }
     const slotTitle = (
-      <div className="display-flex a-i-center w-100">
+      <div className="flex items-center w-100">
         <BsCheckBox
           id="selectAll"
           value={this.getAllSelected(options, value, reverseMode)}

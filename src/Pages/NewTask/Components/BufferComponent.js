@@ -19,7 +19,7 @@ const BufferComponent = ({onDelete, node: {id, title}}) => {
     }])
   }, [onDelete])
   return (
-    <div className="display-flex a-i-center">
+    <div className="flex items-center">
       <div key={id}>
         {title}
       </div>

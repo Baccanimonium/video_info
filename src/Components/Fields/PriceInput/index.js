@@ -86,7 +86,7 @@ const PriceInput = ({ value, id, onInput, inputRef, ...props }) => {
       value={normalizedValue}
       id={id}
     >
-      <RubIcon className="m-l-5 m-r-5 a-i-center" size="10" />
+      <RubIcon className="m-l-5 m-r-5 items-center" size="10" />
     </BsInput>
   )
 }

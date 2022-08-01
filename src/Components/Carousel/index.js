@@ -77,18 +77,18 @@ const Carousel = ({ children, arrowLeft: ArrowLeft, arrowRight: ArrowRight, valu
   }, [availableScroll, value])
 
   return (
-    <div className="w-100 h-100 flex-full-with display-flex overflow-hidden">
+    <div className="w-100 h-full flex-full-with flex overflow-hidden">
       {scrollPosition > 0 && clientWidth < scrollWidth && (
         <ArrowsContainer onClick={handleScroll(false)}>
           <ArrowLeft />
         </ArrowsContainer>
       )}
       <div
-        className="w-100 h-100 flex-full-with display-flex overflow-hidden"
+        className="w-100 h-full flex-full-with flex overflow-hidden"
         ref={carouselContainer}
       >
         <SlidesContainer
-          className="display-flex flex-full-with"
+          className="flex flex-full-with"
           style={transitionState}
           ref={slidesContainer}
           onWheel={handleHorizontalScroll}
@@ -96,7 +96,7 @@ const Carousel = ({ children, arrowLeft: ArrowLeft, arrowRight: ArrowRight, valu
           {children.map((s, index) => (
             <div
               key={index}
-              className={`h-100 ${index === middlewareIndex ? "active" : ""}`}
+              className={`h-full ${index === middlewareIndex ? "active" : ""}`}
               onClick={handleChangeTab(index)}
             >
               {s}

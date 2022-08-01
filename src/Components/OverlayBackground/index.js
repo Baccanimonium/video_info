@@ -6,7 +6,7 @@ import { Fon } from "./styles"
 const OverlayBackground = ({ filterLocation, children, onClick, onKeyUp, onKeyDown, className }) => (
   <Fon filterLocation={filterLocation} className={className}>
     <div
-      className="w-100 h-100"
+      className="w-100 h-full"
       onKeyUp={onKeyUp}
       onKeyDown={onKeyDown}
       onClick={onClick}

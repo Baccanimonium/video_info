@@ -60,7 +60,7 @@ const BsCheckBox = ({
 
   return (
     <CheckBoxContainer
-      className={`${className} display-flex a-i-center`}
+      className={`${className} flex items-center`}
       style={style}
       disabled={disabled}
       type="button"

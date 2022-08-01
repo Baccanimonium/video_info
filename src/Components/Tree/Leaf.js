@@ -117,7 +117,7 @@ const Leaf = (props) => {
   return (
     <LeafContainer level={level} selected={leafVal === selectedNode}>
       <div
-        className="display-flex a-i-center"
+        className="flex items-center"
         onDrop={onDrop}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}

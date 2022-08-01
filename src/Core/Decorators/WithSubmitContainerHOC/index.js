@@ -7,7 +7,7 @@ const WithSubmitContainerHoc = (Component) => {
     const initialValue = useRef(value)
     const valueChanged = initialValue.current !== value
     return (
-      <div className="display-flex fd-column w-100">
+      <div className="flex fd-column w-100">
         <Component {...props} showToggleButton={false} />
         <button
           type="submit"

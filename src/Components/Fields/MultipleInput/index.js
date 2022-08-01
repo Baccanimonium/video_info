@@ -82,7 +82,7 @@ const MultipleInput = ({
         <button
           type="button"
           onClick={deleteInput(realIndex, virtualInput, i)}
-          className="display-flex j-c-flex-end"
+          className="flex j-c-flex-end"
         >
           <IconClose size="8" className="p-b-5" />
         </button>

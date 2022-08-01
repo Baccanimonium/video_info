@@ -53,7 +53,7 @@ export default {
 }
 
 const Template = (args) => (
-  <div className="display-flex fd-column j-c-start">
+  <div className="flex fd-column j-c-start">
     <div className="p-b-10"> <FiltersSubmit {...args}>По умолчанию</FiltersSubmit></div>
     <div className="p-b-10"> <FiltersSubmit {...args} sortQuery="+id">Изменение отображения кнопки сортировки</FiltersSubmit></div>
     <div className="p-b-10"> <FiltersSubmit {...args} sortQuery="-id">Изменение отображения кнопки сортировки</FiltersSubmit></div>

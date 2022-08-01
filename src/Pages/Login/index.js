@@ -71,7 +71,7 @@ const Login = ({onSubmit, initialRoute}) => {
           </BaseButton>
         </AlertWindow>
         <ContentContainer>
-          <FormContainer className="display-flex fd-column">
+          <FormContainer className="flex fd-column">
             <FormTittle className="fw700">
               Welcome
             </FormTittle>
