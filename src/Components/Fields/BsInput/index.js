@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import memoizeOne from "memoize-one"
 import {InputComponentContainer, InputContainer, InputFillIndicator} from "./styles"
+import "./style-input.scss"
 
 export { InputComponentContainer, InputContainer }
 

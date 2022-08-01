@@ -131,20 +131,20 @@ const DownloadTask = () => {
               <div className="flex-container">
               </div>
               <div className="flex justify-end mb-5">
-                <BorderButtonGold
+                <GoldButton
                   type="button"
                   className="w-32 mr-2"
                   onClick={saveTask}
                 >
                   Сохранить
-                </BorderButtonGold>
-                <BorderButtonGold
+                </GoldButton>
+                <GoldButton
                   type="button"
                   className="w-32"
                   onClick={download}
                 >
                   Продолжить
-                </BorderButtonGold>
+                </GoldButton>
               </div>
             </div>
             <AlertWindow

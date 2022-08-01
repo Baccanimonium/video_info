@@ -28,30 +28,6 @@ body {
   font-weight: 400;
 }
 
-@keyframes dash {
-  from {
-   filter: drop-shadow( 1px 1px 2px rgba(161, 137, 69, 0.49));
-  }
-  to {
-    filter: drop-shadow( 2px 5px 4px rgba(161, 137, 69, 0.99))
-  }
-}
-// todo где-то используется?
-@keyframes bounce {
-  0% {
-    top: 150px;
-    border-radius: 60px 60px 20px 20px;
-    transform: scaleX(1.2);
-  }
-  35% {
-    border-radius: 50%;
-    transform: scaleX(1);
-  }
-  100% {
-    top: 0;
-  }
-}
-
 :root {
   --font-helvetica: "Helvetica", sans-serif;
 
@@ -330,33 +306,12 @@ a {
   justify-self: center;
 }
 
-.WS-nowrap {
-  white-space: nowrap;
-}
 .no-white-space {
   white-space: nowrap;
 }
 
 .overflow-hidden {
   overflow: hidden;
-}
-.overflowY-scroll {
-  overflow-y: scroll;
-}
-
-// стиль в сетингсе
-.container-rubber {
-  @media (min-width: 1440px) {
-    padding: 0 7%;
-  }
-  @media (min-width: 1600px) {
-    padding: 0 12%;
-  }
-}
-
-
-.pointer-events-auto {
-  pointer-events: auto;
 }
 
 

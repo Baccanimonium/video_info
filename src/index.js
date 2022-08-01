@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import { RecoilRoot } from "recoil"
 import AppPreloader from "./AppPreloader"
@@ -13,7 +13,6 @@ import dayjs from "dayjs"
 import customParseFormat from "dayjs/plugin/customParseFormat"
 import weekOfYear from "dayjs/plugin/weekOfYear"
 
-
 import "react-virtualized/styles.css";
 import 'rc-tree/assets/index.less';
 import "react-perfect-scrollbar/dist/css/styles.css"
@@ -21,17 +20,16 @@ import "@/style/fonts.scss"
 import "@/style/style.scss"
 import "@/style/style-form.scss"
 import "@/style/misc.scss"
-import "@/style/style-input.scss"
 import "@/style/colors.scss"
 import "@/style/markupHelpers.scss"
 import "@/style/typography.scss"
 import "@/style/iconEffects/style.scss"
 import "@/style/style-btn.scss"
 import "@/style/style-text.scss"
-import "@/style/style-global-components.scss"
-import "@/style/hoverEffects.scss"
+import axios from "axios";
 const weekday = require("dayjs/plugin/weekday")
 const isoWeek = require("dayjs/plugin/isoWeek")
+axios.defaults.headers.common["X-API-KEY"] = 12345
 
 dayjs.extend(isoWeek)
 dayjs.extend(weekOfYear)
