@@ -25,7 +25,6 @@ import {AlertWindow} from "@/Components/ModalWindows";
 const NewTask = ({updateState}) => {
   const [alert, setAlert] = useState("")
   const match = useMatch(`/tab/new_task/:idSource/:sourceTitle/*`)
-
   const {
     tabState,
     setTabState,
@@ -43,13 +42,13 @@ const NewTask = ({updateState}) => {
 
   useEffect(() => {
     if (match && !dataSource) {
-      const { params: { idSource, sourceTitle } } = match
-      setTabState({ dataSource: { id: idSource, title: sourceTitle } })
+      const {params: {idSource, sourceTitle}} = match
+      setTabState({dataSource: {id: idSource, title: sourceTitle}})
     }
   }, [])
 
   const updateTabState = useCallback((state) => {
-    setTabState({...tabState, ...state })
+    setTabState({...tabState, ...state})
   }, [tabState])
 
   const timerRef = useRef()
@@ -245,11 +244,11 @@ const NewTask = ({updateState}) => {
                   />
                   <Route
                     path="/reports/*"
-                    element={<Reports tabState={tabState} updateTabState={updateTabState} />}
+                    element={<Reports tabState={tabState} updateTabState={updateTabState}/>}
                   />
                   <Route
                     path="/result/*"
-                    element={<Result tabState={tabState} updateTabState={updateTabState} />}
+                    element={<Result tabState={tabState} updateTabState={updateTabState}/>}
                   />
                   <Route
                     path="*"
