@@ -139,7 +139,7 @@ const Reports = ({ tabState: { reportState= defaultReportState}, updateTabState 
                   )}
                   {activeOption === "Опции охвата" && (
                     <>
-                      <WrapperInput className="flex a-i-center separator-bot-greyLight pb-4">
+                      <WrapperInput className="flex items-center separator-bot-greyLight pb-4">
                         <div className="pr-4">NBD коррекция:</div>
                         <Select
                           valueKey="label"

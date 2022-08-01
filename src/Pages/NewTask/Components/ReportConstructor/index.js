@@ -36,12 +36,12 @@ const ReportConstructor = ({openModalWindow}) => {
         }
     }
     return (
-        <div className="h-100">
+        <div className="h-full">
             <div
-                className="display-flex j-c-space-between p-10 a-i-center"
+                className="flex j-c-space-between p-10 items-center"
                 style={{borderBottom: "2px solid black", fontSize: "16px"}}
             >
-                <div className="display-flex a-i-center">
+                <div className="flex items-center">
                     <RenderOverlayMenu
                         onOpenOverlayMenu={openMenu}
                         renderOverlayMenu={openSourceMenu}
@@ -66,7 +66,7 @@ const ReportConstructor = ({openModalWindow}) => {
                                             </div>
                                             {openSourceMenu && (
                                                 <OverlayMenu
-                                                    className="display-flex flex-column j-c-center p-10 h-100"
+                                                    className="flex flex-column j-c-center p-10 h-full"
                                                     style={{height: "80%"}}
                                                 >
                                                     <DataSourceModal

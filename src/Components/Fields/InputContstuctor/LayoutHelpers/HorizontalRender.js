@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { StyleChildren } from "./styles"
 
 const HorizontalRender = ({ children, button, leftIndent, rightIndent }) => (
-  <div className="display-flex">
+  <div className="flex">
     <StyleChildren leftIndent={leftIndent} rightIndent={rightIndent}>
       {children}
     </StyleChildren>

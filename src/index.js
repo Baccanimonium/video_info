@@ -28,7 +28,6 @@ import "@/style/typography.scss"
 import "@/style/iconEffects/style.scss"
 import "@/style/style-btn.scss"
 import "@/style/style-text.scss"
-import "@/style/animations.scss"
 import "@/style/style-global-components.scss"
 import "@/style/hoverEffects.scss"
 const weekday = require("dayjs/plugin/weekday")

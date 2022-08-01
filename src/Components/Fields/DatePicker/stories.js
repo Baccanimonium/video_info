@@ -77,7 +77,7 @@ export default {
 }
 
 const Template = (args) => (
-  <div className="display-flex fd-column j-c-start">
+  <div className="flex fd-column j-c-start">
     <DatePicker {...args} id="DatePicker" />
     <DatePicker {...args} id="DatePicker" value={[]} />
     <DatePicker {...args} id="DatePicker" disabled />

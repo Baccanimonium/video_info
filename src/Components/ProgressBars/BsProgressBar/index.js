@@ -8,7 +8,7 @@ const BsProgressbar = React.forwardRef(({ children, percentage, customStyles }, 
     [percentage, customStyles],
   )
   return (
-    <LineContainer className="pos-relative b-r-5 bg-color-greyLight-1" ref={ref}>
+    <LineContainer className="relative b-r-5 bg-color-greyLight-1" ref={ref}>
       <ProgressLine style={getElementStyles} />
       {children}
     </LineContainer>

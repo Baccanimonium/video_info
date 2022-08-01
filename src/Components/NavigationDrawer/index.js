@@ -5,6 +5,7 @@ import { LeftMenuContainer, LeftMenuLogo, LeftMenuItem, ToggleToolbar, ListTile,
   OpenMenuItem, TextLogo, MenuLink, WrapperMenuLink } from "./styles"
 import NavigationButton from "../NavigationButton";
 import TipsOverlayComponent from "../TipsHelp/TipsOverlayComponent";
+import "./styles.scss"
 
 const NavigationDrawer = ({ routes, onOpenNewTab }) => {
   const [tipsName, setTipsName]= useState("")
@@ -53,7 +54,7 @@ const NavigationDrawer = ({ routes, onOpenNewTab }) => {
     <LeftMenuContainer style={{ width: leftWidth }}>
       <LeftMenuLogo>
         <img src="/assets/toolbar-left/three-points.svg" alt="" />
-        <OpenMenuItem hideToolbar={hideToolbar} className="display-flex a-i-center">
+        <OpenMenuItem hideToolbar={hideToolbar} className="flex items-center">
           <TextLogo>VideoInfo</TextLogo>
         </OpenMenuItem>
       </LeftMenuLogo>
@@ -64,9 +65,9 @@ const NavigationDrawer = ({ routes, onOpenNewTab }) => {
           onMouseEnter={showTips(name)}
           onMouseLeave={closeTips}
         >
-          <NavigationButton to={`/tab${route}`} name={name} className="w-100 h-100" onClick={onOpenNewTab}>
+          <NavigationButton to={`/tab${route}`} name={name} className="w-100 h-full" onClick={onOpenNewTab}>
             <ListTile hideToolbar={hideToolbar}>
-              <div className="icon-container transition-icon cursor a-i-center j-c-center display-flex">
+              <div className="icon-container transition-icon cursor items-center j-c-center flex">
                 <Picture
                   size={size}
                 />
@@ -78,7 +79,7 @@ const NavigationDrawer = ({ routes, onOpenNewTab }) => {
                 />
               )}
               {!hideToolbar && (
-                <OpenMenuItem hideToolbar={hideToolbar} className="display-flex a-i-center">
+                <OpenMenuItem hideToolbar={hideToolbar} className="flex items-center">
                   <div className="text-menu font-weight-bold">{name}</div>
                 </OpenMenuItem>
               )}
@@ -106,7 +107,7 @@ const NavigationDrawer = ({ routes, onOpenNewTab }) => {
         </WrapperMenuLink>
       )}
       <ToggleToolbar
-        className={`display-flex a-i-center j-c-center bg-color-blackDarken-1 ${toggleArrow}`}
+        className={`flex items-center j-c-center bg-color-blackDarken-1 ${toggleArrow}`}
         onClick={toggleToolbar}
       >
         <img className={`icon-arrow ${iconArrowStyle}`} src="/assets/icon-arrow/arrow-right-white.svg" alt="" />

@@ -99,7 +99,7 @@ export default {
 }
 
 const Template = (args) => (
-  <div className="display-flex fd-column j-c-start">
+  <div className="flex fd-column j-c-start">
     <div className="p-b-10"><Select {...args} placeholder="Select with options" /></div>
     <div className="p-b-10"><Select {...args} placeholder="Select with disabled" disabled /></div>
     <div className="p-b-10"><Select {...args} options={[]} placeholder="Select without options" /></div>

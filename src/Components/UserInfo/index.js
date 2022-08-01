@@ -7,6 +7,7 @@ import ContextMenu from "@/component_ocean/Components/ContextMenu";
 import Icon from "@/Components/Icon"
 import {logoutMenu} from "./icon/logoutMenu"
 import {useNavigate} from "react-router-dom";
+import {ContextMenuStyle} from "@/Components/ContextMenu";
 
 const AvatarPortrait = UserPortrait.withComponent(Avatar)
 const LogoutIcon = Icon(logoutMenu)
@@ -43,7 +44,7 @@ const UserInfo = () => {
         onClick={() => navigate("/login")}
       />
       {isMenuOpen && (
-        <ContextMenu
+        <ContextMenuStyle
           className="flex items-center pt-1.5 pb-1.5 flex-col"
           onClose={closeMenu}
           width={200}
@@ -61,7 +62,7 @@ const UserInfo = () => {
               <span>{label}</span>
             </Component>
           ))}
-        </ContextMenu>
+        </ContextMenuStyle>
       )}
     </button>
   )

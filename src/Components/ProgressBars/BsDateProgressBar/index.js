@@ -7,12 +7,12 @@ import { ProgressBarContainer, ProgressBarTitle } from "./styles"
 const BsDateProgressbar = ({ creationDate, deadlineDate }) => {
   const styles = useDeadlineProgressBar(creationDate, deadlineDate)
   return deadlineDate && (
-  <ProgressBarContainer className="display-flex jc-fe a-i-center">
+  <ProgressBarContainer className="flex jc-fe items-center">
     <ProgressBarTitle className="color-grey p-r-13">
       Deadline
     </ProgressBarTitle>
     <div className="m-b-3">
-      <div className="display-flex jc-fe fs-12 color-greyLight-6">
+      <div className="flex jc-fe fs-12 color-greyLight-6">
         {deadlineDate}
       </div>
       <BsProgressbar customStyles={styles} />

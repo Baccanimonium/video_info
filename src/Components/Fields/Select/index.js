@@ -19,7 +19,7 @@ import {
 const scrollOptions = { wheelPropagation: false }
 
 export const AlwaysOpenContainer = ({ children }) => (
-  <div className="display-flex fd-column w-100 m-t-3">
+  <div className="flex fd-column w-100 m-t-3">
     {children}
   </div>
 )
@@ -362,11 +362,11 @@ class Select extends PureComponent {
                   className={className}
                 >
                   <InputSelectContainer
-                    className="pos-relative w-100 overflow-hidden flex-full-with display-flex"
+                    className="relative w-100 overflow-hidden flex-full-with flex"
                     allWaysExpandedMultipleSelection={allWaysExpandedMultipleSelection}
                     disabled={disabled}
                   >
-                    <div className="display-flex a-i-center pos-relative w-100">
+                    <div className="flex items-center relative w-100">
                       <SelectInput
                         ref={searchInputRef}
                         id={id}
@@ -426,9 +426,9 @@ class Select extends PureComponent {
                     minSize={tipMinSize}
                   >
                     {(filteredOptions.length > 0) && !disabled && (
-                      <SelectedOptions className="display-flex fd-column">
+                      <SelectedOptions className="flex fd-column">
                         <ScrollBar
-                          className="h-100"
+                          className="h-full"
                           ref={scrollBarRef}
                           options={scrollOptions}
                         >

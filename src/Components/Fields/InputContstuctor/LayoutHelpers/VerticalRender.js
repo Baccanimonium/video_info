@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const VerticalRender = ({ children, button }) => (
-  <div className="display-flex fd-column a-i-flex-start">
+  <div className="flex fd-column a-i-flex-start">
     <div className="word-break-all">
       {children}
     </div>

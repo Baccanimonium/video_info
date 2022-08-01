@@ -14,7 +14,7 @@ const DefaultInputWrapper = React.forwardRef(({
     validationErrors, validationAlerts, submitFailed, changed, touched, formHasSubmitted, validationRules, formPayload
   )
   return (
-    <InputWrapperContainer className={`${className} display-flex flex-column flex-full-with`} style={style} ref={ref}>
+    <InputWrapperContainer className={`${className} flex flex-column flex-full-with`} style={style} ref={ref}>
       {!withoutLabel && (
       <InputLabel htmlFor={id}>
         { label } {isRequired && <span>*</span>}{ suffix }

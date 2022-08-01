@@ -13,12 +13,12 @@ const Tab = () => {
   return (
     <TabController userId={1}>
       {({ tabState: { tabs, currentTabIndex }, onOpenNewTab, onChangeActiveTab, onCloseTab }) => (
-      <div className="display-flex h-100">
+      <div className="flex h-full">
         <NavigationDrawer
           onOpenNewTab={onOpenNewTab}
           routes={tabNavigationMenu}
         />
-        <div className="flex-container pos-relative w-100 overflow-hidden">
+        <div className="flex-container relative w-100 overflow-hidden">
           <TabBar
             tabs={tabs}
             currentTabIndex={currentTabIndex}

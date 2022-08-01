@@ -11,7 +11,7 @@ export default (Icon, name = "Icon") => Vue.component(`WithCaret${name}`, {
   render(h, { data: { attrs, listeners }, children: ch }) {
     return (
       <div
-        className="pos-relative"
+        className="relative"
         on={listeners}
       >
         <Icon attrs={attrs} />
