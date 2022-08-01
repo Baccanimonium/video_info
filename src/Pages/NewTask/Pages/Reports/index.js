@@ -4,8 +4,8 @@ import {DataSetContainer} from "../../styles";
 import {ReportContainer, WrapperInput} from "./styles"
 import Tree from '@/component_ocean/Components/Tree';
 import {ButtonsContainer, Button} from "@/Components/ButtonsTabBar/style";
-import BsCheckBox from "@/component_ocean/Components/Inputs/CheckBox";
-import RadioButton from "../../../../Components/Fields/RadioButton";
+import CheckBox from "@/component_ocean/Components/Inputs/CheckBox";
+import RadioButton from "@/component_ocean/Components/Inputs/RadioButton";
 import Select from "@/component_ocean/Components/Inputs/Select";
 import DatePicker from "@/component_ocean/Components/Inputs/DatePicker";
 import {ContainerDatePicker} from "@/Components/TabHeader/style";
@@ -14,20 +14,24 @@ import {copy} from "@/Icons/copy";
 import {file} from "@/Icons/file";
 import {basketTrash} from "@/Icons/basketTrash";
 import {StyleIcon} from "@/Components/styleIcon";
-import {ReportOptions, CalculationOptions, dayOptions, exitTime, durationOptions, GenderOptions,
+import CalculationOptionsComponent from './Components/CalculationOptions'
+import {ReportOptions, GenderOptions,
   GeoOptions, LocationOptions, NdbCorrectionList, CurrentAdsList, BaseDayOptions, optionsButtons, bottomOptionsButtons
 } from "./constants"
 
-
-import {NumericInputWithControls} from "@/Components/Fields/NumericInput";
 import SelectedParams from "./Components/SelectedParams";
 import Dictionaries from "./Components/Dictionaries";
 import {Resizer} from "./styles";
 import {useRecoilState} from "recoil";
 import {cachedLocalStorageValue} from "@/component_ocean/Logic/Storages/localStorageCache";
 
+const defaultReportState = {
+  precision: 4,
+  time: " ",
+  duration: " ",
+}
 
-const Reports = () => {
+const Reports = ({ tabState: { reportState= defaultReportState}, updateTabState }) => {
   const refColumnsContainer = useRef()
   const [resizeState, setResizeState] = useState({})
   const [columnState, setColumnState] = useRecoilState(cachedLocalStorageValue("task_reports"))
@@ -36,34 +40,16 @@ const Reports = () => {
     return { gridTemplateColumns: `${firstColumn} ${secondColumn} auto` };
   }, [columnState,resizeState])
 
-  const [reportState, setReportsState] = useState({
-    precision: 4,
-    time: " ",
-    duration: " ",
-  })
-
+  const setReportsState = useCallback((state) => {
+    updateTabState({ reportState: { ...reportState, ...state } })
+  }, [reportState])
 
   const [activeOption, setActiveOption] = useState("Опции расчета")
   const [bottomTabsState, setBottomTabsState] = useState("Geo")
 
-  const [totalLine, setTotalLine] = useState()
-  const [interval, setInterval] = useState()
-  const [growing, setGrowing] = useState()
-
-  const [groupEvents, setGroupEvents] = useState()
-
-  const [valueDate, setValueDate] = useState([])
-  const [originalOutputs, setOriginalOutputs] = useState("")
-
   const onFormInput = useCallback((id) => (value) => {
-    setReportsState((prevState) => ({...prevState, [id]: value}))
+    setReportsState(({ [id]: value }))
   }, [])
-
-  const formPayload = {dateRange: []}
-
-  const onCheck = useCallback((checkedKeys, info) => {
-    console.log('onCheck', checkedKeys, info);
-  }, []);
 
   const openOptions = useCallback((e) => {
     setActiveOption(e.target.innerText)
@@ -119,13 +105,13 @@ const Reports = () => {
   return (
     <DataSetContainer className="flex-container ">
       <div className="flex-container">
-        <ReportContainer className="h-100" style={gridStyles} ref={refColumnsContainer}>
+        <ReportContainer className="h-full" style={gridStyles} ref={refColumnsContainer}>
           <ScrollBar>
-            <div className="p-r-15 separator-right m-b-15 pos-relative overflow-hidden">
+            <div className="pr-4 separator-right mb-4 relative overflow-hidden">
               <h3>
                 Выбрать отчет
               </h3>
-              <div className="m-b-20">
+              <div className="mb-5">
                 <Select
                   labelKey="label"
                   valueKey="id"
@@ -147,126 +133,14 @@ const Reports = () => {
                     </Button>
                   ))}
                 </ButtonsContainer>
-                <div className="m-t-15 display-flex fd-column overflow-hidden">
+                <div className="mt-4 flex flex-col overflow-hidden">
                   {activeOption === "Опции расчета" && (
-                    <div className="flex-container">
-                      <div className="display-flex p-b-15 separator-bot-greyLight">
-                        <RadioButton
-                          id="byAmount"
-                          label="по сумме"
-                          value={reportState["calculationOptions"]}
-                          onInput={onFormInput("calculationOptions")}
-                          meaning={CalculationOptions[0]}
-                          className="m-r-30"
-                        />
-                        <RadioButton
-                          id="average"
-                          label="по среднему"
-                          meaning={CalculationOptions[1]}
-                          value={reportState["calculationOptions"]}
-                          onInput={onFormInput("calculationOptions")}
-                          className=""
-                        />
-                      </div>
-                      <div className="p-t-15 separator-bot-greyLight">
-                        <BsCheckBox
-                          id="totalLine"
-                          label="Итоговая строка"
-                          value={totalLine}
-                          onInput={setTotalLine}
-                          className="m-b-15"
-                        />
-                        <BsCheckBox
-                          id="interval"
-                          label="Промежуточный итог"
-                          value={interval}
-                          onInput={setInterval}
-                          className="m-b-15"
-                        />
-                        <BsCheckBox
-                          id="growing"
-                          label="Нарастающий итог"
-                          value={growing}
-                          onInput={setGrowing}
-                          className="m-b-15"
-                        />
-                        <WrapperInput
-                          value={reportState["precision"]}
-                        >
-                          <div className="p-r-15">Точность:</div>
-                          <div>
-                            <NumericInputWithControls
-                              id={"precision"}
-                              value={reportState["precision"]}
-                              onInput={onFormInput("precision")}
-                            />
-                          </div>
-                        </WrapperInput>
-                      </div>
-                      <div className="p-t-15 separator-bot-greyLight">
-                        <WrapperInput
-                          value="ПН"
-                        >
-                          <div className="p-r-15">Первый день недели:</div>
-                          <div>
-                            <Select
-                              valueKey="label"
-                              labelKey="label"
-                              options={dayOptions}
-                              id={"week"}
-                              value={reportState["week"]}
-                              onInput={onFormInput("week")}
-                            />
-                          </div>
-                        </WrapperInput>
-                        <WrapperInput
-                          value={reportState["time"]}
-                        >
-                          <div className="p-r-15">Время выхода событий:</div>
-                          <div className="display-flex a-i-center">
-                            <Select
-                              valueKey="label"
-                              labelKey="label"
-                              options={exitTime}
-                              id={"time"}
-                              value={reportState["time"]}
-                              onInput={onFormInput("time")}
-                            />
-                            <div className="p-l-5">мин</div>
-                          </div>
-                        </WrapperInput>
-                      </div>
-                      <div className="p-t-15 separator-bot-greyLight">
-                        <WrapperInput
-                          value={reportState["duration"]}
-                        >
-                          <div className="p-r-15">Базовая длительность:</div>
-                          <div className="display-flex a-i-center">
-                            <Select
-                              valueKey="label"
-                              labelKey="label"
-                              options={durationOptions}
-                              id={"duration"}
-                              value={reportState["duration"]}
-                              onInput={onFormInput("duration")}
-                            />
-                            <div className="p-l-5">сек</div>
-                          </div>
-                        </WrapperInput>
-                      </div>
-                      <BsCheckBox
-                        id="groupEvents"
-                        label="Группировать события"
-                        value={groupEvents}
-                        onInput={setGroupEvents}
-                        className="m-b-15 p-t-15 p-b-15 separator-bot-greyLight"
-                      />
-                    </div>
+                    <CalculationOptionsComponent reportState={reportState} onFormInput={onFormInput}/>
                   )}
                   {activeOption === "Опции охвата" && (
                     <>
-                      <WrapperInput className="display-flex a-i-center separator-bot-greyLight p-b-15">
-                        <div className="p-r-15">NBD коррекция:</div>
+                      <WrapperInput className="flex a-i-center separator-bot-greyLight pb-4">
+                        <div className="pr-4">NBD коррекция:</div>
                         <Select
                           valueKey="label"
                           labelKey="label"
@@ -277,8 +151,8 @@ const Reports = () => {
                           placeholder="Впишите NBD канал"
                         />
                       </WrapperInput>
-                      <div className=" p-b-15">
-                        <div className="p-b-15">
+                      <div className=" pb-4">
+                        <div className="pb-4">
                           Базовый день:
                         </div>
                         <RadioButton
@@ -287,7 +161,7 @@ const Reports = () => {
                           onInput={onFormInput("baseDayOptions")}
                           meaning={BaseDayOptions[0]}
                           label="Автоматическое определение"
-                          className="m-b-15"
+                          className="mb-4"
                         />
                         <RadioButton
                           id="baseDayOptions"
@@ -295,16 +169,15 @@ const Reports = () => {
                           onInput={onFormInput("baseDayOptions")}
                           meaning={BaseDayOptions[1]}
                           label="Определение пользователем"
-                          className="p-b-15"
+                          className="pb-4"
                         />
                         <ContainerDatePicker className="flex">
-                          <div className="p-r-15">Выберите дату:</div>
+                          <div className="pr-4">Выберите дату:</div>
                           <DatePicker
                             id="dateRange"
-                            formPayload={formPayload}
-                            onInput={setValueDate}
-                            allWaysOpen
-                            value={valueDate}
+                            formPayload={reportState}
+                            value={reportState["dateRange"]}
+                            onInput={onFormInput("dateRange")}
                             placeholder="Выберите дату"
                           />
                         </ContainerDatePicker>
@@ -312,10 +185,10 @@ const Reports = () => {
                     </>
                   )}
                   {activeOption === "Доп опции" && (
-                    <div className="separator-bot-greyLight m-b-15">
-                      <div className="m-b-10">Текущий список предметов рекламы:</div>
+                    <div className="separator-bot-greyLight mb-4">
+                      <div className="mb-2.5">Текущий список предметов рекламы:</div>
                       <Select
-                        className="m-b-10"
+                        className="mb-2.5"
                         options={CurrentAdsList}
                         id="listAdvertising"
                         value={reportState["listAdvertising"]}
@@ -323,15 +196,15 @@ const Reports = () => {
                         valueKey="id"
                         labelKey="label"
                       />
-                      <BsCheckBox
+                      <CheckBox
                         id="originalOutputs"
                         label="Количество только оригинальных выходов"
-                        value={originalOutputs}
-                        onInput={setOriginalOutputs}
-                        className="m-b-15"
+                        value={reportState["originalOutputs"]}
+                        onInput={onFormInput("originalOutputs")}
+                        className="mb-4"
                       />
                       <Tree
-                        className="p-b-15 "
+                        className="pb-4"
                         options={GenderOptions}
                       />
                       <ButtonsContainer>
@@ -345,9 +218,9 @@ const Reports = () => {
                           </Button>
                         ))}
                       </ButtonsContainer>
-                      <div className="display-flex p-t-15">
+                      <div className="flex pt-4">
                         {bottomTabsState === "Geo" && (
-                          <div className="w-100">
+                          <div className="w-full">
                             <Select
                               valueKey="label"
                               labelKey="label"
@@ -359,22 +232,22 @@ const Reports = () => {
                           </div>
                         )}
                         {bottomTabsState === "Location" && (
-                          <div className="w-100">
+                          <div className="w-full">
                             <Tree
                               defaultExpandAll
                               options={LocationOptions}
                             />
                           </div>
                         )}
-                        <div className="display-flex ml-auto p-l-10 a-i-center">
+                        <div className="flex ml-auto pl-2.5 items-center">
                           <StyleIcon
                             icon={file}
-                            className="m-r-5"
+                            className="mr-1.5"
                             size={21}
                           />
                           <StyleIcon
                             icon={copy}
-                            className="m-r-5"
+                            className="mr-1.5"
                             size={22}
                           />
                           <StyleIcon

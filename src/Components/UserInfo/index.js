@@ -1,23 +1,23 @@
-import React, { useCallback, useMemo, useState } from "react"
+import React, {useCallback, useMemo, useState} from "react"
 import UserPortrait from "@/Components/UserPortraitStyle"
-import { useRecoilState, useRecoilValue } from "recoil"
-import { tokenAtom} from "@/Store/userObject"
+import {useRecoilState} from "recoil"
+import {tokenAtom} from "@/Store/userObject"
 import Avatar from "@/Components/Avatar"
-import WithCloseWindow from "@/Core/RenderProps/withCloseWindow"
+import ContextMenu from "@/component_ocean/Components/ContextMenu";
 import Icon from "@/Components/Icon"
-import RenderOverlayMenu from "@/Components/OverlayMenu/RenderOverlayMenu"
-import { logoutMenu } from "./icon/logoutMenu"
-import { UserOverlay } from "./styles"
+import {logoutMenu} from "./icon/logoutMenu"
 import {useNavigate} from "react-router-dom";
 
 const AvatarPortrait = UserPortrait.withComponent(Avatar)
 const LogoutIcon = Icon(logoutMenu)
 
 const UserInfo = () => {
-  const { 1: removeToken } = useRecoilState(tokenAtom)
+  const {1: removeToken} = useRecoilState(tokenAtom)
   const [isMenuOpen, setOpenMenuState] = useState(false)
-  const closeMenu = useCallback(() => { setOpenMenuState(false) }, [])
-  const toggleMenuState = useCallback(() => setOpenMenuState(!isMenuOpen), [isMenuOpen])
+  const closeMenu = useCallback(() => {
+    setOpenMenuState(false)
+  }, [])
+  const toggleMenuState = useCallback(() => setOpenMenuState(true), [])
   const navigate = useNavigate();
 
   const menuItems = useMemo(() => [
@@ -30,50 +30,40 @@ const UserInfo = () => {
   ], [removeToken])
 
   return (
-    <RenderOverlayMenu
-      onOpenOverlayMenu={toggleMenuState}
-      renderOverlayMenu={isMenuOpen}
-      MenuComponent={UserOverlay}
+    <button
+      type="button"
+      className="flex items-center ml-6"
+      onClick={toggleMenuState}
     >
-      {(overlayBoundRef, onOpenOverlayMenu, OverlayMenu) => (
-        <WithCloseWindow closeWindow={closeMenu} byKey={isMenuOpen}>
-          {(onMouseDown) => (
-            <button
-              ref={overlayBoundRef}
-              type="button"
-              className="display-flex a-i-center m-l-25"
-              onMouseDown={onMouseDown}
-              onClick={onOpenOverlayMenu}
+      <AvatarPortrait className="mr-4"/>
+      <span className="fs-14 mr-4 fw700">
+        Иван И
+      </span>
+      <LogoutIcon
+        onClick={() => navigate("/login")}
+      />
+      {isMenuOpen && (
+        <ContextMenu
+          className="flex items-center pt-1.5 pb-1.5 flex-col"
+          onClose={closeMenu}
+          width={200}
+        >
+          {menuItems.map(({Component, Icon, label, ...props}) => (
+            <Component
+              key={label}
+              className="flex items-center pt-2.5 pb-2.5 pr-4 pl-4 w-full item"
+              {...props}
             >
-              <AvatarPortrait className="m-r-15" />
-              <span className="fs-14 m-r-15 fw700">
-                Иван И
-              </span>
-              <LogoutIcon
-                onClick={() => navigate("/login")}
+              <Icon
+                className="color-greyDarken mr-2.5 icon"
+                size="14"
               />
-              {isMenuOpen && (
-              <OverlayMenu className="display-flex a-i-center p-t-5 p-b-5 fd-column">
-                {menuItems.map(({ Component, Icon, label, ...props }) => (
-                  <Component
-                    key={label}
-                    className="display-flex a-i-center p-t-10 p-b-10 p-r-15 p-l-15 w-100 item"
-                    {...props}
-                  >
-                    <Icon
-                      className="color-greyDarken m-r-10 icon"
-                      size="14"
-                    />
-                    <span>{label}</span>
-                  </Component>
-                ))}
-              </OverlayMenu>
-              )}
-            </button>
-          )}
-        </WithCloseWindow>
+              <span>{label}</span>
+            </Component>
+          ))}
+        </ContextMenu>
       )}
-    </RenderOverlayMenu>
+    </button>
   )
 }
 

@@ -1,5 +1,5 @@
 import React, {useCallback, useState, useRef} from 'react';
-import {IconClose, WrapperButtons} from "./style"
+import { WrapperButtons } from "./style"
 import DataSourceModal from "../NewTask/Components/ReportConstructor/DataSourceModal";
 import ContextMenu from "@/component_ocean/Components/ContextMenu";
 import DatePicker from "@/component_ocean/Components/Inputs/DatePicker";

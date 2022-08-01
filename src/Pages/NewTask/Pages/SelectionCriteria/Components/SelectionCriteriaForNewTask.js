@@ -258,7 +258,7 @@ const SelectionCriteriaForNewTask = () => {
           <CheckboxGroupStyle
             options={selectedList}
             valueKey="id"
-            blockTitle={title}
+            title={title}
             labelKey="title"
             value={checkedObject}
             returnObjects

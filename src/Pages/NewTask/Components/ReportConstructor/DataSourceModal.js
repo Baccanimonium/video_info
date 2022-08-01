@@ -1,5 +1,5 @@
 import React, {useCallback, useMemo, useState} from 'react';
-import Tree from '@/Components/Tree';
+import Tree from '@/component_ocean/Components/Tree';
 import ScrollBar from "react-perfect-scrollbar";
 import {treeData} from "./mok";
 

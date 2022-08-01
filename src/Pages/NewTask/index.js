@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 
 import {WrapperButtons} from "../DownloadTask/style";
 import DataSourceModal from "./Components/ReportConstructor/DataSourceModal";
-import {Navigate, Route, Routes, useParams} from "react-router-dom";
+import {Navigate, Route, Routes, useMatch} from "react-router-dom";
 import Result from "./Pages/Result";
 import SelectionCriteria from "./Pages/SelectionCriteria";
 import Reports from "./Pages/Reports"
@@ -22,8 +22,9 @@ import {BorderButtonGold, GoldButton, LightGrayButton} from "@/Components/Button
 import BaseButton from "@/component_ocean/Components/Button";
 import {AlertWindow} from "@/Components/ModalWindows";
 
-const NewTask = ({ updateState}) => {
+const NewTask = ({updateState}) => {
   const [alert, setAlert] = useState("")
+  const match = useMatch(`/tab/new_task/:idSource/:sourceTitle/*`)
 
   const {
     tabState,
@@ -39,6 +40,17 @@ const NewTask = ({ updateState}) => {
   const [continuousDateRange, setContinuousDateRange] = useState([])
   const [event, setEvent] = useState()
   const [isDataChanged, setIsDataChanged] = useState(false)
+
+  useEffect(() => {
+    if (match && !dataSource) {
+      const { params: { idSource, sourceTitle } } = match
+      setTabState({ dataSource: { id: idSource, title: sourceTitle } })
+    }
+  }, [])
+
+  const updateTabState = useCallback((state) => {
+    setTabState({...tabState, ...state })
+  }, [tabState])
 
   const timerRef = useRef()
 
@@ -110,13 +122,7 @@ const NewTask = ({ updateState}) => {
       : ""} - ${continuousDateRange[1]
       ? dayjs(continuousDateRange[1], PRESENT_DATE_FORMAT).format(PRESENT_DATE_FORMAT)
       : ""}`
-    :  "", [continuousDateRange])
-
-  const updateTaskState = useCallback((obj) => {
-    const {date, editData, isDataChanged, saveData} = obj
-    setContinuousDateRange(date)
-    setIsDataChanged(isDataChanged)
-  }, [])
+    : "", [continuousDateRange])
 
   return (
     <div className="flex-container relative overflow-hidden">
@@ -198,72 +204,78 @@ const NewTask = ({ updateState}) => {
             </div>
           }
         </WrapperButtons>
-        {
-          dataSource &&
-          <div className="flex-container overflow-hidden">
-            <ButtonsAndPracticesTabContainer className="flex items-center">
-              <PracticesButtonsContainer>
-                <WrapperButton className="flex bg-color-greyLight-4">
-                  {Tabs.map(({path, text}) => (
-                    <PageLink
-                      to={path}
-                      key={text}
-                      type="button"
-                    >
-                      {text}
-                    </PageLink>
-                  ))}
-                </WrapperButton>
-              </PracticesButtonsContainer>
-              <div className="flex items-center ml-auto">
-                <BorderButtonGold
-                  type="button"
-                  className="w-36 mr-2"
-                >
-                  Загрузить
-                </BorderButtonGold>
-                <BorderButtonGold
-                  type="button"
-                  className="w-36"
-                >
-                  Остановить
-                </BorderButtonGold>
+        <Routes>
+          <Route
+            path="/:idSource/:sourceTitle/*"
+            element={<div className="flex-container overflow-hidden">
+              <ButtonsAndPracticesTabContainer className="flex items-center">
+                <PracticesButtonsContainer>
+                  <WrapperButton className="flex bg-color-greyLight-4">
+                    {Tabs.map(({path, text}) => (
+                      <PageLink
+                        to={path}
+                        key={text}
+                        type="button"
+                      >
+                        {text}
+                      </PageLink>
+                    ))}
+                  </WrapperButton>
+                </PracticesButtonsContainer>
+                <div className="flex items-center ml-auto">
+                  <BorderButtonGold
+                    type="button"
+                    className="w-36 mr-2"
+                  >
+                    Загрузить
+                  </BorderButtonGold>
+                  <BorderButtonGold
+                    type="button"
+                    className="w-36"
+                  >
+                    Остановить
+                  </BorderButtonGold>
+                </div>
+              </ButtonsAndPracticesTabContainer>
+              <div className="p-2.5 flex-container overflow-hidden">
+                <Routes>
+                  <Route
+                    path="/selection_criteria/*"
+                    element={<SelectionCriteria tabState={tabState} updateTabState={updateTabState}/>}
+                  />
+                  <Route
+                    path="/reports/*"
+                    element={<Reports tabState={tabState} updateTabState={updateTabState} />}
+                  />
+                  <Route
+                    path="/result/*"
+                    element={<Result tabState={tabState} updateTabState={updateTabState} />}
+                  />
+                  <Route
+                    path="*"
+                    element={<Navigate to="selection_criteria"/>}
+                  />
+                </Routes>
               </div>
-            </ButtonsAndPracticesTabContainer>
-            <div className="p-2.5 flex-container overflow-hidden">
-              <Routes>
-                <Route
-                  path="/selection_criteria/*"
-                  element={<SelectionCriteria tabState={tabState} updateState={updateTaskState}/>}
-                />
-                <Route
-                  path="/reports/*"
-                  element={<Reports tabState={tabState} />}
-                />
-                <Route
-                  path="/result/*"
-                  element={<Result tabState={tabState}/>}
-                />
-                <Route
-                  path="*"
-                  element={<Navigate to="selection_criteria"/>}
-                />
-              </Routes>
-            </div>
-            <div className="pl-5 pr-5 justify-end">
-              <div className="flex justify-end mb-5">
-                <GoldButton
-                  type="button"
-                  disabled={isDataChanged}
-                  className="btn sign-up-btn color-greyDarken w-18"
-                  onClick={saveTask}
-                >
-                  Сохранить
-                </GoldButton>
+              <div className="pl-5 pr-5 justify-end">
+                <div className="flex justify-end mb-5">
+                  <GoldButton
+                    type="button"
+                    disabled={isDataChanged}
+                    className="btn sign-up-btn color-greyDarken w-18"
+                    onClick={saveTask}
+                  >
+                    Сохранить
+                  </GoldButton>
+                </div>
               </div>
-            </div>
-          </div>
-        }
+            </div>}
+          />
+          {dataSource && <Route
+            path="*"
+            element={<Navigate to={`${dataSource.id}/${dataSource.title}`}/>}
+          />}
+        </Routes>
       </div>
       <AlertWindow
         className="flex flex-col items-center mt-90"

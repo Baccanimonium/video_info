@@ -1,5 +1,5 @@
 import React, {useCallback, useMemo, useState} from 'react';
-import Tree from '@/Components/Tree';
+import Tree from '@/component_ocean/Components/Tree';
 import PerfectScrollbar from "react-perfect-scrollbar"
 import RowComponent from "../../../../Components/RowComponent";
 import {
@@ -7,7 +7,7 @@ import {
   typeOptions, accessOptions, folderOptions
 } from "./mok";
 import {Button, ButtonsContainer} from "@/Components/ButtonsTabBar/style";
-import BsCheckBox from "@/component_ocean/Components/Inputs/CheckBox";
+import CheckBox from "@/component_ocean/Components/Inputs/CheckBox";
 import Select from "@/component_ocean/Components/Inputs/Select";
 import {ContainerForForm} from "./styles"
 import ScrollBar from "react-perfect-scrollbar";
@@ -177,14 +177,14 @@ const AddData = (props) => {
           </div>
       </ContainerForForm>
       <div className="flex m-t-10">
-        <BsCheckBox
+        <CheckBox
           id="viewingBased"
           label="Viewing based"
           value={viewingBased}
           onInput={setViewingBased}
           className="m-r-15"
         />
-        <BsCheckBox
+        <CheckBox
           id="sql"
           label="SQL-определение пользователя"
           value={sql}
