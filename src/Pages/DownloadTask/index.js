@@ -3,7 +3,7 @@ import {IconClose, WrapperButtons} from "./style"
 import DataSourceModal from "../NewTask/Components/ReportConstructor/DataSourceModal";
 import ContextMenu from "@/component_ocean/Components/ContextMenu";
 import DatePicker from "@/component_ocean/Components/Inputs/DatePicker";
-import {BorderButtonBlack, BorderButtonGold} from "@/Components/Buttons";
+import {BorderButtonBlack, BorderButtonGold, GoldButton} from "@/Components/Buttons";
 import BaseButton from "@/component_ocean/Components/Button";
 import { AlertWindow } from "@/Components/ModalWindows";
 
@@ -24,7 +24,7 @@ const DownloadTask = () => {
       return {}
     })
   }, [selectedSource, dataSource])
-  const closeMenu = useCallback(() => { setOpenSourceMenu(false) }, [])
+  const closeMenu = useCallback(() => {setOpenSourceMenu(false) }, [])
   const openMenu = useCallback(() => { setOpenSourceMenu(true) }, [])
   const formPayload = { dateRange: []}
 
@@ -87,13 +87,13 @@ const DownloadTask = () => {
                         setSelectedSource={setSelectedSource}
                         setDataSource={setDataSource}
                       />
-                      <BorderButtonGold
-                        className="w-full text-uppercase mt-3"
+                      <GoldButton
+                        className="w-32 text-uppercase mt-3"
                         type="button"
                         onClick={selectSource}
                       >
                         ok
-                      </BorderButtonGold>
+                      </GoldButton>
                     </div>
                   </ContextMenu>}
                 </div>
