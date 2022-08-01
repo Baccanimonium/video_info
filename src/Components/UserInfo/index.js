@@ -9,6 +9,7 @@ import RenderOverlayMenu from "@/Components/OverlayMenu/RenderOverlayMenu"
 import { logoutMenu } from "./icon/logoutMenu"
 import { UserOverlay } from "./styles"
 import {useNavigate} from "react-router-dom";
+import {ContextMenuStyle} from "@/Components/ContextMenu";
 
 const AvatarPortrait = UserPortrait.withComponent(Avatar)
 const LogoutIcon = Icon(logoutMenu)
@@ -54,19 +55,21 @@ const UserInfo = () => {
               />
               {isMenuOpen && (
               <OverlayMenu className="flex items-center p-t-5 p-b-5 fd-column">
-                {menuItems.map(({ Component, Icon, label, ...props }) => (
-                  <Component
-                    key={label}
-                    className="flex items-center p-t-10 p-b-10 p-r-15 p-l-15 w-100 item"
-                    {...props}
-                  >
-                    <Icon
-                      className="color-greyDarken m-r-10 icon"
-                      size="14"
-                    />
-                    <span>{label}</span>
-                  </Component>
-                ))}
+                <ContextMenuStyle>
+                  {menuItems.map(({ Component, Icon, label, ...props }) => (
+                    <Component
+                      key={label}
+                      className="flex items-center p-t-10 p-b-10 p-r-15 p-l-15 w-100 item"
+                      {...props}
+                    >
+                      <Icon
+                        className="color-greyDarken m-r-10 icon"
+                        size="14"
+                      />
+                      <span>{label}</span>
+                    </Component>
+                  ))}
+                </ContextMenuStyle>
               </OverlayMenu>
               )}
             </button>
