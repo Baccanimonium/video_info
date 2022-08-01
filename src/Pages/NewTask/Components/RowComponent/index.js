@@ -9,6 +9,7 @@ import Select from "@/Components/Fields/Select";
 import uniqueId from 'lodash/uniqueId'
 import {CardForCondition, IconPlus} from "./styles"
 import {StyleIcon} from "@/Components/styleIcon";
+import {GoldButton, LightGrayButton} from "@/Components/Buttons";
 
 const RowComponent = ({ node: { type, condition }, node, children, onInput, onDelete }) => {
 
@@ -162,8 +163,8 @@ const RowComponent = ({ node: { type, condition }, node, children, onInput, onDe
         return <div className="flex items-center flex-column p-15">
           <div>{title}</div>
           <div className="flex items-center m-t-20 j-c-space-between w-100">
-            <BsButton className="btn grey-bg" onClick={onSubmit}>Да</BsButton>
-            <BsButton className="btn golden" onClick={onClose}>Нет</BsButton>
+            <LightGrayButton onClick={onSubmit}>Да</LightGrayButton>
+            <GoldButton onClick={onClose}>Нет</GoldButton>
           </div>
 
         </div>
