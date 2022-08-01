@@ -6,12 +6,20 @@ import DatePicker from "@/component_ocean/Components/Inputs/DatePicker";
 import {BorderButtonBlack, BorderButtonGold} from "@/Components/Buttons";
 import BaseButton from "@/component_ocean/Components/Button";
 import { AlertWindow } from "@/Components/ModalWindows";
+import useTabItem from "@/component_ocean/Logic/Tab/TabItem";
 
 const DownloadTask = () => {
   const [error, setError] = useState("")
   const download = () => {
 
   }
+  const {
+    tabState,
+    setTabState,
+  } = useTabItem({
+    setTabName: useCallback(() => "Upload task", []),
+    stateId: "upload task",
+  })
   const [selectedSource, setSelectedSource] = useState({})
   const [dataSource, setDataSource] = useState({title: "ROSSIYA 1"})
   const [openSourceMenu, setOpenSourceMenu] = useState(false)

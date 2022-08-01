@@ -7,10 +7,10 @@ import { apply } from "@/Icons/apply"
 import { editIcon } from "@/Icons/editIcon"
 import { basketTrash } from "@/Icons/basketTrash"
 
-export const IconClose = () => <Icon icon={close} />
-export const EditIcon = () => <Icon icon={editIcon} />
-export const IconToggleIndicator = () => <Icon icon={toggleIndicator} />
-export const IconDragIndicator = () => <Icon icon={dragIndicator} />
-export const RemoveIcon = () => <Icon icon={removeIcon} />
-export const ApplyIcon = () => <Icon icon={apply} />
-export const TrashIcon = () => <Icon icon={basketTrash} />
+export const IconClose = (props) => <Icon {...props} icon={close} />
+export const EditIcon = (props) => <Icon {...props} icon={editIcon} />
+export const IconToggleIndicator = (props) => <Icon {...props} icon={toggleIndicator} />
+export const IconDragIndicator = (props) => <Icon {...props} icon={dragIndicator} />
+export const RemoveIcon = (props) => <Icon {...props} icon={removeIcon} />
+export const ApplyIcon = (props) => <Icon {...props} icon={apply} />
+export const TrashIcon = (props) => <Icon {...props} icon={basketTrash} />
