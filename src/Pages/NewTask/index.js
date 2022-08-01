@@ -21,6 +21,7 @@ import {ContextMenuStyle} from "@/Components/ContextMenu";
 import {BorderButtonGold, GoldButton, LightGrayButton} from "@/Components/Buttons";
 import BaseButton from "@/component_ocean/Components/Button";
 import {AlertWindow} from "@/Components/ModalWindows";
+import ContextMenu from "@/component_ocean/Components/ContextMenu";
 
 const NewTask = ({ updateState}) => {
   const [alert, setAlert] = useState("")
@@ -155,35 +156,41 @@ const NewTask = ({ updateState}) => {
                 </LightGrayButton>
               }
             </button>
-            {openSourceMenu && <ContextMenuStyle
-              onClose={closeSourceMenu}
-              className="flex flex-col justify-center p-2.5"
-              width={350}
-            >
-              {
-                dataSource && !changeSourceMenu
-                  ? (
-                    <div className="flex flex-col p-2">
-                        <span
-                          onClick={changeDataSource}
-                          className="pb-2.5"
-                        >
-                          Заменить источник
-                        </span>
-                      <span onClick={deleteDataSource}>
-                          Удалить источник
-                        </span>
-                    </div>
-                  )
-                  :
-                  (
-                    <DataSourceModal
-                      selectSource={selectSource}
-                      setSelectedSource={setSelectedSource}
-                    />
-                  )
-              }
-            </ContextMenuStyle>
+            {openSourceMenu &&
+              <ContextMenu
+                onClose={closeSourceMenu}
+                className="flex flex-col justify-center p-2.5"
+                width={350}
+              >
+                {
+                  dataSource && !changeSourceMenu
+                    ? (
+                      <ContextMenuStyle>
+                        <div className="flex flex-col p-2">
+                          <span
+                            onClick={changeDataSource}
+                            className="pb-2.5"
+                          >
+                            Заменить источник
+                          </span>
+                          <span onClick={deleteDataSource}>
+                            Удалить источник
+                          </span>
+                        </div>
+                      </ContextMenuStyle>
+                    )
+                    :
+                    (
+                      <ContextMenuStyle>
+                        <DataSourceModal
+                          selectSource={selectSource}
+                          setSelectedSource={setSelectedSource}
+                        />
+                      </ContextMenuStyle>
+                    )
+                }
+              </ContextMenu>
+
             }
           </div>
           {
