@@ -5,9 +5,7 @@ import {useRecoilState} from "recoil";
 import {TOKEN_KEY, tokenAtom} from "./Store/userObject";
 import Tab from "./Tab"
 
-import AlertFactory from "./AlertFactory"
-import ContextMenuFactory from "./ContextMenuFactory"
-import {useWatch} from "./Utils/hooks/useWatch";
+import useWatch from "@/component_ocean/Utils/Hooks/useWatch";
 
 let initialRoute = history.location.pathname !== "/login" ? history.location.pathname : "/"
 
@@ -26,8 +24,6 @@ function App() {
 
   return (
     <>
-      <AlertFactory />
-      <ContextMenuFactory />
       {/*{token === null*/}
       {/*  ? (*/}
       {/*    <Routes>*/}

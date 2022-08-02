@@ -9,7 +9,7 @@ export default {
 const Template = (args) => (
   <div>
     Делает картинку круглой
-    <div className="p-t-20"><UserPortraitStyle {...args} src="/logo.png" /></div>
+    <div className="pt-5"><UserPortraitStyle {...args} src="/logo.png" /></div>
   </div>
 )
 

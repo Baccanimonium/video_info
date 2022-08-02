@@ -58,7 +58,7 @@ const SelectedParams = ({reportState, setReportsState}) => {
   }, [setReportsState])
 
   return (
-    <div className="flex flex-column overflow-hidden relative">
+    <div className="flex flex-col overflow-hidden relative">
       <ScrollBar>
         <h3>
           Выбранные параметры отчета

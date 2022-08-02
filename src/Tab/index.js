@@ -18,7 +18,7 @@ const Tab = () => {
           onOpenNewTab={onOpenNewTab}
           routes={tabNavigationMenu}
         />
-        <div className="flex-container relative w-100 overflow-hidden">
+        <div className="flex-container relative w-full overflow-hidden">
           <TabBar
             tabs={tabs}
             currentTabIndex={currentTabIndex}

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import Grid from "@/component_ocean/Components/Tables/Grid"
 import {useMemo} from "react";
 

@@ -10,6 +10,7 @@ import {WithWithValidationForm} from '@/component_ocean/Components/Forms'
 
 import { rules, fieldMap } from "./formConfig"
 import BaseButton from "@/component_ocean/Components/Button";
+import {GoldButton} from "@/Components/Buttons";
 
 const LOCAL_STORAGE_REMEBER_ME = "LOCAL_STORAGE_REMEBER_ME"
 
@@ -71,8 +72,8 @@ const Login = ({onSubmit, initialRoute}) => {
           </BaseButton>
         </AlertWindow>
         <ContentContainer>
-          <FormContainer className="flex fd-column">
-            <FormTittle className="fw700">
+          <FormContainer className="flex flex-col">
+            <FormTittle className="font-bold">
               Welcome
             </FormTittle>
             <WithWithValidationForm
@@ -82,14 +83,14 @@ const Login = ({onSubmit, initialRoute}) => {
               onInput={handleInput}
               onSubmit={submitForm}
             >
-              <BaseButton
-                className="golden sign-up-btn btn m-l-a m-r-a m-t-20"
+              <GoldButton
+                className="w-36 ml-auto mr-auto mt-5"
                 loading={loading}
                 disabled={loading}
                 type="submit"
               >
                 Log in
-              </BaseButton>
+              </GoldButton>
             </WithWithValidationForm>
           </FormContainer>
         </ContentContainer>

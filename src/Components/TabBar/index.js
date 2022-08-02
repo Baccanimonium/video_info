@@ -20,10 +20,10 @@ const TabBar = ({ tabs, currentTabIndex, onCloseTab, onChangeActiveTab, classNam
             key={id}
             type="button"
             active={currentTabIndex === i}
-            className="flex items-center justify-between h-full capitalize fw700"
+            className="flex items-center justify-between h-full capitalize font-bold"
             notLast={i !== tabs.length - 1}
           >
-            <span className="overflow-hidden text-overflow-ellipsis no-white-space">{name}</span>
+            <span className="overflow-hidden text-ellipsis whitespace-nowrap">{name}</span>
               <StyleRemoveIcon
                 size="10"
                 onClick={closeTabByIndex(i)}

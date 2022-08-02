@@ -3,14 +3,12 @@ import UserPortrait from "@/Components/UserPortraitStyle"
 import {useRecoilState} from "recoil"
 import {tokenAtom} from "@/Store/userObject"
 import Avatar from "@/Components/Avatar"
-import ContextMenu from "@/component_ocean/Components/ContextMenu";
-import Icon from "@/Components/Icon"
+import Icon from "@/component_ocean/Components/Icon"
 import {logoutMenu} from "./icon/logoutMenu"
 import {useNavigate} from "react-router-dom";
-import {ContextMenuStyle} from "@/Components/ContextMenu";
+import {ThemedContextMenu} from "@/Components/ContextMenus";
 
 const AvatarPortrait = UserPortrait.withComponent(Avatar)
-const LogoutIcon = Icon(logoutMenu)
 
 const UserInfo = () => {
   const {1: removeToken} = useRecoilState(tokenAtom)
@@ -24,7 +22,7 @@ const UserInfo = () => {
   const menuItems = useMemo(() => [
     {
       Component: "button",
-      Icon: LogoutIcon,
+      Icon: (props) => <Icon {...props} icon={logoutMenu}/>,
       label: "Log out",
       onClick: () => navigate("/login")
     }
@@ -37,14 +35,15 @@ const UserInfo = () => {
       onClick={toggleMenuState}
     >
       <AvatarPortrait className="mr-4"/>
-      <span className="fs-14 mr-4 fw700">
+      <span className="fs-14 mr-4 font-bold">
         Иван И
       </span>
-      <LogoutIcon
+      <Icon
+        icon={logoutMenu}
         onClick={() => navigate("/login")}
       />
       {isMenuOpen && (
-        <ContextMenuStyle
+        <ThemedContextMenu
           className="flex items-center pt-1.5 pb-1.5 flex-col"
           onClose={closeMenu}
           width={200}
@@ -52,17 +51,17 @@ const UserInfo = () => {
           {menuItems.map(({Component, Icon, label, ...props}) => (
             <Component
               key={label}
-              className="flex items-center pt-2.5 pb-2.5 pr-4 pl-4 w-full item"
+              className="flex items-center py-1.5 w-full"
               {...props}
             >
               <Icon
-                className="color-greyDarken mr-2.5 icon"
+                className="color-greyDarken mr-2.5"
                 size="14"
               />
               <span>{label}</span>
             </Component>
           ))}
-        </ContextMenuStyle>
+        </ThemedContextMenu>
       )}
     </button>
   )

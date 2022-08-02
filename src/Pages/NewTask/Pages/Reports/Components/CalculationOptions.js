@@ -84,7 +84,7 @@ const CalculationOptionsComponent = ({ reportState, onFormInput}) => {
           value={reportState["time"]}
         >
           <div className="pr-4">Время выхода событий:</div>
-          <div className="flex item-center">
+          <div className="flex items-center justify-center">
             <Select
               valueKey="label"
               labelKey="label"
@@ -102,7 +102,7 @@ const CalculationOptionsComponent = ({ reportState, onFormInput}) => {
           value={reportState["duration"]}
         >
           <div className="pr-4">Базовая длительность:</div>
-          <div className="flex item-center">
+          <div className="flex items-center justify-center">
             <Select
               valueKey="label"
               labelKey="label"

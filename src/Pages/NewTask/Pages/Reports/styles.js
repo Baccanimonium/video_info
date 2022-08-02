@@ -37,3 +37,9 @@ export const Resizer = styled.div`
     bottom: 0;
   }
 `
+
+export const ContainerDatePicker = styled.div`
+  //width: 270px;
+  --background-input: var(--color-white);
+  --width-input: 320px;
+`

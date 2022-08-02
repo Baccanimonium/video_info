@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import PropTypes from 'prop-types';
-import {ButtonsContainer, Button} from "../../../../../Components/ButtonsTabBar/style";
+import {ButtonsContainer, Button} from "@/Components/ButtonsTabBar";
 import {StatisticLabel, AttributeLabel, DemographicLabel, statistics, attributes} from '../constants'
 import DemographicTree from "./DemographicTree";
 import Tree from '@/component_ocean/Components/Tree';
@@ -50,7 +50,7 @@ const Dictionaries = ({ reportState, setReportsState }) => {
   const DictionaryComponent = DictionaryComponents[activeButton]
 
   return (
-    <div className="separator-right p-r-15 m-b-15 flex-container overflow-hidden">
+    <div className="separator-right pr-4 mb-4 flex-container overflow-hidden">
       <h3>Параметры отчета</h3>
       <ButtonsContainer>
         {attributesButtons.map(({id, label}) => (

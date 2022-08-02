@@ -1,6 +1,6 @@
 import React, {useCallback, useState, useRef} from 'react';
 import { WrapperButtons } from "./style"
-import DataSourceModal from "../NewTask/Components/ReportConstructor/DataSourceModal";
+import DataSourceModal from "../NewTask/Components/ReportConstructor";
 import ContextMenu from "@/component_ocean/Components/ContextMenu";
 import DatePicker from "@/component_ocean/Components/Inputs/DatePicker";
 import {BorderButtonBlack, BorderButtonGold, GoldButton} from "@/Components/Buttons";
@@ -14,8 +14,8 @@ const DownloadTask = () => {
 
   }
   const {
-    tabState,
-    setTabState,
+    // tabState,
+    // setTabState,
   } = useTabItem({
     setTabName: useCallback(() => "Upload task", []),
     stateId: "upload task",
@@ -84,7 +84,7 @@ const DownloadTask = () => {
                 </div>
                 <div >
                   <button
-                    className="cursor color-lightGold link"
+                    className="transition-goldLight-gold"
                     onClick={openMenu}
                   >
                     Добавить источник данных
@@ -96,7 +96,7 @@ const DownloadTask = () => {
                         setDataSource={setDataSource}
                       />
                       <GoldButton
-                        className="w-32 text-uppercase mt-3"
+                        className="w-32 uppercase mt-3"
                         type="button"
                         onClick={selectSource}
                       >

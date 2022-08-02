@@ -1,14 +1,12 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import PropTypes from 'prop-types';
+import React, {useCallback, useMemo, useRef, useState} from 'react';
 import {DataSetContainer} from "../../styles";
 import {ReportContainer, WrapperInput} from "./styles"
 import Tree from '@/component_ocean/Components/Tree';
-import {ButtonsContainer, Button} from "@/Components/ButtonsTabBar/style";
+import {ButtonsContainer, Button} from "@/Components/ButtonsTabBar";
 import CheckBox from "@/component_ocean/Components/Inputs/CheckBox";
 import RadioButton from "@/component_ocean/Components/Inputs/RadioButton";
 import Select from "@/component_ocean/Components/Inputs/Select";
 import DatePicker from "@/component_ocean/Components/Inputs/DatePicker";
-import {ContainerDatePicker} from "@/Components/TabHeader/style";
 import ScrollBar from "react-perfect-scrollbar";
 import {copy} from "@/Icons/copy";
 import {file} from "@/Icons/file";
@@ -21,9 +19,10 @@ import {ReportOptions, GenderOptions,
 
 import SelectedParams from "./Components/SelectedParams";
 import Dictionaries from "./Components/Dictionaries";
-import {Resizer} from "./styles";
+import {Resizer, ContainerDatePicker} from "./styles";
 import {useRecoilState} from "recoil";
 import {cachedLocalStorageValue} from "@/component_ocean/Logic/Storages/localStorageCache";
+import {AlwaysRenderDropDown} from "@/Components/AlwaysRenderDropDown";
 
 const defaultReportState = {
   precision: 4,
@@ -171,14 +170,16 @@ const Reports = ({ tabState: { reportState= defaultReportState}, updateTabState 
                           label="Определение пользователем"
                           className="pb-4"
                         />
-                        <ContainerDatePicker className="flex">
-                          <div className="pr-4">Выберите дату:</div>
+                        <ContainerDatePicker className="flex flex-col w-full">
+                          <div className="pr-4 mb-2">Выберите дату:</div>
                           <DatePicker
+                            className="w-full"
                             id="dateRange"
                             formPayload={reportState}
                             value={reportState["dateRange"]}
                             onInput={onFormInput("dateRange")}
                             placeholder="Выберите дату"
+                            DropDownComponent={AlwaysRenderDropDown}
                           />
                         </ContainerDatePicker>
                       </div>
