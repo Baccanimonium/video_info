@@ -22,7 +22,6 @@ import "@/style/colorsAndShadows.scss"
 import "@/style/markupHelpers.scss"
 import "@/style/typography.scss"
 import "@/style/style-text.scss"
-import "@/style/hoverEffects.scss"
 
 const weekday = require("dayjs/plugin/weekday")
 const isoWeek = require("dayjs/plugin/isoWeek")
