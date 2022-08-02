@@ -48,7 +48,7 @@ const Reports = ({ tabState: { reportState= defaultReportState}, updateTabState 
 
   const onFormInput = useCallback((id) => (value) => {
     setReportsState(({ [id]: value }))
-  }, [])
+  }, [setReportsState])
 
   const openOptions = useCallback((e) => {
     setActiveOption(e.target.innerText)

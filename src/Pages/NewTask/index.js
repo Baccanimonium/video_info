@@ -108,30 +108,30 @@ const NewTask = () => {
             <div className="color-grey">Источник данных:</div>
             <TipsOverlayComponent>
               {({renderTips, destroyTips}) => (dataSource
-                ? <LightGrayButton
-                  type="button"
-                  onMouseDown={openMenu}
-                  className="items-center flex ml-3.5 relative"
-                  onMouseEnter={renderTips({text: dataSource.title})}
-                  onMouseLeave={destroyTips}
-                >
-                  {sourceBtnTitle(dataSource.title)}
-                </LightGrayButton>
-                :
-                <LightGrayButton
-                  className="items-center flex ml-3.5"
-                  type="button"
-                  onMouseDown={openMenu}
-                >
+                  ? <LightGrayButton
+                    type="button"
+                    onMouseDown={openMenu}
+                    className="items-center flex ml-3.5 relative"
+                    onMouseEnter={renderTips({text: dataSource.title})}
+                    onMouseLeave={destroyTips}
+                  >
+                    {sourceBtnTitle(dataSource.title)}
+                  </LightGrayButton>
+                  :
+                  <LightGrayButton
+                    className="items-center flex ml-3.5"
+                    type="button"
+                    onMouseDown={openMenu}
+                  >
                     <span className="fs-14">
                       + 
                     </span>
-                  Добавить
-                </LightGrayButton>
+                    Добавить
+                  </LightGrayButton>
               )}
             </TipsOverlayComponent>
             {openSourceMenu &&
-              <ContextMenu
+              <ThemedContextMenu
                 onClose={closeSourceMenu}
                 className="flex flex-col justify-center p-2.5"
                 width={350}
@@ -139,36 +139,32 @@ const NewTask = () => {
                 {
                   dataSource && !changeSourceMenu
                     ? (
-                      <ThemedContextMenu>
-                        <div className="flex flex-col p-2">
-                          <button
-                            type="button"
-                            onClick={changeDataSource}
-                            className="pb-2.5 text-start"
-                          >
-                            Заменить источник
-                          </button>
-                          <button
-                            type="button"
-                            className="text-start"
-                            onClick={deleteDataSource}
-                          >
-                            Удалить источник
-                          </button>
-                        </div>
-                      </ThemedContextMenu>
+                      <div className="flex flex-col ">
+                        <button
+                          type="button"
+                          onClick={changeDataSource}
+                          className="py-1.5 text-start"
+                        >
+                          Заменить источник
+                        </button>
+                        <button
+                          type="button"
+                          className="text-start py-1.5 "
+                          onClick={deleteDataSource}
+                        >
+                          Удалить источник
+                        </button>
+                      </div>
                     )
                     :
                     (
-                      <ThemedContextMenu>
-                        <DataSourceModal
-                          selectSource={selectSource}
-                          setSelectedSource={setSelectedSource}
-                        />
-                      </ThemedContextMenu>
+                      <DataSourceModal
+                        selectSource={selectSource}
+                        setSelectedSource={setSelectedSource}
+                      />
                     )
                 }
-              </ContextMenu>
+              </ThemedContextMenu>
 
             }
           </div>

@@ -6,13 +6,6 @@ import SelectedParamsRow from "./SelectedParamsRow";
 import ScrollBar from "react-perfect-scrollbar";
 
 const SelectedParams = ({reportState, setReportsState}) => {
-  const onExpand = useCallback(expandedKeys => {
-    console.log('onExpand', expandedKeys);
-  }, []);
-
-  const onSelect = useCallback((selectedKeys, info) => {
-    console.log('selected', selectedKeys, info);
-  }, []);
 
   const TreeData = useMemo(() => {
     const {
@@ -48,14 +41,13 @@ const SelectedParams = ({reportState, setReportsState}) => {
       {children: attributeState},
       {children: demographicState},
     ]) => {
-
-    setReportsState(prevReportState => ({
-      ...prevReportState,
+    setReportsState({
+      ...reportState,
       [StatisticLabel]: statisticState,
       [AttributeLabel]: attributeState,
       [DemographicLabel]: demographicState,
-    }))
-  }, [setReportsState])
+    })
+  }, [reportState, setReportsState])
 
   return (
     <div className="flex flex-col overflow-hidden relative">
@@ -64,11 +56,7 @@ const SelectedParams = ({reportState, setReportsState}) => {
           Выбранные параметры отчета
         </h3>
         <Tree
-          showLine
           defaultExpandAll
-          onExpand={onExpand}
-          onSelect={onSelect}
-          draggable
           options={TreeData}
           rowComponent={SelectedParamsRow}
           onUpdateOptions={onTreeDataUpdate}

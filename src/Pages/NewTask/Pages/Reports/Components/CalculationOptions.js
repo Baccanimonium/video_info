@@ -26,7 +26,6 @@ const CalculationOptionsComponent = ({ reportState, onFormInput}) => {
           meaning={CalculationOptions[1]}
           value={reportState["calculationOptions"]}
           onInput={onFormInput("calculationOptions")}
-          className=""
         />
       </div>
       <div className="pt-4 separator-bot-greyLight">

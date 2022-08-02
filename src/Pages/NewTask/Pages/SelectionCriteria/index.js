@@ -260,7 +260,7 @@ const SelectionCriteria = ({tabState, tabState: { criteriaData = treeData }, upd
   }, [checkedObject, title])
 
   return (
-    <div className="relative  flex-container">
+    <div className="relative flex-container">
       <TipsOverlayComponent>
         {({renderTips, destroyTips}) => (
           <div className="flex">

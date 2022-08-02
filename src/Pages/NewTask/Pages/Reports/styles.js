@@ -10,7 +10,7 @@ export const ReportContainer = styled.div`
 `
 
 export const WrapperInput = styled.div`
-  --width-input: ${({ value }) => value !== undefined ? 50 + String(value).length * 9 : 115}px;
+  --width-input: ${({ value }) => value ? 50 + String(value).length * 9 : 59}px;
   --height-input: 30px;
   margin-bottom: 15px;
   display: flex;
