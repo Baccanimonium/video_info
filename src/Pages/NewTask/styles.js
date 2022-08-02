@@ -1,23 +1,6 @@
 import styled from "styled-components"
 import { Link } from 'react-router-dom'
 
-export const InformationCard = styled.div`
-  border-radius: 5px;
-  padding: 8px 14px;
-  box-sizing: border-box;
-  white-space: nowrap;
-  text-align: center;
-  border-color: var(--color-grey);
-  border-width: 1px;
-  border-style: solid;
-  min-height: var(--height-button);
-  color: var(--color-grey);
-  margin-right: 5px;
-  &:last-child {
-    margin-right: 0;
-  }
-`
-
 export const InformationCardMin = styled.div`
   height: 34px;
   width: 34px;
@@ -35,11 +18,7 @@ export const InformationCardMin = styled.div`
   border-style: solid;
   min-height: var(--height-button);
   color: var(--color-grey);
-  margin-right: 5px;
   cursor: pointer;
-  &:last-child {
-    margin-right: 0;
-  }
   &:hover {
     box-shadow: 0px 2px 6px rgba(161, 137, 69, 0.49);
   }
@@ -100,4 +79,16 @@ export const DataSetContainer = styled.div`
     --layout-left-padding: 5%;
     --layout-right-padding: 5%;
   }
+`
+
+export const HeaderContainer = styled.div`
+  border-bottom: 1px solid var(--color-grey-darken-3);
+  padding: 0 10px;
+`
+
+export const PagesLinkContainer = styled.div`
+  display: flex;
+  border-top: 1px solid var(--color-grey-darken-1);
+  align-items: center;
+  border-top: 2px solid var(--color-white);
 `

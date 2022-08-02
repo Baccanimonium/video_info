@@ -3,10 +3,19 @@ import { Spring } from "react-spring"
 import "./style.scss"
 
 import React from "react"
-import styled from "styled-components"
+import styled, {keyframes} from "styled-components"
 
 const from = { opacity: 0 }
 const to = { opacity: 1 }
+
+const dash = keyframes`
+  0% {
+    filter: drop-shadow( 1px 1px 2px rgba(161, 137, 69, 0.49));
+  }
+  100% {
+    filter: drop-shadow( 2px 5px 4px rgba(161, 137, 69, 0.99))
+  }
+`
 
 const PreloaderContainer = styled.svg`
   position: absolute;
@@ -15,7 +24,7 @@ const PreloaderContainer = styled.svg`
   right: 0;
   left: 0;
   margin: auto;
-  animation: dash 1000ms linear alternate infinite;
+  animation: 1000ms ${dash} linear alternate infinite;
 `
 
 const AppPreloader = () => (

@@ -1,20 +1,18 @@
-import React, { useEffect, useState, useContext, useCallback, useRef } from "react"
+import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { NavLink } from "react-router-dom"
 import { LeftMenuContainer, LeftMenuLogo, LeftMenuItem, ToggleToolbar, ListTile,
   OpenMenuItem, TextLogo, MenuLink, WrapperMenuLink } from "./styles"
 import NavigationButton from "../NavigationButton";
-import TipsOverlayComponent from "../TipsHelp/TipsOverlayComponent";
+import TipsOverlayComponent from "../TipsHelp";
 import "./styles.scss"
 
 const NavigationDrawer = ({ routes, onOpenNewTab }) => {
-  const [tipsName, setTipsName]= useState("")
   const [leftWidth, setLeftWidth] = useState(60)
   const [toggleArrow, setToggleArrow] = useState()
   const [iconArrowStyle, setIconArrowStyle] = useState()
   const [getHidden, setGetHidden] = useState(localStorage.getItem("APP_NAVBAR"))
-  const [event, setEvent] = useState()
-  const timerRef = useRef()
+
   useEffect(() => {
     if (getHidden === "close") {
       setLeftWidth(60)
@@ -38,18 +36,6 @@ const NavigationDrawer = ({ routes, onOpenNewTab }) => {
     setGetHidden(localStorage.getItem("APP_NAVBAR"))
   }
 
-  const showTips = useCallback((name) => (e) => {
-    clearTimeout(timerRef.current)
-    timerRef.current = setTimeout(() => { setEvent(e) }, 500)
-    setTipsName(name)
-  }, [])
-
-  const closeTips = useCallback(() => {
-    clearTimeout(timerRef.current)
-    setEvent(undefined)
-    setTipsName("")
-  }, [setEvent])
-
   return (
     <LeftMenuContainer style={{ width: leftWidth }}>
       <LeftMenuLogo>
@@ -58,35 +44,34 @@ const NavigationDrawer = ({ routes, onOpenNewTab }) => {
           <TextLogo>VideoInfo</TextLogo>
         </OpenMenuItem>
       </LeftMenuLogo>
-      {routes.map(({ name, style, route, picture: Picture, size }) => (
-        <LeftMenuItem
-          key={name}
-          style={style}
-          onMouseEnter={showTips(name)}
-          onMouseLeave={closeTips}
-        >
-          <NavigationButton to={`/tab${route}`} name={name} className="w-100 h-full" onClick={onOpenNewTab}>
-            <ListTile hideToolbar={hideToolbar}>
-              <div className="icon-container transition-icon cursor items-center j-c-center flex">
-                <Picture
-                  size={size}
-                />
-              </div>
-              {hideToolbar && tipsName === name && (
-                <TipsOverlayComponent
-                  tipsText={name}
-                  event={event}
-                />
-              )}
-              {!hideToolbar && (
-                <OpenMenuItem hideToolbar={hideToolbar} className="flex items-center">
-                  <div className="text-menu font-weight-bold">{name}</div>
-                </OpenMenuItem>
-              )}
-            </ListTile>
-          </NavigationButton>
-        </LeftMenuItem>
-      ))}
+      <TipsOverlayComponent
+        tipsText={name}
+        event={event}
+      >
+        {({renderTips, destroyTips}) => routes.map(({ name, style, route, picture: Picture, size }) => (
+          <LeftMenuItem
+            key={name}
+            style={style}
+            onMouseEnter={hideToolbar ? renderTips({text: name }) : null}
+            onMouseLeave={destroyTips}
+          >
+            <NavigationButton to={`/tab${route}`} name={name} className="w-full h-full" onClick={onOpenNewTab}>
+              <ListTile hideToolbar={hideToolbar}>
+                <div className="icon-container items-center justify-center flex">
+                  <Picture
+                    size={size}
+                  />
+                </div>
+                {!hideToolbar && (
+                  <OpenMenuItem hideToolbar={hideToolbar} className="flex items-center">
+                    <div className="text-menu font-bold">{name}</div>
+                  </OpenMenuItem>
+                )}
+              </ListTile>
+            </NavigationButton>
+          </LeftMenuItem>
+        ))}
+      </TipsOverlayComponent>
       {!hideToolbar && (
         <WrapperMenuLink>
           <MenuLink>
@@ -107,7 +92,7 @@ const NavigationDrawer = ({ routes, onOpenNewTab }) => {
         </WrapperMenuLink>
       )}
       <ToggleToolbar
-        className={`flex items-center j-c-center bg-color-blackDarken-1 ${toggleArrow}`}
+        className={`flex items-center justify-center bg-color-blackDarken-1 ${toggleArrow}`}
         onClick={toggleToolbar}
       >
         <img className={`icon-arrow ${iconArrowStyle}`} src="/assets/icon-arrow/arrow-right-white.svg" alt="" />
@@ -117,6 +102,7 @@ const NavigationDrawer = ({ routes, onOpenNewTab }) => {
 }
 NavigationDrawer.propTypes = {
   routes: PropTypes.array.isRequired,
+  onOpenNewTab: PropTypes.func.isRequired,
 }
 
 export default React.memo(NavigationDrawer)

@@ -12,18 +12,18 @@ const TabBar = ({ tabs, currentTabIndex, onCloseTab, onChangeActiveTab, classNam
   }
 
   return (
-    <TabBarContainer className={`flex flex-min-with p-l-5 p-r-10 w-100 ${className}`}>
+    <TabBarContainer className={`flex flex-min-with pl-1.5 pr-2.5 w-full ${className}`}>
       <Carousel value={currentTabIndex} onInput={onChangeActiveTab}>
-        {tabs.map((({ tabName, id }, i) => (
+        {tabs.map((({ name, id }, i) => (
           <TabButton
             onClick={() => onChangeActiveTab(i)}
             key={id}
             type="button"
             active={currentTabIndex === i}
-            className="flex items-center j-c-space-between h-full capitalize fw700"
+            className="flex items-center justify-between h-full capitalize font-bold"
             notLast={i !== tabs.length - 1}
           >
-            <span className="overflow-hidden text-overflow-ellipsis no-white-space">{tabName}</span>
+            <span className="overflow-hidden text-ellipsis whitespace-nowrap">{name}</span>
               <StyleRemoveIcon
                 size="10"
                 onClick={closeTabByIndex(i)}

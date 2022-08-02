@@ -1,4 +1,4 @@
-import Icon from "@/Components/Icon"
+import Icon from "@/component_ocean/Components/Icon"
 import { book } from "./icons/book"
 import { wiki } from "./icons/wiki"
 import { settings } from "./icons/settings"
@@ -12,12 +12,12 @@ export const tabNavigationMenu = [
   {
     name: "Новая задача",
     route: "/new_task",
-    picture: Icon(mediaplanIcon),
+    picture: () => <Icon icon={mediaplanIcon} />,
   },
   {
     name: "Загрузить задачу",
     route: "/download_task",
-    picture: Icon(templates),
+    picture: () => <Icon icon={templates} />,
     size: 20
   },
   // {

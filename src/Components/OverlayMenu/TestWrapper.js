@@ -34,7 +34,7 @@ const TestWrapper = () => {
           General components
         </h2>
       </OverlayMenu>
-      <div className="flex fd-column bg-color-greyDarken">
+      <div className="flex flex-col bg-color-greyDarken">
         <button
           type="button"
           onClick={setAxisHandler(undefined)}

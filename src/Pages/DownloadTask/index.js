@@ -1,17 +1,25 @@
 import React, {useCallback, useState, useRef} from 'react';
-import {IconClose, WrapperButtons} from "./style"
-import DataSourceModal from "../NewTask/Components/ReportConstructor/DataSourceModal";
+import { WrapperButtons } from "./style"
+import DataSourceModal from "../NewTask/Components/ReportConstructor";
 import ContextMenu from "@/component_ocean/Components/ContextMenu";
 import DatePicker from "@/component_ocean/Components/Inputs/DatePicker";
 import {BorderButtonBlack, BorderButtonGold, GoldButton} from "@/Components/Buttons";
 import BaseButton from "@/component_ocean/Components/Button";
 import { AlertWindow } from "@/Components/ModalWindows";
+import useTabItem from "@/component_ocean/Logic/Tab/TabItem";
 
 const DownloadTask = () => {
   const [error, setError] = useState("")
   const download = () => {
 
   }
+  const {
+    // tabState,
+    // setTabState,
+  } = useTabItem({
+    setTabName: useCallback(() => "Upload task", []),
+    stateId: "upload task",
+  })
   const [selectedSource, setSelectedSource] = useState({})
   const [dataSource, setDataSource] = useState({title: "ROSSIYA 1"})
   const [openSourceMenu, setOpenSourceMenu] = useState(false)
@@ -76,7 +84,7 @@ const DownloadTask = () => {
                 </div>
                 <div >
                   <button
-                    className="cursor color-lightGold link"
+                    className="transition-goldLight-gold"
                     onClick={openMenu}
                   >
                     Добавить источник данных
@@ -88,7 +96,7 @@ const DownloadTask = () => {
                         setDataSource={setDataSource}
                       />
                       <GoldButton
-                        className="w-32 text-uppercase mt-3"
+                        className="w-32 uppercase mt-3"
                         type="button"
                         onClick={selectSource}
                       >

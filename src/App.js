@@ -5,10 +5,7 @@ import {useRecoilState} from "recoil";
 import {TOKEN_KEY, tokenAtom} from "./Store/userObject";
 import Tab from "./Tab"
 
-import AlertFactory from "./AlertFactory"
-import ContextMenuFactory from "./ContextMenuFactory"
-import ApiRecoilBounder from "./ApiRecoilBounder"
-import {useWatch} from "./Utils/hooks/useWatch";
+import useWatch from "@/component_ocean/Utils/Hooks/useWatch";
 
 let initialRoute = history.location.pathname !== "/login" ? history.location.pathname : "/"
 
@@ -27,23 +24,43 @@ function App() {
 
   return (
     <>
-      <AlertFactory />
-      <ContextMenuFactory />
-      <ApiRecoilBounder />
-        <Routes>
-          <Route
-              path="/login"
-              element={<Login initialRoute={initialRoute} onSubmit={setToken}/>}
-          />
-          <Route
-            path="/tab/*"
-            element={<Tab />}
-          />
-          <Route
-            path="*"
-            element={<Navigate to="/tab"/>}
-          />
-        </Routes>
+      {/*{token === null*/}
+      {/*  ? (*/}
+      {/*    <Routes>*/}
+      {/*      <Route*/}
+      {/*        path="/login"*/}
+      {/*        element={<Login initialRoute={initialRoute} onSubmit={setToken}/>}*/}
+      {/*      />*/}
+      {/*      <Route*/}
+      {/*        path="*"*/}
+      {/*        element={<Navigate to="/login"/>}*/}
+      {/*      />*/}
+      {/*    </Routes>*/}
+        {/*)*/}
+        {/*: (*/}
+          <Routes>
+            <Route
+                path="/login"
+                element={<Login initialRoute={initialRoute} onSubmit={setToken}/>}
+            />
+            {/*<Route*/}
+            {/*    path="*"*/}
+            {/*    element={<Navigate to="/login"/>}*/}
+            {/*/>*/}
+            <Route
+              path="/tab/*"
+              element={<Tab />}
+            />
+            {/*<Route*/}
+            {/*  path="/login"*/}
+            {/*  element={<Login onSubmit={setToken}/>}*/}
+            {/*/>*/}
+            <Route
+              path="*"
+              element={<Navigate to="/tab"/>}
+            />
+          </Routes>
+        {/*)}*/}
     </>
   );
 }

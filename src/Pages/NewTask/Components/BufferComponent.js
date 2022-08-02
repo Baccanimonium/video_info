@@ -1,36 +1,28 @@
-import WithOpenContextMenu from "@/Core/RenderProps/WithOpenContextMenu";
-import React, {useCallback} from "react";
+import React, {useCallback, useState} from "react";
 import {basketTrash} from "@/Icons/basketTrash";
 import {StyleIcon} from "@/Components/styleIcon";
 import ButtonsForDelete from "@/Pages/NewTask/Components/ButtonsForDelete";
+import {ThemedContextMenu} from "@/Components/ContextMenus";
 
 const BufferComponent = ({onDelete, node: {id, title}}) => {
-  const handleInitDelete = useCallback(({applyContextMenu, e}) => {
-    e.stopPropagation()
-    e.preventDefault()
-    applyContextMenu([{
-      component: ({onClose, title, onSubmit}) => {
-        return <ButtonsForDelete title={title} onClose={onClose} onSubmit={onSubmit}/>
-      },
-      componentProps: {
-        onSubmit: onDelete,
-        title: "Удалить буфер?",
-      }
-    }])
-  }, [onDelete])
+  const [contextMenuOpened, setContextMenuState] = useState(false)
+
+  const toggleContextMenuState = useCallback(() => setContextMenuState(s => !s), [])
+
   return (
     <div className="flex items-center">
       <div key={id}>
         {title}
       </div>
-      <WithOpenContextMenu
-        settings={{maxSize: "150", minSize: "150"}}
-        onOpenContextMenu={handleInitDelete}
-      >
-        {(onOpenContextMenu) => (
-          <StyleIcon title="Удалить буфер" className="m-l-5" onClick={onOpenContextMenu} icon={basketTrash}/>
-        )}
-      </WithOpenContextMenu>
+      <div>
+        <StyleIcon title="Удалить буфер" className="ml-1.5" onClick={toggleContextMenuState} icon={basketTrash}/>
+        {contextMenuOpened && <ThemedContextMenu onClose={toggleContextMenuState} width={220}>
+          <ButtonsForDelete onClose={toggleContextMenuState} onSubmit={() => {
+            onDelete()
+            toggleContextMenuState()
+          }} title="Удалить буфер?"/>
+        </ThemedContextMenu>}
+      </div>
     </div>
   )
 }

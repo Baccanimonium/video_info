@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {demographic} from "../constants";
-import ListTable from "../../../../../component_ocean/Components/Tables/ListTable";
-import {NonParentsSelect} from "../../../../../component_ocean/Components/Tables/Plugins/selectable";
+import ListTable from "@/component_ocean/Components/Tables/ListTable";
+import {NonParentsSelect} from "@/component_ocean/Components/Tables/Plugins/selectable";
 import DemographicActionsAndLabelColumn from "./DemographicActionsAndLabelColumn";
 import {demographicChildrenKey} from "./constants";
 import Leaf from '@/component_ocean/Components/Tables/Plugins/TreePlugin/Components/Leaf'

@@ -1,5 +1,5 @@
 import styled, {css} from "styled-components"
-import { RemoveIcon } from "@/Components/Icon/CommonIcons"
+import { RemoveIcon } from "@/Components/CommonIcons"
 
 export const TabBarContainer = styled.div`
   height: 40px;
